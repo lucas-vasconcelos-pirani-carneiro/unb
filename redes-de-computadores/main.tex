@@ -1,0 +1,31 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{lmodern}
+
+\input{preambulo.tex}
+
+\begin{document}
+
+% --- Título estilizado ---
+% --- Título simples e elegante ---
+\begin{center}
+    \centering
+    \vspace*{\fill}
+    {\sffamily\bfseries\fontsize{28}{32}\selectfont\textcolor{pretoFosco}{Redes de Computadores}}\\[0.6em]
+    \vspace*{\fill}
+\end{center}
+
+\pagestyle{fancy} 
+\newpage
+
+% --- Sumário --- %
+\tableofcontents
+\newpage
+
+% --- Seções ---
+\input{sections/01-introducao.tex}
+\input{sections/02-camada-aplicacao.tex}
+\input{sections/03-camada-de-transporte.tex}
+\input{sections/04-camada-de-redes.tex}
+\input{sections/05-camada-de-enlace.tex}
+
+\end{document}
