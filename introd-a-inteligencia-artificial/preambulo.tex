@@ -1,0 +1,77 @@
+% --- Pacotes principais --- %
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb}
+\usepackage{enumitem}
+% --- Fonte e layout otimizados para anotações ---
+\usepackage[sfdefault]{sourcesanspro} % Fonte limpa e moderna
+\usepackage[a4paper, left=2.3cm, right=2.3cm, top=2.8cm, bottom=2.8cm]{geometry}
+\linespread{1.15} % ótimo espaçamento para leitura
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{setspace}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{tocloft}
+\usepackage[normalem]{ulem}
+\usepackage{placeins}
+\usepackage{fancyhdr}
+\setlength{\headheight}{25pt}
+\addtolength{\topmargin}{-10pt}
+
+% --- Configuração de colunas ---
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+
+% --- Bibliotecas TikZ ---
+\usetikzlibrary{trees, positioning}
+
+% --- Estilo geral ---
+\setstretch{1.15}
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0pt}
+
+% --- Espaçamento entre seções ---
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{0.8em}{0.5em}
+\titlespacing*{\subsection}{0pt}{0.6em}{0.3em}
+
+% --- Configuração do sumário ---
+\setlength{\cftbeforesecskip}{0.1em}
+\setlength{\cftbeforesubsecskip}{0.05em}
+\setlength{\cftbeforesubsubsecskip}{0.1em}
+
+% --- Paleta preto e cinza ---
+\definecolor{cinzaEscuro}{RGB}{40, 40, 40}
+\definecolor{cinzaClaro}{RGB}{230, 230, 230}
+\definecolor{cinzaMedio}{RGB}{120, 120, 120}
+\definecolor{pretoFosco}{RGB}{15, 15, 15}
+
+% --- Cores e estilo das seções ---
+\usepackage{sectsty}
+\sectionfont{\color{cinzaEscuro}\large\sffamily}
+\subsectionfont{\color{cinzaMedio}\sffamily}
+\subsubsectionfont{\color{cinzaMedio}\sffamily}
+
+% --- Cabeçalho e rodapé ---
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textcolor{cinzaMedio}{\textbf{Introdução à Inteligência Artificial}}}
+\rfoot{\textcolor{cinzaMedio}{\thepage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{cinzaClaro}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\footrule}{\hbox to\headwidth{\color{cinzaClaro}\leaders\hrule height \footrulewidth\hfill}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}
+  \lhead{\textcolor{cinzaMedio}{\textbf{Introdução à Inteligência Artificial}}}
+  \rfoot{\textcolor{cinzaMedio}{\thepage}}
+  \renewcommand{\headrulewidth}{0.4pt}
+  \renewcommand{\footrulewidth}{0.4pt}
+  \renewcommand{\headrule}{\hbox to\headwidth{\color{cinzaClaro}\leaders\hrule height \headrulewidth\hfill}}
+  \renewcommand{\footrule}{\hbox to\headwidth{\color{cinzaClaro}\leaders\hrule height \footrulewidth\hfill}}
+}
