@@ -1,0 +1,55 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{enumitem} 
+
+\pagestyle{empty}
+
+\begin{document}
+
+\begin{center}
+    \large Álgebra 1
+\end{center}
+
+\begin{center}
+    \large Lista 09 \\
+    \small (Subgrupos)
+\end{center}
+  
+\begin{enumerate}[label=9.\arabic*.]
+
+    \item (\textbf{Subgrupos finitos}). Mostre que um subconjunto finito não vazio $S$ de um grupo $G$ 
+    é um subgrupo de $G$ se, e somente se, ele é fechado com respeito à operação do grupo. 
+    \\ \textit{Dica:} se $a \in S$, então $x \mapsto ax$ é uma bijeção de $S$ sobre si mesmo. 
+
+    \item (\textbf{Certos subconjuntos}). Seja $G$ um grupo comutativo. Verifique que: 
+    \begin{enumerate}[label=(\roman*)]
+        \item se $n$ é um inteiro qualquer, então $\{x^n : x \in G\}$ é um subgrupo de $G$;
+        \item se $H$ e $K$ são subgrupos de $G$, então $\{hk : h \in H, \, k \in K\}$ é um subgrupo de $G$.
+    \end{enumerate}
+
+    \item (\textbf{Subgrupos notáveis}). Mostre que os seguintes subconjuntos são subgrupos de um grupo $G$:
+    \begin{enumerate}[label=(\roman*)]
+        \item o conjunto $Z(G)$ dos elementos $x \in G$ tais que $xg = gx$ para cada $g \in G$;
+        \item o conjunto $D(G)$ de todos os produtos possíveis de um número finito de elementos da forma $aba^{-1}b^{-1}$ com $a, b \in G$;
+        \item a interseção $\Phi(G)$ dos subgrupos próprios maximais $M$ de $G$ 
+        (i.e., $M$ é um subgrupo de $G$ com $M \neq G$ e, para qualquer subgrupo $H$ de $G$ com $H \neq G$, se $M \subseteq H$ então $H = M$).
+    \end{enumerate}
+
+    \item (\textbf{Automorfismos}). Se $G$ é um grupo, prove que o conjunto $\text{Aut}(G)$ das bijeções $f : G \to G$ tais que $f(xy) = f(x)f(y)$ é um subgrupo do grupo $\text{Perm}(G)$ de todas as bijeções de $G$ em si mesmo. 
+
+    Para cada $g \in G$, seja $c_g : G \to G$, $c_g(x) = gxg^{-1}$. Prove que $\{c_g : g \in G\}$ é um subgrupo de $\text{Aut}(G)$. 
+
+    \item (\textbf{Produto de grupos II}). Sob a notação do Exercício 8.3, é verdade que cada subgrupo de $G \times H$ é da forma $G' \times H'$, em que $G'$ é um subgrupo de $G$ e $H'$ é um subgrupo de $H$? 
+
+    \item (\textbf{Produto de grupos III}). Seja $(G_i)_{i \in I}$ uma família de grupos e, para todos os $i \in I$, exceto possivelmente por uma quantidade finita, sejam $H_i$ subgrupos de $G_i$. Verifique que as famílias $(g_i)_{i \in I}$ tais que $g_i \in G_i$ com $g_i \in H_i$ quando $H_i$ está definido, formam um grupo sob a multiplicação 
+    \[
+    (g_i)_{i \in I} (g_i')_{i \in I} = (g_ig_i')_{i \in I}.
+    \] 
+
+\end{enumerate}
+
+\end{document}

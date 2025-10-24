@@ -1,0 +1,77 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{enumitem} 
+
+\pagestyle{empty}
+
+\begin{document}
+
+\begin{center}
+    \large Álgebra 1
+\end{center}
+
+\begin{center}
+    \large Lista 12 \\
+    \small (Grupos Finitos)
+\end{center}
+  
+\begin{enumerate}[label=12.\arabic*.]
+
+    \item (\textbf{Potências $n$-ésimas}). Se $G$ é um grupo de ordem $m$, e $n$ é primo a $m$, mostre que cada elemento de $G$ pode ser escrito na forma $x^n$ para algum $x \in G$. 
+
+    \item (\textbf{$p$-grupos finitos}). Se $p$ é um primo, verifique que todo grupo de ordem $p^n$, com $n>0$, contém um elemento de ordem $p$, e que todo grupo de ordem $p$ é cíclico. 
+
+    \item (\textbf{Euler vs. Fermat}). Se $p$ é um divisor primo ímpar de $a^{2^n}+1$, com $n \geq 1$, prove que 
+    \[
+    p \equiv 1 \pmod{2^{n+1}}.
+    \] 
+    \textit{Dica: qual é a ordem de $(a \bmod p)$ no grupo multiplicativo módulo $p$?} 
+
+    \item (\textbf{Permutações II}). Sejam $n>1$, $X=\{1,\ldots,n\}$ e $S_n$ o grupo $\text{Perm}(X)$. Um elemento $f \in S_n$ é um $r$-ciclo se existem $i_1, \ldots, i_r \in X$ tais que 
+    \[
+    f(i_1)=i_2, \, f(i_2)=i_3, \ldots, f(i_{r-1})=i_r, \, f(i_r)=i_1
+    \] 
+    e $f(j)=j$ se $j \notin \{i_1,\ldots,i_r\}$. Neste caso, denota-se $f$ por $(i_1\,i_2\,\ldots\,i_r)$.  
+    Note que $(1\,2\,3\,4\,5\,6\,7\,8) = (1\,2\,3)(4)(5\,7)(6\,8)$.  
+    Escreva 
+    \[
+    \begin{pmatrix} 1&2&3&4&5&6&7&8 \\ 2&4&5&7&8&6&3&1 \end{pmatrix}
+    \] 
+    como um produto de ciclos. Prove que cada elemento de $S_n$ é um produto de ciclos.
+
+    \item (\textbf{Permutações III}). Dizemos que uma permutação $f \in S_n$ é \textit{par} se a quantidade de pares $(i,j)$ com $i<j$ e $f(i)>f(j)$ é par. Mostre que o subconjunto $A_n$ das permutações pares é um subgrupo de $S_n$ de ordem $n!/2$.  
+    Verifique que 
+    \[
+    (i_1\,i_2\,\ldots\, i_r) = (i_1\,i_r)(i_1\,i_{r-1})\ldots(i_1\,i_2), \quad 
+    (i\,j)(k\,\ell) = (i\,j)(k\,\ell), \quad
+    (i\,j)(i\,\ell)=(i\,\ell)(j\,\ell).
+    \] 
+    Conclua que o conjunto dos 3-ciclos de $S_n$ gera $A_n$.
+
+    \item (\textbf{Os grupos de ordem 8}). Seja $GL_n(R)$ o grupo dos elementos invertíveis do anel das matrizes $n \times n$ com entradas em um anel associativo comutativo unitário $R$.  
+    Verifique que os seguintes subconjuntos geram grupos não isomorfos de ordem 8:
+    \begin{enumerate}[label=(\roman*)]
+        \item $\{2\} \subseteq GL_1(\mathbb{Z}/17\mathbb{Z})$;
+        \item $\left\{ \begin{pmatrix} 4 & 0 \\ 0 & 1 \end{pmatrix}, \begin{pmatrix} 3 & 0 \\ 0 & 1 \end{pmatrix} \right\} \subseteq GL_2(\mathbb{Z}/5\mathbb{Z})$;
+        \item $\left\{ \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}, \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} \right\} \subseteq GL_2(\mathbb{Z})$;
+        \item $\left\{ \begin{pmatrix} -1 & 0 \\ 0 & 1 \end{pmatrix}, \begin{pmatrix} 2 & 0 \\ 0 & 1 \end{pmatrix} \right\} \subseteq GL_2(\mathbb{Z}/3\mathbb{Z})$;
+        \item $\left\{ \begin{pmatrix} 0&1&0 \\ 1&0&0 \\ 0&0&-1 \end{pmatrix}, \begin{pmatrix} 0&0&1 \\ 0&1&0 \\ 1&0&0 \end{pmatrix} \right\} \subseteq GL_3(\mathbb{Z})$.
+    \end{enumerate}
+
+    \item (\textbf{$p$-subgrupos}). Demonstre que $G=GL_n(\mathbb{Z}/p\mathbb{Z})$, com $p$ primo, possui ordem 
+    \[
+    \prod_{1 \leq i \leq n} (p^i - 1)p^{\frac{n(n-1)}{2}},
+    \] 
+    e que o subgrupo de $G$ das matrizes triangulares superiores com entradas diagonais iguais a $1$ possui ordem 
+    \[
+    p^{\frac{n(n-1)}{2}}.
+    \] 
+    \textit{Dica: para $R=\mathbb{Z}/p\mathbb{Z}$, a ordem de $G$ é o número de $R$-bases ordenadas de $R^n$.}
+
+\end{enumerate}
+
+\end{document}

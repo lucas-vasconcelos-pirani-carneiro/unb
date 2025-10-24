@@ -1,0 +1,42 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{enumitem} 
+
+\pagestyle{empty}
+
+\begin{document}
+
+\begin{center}
+    Álgebra 1
+\end{center}
+
+\begin{center}
+    \large Lista 06 \\
+    \small (Inteiros Gaussianos)
+\end{center}
+
+\begin{enumerate}[label=6.\arabic*.]
+    \item (Calculando m.d.c. III). Calcule o seu m.d.c. tanto pela divisão euclidiana quanto pela fatoração em primos Gaussianos dos seguintes pares de inteiros Gaussianos, e escreva-o como combinação linear deles:
+    \begin{itemize}
+        \item[(i)] $a = 32 + 9i$ e $b = 4 + 11i$
+        \item[(ii)] $a = 4 + 5i$ e $b = 4 - 5i$
+        \item[(iii)] $a = 10 + 91i$ e $b = 7 + 3i$
+    \end{itemize}
+    \item (Distância). Usando a representação de números complexos por pontos no plano, prove que, se $z$ for um número complexo qualquer, existe um inteiro Gaussiano $q$ cuja distância a $z$ será menor ou igual a $\sqrt{2}/2$. Prove que, dentre todos os inteiros Gaussianos, existe pelo menos um cuja distância a $z$ é a menor possível, e que não existem mais do que quatro com esta propriedade.
+    \item (Ternos pitagóricos). Prove que todas as soluções inteiras da equação $x^2 + y^2 = z^2$ são, a menos da troca de $x$ por $y$, dadas por $x = m^2 - n^2$, $y = 2mn$, $z = m^2 + n^2$, onde $m, n$ inteiros positivos.
+    \item (Inteiros de Eisenstein). Se $\omega = e^{2 \pi i /3}$, mostre que os números complexos $x + y\omega$, onde $x$ e $y$ são inteiros ordinários, formam um anel $R$, cujos invertíveis são $\pm 1, \pm \omega$, e $\pm \omega^2$. Prove que, se $z$ for um número complexo qualquer, existirá um elemento $q$ do anel $R$ tal que $|z - q| \leq 1/\sqrt{3}$. Donde, prove um teorema de fatoração única para este anel.
+    \item (Primos da forma $x^2 + xy + y^2$). Use o Exercício 6.4 para mostrar que um primo racional $> 3$ pode ser escrito como $x^2-xy+y^2$, com inteiros $x$ e $y$ se, e somente se, ele deixa resto 1 pela divisão por 3.
+    \item (Anéis de inteiros em corpos quadráticos). Quais resultados vistos sobre os inteiros Gaussianos possuem análogos sobre cada anel $R$ de números complexos a seguir? Dê contraexemplos ou demonstrações.
+    \begin{itemize}
+        \item[(i)] $R = \{ x + y\sqrt{2} : x, y \in \mathbb{Z} \}$
+        \item[(ii)] $R = \{ x + y \omega : x, y \in \mathbb{Z} \}$
+        \item[(iii)] $R = \{ x + y i : x, y \in \mathbb{Z} \}$
+        \item[(iv)] $R = \mathbb{Z}$
+    \end{itemize}
+\end{enumerate}
+
+\end{document}

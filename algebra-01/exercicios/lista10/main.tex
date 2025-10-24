@@ -1,0 +1,85 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{enumitem} 
+
+\pagestyle{empty}
+
+\begin{document}
+
+\begin{center}
+    \large Álgebra 1
+\end{center}
+
+\begin{center}
+    \large Lista 10 \\
+    \small (Anéis)
+\end{center}
+  
+\begin{enumerate}[label=10.\arabic*.]
+
+    \item (\textbf{A função $\varphi$ de Euler}). Se $m$ e $n$ são inteiros $> 0$, e $\gcd(m,n) = 1$, prove que 
+    \[
+    \varphi(mn) = \varphi(m)\varphi(n).
+    \] 
+    Se $p$ é um primo, prove que 
+    \[
+    \varphi(p^n) = p^n - p^{n-1}.
+    \] 
+    \textit{Sugestão: use o Teorema Chinês dos Restos para a primeira parte.} 
+
+    \item (\textbf{$\mathbb{Z}[\sqrt{2}]$ e $\mathbb{Q}(\sqrt{2})$}). Verifique que os números da forma 
+    \[
+    x + y\sqrt{2}, \quad x,y \in \mathbb{Z},
+    \] 
+    formam um anel. Se $x,y \in \mathbb{Q}$, verifique que eles formam um corpo. 
+
+    \item (\textbf{Sem divisores de zero}). Demonstre que um anel associativo comutativo unitário finito é um corpo se, e somente se, ele não possui divisores de zero. \textit{Dica: Exercício 9.1.} 
+
+    \item (\textbf{Sequências de Cauchy}). Seja $F$ um corpo com um valor absoluto 
+    \[
+    |\cdot| : F \to \mathbb{R}_{\geq 0}
+    \] 
+    (isto é, para quaisquer $x,y \in F$ valem: $|x|=0 \iff x=0$; $|xy| = |x||y|$; $|x+y| \leq |x|+|y|$). 
+
+    Mostre que as sequências $(x_n)_{n \geq 0}$ sobre $F$ tais que, para cada $\varepsilon > 0$, existe um correspondente $N > 0$ de modo que, para quaisquer $n,m \geq N$, vale $|x_n - x_m| < \varepsilon$, formam um anel com respeito às operações de adição e multiplicação termo a termo. 
+
+    \item (\textbf{$R^X$}). Sejam $X$ um conjunto e $R$ um anel. Verifique que o conjunto $R^{(X)}$ das funções $f: X \to R$ tais que $\{x \in X : f(x) \neq 0\}$ é finito é: 
+    \begin{enumerate}[label=(\roman*)]
+        \item um grupo com respeito à soma pontual de funções; 
+        \item um anel definindo-se o produto por 
+        \[
+        (f*g)(x) = \sum_{y \in X} f(y)g(y^{-1}x), \quad \text{se $X$ for um grupo};
+        \] 
+        \item um espaço vetorial sobre $R$ sob a operação escalar $(rf)(x) = r f(x)$, se $R$ for um corpo.
+    \end{enumerate}
+
+    \item (\textbf{Quaternions}). Seja $H$ o conjunto das matrizes complexas 
+    \[
+    q = \begin{pmatrix} a+id & -b-ic \\ b-ic & a-id \end{pmatrix}, \quad a,b,c,d \in \mathbb{R}.
+    \] 
+    Prove que a soma e o produto matriciais usuais tornam $H$ um anel de divisão (isto é, um ``corpo possivelmente não comutativo''). 
+
+    Prove que 
+    \[
+    q = a1 + b i + c j + d k,
+    \] 
+    com 
+    \[
+    1 = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}, \quad 
+    i = \begin{pmatrix} i & 0 \\ 0 & -i \end{pmatrix}, \quad 
+    j = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}, \quad 
+    k = \begin{pmatrix} 0 & i \\ i & 0 \end{pmatrix}.
+    \] 
+
+    Mostre que $i^2 = j^2 = k^2 = ijk = -1$, e $ij = k = -ji$. Prove ainda que 
+    \[
+    q\overline{q} = |q|^2 = a^2 + b^2 + c^2 + d^2 \geq 1.
+    \]
+
+\end{enumerate}
+
+\end{document}

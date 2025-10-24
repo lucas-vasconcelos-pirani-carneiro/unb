@@ -1,0 +1,165 @@
+\section*{Inteiros Gaussianos}
+
+Recordemos o conceito de um \textbf{número complexo}: este é um número da forma 
+$a = x + iy$, onde $x$ e $y$ são números reais e $i$ satisfaz $i^2 = -1$. 
+As regras para a \underline{adição} e a \underline{multiplicação} são as usuais:
+\[
+    (x + iy) + (x' + iy') = (x + x') + i(y + y'),
+\]
+\[
+    (x + iy)(x' + iy') = (xx' - yy') + i(yx' + xy').
+\]
+
+Provido de tais operações, o conjunto $\mathbb{C}$ dos \textbf{números complexos} torna-se um \textbf{anel}
+\underline{associativo, comutativo e unitário}, com $1 = 1 + i \cdot 0$.  
+
+Se $a = x + iy$, escrevemos $\boxed{\overline{a} = x - iy}$ e chamamos $\overline{a}$ de 
+\textbf{conjugado complexo} de $a$; o conjugado de $\overline{a}$ é $a$.  
+
+A aplicação $a \mapsto \overline{a}$ é uma \underline{bijeção} de $\mathbb{C}$ sobre \textbf{si mesma} que 
+\underline{preserva} as operações de adição e multiplicação; logo, ela é um \underline{\textit{automorfismo}} de 
+$\mathbb{C}$, isto é, um \underline{\textit{isomorfismo}} de $\mathbb{C}$ em $\mathbb{C}$.
+
+Escrevemos $N(a) = a \cdot \overline{a}$ e chamamos $N(a)$ de \underline{\textit{norma}} de $a$.  
+Pela regra da multiplicação, se $a = x + iy$ então : 
+\[
+N(a) = x^2 + y^2,
+\]
+e, pela \textbf{comutatividade} da multiplicação, temos
+\[
+N(ab) = N(a)N(b).
+\]
+
+A norma de $a$ é $0$ se, e somente se, $a = 0$; caso contrário, ela é um número real $> 0$.  
+Consequentemente, para cada $a = x + iy \neq 0$, consideramos
+\[
+a' = N(a)^{-1}\,\overline{a} = \frac{x}{N(a)} - i\frac{y}{N(a)}.
+\]
+
+\noindent Então $aa' = 1$, e, para cada $b \in \mathbb{C}$, vale $a(a'b) = b$.  
+Reciprocamente, se $az = b$, então $a'(az) = a'b$, donde, pela \underline{associatividade}, obtemos 
+$z = a'b$. Isso mostra que $\mathbb{C}$ é um \textbf{corpo}.
+
+De maneira usual, fazemos corresponder o número complexo 
+$a = x + iy$ ao ponto $(x,y)$ no plano euclidiano; sua distância da origem $0$ é
+\[
+|a| = \sqrt{x^2 + y^2} = \sqrt{N(a)}.
+\]
+Esse valor é também chamado de \underline{\textit{valor absoluto}} de $a$.
+
+\vspace{0.2cm}
+\noindent Para nossos propósitos, vamos considerar, em vez de $\mathbb{C}$, o subconjunto 
+\[
+\mathbb{Z}[i] = \{x + iy \mid x, y \in \mathbb{Z}\}
+\]
+consistindo nos números complexos cujas \underline{partes real} e \underline{imaginária} são inteiras.  
+
+Pode ser imediatamente verificado que $\mathbb{Z}[i]$ é um \textbf{anel} \underline{associativo, comutativo e unitário}, com 
+$1 = 1 + i \cdot 0$. Ele é chamado \textbf{anel Gaussiano}, e seus elementos são chamados 
+\textbf{inteiros Gaussianos}.  
+
+A bijeção $a \mapsto \overline{a}$ preserva as operações desse anel.  
+Se $a$ é um inteiro Gaussiano qualquer, então :
+\[
+N(a) = a \cdot \overline{a}
+\]
+é um inteiro $\geq 0$.  
+
+Ocasionalmente também consideramos os números $x + iy$ com $x, y \in \mathbb{Q}$; como anteriormente, 
+eles formam um \textbf{corpo} (o \textbf{corpo Gaussiano}).  
+
+\subsection*{Divisibilidade e Associados}
+
+Se $a, b, c \in \mathbb{Z}[i]$ e $b = ac$ , então : 
+
+- $b$ é um \underline{múltiplo} de $a$, 
+
+- $a$ \underline{divide} $b$ (ou que $a$ é um \underline{divisor} de $b$).  
+
+\noindent Quando isso ocorre, $N(a)$ \underline{divide} $N(b)$.  
+
+\noindent Cada inteiro Gaussiano \underline{divide} a sua \textbf{norma}.  
+
+\begin{itemize}
+    \item Um divisor de $1$ é chamado \textbf{invertível}.  
+    \item Se $a = x + iy$ é \textbf{invertível}, então $N(a) = 1$. Como $x, y \in \mathbb{Z}$, isso implica que $a \in \{\pm 1, \pm i\}$.  
+    \item Dois inteiros Gaussianos não nulos $a$ e $b$ \underline{dividem um ao outro} se, e somente se, diferem por um fator invertível, isto é, $a = ub$ com $u \in \{\pm 1, \pm i\}$. Nesse caso, chamamos $a$ e $b$ de \textbf{associados}.  
+\end{itemize}
+
+Dentre os \textbf{quatro associados} de um dado inteiro Gaussiano $b$, existe um único, digamos $a = x + iy$, satisfazendo $x > 0$ e $y \geq 0$. Este será chamado de \textbf{normalizado}.  
+
+\begin{exemplo}
+Dentre os associados $\pm 1 \pm i$ de $1+i$, apenas $\boxed{1+i}$ é normalizado.      
+\end{exemplo}
+
+Geometricamente, os \underline{pontos no plano} correspondentes aos associados de $b$ são obtidos 
+a partir de $b$ por uma \underline{rotação} em torno de $0$ por um ângulo $n\pi/2$, com $n = 0,1,2,3$. 
+
+O normalizado é aquele no \textbf{primeiro quadrante} (ou sobre o semieixo real positivo).  
+
+\subsection*{Primos Gaussianos}
+
+Um inteiro Gaussiano de norma $> 1$ é chamado \textbf{primo Gaussiano} se seus divisores são 
+exatamente os seus \underline{associados} e os \underline{invertíveis}.  
+
+\noindent Isso equivale a dizer que $q$ é um primo Gaussiano se:
+
+- $q \neq 0$;
+
+- $q$ \textbf{não} é invertível;
+
+- $q$ \textbf{não possui divisor} com \underline{norma} $>1$ e $< N(q)$.
+
+\noindent \textbf{Inteiros Ordinários} que são primos no sentido \underline{usual} serão chamados \textbf{primos racionais}.  
+
+- Se $q \in \mathbb{Z}[i]$ e $N(q)$ é um \underline{primo racional}, então $q$ é um \underline{primo Gaussiano}.  
+
+- A recíproca, porém, não é verdadeira. Exemplo, $N(3) = 9$, e $3$ é primo Gaussiano.  
+
+- Os \textbf{associados} de um primo Gaussiano também são \underline{primos Gaussianos}, e existe apenas um normalizado.  
+
+- Se $q$ é um \underline{primo Gaussiano}, então $\overline{q}$ também o é.  
+
+Se $a \in \mathbb{Z}[i]$, $a \neq 0$ e não invertível, então \underline{todo divisor} de $a$ com norma mínima $> 1$ deve ser um \textbf{primo Gaussiano}.  
+
+\vspace{0.3cm}
+\noindent\underline{\underline{\textbf{($\ast$) Lema 7.1. }}} : \textbf{\textcolor{teal}{Divisão Euclidiana}}
+
+Se $a, b \in \mathbb{Z}[i]$ com $b \neq 0$, então existe $q \in \mathbb{Z}[i]$ tal que
+\[
+N(a - bq) \leq \tfrac{1}{2}N(b).
+\]
+
+\noindent\textit{Demonstração : }
+
+Para cada número real $t$, existe um maior inteiro $m \leq t$ tal que $m \leq t < m+1$.  
+Chamamos $m'$ de inteiro mais próximo de $t$, isto é, $m$ ou $m+1$, de acordo com se $t-m \leq m+1-t$ ou não.  
+Assim, $|t - m'| \leq \tfrac{1}{2}$.  
+
+Seja $z = x + iy \in \mathbb{C}$. Tomando $m$ e $n$ inteiros mais próximos de $x$ e $y$, respectivamente, e definindo $q = m + in$, obtemos
+\[
+N(z - q) = (x-m)^2 + (y-n)^2 \leq \tfrac{1}{4} + \tfrac{1}{4} = \tfrac{1}{2}.
+\]
+
+Aplicando isso para $z = \tfrac{a}{b}$, com $a,b \in \mathbb{Z}[i]$, segue que $q$ satisfaz a propriedade desejada.
+
+\begin{exemplo}
+    \begin{enumerate}
+        \item Para $a = 11 + 10i$ e $b = 4+i$:
+        \[
+            \frac{a}{b} = \frac{(11+10i)(4-i)}{N(4+i)} = \frac{54+29i}{17} \approx 3{,}17 + 1{,}71i.
+        \]
+        Tomando $q = 3 + 2i$, obtemos $a - bq = 1 - i$, e
+        \[
+            N(a-bq) \leq \tfrac{1}{2}N(b).
+        \]
+
+        \item Para $a = 3i$ e $b = 1+i$, no lema, há 4 possíveis escolhas de $q$, e verifica-se que a desigualdade não pode ser melhorada em geral.
+    \end{enumerate}
+\end{exemplo}
+
+
+\begin{questao}[\textbf{(Fossas Gaussianas).}  ]
+    Existe uma sequência infinita de primos Gaussianos distintos tal que haja uma 
+    limitação para as diferenças entre os números consecutivos da sequência?
+\end{questao}

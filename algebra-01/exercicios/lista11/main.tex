@@ -1,0 +1,64 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{enumitem} 
+
+\pagestyle{empty}
+
+\begin{document}
+
+\begin{center}
+    \large Álgebra 1
+\end{center}
+
+\begin{center}
+    \large Lista 11
+\end{center}
+  
+\begin{enumerate}[label=11.\arabic*.]
+
+    \item (\textbf{Corpos finitos}). Se $F$ é um corpo finito, mostre que o subgrupo do grupo aditivo de $F$ gerado por $1$ possui ordem prima $p$, e é um subcorpo de $F$ isomorfo ao corpo $\mathbb{F}_p$ das classes de congruência módulo $p$. 
+
+    \item (\textbf{Geradores}). Faça uma tabela de conjuntos minimais que geram $(\mathbb{Z}/m\mathbb{Z})^\times$ para $1 \leq m \leq 24$. 
+
+    \item (\textbf{Grupos cíclicos I}). Sejam $G$ um grupo comutativo, $x$ um elemento de $G$ de ordem $m$ e $y$ um elemento de $G$ de ordem $n$. Prove que se $\gcd(m,n)=1$, então 
+    \[
+    x^a y^b = 1 \iff x^a = 1 = y^b,
+    \] 
+    donde conclua que o grupo gerado por $x$ e $y$ é cíclico de ordem $mn$, gerado por $xy$. 
+
+    \item (\textbf{Grupos não cíclicos}). Demonstre que, se $m > 2$, $n > 2$ e $\gcd(m,n)=1$, então o grupo multiplicativo das classes de congruência primas a $mn$ módulo $mn$ não é cíclico. 
+    \\ \textit{Dica: use o Teorema Chinês dos Restos e o fato de que um grupo cíclico possui no máximo um subgrupo de ordem $2$.} 
+
+    \item (\textbf{Grupos cíclicos II}). Encontre todos os valores de $n$ para os quais o grupo multiplicativo das classes de congruência ímpares módulo $2^n$ é cíclico. 
+    \\ \textit{Dica: se $a$ é ímpar, então $a^{2^{n-2}} \equiv 1 \pmod{2^n}$ para cada $n \geq 3$.}
+
+    \item (\textit{$n$-torção de grupos abelianos}). Verifique que, se $G$ é um grupo comutativo e $n$ é um inteiro $>0$, então o conjunto de todos os elementos de $G$ cujas ordens dividem $n$ é um subgrupo de $G$. 
+
+    \item (\textit{Elementos de ordem 2}). Prove que, se $G$ é um grupo comutativo finito, então o produto de todos os elementos de $G$ é ou $1$ ou um elemento de ordem $2$. Prove que, se $p$ é um primo, então 
+    \[
+    (p-1)! \equiv -1 \pmod{p}.
+    \]
+
+    \item (\textit{Grupos abelianos I}). Seja $G$ um grupo aditivo comutativo gerado por $\{x_1, \ldots, x_k\}$ e sejam $c_1, \ldots, c_k$ inteiros tais que $\mathrm{mdc}(c_1, \ldots, c_k) = 1$. Mostre que existe um conjunto $\{y_1, \ldots, y_k\}$ que gera $G$ tal que 
+    \[
+    y_1 = c_1x_1 + \cdots + c_kx_k.
+    \] 
+    \textit{Dica: suponha que cada $c_i \geq 0$ e proceda por indução sobre $s = c_1 + \cdots + c_k$.}
+
+    \item (\textit{Grupos abelianos II}). Dentre todos os conjuntos minimais $\{x_1, \ldots, x_k\}$ que geram um grupo aditivo comutativo $G$, tome um deles tal que $x_1$ possua a menor ordem possível. Use o Exercício 11.8 para ver que não existem inteiros positivos $m_1, \ldots, m_k$ tais que 
+    \[
+    m_1x_1 + \cdots + m_kx_k = 0 \quad \text{com } m_1x_1 \neq 0.
+    \] 
+    Conclua, por indução, que existe $\{g_1, \ldots, g_k\}$ que gera $G$ tal que se 
+    \[
+    g = n_1 g_1 + \cdots + n_k g_k
+    \] 
+    com cada $n_i$ inteiro, então $n_i g_i = 0$ para cada $i$.
+
+\end{enumerate}
+
+\end{document}

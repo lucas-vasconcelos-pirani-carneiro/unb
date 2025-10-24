@@ -1,0 +1,45 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{enumitem} 
+
+\pagestyle{empty}
+
+\begin{document}
+
+\begin{center}
+    Álgebra 1 
+\end{center}
+
+\begin{center}
+    \large Lista 05 \\
+    \small (Polinômios)
+\end{center}
+
+\begin{enumerate}[label=5.\arabic*.]
+\item (Calculando m.d.c. II). Encontre o m.d.c. dos seguintes polinômios sobre $\mathbb{Q}$:
+    \begin{itemize}
+        \item[(i)] $X^7 - 3X^5 + 2X^4$ e $X^5 + X^4 - 2X^3 - X^2 - X + 2$
+        \item[(ii)] $X^5 - 4X^4 - 3X^3 + 34X^2 - 52X + 24$ e $X^3 - 3X^2 + 4$
+        \item[(iii)] $X^5 - X^4 - 6X^3 -2X^2 + 5X + 3$ e $X^3 - 3X - 2$
+    \end{itemize}
+    Verifique as respostas por outro método.
+    \item (Schönemann e Eisenstein). Seja $f(X) = a_n X^n + \dots + a_0$ um polinômio de grau $n > 0$ com coeficientes inteiros. Se existe um primo $p$ tal que $p$ divide $a_{n-1},\ldots,a_0$ mas $p$ não divide $a_n$ e $p^2$ não divide $a_0$, demonstre que $f(X)$ é irredutível sobre $\mathbb{Z}$.
+    \item (Irredutibilidade depende do anel de coeficientes). Mostre que $X^4 + 1$ é um polinômio irredutível sobre $\mathbb{Q}$, mas possui divisores de grau 2 sobre o corpo dos números da forma $x + y \sqrt{2}$, onde $x$ e $y$ percorrem todos os números racionais.
+    \item (Se o anel dos coeficientes não for um corpo...). Prove que o conjunto $I$ de todos os polinômios da forma $2f(X) + Xg(X)$, onde $f(X)$ e $g(X)$ percorrem $\mathbb{Z}[X]$, é fechado para a subtração e é tal que se $p(X) \in I$ então todos os múltiplos de $p(X)$ pertencem a $I$. Prove que $I$ não consiste nos múltiplos de um polinômio em $\mathbb{Z}[X]$.
+    \item (Derivação). Seja $K$ um corpo. Defina a aplicação $D: K[X] \to K[X]$ por: se $f(X) = a_n X^n + ... + a_0$ com $a_i \in K$, então $Df(X) = 0$ quando $n = 0$ e, em geral, $Df(X) = n a_n X^{n-1} + ... + a_1$. Verifique que:
+    \begin{enumerate}
+        \item[(i)] Se $f(X)$ e $g(X)$ são polinômios em $K[X]$ e $a \in K$, então $D(f(X) + g(X)) = Df(X) + Dg(X)$, $D(a f(X)) = a Df(X)$, e $D(f(X) g(X)) = Df(X) g(X) + f(X) Dg(X)$.
+        \item[(ii)] Se $f(X)$ é um polinômio de grau $>0$ em $K[X]$, então para que uma raiz $a$ de $f(X)$ em $K$ possua multiplicidade $>1$ é necessário e suficiente que $Df(a) = 0$.
+    \end{enumerate}
+    \item ($K(X)$ e $K((X))$). Se $K$ for um corpo, verifique que, com as operações usuais, os seguintes conjuntos formam corpos:
+    \begin{enumerate}
+        \item[(i)] O conjunto de todas as frações $\frac{p}{q}$, onde $p, q \in K[X], q \neq 0$.
+        \item[(ii)] O conjunto de todas as séries formais de Laurent $\sum_{n=m}^{\infty} a_n X^n$, onde $a_n \in K$ e $m \in \mathbb{Z}$.
+    \end{enumerate}
+\end{enumerate}
+
+\end{document}

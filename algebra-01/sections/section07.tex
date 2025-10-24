@@ -1,0 +1,117 @@
+\section*{$x^2 + y^2 = p$}
+
+\noindent\underline{\underline{\textbf{($\ast$) Proposição 8.1. }}} : Seja $M$ um conjunto não-vazio de inteiros Gaussianos.Se
+$M$ é \underline{fechado} com respeito à \underline{subtração} e satisfaz a condição : “Se $a \in M$, então \underline{todos} os \textbf{múltiplos} 
+de $a$ pertencem a $M$”,então $M$ consiste em \underline{todos} os \textbf{múltiplos} de algum 
+\textbf{inteiro Gaussiano} $d$, unicamente determinado a menos de um fator invertível.
+
+\vspace{0.2cm}
+\noindent\textit{Demonstração : }
+
+Se $M=\{0\}$, a proposição é verdadeira com $d=0$.  
+Senão, tomemos em $M$ um elemento $d$ de menor norma $>0$.  
+Se $a\in M$, pela divisão euclidiana em $\mathbb{Z}[i]$ (Lema 5.1), 
+escrevemos $a = dq + r$ com $N(r) \leq \tfrac{1}{2}N(d)$.  
+
+Como $r = a - dq \in M$, temos $r=0$, logo $a$ é múltiplo de $d$.  
+
+Para a unicidade: se $d'$ possui a mesma propriedade, então $d$ e $d'$ dividem um ao outro, 
+portanto são associados.
+
+\vspace{0.3cm}
+
+Podemos aplicar a \textbf{Proposição 8.1} anterior ao conjunto de \underline{todas} as \textbf{combinações lineares} 
+$ax + by + \ldots + cz$ com $a,b,\dots,c \in \mathbb{Z}[i]$.  
+\[
+ax+ by + \ldots + cz : a,b,\ldots,z \in \mathbb{Z}[i] = d\mathbb{Z}[i]
+\]
+
+Isso nos permite definir o $m.d.c.$ $(a,b,\ldots,c)$ em $\mathbb{Z}[i]$.  
+Ele será unicamente determinado se prescrevermos que ele seja \textbf{normalizado}.
+
+Se $m.d.c.(a,b,\ldots,c) = 1$, então $a, b, \ldots , c$ são \textbf{mutuamente relativamente primos}.
+
+\vspace{0.2cm}
+\noindent\underline{\underline{\textbf{($\ast$) Proposição 8.2. }}} : Todo inteiro Gaussiano não-nulo pode ser escrito de modo 
+\emph{essencialmente único} como produto de um \textbf{invertível} e de \textbf{primos Gaussianos}.
+
+\vspace{0.2cm}
+
+Aqui, as palavras \textit{“essencialmente único”} têm o seguinte sentido. 
+Sejam 
+\[
+a = uq_1 \ldots q_r = u'q_1' \ldots q'_s
+\]
+dois produtos do tipo desejado para algum $a \neq 0$, em que $u$ e $u'$ são 
+\textbf{invertíveis} e $q_j$ e $q_k'$ são \textbf{primos Gaussianos}. 
+
+Então, o teorema deve ser entendido por dizer que $r = s$ e que os $q_k'$ podem ser ordenados de
+modo que $q_j'$ seja um \underline{associado} de $q_j$ para $1 \leq j \leq r$; se a for \textbf{invertível}, então $r = 0$. 
+Se prescrevermos que os fatores primos de a sejam “normalizados”, então o produto é unicamente determinado a menos da
+ordem dos fatores.
+
+\textbf{Inteiros ordinários} também são \textbf{inteiros Gaussianos}; para obtermos a decomposição deles em \textbf{primos
+Gaussianos}, basta fazermos isso para os \textbf{primos “ordinários”}.
+
+\vspace{0.2cm}
+\noindent\underline{\underline{\textbf{($\ast$) Proposição 8.3. }}} : Se $p$ é um primo racional ímpar, então ele é um \textbf{primo Gaussiano} ou é a \underline{norma} de um primo Gaussiano $q$.  
+
+Neste último caso, $p = q\bar \cdot {q}$, $q$ e $\bar{q}$ \textbf{não} são associados, e os únicos divisores de $p$ são $q, \bar{q}$ e seus \underline{associados}.
+
+\vspace{0.2cm}
+\noindent\textit{Demonstração : }
+
+Escrevamos $p = u q_1 \cdots q_r$ como na Proposição anterior.  
+Tomando a norma:
+\[
+p^2 = N(q_1)\,N(q_2)\cdots N(q_r).
+\]
+Se algum $N(q_j) = p^2$, então $r=1$, $p = u q_j$ e $p$ seria um primo Gaussiano.  
+Caso contrário, cada $N(q_j) = p$, e podemos escrever $p = q\bar{q}$ com $q$ primo Gaussiano.  
+
+Escreva $q = x+iy$.  
+Se $\bar{q}$ fosse associado a $q$, teríamos $\bar{q} = \pm q$ ou $\pm iq$.  
+Isso implicaria $y=0$ ($p=x^2$), ou $x=0$ ($p=y^2$), ou $y=\pm x$ ($p=2x^2$).  
+Nenhum desses casos é possível, pois $p$ é primo ímpar.
+
+\vspace{0.3cm}
+
+Para $p=2$, temos a decomposição:
+\[
+2 = N(1+i) = (1+i)(1-i) = i^3 (1+i)^2,
+\]
+ou seja, $2$ possui um único fator primo normalizado $1+i$.
+
+\vspace{0.2cm}
+\noindent\underline{\underline{\textbf{($\ast$) Proposição 8.4. }}} : Se $p$ é um \underline{primo racional ímpar}, então $p$ é um \underline{primo Gaussiano} ou 
+a \textbf{norma} de um \underline{primo Gaussiano} quando ele deixa \underline{resto} $3$ ou $1$ na divisão por $4$.
+
+\vspace{0.2cm}
+\noindent\textit{Demonstração : }
+
+Se $p = x^2 + y^2$, então um de $x,y$ é par e o outro ímpar.  
+Logo, um dos quadrados deixa resto $1$ e o outro resto $0$ módulo $4$, logo $p\equiv 1 \pmod{4}$.  
+
+Reciprocamente, se $p\equiv 1 \pmod{4}$, então existe $x$ tal que $x^2 \equiv -1 \pmod{p}$.  
+Assim $p \mid (x+i)(x-i)$ em $\mathbb{Z}[i]$, logo $p$ não pode ser primo Gaussiano, mas sim $p = (x+i)(x-i)$.
+
+\vspace{0.2cm}
+\noindent\underline{\underline{\textbf{($\ast$) Corolário 8.5. }}} : Cada primo Gaussiano  $\pm 1 \pm i$, ou um associado de um 
+\underline{primo racional} que deixa \textbf{resto} $3$ na divisão por $4$ ou ainda sua norma é um \underline{primo racional} que deixa 
+\textbf{resto} $1$ na divisão por $4$.
+
+\vspace{0.2cm}
+\noindent\textit{Demonstração : }
+
+Cada \underline{primo Gaussiano} $q$ deve \underline{dividir} algum \textbf{fator primo racional} $p$ de sua \underline{norma} $q \overline{q}$;
+aplicando a \textbf{Proposição 8.4} se $p$ for ímpar, e as observações anteriores se $p = 2$, obtemos o desejado.
+
+\vspace{0.2cm}
+\noindent\underline{\underline{\textbf{($\ast$) Corolário 8.6. }}} : Um primo racional $p$ pode ser escrito como soma de dois quadrados 
+se, e somente se ele é igual à $2$ ou deixa resto $1$ na divisão por $4$.
+
+\vspace{0.2cm}
+\noindent\textit{Demonstração : }
+
+Se $p=x^2+y^2$, então $p$ não é primo Gaussiano, pois divide $(x+iy)(x-iy)$.  
+A recíproca vem da proposição anterior.

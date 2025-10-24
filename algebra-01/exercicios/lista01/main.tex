@@ -1,0 +1,270 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{enumitem} 
+
+\pagestyle{empty}
+
+\begin{document}
+
+\begin{center}
+    Álgebra 1 
+\end{center}
+
+\begin{center}
+    \large Lista 01 \\
+    \small (Princípios Básicos)
+\end{center}
+
+  \begin{enumerate}[label=1.\arabic*.]
+
+    \item (Quanto tinha ontem). Mostre que a relação $(-1)\cdot(-1)=+1$ é uma consequência 
+    da lei distributiva.
+
+    Como $0=1+(-1)$, temos que :
+    \begin{gather*}
+      0 = 0\cdot(-1) = (1+(-1))\cdot(-1) \\
+      = 1\cdot(-1) + (-1)\cdot(-1) \\
+      = -1 + (-1)\cdot(-1) = 0 \\
+      \Rightarrow 1 = (-1)\cdot(-1)
+    \end{gather*}
+
+    Portanto, $(-1)\cdot(-1)=1$.
+
+    \item (Funções). Seja $I=\{x\in\mathbb{R}:0\le x\le 1\}$. O conjunto $C$ das funções 
+    contínuas de $I$ em $\mathbb{R}$, com as operações usuais de adição e multiplicação 
+    pontuais, possui quais propriedades dos conjuntos numéricos vistas em aula?
+
+    Sejam $f,g,h \in C$ e $x \in I$.
+
+    \begin{description}
+      \item[A1 -- Associatividade da Adição] : $(f+g)+h = f+(g+h)$  
+      \begin{align*}
+        ((f+g)+h)(x) &= (f(x)+g(x)) + h(x), \\
+        (f+(g+h))(x) &= f(x) + (g(x)+h(x)).
+      \end{align*}
+      Como a adição em $\mathbb{R}$ é associativa, temos
+      \[
+      (f+g)+h = f+(g+h).
+      \]
+      Logo, essa propriedade é válida.
+
+      \item[A2 -- Elemento Neutro aditivo] : $0 + f = f$  
+      
+      Seja função nula $z(x) = 0 \text{ } \forall \text{ } x \in C$, satisfaz
+      \[
+      (f+z)(x) = f(x) + 0 = f(x),
+      \]
+      Logo, essa propriedade é válida. 
+
+      \item[A3 -- A equação $f + h = g$ possui uma única solução]  
+      
+      \[
+        h(x) = g(x) - f(x)
+      \]
+      Como $g$ e $f$ são contínuas, a diferença entre elas também é uma \underline{função contínua}
+      
+      Logo, $h \in C$ pois $g$ e $f \in C$ e é a única solução.
+
+      \item[A4 -- Comutatividade da Adição] : $f + g = g + f$  
+
+        Como a adição em $\mathbb{R}$ é comutativa temos :
+
+        $(f+g)(x) = f(x)+g(x) = g(x)+f(x) = (g+f)(x)$.
+      
+        Logo, essa propriedade é válida. 
+
+      \item[M1 -- Associatividade da Multiplicação] : $(f \cdot g) \cdot h = f \cdot (g \cdot h)$  
+      \begin{align*}
+        ((f \cdot g) \cdot h)(x) &= (f(x) \cdot g(x)) \cdot h(x), \\
+        (f \cdot (g \cdot h))(x) &= f(x) \cdot (g(x) \cdot h(x)).
+      \end{align*}
+      Como a multiplicação em $\mathbb{R}$ é associativa, temos
+      \[
+      (f \cdot g) \cdot h = f \cdot (g \cdot h).
+      \]
+      Logo, essa propriedade é válida.
+
+      \item[M2 -- Elemento Neutro multiplicativo] : $1 \cdot f = f$
+      
+      A função $u(x) = 1 \text{ } \forall \text{ } x \in I$,essa função é \underline{contínua}, logo $\in C$. 
+      
+      $(f \cdot u)(x) = f(x) \cdot u(x) = f(x)\cdot 1 = f(x)$.
+
+      Logo, essa propriedade é válida.
+      
+      \item[M3 -- $fg =h$ possui uma única solução]
+      
+      \textit{Contraexemplo : }
+
+      Seja $f(x) = x - 0.5 \text{ e } g(x) = 1$
+
+      A equação $(x - 0.5) \cdot h(x) = 1$ \textbf{não} tem solução em $C$ pois a função $h(x) = \frac{1}{x - 0.5}$ 
+      \underline{não é contínua} em $0.5$.
+
+      Logo, essa propriedade \textbf{não} é válida.
+
+      \item[M4 -- Comutatividade da Multiplicação] : $fg = gf$
+      
+      Como a adição em $\mathbb{R}$ é comutativa temos :
+
+      $(fg)(x) = f(x)g(x) = g(x)f(x) = (gf)(x)$.
+      
+      Logo, essa propriedade é válida. 
+
+      \item[MA -- Distributividade.]  
+        
+    \end{description}
+
+    Portanto, $(C,+,\cdot)$ é um \underline{anel comutativo} com unidade, mas não um corpo.
+
+    \item (Reticulado e relação de ordem). Um conjunto $L$, juntamente com duas operações 
+    binárias associativas e comutativas $\vee$ e $\wedge$ sobre $L$ tais que 
+    $a\vee(a\wedge b)=a$ e $a\wedge(a\vee b)=a$, para quaisquer $a,b\in L$, é chamado reticulado. 
+    Definindo $a\le b$ se $a=a\wedge b$ ou $b=a\vee b$, verifique que, para quaisquer $x,y,z\in L$, tem-se:
+    $x \le x$ ; se $x \le y$ e $y \le z$, então $x\le z$ ; se $x \le y$ e $y \le x$, então $x=y$.
+    
+    Tome $x,y \text{ e } z \in L$.
+    
+    \begin{enumerate}[label=\roman*.]
+      \item $x \leq x$
+      
+      Sabemos que $x = x \wedge (x \vee y)$
+      
+      Seja $y = (x \vee z)$ para algum $z$, então
+
+      $x = x \wedge (x \vee (x \vee z)) = x \wedge x$
+
+      Logo, $x \leq x$
+
+      \item Se $x \leq y \text{ e } y \leq z$ então $x \leq z$
+      
+      $x = x \wedge y$ e $y = y \wedge z$, substituindo $y$ em $x \wedge y$
+
+      $x = x \wedge (y \wedge z)$, como "$\wedge$" é associativa
+
+      $x = (x \wedge y) \wedge z = x \wedge z$
+      
+      Logo, $x \leq z$.
+
+      \item Se $x \leq y \text{ e } y \leq x$ então $x = y$
+    
+      Temos, $x = x \wedge y$
+
+      $y = y \wedge x$, como "$\wedge$" é comutativa $y = x \wedge y$
+
+      Assim, $x = x \wedge y = y$
+
+      Logo, $x = y$
+
+    \end{enumerate}
+
+    \item (Uma álgebra de Boole). Seja $P(X)$ o conjunto das partes de um conjunto $X$. 
+    Escrevendo $+$ ou $\vee$ no lugar de união e $\wedge$ no lugar de interseção, e 
+    definindo $\neg a$ como o complementar de $a\subseteq X$, prove que $P(X)$ é um reticulado 
+    no qual $\wedge$ distribui-se sobre $\vee$, $\vee$ distribui-se sobre $\wedge$, e que 
+    $a\vee \neg a = 1 $ e $a\wedge(\neg a)=0$ para qualquer $a\in P(X)$. Quais conjuntos são $0$ e $1$?
+
+    Para ser um reticulado pe preciso que as leis de absorção valem:
+
+    - $a \vee (a \wedge b) \rightarrow A \cup (A \cap B ) = A$ \\
+    - $a \wedge (a \vee b) \rightarrow A \cap (A \cup B ) = A$
+
+    Como as leis são válidas, $P(X)$ é um reticulado.
+    
+    Distributivas:
+
+    - $\wedge$ distribui-se sobre $\vee$ : $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$\\
+    - $\vee$ distribui-se sobre $\wedge$ : $A \cup (B \cap C) = (A \cap B) \cup (A \cap C)$
+
+    Logo, a distributiva é válida.
+
+    Complemento:
+
+    - $a \wedge ( \neg a ) = 0 \rightarrow A \cup A^c = X (\text{ Conjunto Universal})$ \\
+    - $ a \vee \neg a = 1 \rightarrow A \cap A^c = \emptyset$ 
+
+    $0 \rightarrow \emptyset$ \\ 
+    $1 \rightarrow \text{Universal (X)}$  
+
+    \item (Até onde encontramos um divisor). Prove que cada inteiro $n>1$ ou possui um divisor 
+    $>1$ e $\le\sqrt{n}$, ou então não possui divisor $>1$ e $<n$.
+
+    \begin{enumerate}[label=\Roman*.]
+      
+      \item $n$ é um número primo
+      
+      Por definição, a segunda condição é satisfeita
+
+      \item $n$ é um número composto
+    
+      Por definição $n$ pode ser escrito da seguinte forma : $n = a \cdot b \text{ tal que } a,b \in \mathbb{Z}$ e
+      $1 < a,b < n$ 
+      
+      Em relação a $\sqrt{n}$ temos 3 possibilidades :
+
+      1. $a > \sqrt{n}$ e $b > \sqrt{n}$ : o que seria uma contradição pois $a \cdot b > n$
+      
+      2. $a < \sqrt{n}$ e $b < \sqrt{n}$
+
+      3. $a \geq \sqrt{n}$ e $b \leq \sqrt{n}$ (ou vice-versa)
+
+      Assim, pelo menos um dos fatores deve ser \underline{menor ou igual} a $\sqrt{n}$, como $a,b > 1$ encontramos
+      um divisor $d$ tal que $1 < d \leq \sqrt{n}$
+
+    \end{enumerate}
+
+    \item (Uma equação diofantina). Use o Princípio da Boa Ordenação para ver que a equação $X^6+2Y^6=4Z^6$ 
+    possui uma única solução sobre $\mathbb{Z}$.
+
+    Nota-se que $(0,0,0)$ é uma solução pois $(0^{6}) + 2(0^{6}) = 4(0^{6})$
+
+    \item (Soma dos $n$ primeiros cubos). Demonstre, por indução, que
+    \[
+      1^3+2^3+\ldots+n^3=\left(\frac{n(n+1)}{2}\right)^2.
+    \]
+
+    De fato, para $ n = 1$ temos : 
+    \[
+      1^{3} = \left(\frac{1(1+1)}{2}\right)^2
+    \]
+
+    Suponhamos que a equação seja válida para cada $n$ com $1 \leq n < N$.
+
+    Daí,
+
+    \begin{align*}
+      1^3+2^3+\ldots+(N-1)^{3}+N^3 &= \left(\frac{n-1(n-1+1)}{2}\right)^2 + N^3 \\
+      &= \left(\frac{N^2 - N}{2}\right)^2 + N^3 \\
+      &= \frac{N^4 -2N^3 + N^2 + 4N^3}{4} = \frac{N^4 + 2N^3 + N^2}{4} \\
+      &= \left(\frac{N^2 + N}{2}\right)^2= \left(\frac{N(N+1)}{2}\right)^2
+    \end{align*}
+
+    Logo, pelo Princípio da Indução Matemática a equação é válida.
+
+    \item (Múltiplo de 11). Mostre por indução que $3^{3n+2}+2^{4n+1}$ é múltiplo de $11$ para 
+    cada inteiro $n\ge 0$.
+
+     De fato, para $ n = 0$ temos : 
+    \[
+      3^{3 \cdot 0 + 2 }+ 2^{4 \cdot 0 + 1} = 11 = 11 \cdot 0  
+    \]
+
+    Suponhamos que a expressão seja um multíplo de 11 para cada $n$ com $0 \leq n < N + 1$.
+
+    Daí,    
+    \begin{align*}
+      3^{3 \cdot (N+1) + 2 } + 2^{4 \cdot (N+1) + 1} &= 3^{3N + 2 } \cdot 27 + 2^{4N + 1} \cdot 16 \\
+      &= (16 + 11) \cdot 3^{3N + 2} + 16 \cdot 2^{4N + 1} \\
+      &= 11 \cdot 3^{3N + 2} + 16 \cdot (2^{4N + 1} + 3^{3N + 2})
+    \end{align*}
+    que é um multíplo de $11$.
+
+    Logo, pelo Princípio da Indução Matemática a afirmação é válida.
+
+  \end{enumerate}
+
+\end{document}

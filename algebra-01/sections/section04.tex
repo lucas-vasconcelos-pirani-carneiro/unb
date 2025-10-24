@@ -1,0 +1,302 @@
+\section*{Números Primos e Coprimos}
+
+\subsection*{Números Coprimos}
+
+\noindent\underline{\underline{\textbf{($\ast$) Definição 5.1. }}} : Dizemos que inteiros $a, b, \ldots, c$ são \textbf{mutuamente relativamente primos} (ou \textbf{coprimos}) 
+se o m.d.c. deles for $1$.  
+
+Em outras palavras, eles são \textbf{mutuamente relativamente primos} se \textbf{não} possuem um divisor comum
+positivo \underline{diferente} de $1$.  
+
+Se $a$ e $b$ são \textbf{mutuamente relativamente primos}, dizemos que $a$ é \underline{primo} a $b$ e que $b$ é \underline{primo} a $a$. 
+Quando isso ocorre, observamos que \textbf{cada divisor} de $a$ é \underline{primo} a $b$, e que \textbf{cada divisor} de $b$ é \underline{primo} a $a$.
+
+\begin{exemplo}
+\begin{enumerate}
+    \item Os números $6, 10$ e $15$ são mutuamente relativamente primos, pois $(6, 10, 15) = 1$ 
+    (o que segue diretamente de $6 + 10 - 15 = 1$).
+    
+    \item A fração $\dfrac{14n+3}{21n+4}$ é irredutível para cada inteiro $n \ge 0$, 
+    pois $(-2)(21n + 4) + (3)(14n + 3) = 1$.
+    
+    \item Para qualquer $m$, $(1, m) = 1$; e $(k, m) = 1$ se, e somente se, $(m - k, m) = 1$ 
+    (de fato, $kx + my = 1$ equivale a $(m-k)x' + my' = 1$ para $x' = -x$ e $y' = x + y$).
+\end{enumerate}
+\end{exemplo}
+
+\vspace{0.2cm}
+\noindent\underline{\underline{\textbf{($\ast$) Proposição 5.2. }}} : Os inteiros $a, b, \ldots, c$ 
+são mutuamente relativamente primos se, e somente se, a equação $ax + by + \cdots + cz = 1$ possui 
+uma solução em inteiros $x, y, \ldots, z$.
+
+\vspace{0.2cm}
+\noindent\textit{Demonstração : }
+
+Se a equação possui uma solução, então cada divisor comum $d \ge 0$ de $a, b, \ldots, c$ deve
+dividir $1$, logo, deve ser $1$.
+
+Reciprocamente, se $(a, b, \ldots , c) = 1$, então $a$ Proposição 4.2 
+garante que a equação possui \underline{uma solução}.
+
+\vspace{0.2cm}
+\noindent\underline{\underline{\textbf{($\ast$) Corolário 5.3. }}} : Se $d > 0$ é o $m.d.c.$ dos inteiros 
+$a, b, \ldots, c$, então $\tfrac{a}{d}, \tfrac{b}{d}, \ldots, \tfrac{c}{d}$ 
+são \underline{mutuamente relativamente primos}.
+
+\vspace{0.2cm}
+\noindent\textit{Demonstração : }
+
+Isto segue-se de escrever $d = ax_0 + by_0 + \cdots + cz_0$.
+
+\vspace{0.2cm}
+\noindent\underline{\underline{\textbf{($\ast$) Proposição 5.4. }}} : Se $a, b, c$ são inteiros tais que $a$ é primo a $b$ e $a$ divide $bc$, então $a$ divide $c$.
+
+\vspace{0.2cm}
+\noindent\textit{Demonstração : }
+
+Escrevemos $1 = ax_0 + by_0$ e obtemos $c = cax_0 + cby_0$.  
+Como $a$ divide ambos os termos do lado direito desta igualdade, $a$ divide $c$.
+
+\vspace{0.2cm}
+\noindent\underline{\underline{\textbf{($\ast$) Corolário 5.5. }}} : Se $a, b, c$ são inteiros e $a$ é primo a ambos $b$ e $c$, então $a$ é primo a $bc$.
+
+\vspace{0.2cm}
+\noindent\textit{Demonstração : }
+
+Se $d \ge 0$ e $d$ divide $a$ e $bc$, então $d$ é primo a $b$ (pois $d$ é divisor de $a$), 
+logo, $d$ divide $c$, pela Proposição 5.4.
+
+Como $(a, c) = 1$, $d$ deve ser $1$.
+
+\vspace{0.2cm}
+\noindent\underline{\underline{\textbf{($\ast$) Corolário 5.6. }}} : Se um inteiro é primo a cada um dos inteiros $a, b, \ldots, c$, então ele é primo ao produto $ab \cdots c$.
+
+\vspace{0.2cm}
+\noindent\textit{Demonstração : }
+
+Isto decorre do Corolário 5.5 por indução sobre o número de fatores no produto.
+
+\subsection*{Números Primos}
+
+\noindent\underline{\underline{\textbf{($\ast$) Definição 5.7. }}} : \textbf{\textcolor{teal}{Números Primos}}
+
+Dizemos que um inteiro $p > 1$ é \underline{primo} se ele \textbf{não} possui outros divisores positivos além 
+de \textbf{si mesmo} e $1$; caso contrário, ele é dito \underline{composto}.  
+
+Em outros termos, ele é \textbf{primo} se possui \underline{exatamente} \textbf{dois divisores} positivos. 
+
+Cada inteiro $> 1$ possui \textbf{pelo menos} um divisor \textbf{primo}, a saber, seu menor divisor $> 1$. 
+
+Se $a$ é um inteiro qualquer e $p$ é um primo, então ou $p \mid a$ ou $p$ é primo a $a$.  
+
+\begin{exemplo}
+    \begin{enumerate}
+        \item Os primos $\leq 50$ estão circulados na seguinte tabela:   
+        \[
+            \begin{array}{cccccccc}
+            1 & \circled{2} & \circled{3} & 4 & \circled{5} & 6 & \circled{7} & 8 \\
+            \circled{9} & 10 & \circled{11} & 12 & \circled{13} & 14 & 15 & 16 \\
+            \circled{17} & 18 & \circled{19} & 20 & 21 & 22 & \circled{23} & 24 \\
+            25 & 26 & \circled{27} & 28 & \circled{29} & 30 & \circled{31} & 32 \\
+            33 & 34 & 35 & 36 & \circled{37} & 38 & \circled{39} & 40 \\
+            \circled{41} & 42 & \circled{43} & 44 & 45 & 46 & \circled{47} & 48 \\
+            49 & 50 &   &   &   &   &   &   
+            \end{array}
+        \]
+
+        \begin{center}
+            (Crivo de Eratóstenes – números primos circulados).      
+        \end{center}
+        
+        \item O maior primo conhecido pode ser visto em \texttt{www.mersenne.org} (Great Internet Mersenne Prime Search).  
+        \item Temos $2014 = 2 \cdot 1007 = 2 \cdot 19 \cdot 53$, $1484 = 2 \cdot 742 = 2^2 \cdot 371 = 2^2 \cdot 7 \cdot 53$, e $2 \cdot 3 \cdot 5 \cdot 7 \cdot 11 \cdot 13 + 1 = 59509$.  
+    \end{enumerate}
+\end{exemplo}
+
+\vspace{0.2cm}
+\noindent\underline{\underline{\textbf{($\ast$) Proposição 5.8. }}} : Se um primo divide um produto de certos inteiros, então ele divide pelo menos um dos fatores.  
+
+\vspace{0.2cm}
+\noindent\textit{Demonstração : }
+
+Isto decorre da Proposição 5.4 por indução sobre o número de fatores no produto.
+
+\vspace{0.2cm}
+\noindent\underline{\underline{\textbf{($\ast$) Teorema 5.9. }}} : \textbf{\textcolor{teal}{Teorema Fundamental da Aritmética}}
+
+Cada inteiro $> 1$ pode ser escrito como um \underline{produto de primos}, e pode ser assim escrito de modo único, exceto pela ordem dos fatores.
+
+\vspace{0.2cm}
+\noindent\textit{Demonstração : }
+
+Seja $a > 1$ e seja $p$ um \underline{divisor primo} de $a$. Se $a = p$, o teorema vale para $a$. Senão, 
+$\frac{a}{p}$ é $> 1$ e $< a$. 
+
+Se a primeira afirmação do teorema vale para $\frac{a}{p}$, então ela vale para $a$. Portanto, a primeira afirmação segue-se por \textbf{indução} sobre $a$.  
+
+A segunda afirmação do teorema também pode ser provada por \textbf{indução}. 
+
+De fato, suponhamos que $a$ seja escrito de duas maneiras como \underline{produto de primos}:  
+
+\[
+a = pq\cdots r \quad \text{e} \quad a = p' q' \cdots s'.
+\]  
+
+Como $p$ \underline{divide} $a$, a Proposição 3.8 garante que $p$ deve \underline{dividir um dos primos} $p', q', \ldots, s'$, 
+digamos $p'$. Assim, $p = p'$.  
+
+Aplicando a segunda parte do teorema para $\frac{a}{p}$, segue-se que $q'\cdots s'$ deve ser o mesmo 
+que $q \cdot \ldots \cdot r$, a menos da ordem. Por \textbf{indução}, a segunda parte está provada.  
+
+Demonstração da \textbf{Unicidade}: 
+
+Escreva $a$ como um \underline{produto de primos}, $a = pq \cdots r$.  
+
+Seja $P$ um \underline{primo qualquer}, e seja $n$ o \underline{número de vezes} que $P$ aparece dentre os fatores $p,q,\ldots,r$.  
+
+\begin{enumerate}
+    \item Por um lado, $a$ é \underline{múltiplo} de $P^n$.
+    \item Por outro, $a$ \underline{\textbf{não} é múltiplo} de $P^{n+1}$ (pois pela Proposição 3.8, $a \cdot P^{-n}$ \underline{\textbf{não} é múltiplo} de $P$).      
+\end{enumerate}
+
+Assim, $n$ é unicamente determinado como o \underline{maior inteiro} tal que $P^n$ \underline{divide} $a$, e podemos escrever $n = v_P(a)$. 
+
+Logo, em quaisquer duas maneiras de escrever $a$ como um \underline{produto de primos}, os \underline{mesmos primos} devem aparecem, devem ocorrer o \underline{mesmo número de vezes} me \textbf{ambos} os produtos.  
+
+\begin{exemplo}
+    A \textbf{fatoração única} pode ser usada para determinar o \textbf{máximo divisor comum} ($m.d.c.$) de inteiros $> 0$. 
+    De fato, se 
+    
+    \[
+    a = \prod_{p \ \text{primo}} p^{v_p(a)} 
+    \quad \text{e} \quad 
+    b = \prod_{p \ \text{primo}} p^{v_p(b)} ,
+    \]
+    
+    (em que quase todos os expoentes são $= 0$), então
+    
+    \[
+    (a, b) = \prod_{p \ \text{primo}} p^{\min\{v_p(a),v_p(b)\}}.
+    \]  
+
+    $(2014, 1484) = 2 \cdot 53 = 106$.
+\end{exemplo}
+
+\vspace{0.2cm}
+\noindent\underline{\underline{\textbf{($\ast$) Teorema 5.10. }}} : Existe uma quantidade infinita de primos.
+
+\vspace{0.2cm}
+\noindent\textit{Demonstração : }
+
+(\textbf{Argumento de Euclides}). Se $p, q, \ldots , r$ são primos, então \underline{cada divisor primo} de $p \cdot q \cdots r +1$
+deve ser diferente de $p, q, \ldots , r$.
+
+\section*{Equações Diofantinas}
+
+Sejam $a,b, \text{e } c \in \mathbb{Z}$. A equação : 
+\[
+aX + bY = c
+\]
+
+\begin{enumerate}[label=\roman*.]
+    \item Possui \underline{uma} solução \textbf{inteira} se, e somente se, \underline{$d$ divide $c$}, neste caso, temos \underline{infinitas} 
+    tais soluções 
+    \item Além disso, se $ ax_0 + by_0 = c $ com $x_0,y_0 \in \mathbb{Z}$, então \underline{todas} as soluções são dadas por : 
+\end{enumerate}
+
+\[
+x = x_0 + \frac{b}{d} \cdot t , \text{com } t \in \mathbb{Z} 
+\]
+
+\[
+y = y_0 - \frac{a}{d} \cdot t , \text{com } t \in \mathbb{Z}
+\]
+
+\noindent\textit{Demonstração : }
+
+Se $ax_0 + by_0 = c$, então $d \mid c$.
+
+Reciprocamente, se $c \mid d$, então $c = d \cdot e$.
+
+Como existem inteiros $v$ e $s$ tais que $av + bs = d$, temos:
+
+\[
+a \cdot \Big(x_0 + \frac{b}{d} \cdot t\Big) + b \cdot \Big(y_0 - \frac{a}{d} \cdot t\Big) 
+= ax_0 + by_0 = c, \quad \forall t \in \mathbb{Z}.
+\]
+
+Além disso, se $ax + by = c$, então
+\[
+a \cdot \Big(x_0 + \tfrac{b}{d} \cdot t\Big) = b \cdot \Big(y_0 - \tfrac{a}{d} \cdot t\Big) \tag{1}
+\]
+
+Daí,
+\[
+\frac{b}{d} \mid \frac{a}{d}(x-x_0).
+\]
+
+Como $mdc\!\left(\tfrac{a}{d}, \tfrac{b}{d}\right) = 1$, existe $t \in \mathbb{Z}$ tal que
+\[
+\boxed{x = x_0 + \tfrac{b}{d}t} \tag{2}
+\]
+
+Substituindo (2) em (1), obtemos:
+\[
+\boxed{y = y_0 - \tfrac{a}{d}t}.
+\]
+
+\subsection*{Exemplos}
+
+\begin{enumerate}
+    \item 9X + 12Y = 1
+     
+    Nota-se que $(9,12) = 3$ que \textbf{não} divide 1, logo a equação não possui solução em $\mathbb{Z}$. 
+    
+    \item 28X + 90Y = 22
+    
+    Note que,
+    \begin{minipage}[t]{0.45\linewidth}
+        \begin{align*}
+                90 &= (3)\cdot 28 + 6 \\
+                28 &= (4)\cdot 6 + 4 \\
+                6  &= (1)\cdot 4 + 2 \\
+                4  &= (2)\cdot 2 + 0
+        \end{align*}
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.45\linewidth}
+        \begin{align*}
+            2  &= 6 + (-1)\cdot 4 \\
+            2  &= (-1)\cdot 28 + (5)\cdot 6 \\
+            2  &= (-16)\cdot 28 + (5)\cdot 90
+        \end{align*}
+    \end{minipage}
+
+    Dando 
+    \[
+        (28,90) = 2 = (-16)\cdot 28 + (5)\cdot 90
+    \]
+
+    Assim, 
+    \[
+        (-16 \cdot 11)\cdot 28 + (5 \cdot 11)\cdot 90 = 22
+    \]
+
+    Portanto, todas as soluções da equação são:
+    \[
+        x = -176 + 45t, \quad y = 55 - 14t, \quad t \in \mathbb{Z}.
+    \]
+
+    \item 12X + 25Y = 1
+    
+    Pela divisão euclidiana temos : 
+    
+    $25 = (2)12 + + 1$ ,Ou Seja
+    
+    $1 = 25(1) + (-2)12$
+    
+    Assim, as soluções da equação são : 
+    \[
+        x = -2 + 25t, \quad y = 1 - 12t, \quad t \in \mathbb{Z}.
+    \]
+
+\end{enumerate}

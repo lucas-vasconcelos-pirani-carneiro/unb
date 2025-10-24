@@ -1,0 +1,109 @@
+% --- Pacotes principais --- %
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb}
+\usepackage{enumitem}
+\usepackage[a4paper, left=2cm, right=2cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{setspace}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{tocloft}
+\usepackage[normalem]{ulem}
+\usepackage{placeins}
+\usepackage{fancyhdr}
+\setlength{\headheight}{25pt}
+\addtolength{\topmargin}{-10pt}
+
+% --- Configuração de colunas ---
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+
+% --- Bibliotecas TikZ ---
+\usetikzlibrary{trees, positioning}
+
+% --- Estilo geral ---
+\setstretch{1.15}
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0pt}
+
+% --- Espaçamento entre seções ---
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{0.8em}{0.5em}
+\titlespacing*{\subsection}{0pt}{0.6em}{0.3em}
+
+% --- Configuração do sumário ---
+\setlength{\cftbeforesecskip}{0.1em}
+\setlength{\cftbeforesubsecskip}{0.05em}
+\setlength{\cftbeforesubsubsecskip}{0.1em}
+
+% --- Paleta preto e cinza ---
+\definecolor{cinzaEscuro}{RGB}{40, 40, 40}
+\definecolor{cinzaClaro}{RGB}{230, 230, 230}
+\definecolor{cinzaMedio}{RGB}{120, 120, 120}
+\definecolor{pretoFosco}{RGB}{15, 15, 15}
+
+% --- Cores e estilo das seções ---
+\usepackage{sectsty}
+\sectionfont{\color{cinzaEscuro}\large\sffamily}
+\subsectionfont{\color{cinzaMedio}\sffamily}
+\subsubsectionfont{\color{cinzaMedio}\sffamily}
+
+% --- Cabeçalho e rodapé ---
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textcolor{cinzaMedio}{\textbf{Algébra 01}}}
+\rfoot{\textcolor{cinzaMedio}{\thepage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{cinzaClaro}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\footrule}{\hbox to\headwidth{\color{cinzaClaro}\leaders\hrule height \footrulewidth\hfill}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}
+  \lhead{\textcolor{cinzaMedio}{\textbf{Algébra 01}}}
+  \rfoot{\textcolor{cinzaMedio}{\thepage}}
+  \renewcommand{\headrulewidth}{0.4pt}
+  \renewcommand{\footrulewidth}{0.4pt}
+  \renewcommand{\headrule}{\hbox to\headwidth{\color{cinzaClaro}\leaders\hrule height \headrulewidth\hfill}}
+  \renewcommand{\footrule}{\hbox to\headwidth{\color{cinzaClaro}\leaders\hrule height \footrulewidth\hfill}}
+}
+
+% --- Boxes estilizados com a paleta do documento ---
+\usepackage[most]{tcolorbox}
+
+% Box de Exemplo (cinza e preto fosco)
+\newtcolorbox{exemplo}[1][]{
+  colback=cinzaClaro!40!white,
+  colframe=pretoFosco!80!black,
+  fonttitle=\bfseries\sffamily,
+  title=\textcolor{white}{Exemplo~#1},
+  boxrule=0.6pt,
+  arc=4pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+  coltitle=pretoFosco
+}
+
+% Box de Questão (cinza escuro e médio)
+\newtcolorbox{questao}[1][]{
+  colback=cinzaClaro!30!white,
+  colframe=cinzaEscuro!80!black,
+  fonttitle=\bfseries\sffamily,
+  title=\textcolor{white}{Questão~#1},
+  boxrule=0.6pt,
+  arc=4pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+  coltitle=cinzaEscuro
+}
+
+% --- Comando para número circundado ---
+\usepackage{tikz}
+\newcommand*\circled[1]{%
+  \tikz[baseline=(char.base)]{
+    \node[shape=circle,draw=cinzaMedio,inner sep=1pt, text=cinzaEscuro] (char) {#1};
+  }%
+}

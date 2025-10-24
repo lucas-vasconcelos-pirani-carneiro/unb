@@ -1,0 +1,33 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{lmodern}
+
+\input{preambulo.tex}
+
+\begin{document}
+
+% --- Título estilizado ---
+% --- Título simples e elegante ---
+\begin{center}
+    \centering
+    \vspace*{\fill}
+    {\sffamily\bfseries\fontsize{28}{32}\selectfont\textcolor{pretoFosco}{Algébra 01}}\\[0.6em]
+    \vspace*{\fill}
+\end{center}
+
+\pagestyle{fancy} 
+\newpage
+
+% --- Sumário --- %
+\tableofcontents
+\newpage
+
+% --- Seções ---
+\input{sections/section01.tex}
+\input{sections/section02.tex}
+\input{sections/section03.tex}
+\input{sections/section04.tex}
+\input{sections/section05.tex}
+\input{sections/section06.tex}
+\input{sections/section07.tex}
+
+\end{document}
