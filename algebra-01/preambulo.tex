@@ -103,6 +103,30 @@
   coltitle=cinzaEscuro
 }
 
+% Box de Definição (cinza e preto fosco)
+\newtcolorbox{definicao}[1][]{
+  colback=cinzaClaro!40!white,
+  colframe=pretoFosco!80!black,
+  fonttitle=\bfseries\sffamily,
+  title=\textcolor{white}{Definição~#1},
+  boxrule=0.6pt,
+  arc=4pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+  coltitle=pretoFosco
+}
+
+% Box de Definição (cinza e preto fosco)
+\newtcolorbox{teorema}[1][]{
+  colback=cinzaClaro!40!white,
+  colframe=pretoFosco!80!black,
+  fonttitle=\bfseries\sffamily,
+  title=\textcolor{white}{Teorema~#1},
+  boxrule=0.6pt,
+  arc=4pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+  coltitle=pretoFosco
+}
+
 % --- Comando para número circundado ---
 \usepackage{tikz}
 \newcommand*\circled[1]{%

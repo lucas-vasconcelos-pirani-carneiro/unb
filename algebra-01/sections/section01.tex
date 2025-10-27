@@ -1,210 +1,199 @@
-\section*{Princípios Básicos}
-
-Assumimos os conceitos de \underline{\textbf{conjuntos}} e \underline{\textbf{subconjuntos}}.
-
-$\hookrightarrow$ $\in$ : "é elemento de"
-
-$\hookrightarrow$ $\mathbb{N}$ : Naturais
-
-$\hookrightarrow$ $\mathbb{Z}$ : Inteiros
-
-$\hookrightarrow$ $\mathbb{Q}$ : Racionais
-
-$\hookrightarrow$ $\mathbb{R}$ : Reais
-
-$\hookrightarrow$ $\mathbb{C}$ : Complexos
-
-\begin{exemplo}
-Para $a \neq 0$. As soluções para \textbf{A3} e \textbf{M3} são, respectivamente: $b-a$ e $\frac{b}{a}$.
-\end{exemplo}
-
-\subsection*{Propriedades}
-Assumindo que esses conjuntos númericos tenham essas propriedades : 
-
-\textbf{A1.} $(x + y) + z = x + (y + z)$
-
-\textbf{A2.} $0 + x = x$
-
-\textbf{A3.} A equação $a + x = b$ possui uma única solução em $\mathbb{Z}$, se $a,b \in \mathbb{Z}$ (respectivamente, $\mathbb{Q},\mathbb{R}$ e $\mathbb{C}$).
-
-\textbf{A4.} $x + y = y + x$
-
-\textbf{M1.} $(xy)z = x (yz)$
-
-\textbf{M2.} $1 \cdot x = x$
-
-\textbf{M3.} A equação $ax = b$ possui uma única solução em $\mathbb{Q}$, se $a,b \in \mathbb{Q}$ (respectivamente, $\mathbb{R}$ e $\mathbb{C}$).
-
-\textbf{M4.} $xy = yx$
-
-\textbf{MA.} $x \cdot (y + z) = xy + xz$ e $(x + y) \cdot z = xy + xz$ (\textbf{lei distributiva}). \\ 
-\vspace{0.005cm}
-
-\fbox{Para $a \neq 0$. As soluções para \textbf{A3} e \textbf{M3} são respectivamente: $b-a$ e $\frac{b}{a}$.}
-
-\subsection*{Definições}
-
-\begin{itemize}[left=0pt, label={\(\bullet\)}]
-    \item \textbf{Anel:} Possui as propriedades \textbf{A1}, \textbf{A2}, \textbf{A3}, \textbf{A4} e \textbf{MA}.
-    \item \textbf{Corpo:} Possui \underline{todas} as \textbf{noves} propriedades.
-\end{itemize}
-
-\subsection*{Números Reais}
-
-Aqui estão algumas inferências sobre os números reais ($\mathbb{R}$).
-
-\begin{enumerate}
-    \item É \underline{positivo} ($0 \geq $) ou \underline{negativo} ($0 \leq$).
-    \item $0$ é \underline{positivo} e \underline{negativo}.
-    \item $b \geq a \text{ }(\text{ou } a \leq b) \rightarrow a-b \geq 0$.
-    \item $b > a \text{ }(\text{ou }  a < b) \rightarrow b \geq a \text{ e } b \ne a$.
-\end{enumerate}
-
-\subsection*{Múltiplos e Divisores}
-Se $a,b$ e $c$ são inteiros e \boxed{b = a \cdot c} 
-
-$\hookrightarrow$ $b$ : É \underline{múltiplo} de a 
-
-$\hookrightarrow$ $a$ \underline{divide} $b$ ou $a$ é \underline{divisor} de $b$.
-
-$\hookrightarrow$ \textbf{Notação} : $a|b$.
-
-\vspace{0.4cm}
-
-\noindent\underline{\underline{\textbf{($\ast$) Def }}} : \textbf{\textcolor{teal}{Par}} 
-
-\vspace{0.1cm}
-
-\noindent $b$ é um inteiro \underline{\textbf{par}} se \underline{$2|b$}, caso contrário, $b$ é \underline{\textbf{ímpar}}
-
-\begin{exemplo}[: Soma dos Divisores]
-$6 \Rightarrow 1 + 2 + 3 + 6 = 12$ \\
-$15 \Rightarrow 24$ \\
-$945 \Rightarrow 1920$
-\end{exemplo}
-
-\begin{questao}[(Números Perfeitos)]
-Existe um número ímpar $n$ tal que a soma dos seus divisores positivos seja igual a $2n$ ?
-\end{questao}
-
-\subsection*{Princípio da Boa Ordenação e Indução}
-
-\noindent\underline{\underline{\textbf{($\ast$) Def }}} : \textbf{\textcolor{teal}{Princípio da Boa Ordenação (PBO)}}
-
-\noindent Cada conjunto não vazio de interios positivos contém um \underline{menor elemento}.
-
-\begin{exemplo}[: Prove que não existe um número inteiro $x$ tal que $0 < x < 1$.]
-De fato, se o conjunto de todos os inteiros x tais que $0 < x < 1$ fosse não vazio,
-o Princípio da Boa Ordenação é garantido que existiria um menor inteiro m tal que,
-$0 < m < 1$.
-
-Então, teriamos que $0 < m^2 < m < 1$; uma contradição
-\end{exemplo}
-
-\vspace{0.05cm}
-\noindent Uma formulação equivalente do Princípio da Boa Ordenação é o \underline{Princípio da Indução Matemática}.
-\vspace{0.05cm}
-
-\noindent\underline{\underline{\textbf{($\ast$) Def }}} : \textbf{\textcolor{teal}{Princípio da Indução Matemática (PIM)}}
-
-\noindent Se uma senteça sobre um \underline{inteiro positivo} $n$ é verdadeira para $n = 0$, e se sua veracidade 
-para cada $n$ com \underline{$0 \leq n \leq N$} implica sua veracidade para \underline{$n = N$},então ela é verdadeira \underline{para todo $n \geq 0$}. 
-
-\subsection*{Exemplos}
-
-\begin{exemplo}[Soma dos primeiros números naturais]
-Mostre que a igualdade $1+2+\dots+n=\tfrac{n\cdot(n+1)}{2}$ vale para cada $n\ge1$.
-\end{exemplo}
-
-De fato, para $n=1$ temos :
-\begin{align*}
-1 = \frac{1(1+1)}{2}
-\end{align*}
-
-Suponhamos que a igualdade seja válida para cada $n$ com $1 \leq n < N$.
-
-Daí,
-\begin{align*}
-    1+2+\dotsc +(N-1)+N &= (1+2+\dotsc +N-1) + N \\
-    &= \frac{(N-1) \cdot ((N-1) + 1)}{2} + N \\
-    &= \frac{N^2 - N + 2N}{2} \\
-    &= \frac{N \cdot (N+1)}{2} \\
-\end{align*}
-
-Logo, pelo Princípio da Indução Matemática a igualdade é válida para todo $n \ge 1$.
-
-\begin{exemplo}[]
-Demostre a validade de $2^n > 18(n+1)$ para cada $n \ge 8$.
-\end{exemplo}
-
-De fato, para $n = 8$ temos : 
-\begin{align*}
-2^8 = 256 > 162 = 18\cdot(9)
-\end{align*}
-
-Suponhamos que essa afirmação é válida para cada $n$ com $8 \leq n < N$.
-
-Daí,
-\begin{align*}
-    2^{N} = 2^{N-1} \cdot 2 &> 18 \cdot (N - 1 + 1) \cdot 2 \\
-    &> (18N) \cdot 2 = 18N + 18N \\
-    &> 18N + 18 = 18 \cdot (N+1) \\
-\end{align*}
-
-Logo, pelo Princípio da Indução Matemática a afirmação é válida para cada $n \ge 8$.
-
-\vspace{0.05cm}
-
-\begin{exemplo}[]
-    \begin{equation*}
-        \begin{alignedat}{2}
-            a_n &=\; \begin{cases}
-                1, & \text{se } n = 1,\\
-                a_{n-1}+3, & \text{se } n \ge 2,
-            \end{cases}
-            &\qquad
-            b_n &= a_1 + \dotsc + a_n \;=\; \sum_{k=1}^{n} a_k.
-        \end{alignedat}
-\end{equation*}
-
-    Para cada $n \ge 1$ mostre que :
-    \begin{enumerate}[label=\roman*.]
-        \item $a_{n} = 1 + 3 \cdot (n-1)$
-        \item $b_{n} = \frac{3n^{2} - n}{2}$
-    \end{enumerate}
-    
-\end{exemplo}
-
-De fato, para $n = 1$ temos :
-
-\begin{align*}
-a_n = 1 + 3 \cdot (1 - 1) = 1
-\end{align*}
-
-Suponhamos que a afirmação seja válida para cada n com $1 \leq n < N$.
-
-Daí,
-\begin{align*}
-a_{N} &= a_{N-1} + 3 \\
-&= 1 + 3 \cdot ((N-1) - 1) + 3 \\
-&= 1 + 3 \cdot ((N-1) - 1 + 1) = 1 + 3 \cdot (N - 1) 
-\end{align*}
-
-Logo, pelo Princípio da Indução Matemática a afirmação é válida para todo $n \ge 1$.
-
-Por outro lado, para $n = 1$ temos : 
-\begin{align*}
-b_{N} = 1 = \frac{3(1)^2 - (1)}{2} \\
-\end{align*}
-
-Suponhamos que a afirmação seja válida para cada n com $1 \leq n < N$.
-
-Daí,
-\begin{align*}
-b_{N} &= a_1 + \dotsc + a_{N-1} + a_{N} \\
-&= \frac{3(N-1)^2 - (N-1)}{2} + 1 + 3 \cdot (N - 1) \\
-&= \frac{ 3N^{2} -6N + 3 -N + 1 + 2 + 6N + 3 }{2} \\
-&= \frac{3N^{2} - N}{2}
-\end{align*}
-
-Logo, pelo Princípio da Indução Matemática a afirmação é válida para cada $n \ge 1$.
+\section{Princípios Básicos}
+
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Assumimos os conceitos de \underline{\textbf{conjuntos}} e \underline{\textbf{subconjuntos}}. \\
+        $\hookrightarrow$ $\in$ : "é elemento de" \\
+        $\hookrightarrow$ $\mathbb{N}$ : Naturais \\
+        $\hookrightarrow$ $\mathbb{Z}$ : Inteiros \\
+        $\hookrightarrow$ $\mathbb{Q}$ : Racionais \\
+        $\hookrightarrow$ $\mathbb{R}$ : Reais \\
+        $\hookrightarrow$ $\mathbb{C}$ : Complexos 
+    \end{itemize} 
+
+    \subsection{Propriedades}
+
+        \begin{itemize}
+            \item Assumindo que esses conjuntos númericos tenham essas propriedades :  
+        \end{itemize}
+
+        \begin{enumerate}[label=\textbf{A\arabic*.}, align=left, leftmargin=2cm, nosep]
+            \item $(x + y) + z = x + (y + z)$
+            \item $0 + x = x$
+            \item A equação $a + x = b$ possui uma única solução em $\mathbb{Z}$, se $a,b \in \mathbb{Z}$ (respectivamente, $\mathbb{Q},\mathbb{R}$ e $\mathbb{C}$).
+            \item $x + y = y + x$
+        \end{enumerate}
+
+        \begin{enumerate}[label=\textbf{M\arabic*.}, align=left, leftmargin=2cm, nosep]
+            \item $(xy)z = x (yz)$
+            \item $1 \cdot x = x$
+            \item A equação $ax = b$ possui uma única solução em $\mathbb{Q}$, se $a,b \in \mathbb{Q}$ (respectivamente, $\mathbb{R}$ e $\mathbb{C}$).
+            \item $xy = yx$
+        \end{enumerate}
+
+        \hspace{1cm}\textbf{MA.} $x \cdot (y + z) = xy + xz$ e $(x + y) \cdot z = xy + xz$ (\textbf{Lei Distributiva}).
+
+        \hspace{2cm}\fbox{Para $a \neq 0$. As soluções para \textbf{A3} e \textbf{M3} são respectivamente: $b-a$ e $\frac{b}{a}$.}
+
+    \subsection{Definições}
+
+        \begin{itemize}[left=0.5cm, align=left, nosep]
+            \item \textbf{Anel:} Possui as propriedades \textbf{A1}, \textbf{A2}, \textbf{A3}, \textbf{A4} e \textbf{MA}.
+            \item \textbf{Corpo:} Possui \underline{todas} as \textbf{noves} propriedades.
+        \end{itemize}
+
+    \subsection{Números Reais}
+
+        \begin{itemize}[left=0.5cm, align=left, nosep]
+            \item Aqui estão algumas inferências sobre os números reais ($\mathbb{R}$).
+        \end{itemize} 
+
+        \begin{enumerate}[left=1cm, align=left, nosep]
+            \item É \underline{positivo} ($0 \geq $) ou \underline{negativo} ($0 \leq$).
+            \item $0$ é \underline{positivo} e \underline{negativo}.
+            \item $b \geq a \text{ }(\text{ou } a \leq b) \rightarrow a-b \geq 0$.
+            \item $b > a \text{ }(\text{ou }  a < b) \rightarrow b \geq a \text{ e } b \ne a$.
+        \end{enumerate}
+
+    \subsection{Múltiplos e Divisores}
+
+        \begin{itemize}[left=0.5cm, align=left, nosep]
+            \item Se $a,b$ e $c$ são inteiros e \boxed{b = a \cdot c} \\ 
+            $\hookrightarrow$ $b$ : É \underline{múltiplo} de $a$ \\  
+            $\hookrightarrow$ $a$ \underline{divide} $b$ ou $a$ é \underline{divisor} de $b$. \\
+            $\hookrightarrow$ \textbf{Notação} : $a|b$.
+        \end{itemize}
+
+        \begin{definicao}[: Par]
+            $b$ é um inteiro \underline{\textbf{par}} se \underline{$2|b$}, caso contrário, $b$ é \underline{\textbf{ímpar}}
+        \end{definicao}
+
+        \begin{exemplo}[: Soma dos Divisores]
+        $6 \Rightarrow 1 + 2 + 3 + 6 = 12$ \\
+        $15 \Rightarrow 24$ \\
+        $945 \Rightarrow 1920$
+        \end{exemplo}
+
+        \begin{questao}[(Números Perfeitos)]
+        Existe um número ímpar $n$ tal que a soma dos seus divisores positivos seja igual a $2n$ ?
+        \end{questao}
+
+    \subsection{Princípio da Boa Ordenação e Indução}
+
+        \begin{definicao}[: Princípio da Boa Ordenação (PBO)]
+            Cada conjunto não vazio de interios positivos contém um \underline{menor elemento}.
+        \end{definicao}
+
+        \begin{exemplo}[: Prove que não existe um número inteiro $x$ tal que $0 < x < 1$.]
+        De fato, se o conjunto de todos os inteiros x tais que $0 < x < 1$ fosse não vazio,
+        o Princípio da Boa Ordenação é garantido que existiria um menor inteiro m tal que,
+        $0 < m < 1$.
+
+        Então, teriamos que $0 < m^2 < m < 1$; uma contradição
+        \end{exemplo}
+
+        \vspace{0.05cm}
+        \noindent Uma formulação equivalente do \textbf{Princípio da Boa Ordenação} é o \textbf{Princípio da Indução Matemática}.
+
+        \begin{definicao}[: Princípio da Indução Matemática (PIM)]
+            Se uma senteça sobre um \underline{inteiro positivo} $n$ é verdadeira para $n = 0$, e se sua veracidade 
+            para cada $n$ com \underline{$0 \leq n \leq N$} implica sua veracidade para \underline{$n = N$},então ela é verdadeira \underline{para todo $n \geq 0$}. 
+        \end{definicao}
+
+    \subsection{Exemplos}
+
+    \begin{exemplo}[: Soma dos primeiros números naturais]
+    Mostre que a igualdade $1+2+\dots+n=\tfrac{n\cdot(n+1)}{2}$ vale para cada $n\ge1$.
+    \end{exemplo}
+
+    De fato, para $n=1$ temos :
+    \begin{align*}
+    1 = \frac{1(1+1)}{2}
+    \end{align*}
+
+    Suponhamos que a igualdade seja válida para cada $n$ com $1 \leq n < N$.
+
+    Daí,
+    \begin{align*}
+        1+2+\dotsc +(N-1)+N &= (1+2+\dotsc +N-1) + N \\
+        &= \frac{(N-1) \cdot ((N-1) + 1)}{2} + N \\
+        &= \frac{N^2 - N + 2N}{2} \\
+        &= \frac{N \cdot (N+1)}{2} \\
+    \end{align*}
+
+    Logo, pelo Princípio da Indução Matemática a igualdade é válida para todo $n \ge 1$.
+
+    \begin{exemplo}[]
+    Demostre a validade de $2^n > 18(n+1)$ para cada $n \ge 8$.
+    \end{exemplo}
+
+    De fato, para $n = 8$ temos : 
+    \begin{align*}
+    2^8 = 256 > 162 = 18\cdot(9)
+    \end{align*}
+
+    Suponhamos que essa afirmação é válida para cada $n$ com $8 \leq n < N$.
+
+    Daí,
+    \begin{align*}
+        2^{N} = 2^{N-1} \cdot 2 &> 18 \cdot (N - 1 + 1) \cdot 2 \\
+        &> (18N) \cdot 2 = 18N + 18N \\
+        &> 18N + 18 = 18 \cdot (N+1) \\
+    \end{align*}
+
+    Logo, pelo Princípio da Indução Matemática a afirmação é válida para cada $n \ge 8$.
+
+    \vspace{0.05cm}
+
+    \begin{exemplo}[: Sequências]
+        \begin{equation*}
+            \begin{alignedat}{2}
+                a_n &=\; \begin{cases}
+                    1, & \text{se } n = 1,\\
+                    a_{n-1}+3, & \text{se } n \ge 2,
+                \end{cases}
+                &\qquad
+                b_n &= a_1 + \dotsc + a_n \;=\; \sum_{k=1}^{n} a_k.
+            \end{alignedat}
+    \end{equation*}
+
+        Para cada $n \ge 1$ mostre que :
+        \begin{enumerate}[label=\roman*.]
+            \item $a_{n} = 1 + 3 \cdot (n-1)$
+            \item $b_{n} = \frac{3n^{2} - n}{2}$
+        \end{enumerate}
+        
+    \end{exemplo}
+
+    De fato, para $n = 1$ temos :
+
+    \begin{align*}
+    a_n = 1 + 3 \cdot (1 - 1) = 1
+    \end{align*}
+
+    Suponhamos que a afirmação seja válida para cada n com $1 \leq n < N$.
+
+    Daí,
+    \begin{align*}
+    a_{N} &= a_{N-1} + 3 \\
+    &= 1 + 3 \cdot ((N-1) - 1) + 3 \\
+    &= 1 + 3 \cdot ((N-1) - 1 + 1) = 1 + 3 \cdot (N - 1) 
+    \end{align*}
+
+    Logo, pelo Princípio da Indução Matemática a afirmação é válida para todo $n \ge 1$.
+
+    Por outro lado, para $n = 1$ temos : 
+    \begin{align*}
+    b_{N} = 1 = \frac{3(1)^2 - (1)}{2} \\
+    \end{align*}
+
+    Suponhamos que a afirmação seja válida para cada n com $1 \leq n < N$.
+
+    Daí,
+    \begin{align*}
+    b_{N} &= a_1 + \dotsc + a_{N-1} + a_{N} \\
+    &= \frac{3(N-1)^2 - (N-1)}{2} + 1 + 3 \cdot (N - 1) \\
+    &= \frac{ 3N^{2} -6N + 3 -N + 1 + 2 + 6N + 3 }{2} \\
+    &= \frac{3N^{2} - N}{2}
+    \end{align*}
+
+    Logo, pelo Princípio da Indução Matemática a afirmação é válida para cada $n \ge 1$.

@@ -1,124 +1,131 @@
-\section*{Divisão Euclidiana e Máximo Divisor Comum}
+\section{Divisão Euclidiana e Máximo Divisor Comum}
 
-Vamos começar com um exemplo para calcular o $mdc$ entre dois \textbf{números inteiros}.
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Vamos começar com um exemplo para calcular o $mdc$ entre dois \textbf{números inteiros}.  
+    \end{itemize}
 
-\begin{exemplo}[: {$mdc(2014,1486) = 106$}]
-\[
-\begin{aligned}
-    2014 &= 1 \cdot 1484 + 530 \\
-    1484 &= 2 \cdot 530 + 424 \\
-    530 &= 1 \cdot 424 + 106 \\
-    424 &= 4 \cdot 106 + 0.
-\end{aligned}
-\]
-\end{exemplo}
+    \begin{exemplo}[: {$mdc(2014,1486) = 106$}]
+    \[
+    \begin{aligned}
+        2014 &= 1 \cdot 1484 + 530 \\
+        1484 &= 2 \cdot 530 + 424 \\
+        530 &= 1 \cdot 424 + 106 \\
+        424 &= 4 \cdot 106 + 0.
+    \end{aligned}
+    \]
+    \end{exemplo}
 
-\noindent Analisando de \underline{baixo para cima}, $106$ divide $1484$ ($106|1484$) e $106$ divide $2014$ 
-($106|2014$), e de \underline{cima para baixo}, se um \textbf{inteiro} $d$ divide $2014$ e $1484$, então $d$ divide $106$ ($d|106$).
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Analisando de \underline{baixo para cima}, $106$ divide $1484$ ($106|1484$) e $106$ divide $2014$ 
+        ($106|2014$), e de \underline{cima para baixo}, se um \textbf{inteiro} $d$ divide $2014$ e $1484$, então $d$ divide $106$ ($d|106$).
+        \item Assim, podemos reescrever a equações de cima para baixo do seguinte modo :
+    \end{itemize}
 
-\vspace{0.05cm}
-\noindent Assim, podemos reescrever a equações de cima para baixo do seguinte modo : 
+    \vspace{-1cm}
+    \begin{align*}
+        530 &= 2014 + (-1) \cdot 1484 \\
+        424 &= 1484 + (-2) \cdot 530 = (-2) \cdot 2014 + 3 \cdot 1484 \\
+        106 &= 530 + (-1) \cdot 424 = 3 \cdot 2014 + (-4) \cdot 1484. \\
+    \end{align*}
 
-\begin{align*}
-    530 &= 2014 + (-1) \cdot 1484 \\
-    424 &= 1484 + (-2) \cdot 530 = (-2) \cdot 2014 + 3 \cdot 1484 \\
-    106 &= 530 + (-1) \cdot 424 = 3 \cdot 2014 + (-4) \cdot 1484. \\
-\end{align*}
+    \subsection{Divisão Euclidiana}
 
-\subsection*{Divisão Euclidiana}
+        \underline{\underline{ \textbf{\textcolor{cinzaEscuro}{($\ast$) Lema 4.1.}} }} : \textbf{\textcolor{cinzaEscuro}{Divisão Euclidiana}}
 
-\noindent\underline{\underline{\textbf{($\ast$) Lema 4.1. }}} : \textbf{\textcolor{teal}{Divisão Euclidiana}}
+        Se $a$ e $d$ são \textbf{inteiros} com $d > 0$, então existe um \underline{único maior múltiplo} $qd$ de $d$ que é 
+        \underline{menor do que ou igual} a $a$; ele pode ser caracterizado por $qd \leq a < (q + 1)d$, ou por : 
+        \begin{center}
+            $a = qd + r \text{, com } 0 \leq r < d$
+        \end{center}
 
-Se $a$ e $d$ são \textbf{inteiros} com $d > 0$, então existe um \underline{único maior múltiplo} $qd$ de $d$ que é 
-\underline{menor do que ou igual} a $a$; ele pode ser caracterizado por $qd \leq a < (q + 1)d$, ou por : 
-\begin{center}
-    $a = qd + r \text{, com } 0 \leq r < d$
-\end{center}
+        $r$ : \textbf{Resto} da divisão de $a$. \\
+        $d$ : \textbf{Divisor}. \\
+        $q$ : \textbf{Quociente}.
 
-\noindent $r$ : \textbf{Resto} da divisão de $a$. \\
-$d$ : \textbf{Divisor}. \\
-$q$ : \textbf{Quociente}.
+        \textit{Demonstração : }
 
-\vspace{0.2cm}
-\noindent\textit{Demonstração : }
+            O conjunto dos inteiros positivos da forma $a - zd \text{ , com } z \in \mathbb{Z}$ é não-vazio, pois podemos
+            tomar $z = -N$ em que $N$ é um inteiro não-negativo suficientemente grande.
 
-O conjunto dos inteiros positivos da forma $a - zd \text{ , com } z \in \mathbb{Z}$ é não-vazio, pois podemos
-tomar $z = -N$ em que $N$ é um inteiro não-negativo suficientemente grande.
+            Assim, pelo \textbf{\textcolor{cinzaEscuro}{Princípio da Boa Ordenação}}, digamos que seja r o menor elemento daquele conjunto, 
+            e escrevamos $r = a - qd$. Então, $r \ge 0$ e, $r < d$ pois caso contrário $a - (q + 1)d$ pertenceria ao conjunto e seria $< r$.
 
-Assim, pelo \textbf{\textcolor{teal}{Princípio da Boa Ordenação}}, digamos que seja r o menor elemento daquele conjunto, 
-e escrevamos $r = a - qd$. Então, $r \ge 0$ e, $r < d$ pois caso contrário $a - (q + 1)d$ pertenceria ao conjunto e seria $< r$.
+        \begin{exemplo}[]
+            Os \textbf{números ímpares} são da forma $2n + 1 \text{ , com } n \in \mathbb{Z}$. \\
+            A \underline{diferença} entre quaisquer dois \textbf{números ímpares} é um \textbf{número par}.
+        \end{exemplo}
 
-\begin{exemplo}[]
-    Os \textbf{números ímpares} são da forma $2n + 1 \text{,com } n \in \mathbb{Z}$. \\
-    A \underline{diferença} entre quaisquer dois \textbf{números ímpares} é um \textbf{número par}.
-\end{exemplo}
+        \vspace{1cm}
 
-\noindent\underline{\underline{\textbf{($\ast$) Proposição 4.2. }}} : Seja $M$ um conjunto não-vazio de inteiros. 
-Se $M$ é \textbf{fechado} com respeito à \underline{subtração}, então existe um único $m \ge 0$ tal que M é o conjunto
-de \textbf{todos} os \underline{múltiplos de m} :
+        \underline{\underline{ \textbf{\textcolor{cinzaEscuro}{($\ast$) Proposição 4.2.}} }} : Seja $M$ um conjunto não-vazio de inteiros. 
+        Se $M$ é \textbf{fechado} com respeito à \underline{subtração}, então existe um único $m \ge 0$ tal que M é o conjunto
+        de \textbf{todos} os \underline{múltiplos de m} :
 
-\begin{center}
-    $ M = \{mz : z \in \mathbb{Z} \} = m\mathbb{Z} $
-\end{center}
+        \begin{center}
+            $ M = \{mz : z \in \mathbb{Z} \} = m\mathbb{Z} $
+        \end{center}
 
-\vspace{0.2cm}
-\noindent\textit{Demonstração : }
+        \textit{Demonstração : }
 
-Começemos com algumas observações. Se $x \in M$, então pela hipótese $0 = x - x \in M$, e
-$-x = 0 - x \in M$. Se, além disso, $y \in M$, então $y + x = y - (-x) \in M$, logo $M$ é fechado com respeito à
-adição. Se $x \in M$ e $nx \in M$ em que $n$ é um inteiro não-negativo qualquer, então $(n + 1)x \in M$. Portanto,
-pelo \textbf{\textcolor{teal}{Princípio da Indução Matemática}}, $nx \in M$ para cada $n \ge 0$, e logo para
-cada $n \in \mathbb{Z}$. Finalmente, todas as combinações lineares de elementos de $M$ com coeficientes inteiros ainda
-pertencem a $M$. Como essa propriedade resulta em $M$ ser fechado com respeito à adição e à subtração,
-ela é equivalente à hipótese sobre $M$.  
+            Começemos com algumas observações. Se $x \in M$, então pela hipótese $0 = x - x \in M$, e
+            $-x = 0 - x \in M$. Se, além disso, $y \in M$, então $y + x = y - (-x) \in M$, logo $M$ é fechado com respeito à
+            adição. Se $x \in M$ e $nx \in M$ em que $n$ é um inteiro não-negativo qualquer, então $(n + 1)x \in M$. Portanto,
+            pelo \textbf{\textcolor{cinzaEscuro}{Princípio da Indução Matemática}}, $nx \in M$ para cada $n \ge 0$, e logo para
+            cada $n \in \mathbb{Z}$. Finalmente, todas as combinações lineares de elementos de $M$ com coeficientes inteiros ainda
+            pertencem a $M$. Como essa propriedade resulta em $M$ ser fechado com respeito à adição e à subtração,
+            ela é equivalente à hipótese sobre $M$.  
 
-Se $M = \{0\}$, a proposição é verdadeira tomando-se $m = 0$. Caso contrário, o conjunto dos elementos
-$> 0$ em $M$ é não-vazio. Tomemos $m$ como o menor desses elementos. Todos os múltiplos de $m$ pertencem
-a $M$. Para cada $x \in M$, aplicamos o Lema 4.1 (Divisão Euclidiana) e escrevemos $x = my + r$ com
-$0 \le r < m$; então, $r = x - my \in M$. Pela definição de $m$, isto implica $r = 0$, ou seja, $x = my$. Portanto,
-$M = m\mathbb{Z}$. Finalmente, como $m$ é o menor elemento $> 0$ em $m\mathbb{Z}$, ele é unicamente determinado quando
-$M$ é dado.
+            Se $M = \{0\}$, a proposição é verdadeira tomando-se $m = 0$. Caso contrário, o conjunto dos elementos
+            $> 0$ em $M$ é não-vazio. Tomemos $m$ como o menor desses elementos. Todos os múltiplos de $m$ pertencem
+            a $M$. Para cada $x \in M$, aplicamos o Lema 4.1 (Divisão Euclidiana) e escrevemos $x = my + r$ com
+            $0 \le r < m$; então, $r = x - my \in M$. Pela definição de $m$, isto implica $r = 0$, ou seja, $x = my$. Portanto,
+            $M = m\mathbb{Z}$. Finalmente, como $m$ é o menor elemento $> 0$ em $m\mathbb{Z}$, ele é unicamente determinado quando
+            $M$ é dado.
 
-\vspace{0.2cm}
-\noindent\underline{\underline{\textbf{($\ast$) Corolário 4.3. }}} : Se $a, b, \ldots, c$ são inteiros em qualquer quantidade finita, 
-então existe um único inteiro $d \ge 0$ tal que o conjunto de todas as combinações lineares $ax + by + \cdots + cz$ de 
-$a, b, \ldots, c$ com coeficientes inteiros $x, y, \ldots, z$ consiste em todos os múltiplos de $d$.
+        \underline{\underline{ \textbf{\textcolor{cinzaEscuro}{($\ast$) Corolário 4.3.}} }} : Se $a, b, \ldots, c$ são inteiros em qualquer quantidade finita, 
+        então existe um único inteiro $d \ge 0$ tal que o conjunto de todas as combinações lineares $ax + by + \cdots + cz$ de 
+        $a, b, \ldots, c$ com coeficientes inteiros $x, y, \ldots, z$ consiste em todos os múltiplos de $d$.
 
-\begin{center}
-    $ \{ax + by + \ldots + cz : x,y,\ldots,z \in \mathbb{Z} \} = d\mathbb{Z} $
-\end{center}
+        \begin{center}
+            $ \{ax + by + \ldots + cz : x,y,\ldots,z \in \mathbb{Z} \} = d\mathbb{Z} $
+        \end{center}
 
-\vspace{0.2cm}
-\noindent\textit{Demonstração : }
+        \textit{Demonstração : }
 
-Aplique a Proposição ao conjunto das tais combinações lineares.
+        Aplique a Proposição ao conjunto das tais combinações lineares.
 
-\vspace{0.2cm}
-\noindent\underline{\underline{\textbf{($\ast$) Corolário 4.4. }}} : Sob as notações e hipóteses do Corolário 4.3, vale que $d$ é um 
-divisor de cada um dos inteiros $a, b, \ldots, c$ e cada divisor comum desses inteiros é um divisor de $d$.
+        \underline{\underline{ \textbf{\textcolor{cinzaEscuro}{($\ast$) Corolário 4.4. }} }} : Sob as notações e hipóteses do Corolário 4.3, vale que $d$ é um 
+        divisor de cada um dos inteiros $a, b, \ldots, c$ e cada divisor comum desses inteiros é um divisor de $d$.
 
-\vspace{0.2cm}
-\noindent\textit{Demonstração : }
+        \vspace{2cm}
+        \textit{Demonstração : }
 
-Cada um dos inteiros $a, b, \ldots, c$ pertence ao conjunto das suas combinações lineares; e cada divisor comum de 
-$a, b, \ldots, c$ é um divisor de cada uma das suas combinações lineares, e em particular, de $d$.
+        Cada um dos inteiros $a, b, \ldots, c$ pertence ao conjunto das suas combinações lineares; e cada divisor comum de 
+        $a, b, \ldots, c$ é um divisor de cada uma das suas combinações lineares, e em particular, de $d$.
 
-\subsection*{Máximo Divisor Comum}
+    \subsection{Máximo Divisor Comum}
 
-\noindent\underline{\underline{\textbf{($\ast$) Definição 4.5. }}} : O inteiro $d$ definido nos corolários da Proposição é chamado 
-de o \textbf{máximo divisor comum} (ou abreviadamente \textbf{$m.d.c.$}) de $a, b, \ldots, c$; ele é denotado por $(a, b, \ldots, c)$.  
+        \begin{definicao}[4.5 : Máximo Divisor Comum]
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item O inteiro $d$ definido nos corolários da Proposição é chamado 
+                de o \textbf{máximo divisor comum} (ou abreviadamente \textbf{$m.d.c.$}) de $a, b, \ldots, c$; ele é denotado por $(a, b, \ldots, c)$.  
+                \item  Como o $m.d.c.$ $(a, b, \ldots, c)$ pertence ao conjunto das combinações lineares, 
+                ele pode ser escrito da forma: 
+            \end{itemize}
+               
+            \vspace{-0.5cm}
+            \[
+                (a, b, \ldots, c) = ax_0 + by_0 + \ldots + cz_0,
+            \]
+            
+            \hspace{1cm} em que $x_0, y_0, \ldots, z_0$ são inteiros.
+        
+        \end{definicao}
 
-Como o $m.d.c.$ $(a, b, \ldots, c)$ pertence ao conjunto das combinações lineares, 
-ele pode ser escrito da forma:
-\[
-(a, b, \ldots, c) = ax_0 + by_0 + \ldots + cz_0,
-\]
-em que $x_0, y_0, \ldots, z_0$ são inteiros.
-
-\begin{exemplo}
-    \begin{enumerate}
-        \item Temos $(6, 10, 15) = 1$, $(6, 10) = 2$, $(6, 15) = 3$, e $(10, 15) = 5$.
-        \item Para $a \ge 0$, temos $(a, b) = a$ se, e somente se, $a \mid b$.
-        \item Se $a = qb + c$, então $(a, b) = (b, c)$.
-    \end{enumerate}
-\end{exemplo}
+    \begin{exemplo}
+        \begin{enumerate}[left=0.5cm, align=left, nosep]
+            \item Temos $(6, 10, 15) = 1$, $(6, 10) = 2$, $(6, 15) = 3$, e $(10, 15) = 5$.
+            \item Para $a \ge 0$, temos $(a, b) = a$ se, e somente se, $a \mid b$.
+            \item Se $a = qb + c$, então $(a, b) = (b, c)$.
+        \end{enumerate}
+    \end{exemplo}

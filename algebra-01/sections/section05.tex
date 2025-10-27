@@ -1,169 +1,161 @@
 \section*{Polinômios}
 
-Recordemos agora algumas \underline{propriedades elementares} de \textbf{polinômios} sobre um corpo arbitrário.  
-Estas são \underline{independentes da natureza do corpo}, e \underline{análogas} às propriedades dos inteiros descritas anteriormente.  
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Recordemos agora algumas \underline{propriedades elementares} de \textbf{polinômios} sobre um corpo arbitrário.  
+        \item Estas são \underline{independentes da natureza do corpo}, e \underline{análogas} às propriedades dos inteiros descritas anteriormente.  
+        \item Seja $K$ um \underline{corpo} qualquer. Um polinômio $P$ sobre $K$ (isto é, com \textbf{coeficientes} em $K$), em uma indeterminada $X$, é dado por uma expressão : 
+        \[
+            P = a_0 + a_1 X + \cdots + a_n X^n, \text{ com $a_0, a_1, \ldots, a_n \in K$. }
+        \]
+        \item Se $a_n \neq 0$, dizemos que $P$ possui \textbf{grau} $n$ e escrevemos $grau(P) = n$.  
+        \item Cada polinômio \underline{exceto} $0$ (o polinômio com todos os \textbf{coeficientes nulos}) possui um grau.  
+        \item A \underline{adição} e a \underline{multiplicação}, definidas de maneira usual, fazem com que os polinômios sobre $K$ formem um \textbf{anel}, usualmente denotado por $K[X]$.  
+        \item Se $P$ e $Q$ são polinômios \underline{não nulos}, então
+        \[
+            \boxed{grau(PQ) = grau(P) + grau(Q)}.
+        \]
+    
+    \end{itemize}
 
-Seja $K$ um \underline{corpo} qualquer. Um polinômio $P$ sobre $K$ (isto é, com \textbf{coeficientes} em $K$), em uma indeterminada $X$, é dado por uma expressão : 
-\[
-P = a_0 + a_1 X + \cdots + a_n X^n
-\]
+    \underline{\underline{ \textbf{\textcolor{cinzaEscuro}{($\ast$) Lema 6.1.}} }} : \textbf{\textcolor{cinzaEscuro}{Divisão Euclidiana}}
 
-com $a_0, a_1, \ldots, a_n \in K$.  
+        Se $A$ e $B$ são polinômios sobre um corpo $K$ com $B \neq 0$, então existe um único polinômio $Q$ tal que 
+        \[
+        \boxed{A - BQ = 0} \quad \text{ou} \quad \boxed{grau(A - BQ) < grau(B)}.
+        \]
 
-\vspace{0.2cm}
-Se $a_n \neq 0$, dizemos que $P$ possui \textbf{grau} $n$ e escrevemos $grau(P) = n$.  
-Cada polinômio \underline{exceto} $0$ (o polinômio com todos os \textbf{coeficientes nulos}) possui um grau.  
+        \noindent\textit{Demonstração : }
 
-A \underline{adição} e a \underline{multiplicação}, definidas de maneira usual, fazem com que os polinômios sobre $K$ formem um \textbf{anel}, usualmente denotado por $K[X]$.  
+        Se $A = 0$ ou $\text{grau}(A) < \text{grau}(B)$, tomamos $Q = 0$.  
+        Caso contrário, procedemos por \textbf{indução} sobre $n = grau(A)$.  
 
-Se $P$ e $Q$ são polinômios \underline{não nulos}, então
-\[
-\boxed{grau(PQ) = grau(P) + grau(Q)}.
-\]
+        Sejam $bX^m$ o termo de $grau$ $m$ em $B$ e $aX^n$ o termo de $grau$ $n$ em $A$.  
 
-\noindent\underline{\underline{\textbf{($\ast$) Lema 6.1. }}} : \textbf{\textcolor{teal}{Divisão Euclidiana}}
+        Definimos, 
+        \[
+        A' = A - B \cdot \frac{a}{b} X^{n-m},
+        \]
+        que é de $grau$ $< n$.  
 
-Se $A$ e $B$ são polinômios sobre um corpo $K$ com $B \neq 0$, então existe um único polinômio $Q$ tal que 
-\[
-\boxed{A - BQ = 0} \quad \text{ou} \quad \boxed{grau(A - BQ) < grau(B)}.
-\]
+        Pela \textbf{hipótese de indução}, podemos escrever
+        \[
+        A' = BQ' + R, \text{ com $R = 0$ ou $grau(R) < m$}.
+        \]
 
-\vspace{0.2cm}
-\noindent\textit{Demonstração : }
+        Então,
+        \[
+        A = BQ + R, \quad \text{com } Q = Q' + \frac{a}{b} X^{n-m}.
+        \]
 
-Se $A = 0$ ou $\text{grau}(A) < \text{grau}(B)$, tomamos $Q = 0$.  
-Caso contrário, procedemos por \textbf{indução} sobre $n = grau(A)$.  
+        Quanto à \underline{Unicidade} de $Q$ : 
 
-Sejam $bX^m$ o termo de $grau$ $m$ em $B$ e $aX^n$ o termo de $grau$ $n$ em $A$.  
+        Se $A - BQ$ e $A - BQ_1$ são \textbf{nulos} ou de $grau$ $< m$, então o mesmo vale para $B(Q - Q_1)$.  
+        Como este possui $grau$ $m + grau(Q - Q_1)$, a menos que $Q - Q_1 = 0$, chegamos a uma \textbf{contradição}.  
+        Portanto, $Q = Q_1$.  
+    
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Se $R = A - BQ = 0$, então $A = BQ$, neste caso : \\ 
+        $\hookrightarrow$ $A$ é um \textbf{múltiplo} de $B$ \\
+        $\hookrightarrow$ $B$ é um \textbf{divisor} de $A$. 
 
-Definimos, 
-\[
-A' = A - B \cdot \frac{a}{b} X^{n-m},
-\]
-que é de $grau$ $< n$.  
+        \item Em particular, se $B = X - a$, então $R$ deve ser $0$ ou de $grau$ $0$, isto é, uma \underline{constante} $r \in K$, de modo que podemos escrever:
+            \[
+            A = (X - a)Q + r, \text{ com } r \in K.
+            \]
+    
+    \end{itemize}
 
-Pela \textbf{hipótese de indução}, podemos escrever
-\[
-A' = BQ' + R, \text{ com $R = 0$ ou $grau(R) < m$}.
-\]
+    Substituindo $X = a$, obtemos $\boxed{A(a) = r}$.  
 
-Então,
-\[
-A = BQ + R, \quad \text{com } Q = Q' + \frac{a}{b} X^{n-m}.
-\]
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Se $r = 0$, dizemos que $a$ é uma \textbf{raiz} de $A$.
+        \item Assim, $A$ é um \textbf{múltiplo} de $X - a$ se, e somente se, $a$ é uma \textbf{raiz} de $A$.  
+    \end{itemize}
 
-Quanto à \underline{Unicidade} de $Q$: 
+    Assim como a Proposição 5.2 foi derivada do Lema 4.1, teremos um \underline{análogo} para polinômios.
 
-Se $A - BQ$ e $A - BQ_1$ são \textbf{nulos} ou de $grau$ $< m$, então o mesmo vale para $B(Q - Q_1)$.  
-Como este possui $grau$ $m + grau(Q - Q_1)$, a menos que $Q - Q_1 = 0$, chegamos a uma \textbf{contradição}.  
-Portanto, $Q = Q_1$.  
+    \underline{\underline{ \textbf{\textcolor{cinzaEscuro}{($\ast$) Proposição 6.2.}} }} : Seja $M$ um conjunto não-vazio de polinômios sobre um corpo. 
+    Se $M$ é \underline{fechado} com respeito à \textbf{subtração} e satisfaz a condição “se $A \in M$, então \underline{todos} 
+    os \textbf{múltiplos} de $A$ pertencem a $M$”, então $M$ consiste em \underline{todos} os \textbf{múltiplos} de algum \textbf{polinômio} $D$, unicamente determinado a menos de
+    multiplicação por uma \underline{constante não-nula}.
 
-\vspace{0.3cm}
+    \textit{Demonstração : }
 
-Se $R = A - BQ = 0$, então $A = BQ$, neste caso :  
+        Se $M = \{0\}$, tomamos $D = 0$. Caso contrário, tomamos um polinômio $D$ 
+        de menor grau $d$ em $M$. Se $A \in M$, aplicamos o Lema 4.1 para $A$ e $D$ e escrevemos : 
+        \begin{center}
+        $A = DQ + R$, onde $R$ é $0$ ou possui $grau$ $< d$. 
+        \end{center}
 
-$\hookrightarrow$ $A$ é um \textbf{múltiplo} de $B$ 
+    Então $A + D(-Q) \in M$, donde é $0$ pela definição de $D$, e $A = DQ$. 
 
-$\hookrightarrow$ $B$ é um \textbf{divisor} de $A$.  
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Se $D_{1}$ possui a \underline{mesma propriedade} de $D$, então ele é um \textbf{múltiplo} de $D$ e $D$ é um \textbf{múltiplo} de $D_{1}$, 
+        de modo que ambos possuem o mesmo grau; escrevendo $D_{1} = DE$, vemos que $E$ possui $grau$ $0$, e 
+        ele é uma \underline{constante não nula}.
+        \item Se $aX^{d}$ é o termo de $grau$ $d$ em $D$, dentre os polinômios diferindo de $D$ por um fator \underline{constante não-nulo},
+        existe um e exatamente um com \textbf{coeficiente} de mais alto $grau$ igual a $1$, a saber $a^{-1}D$. Chamamos tal
+        polinômio de \textbf{normalizado}.
+        \item Podemos aplicar a \textbf{Proposição 6.2} ao conjunto $M$ de \underline{todas} as \textbf{combinações lineares} 
+        $AP + BQ + \ldots + CR$ de qualquer número de dados polinômios $A, B, \ldots, C$, aqui $P, Q, \ldots, R$ 
+        denotam \textbf{polinômios arbitrários}. 
 
-Em particular, se $B = X - a$, então $R$ deve ser $0$ ou de $grau$ $0$, isto é, uma \underline{constante} $r \in K$, de modo que podemos escrever:
-\[
-A = (X - a)Q + r, \text{ com } r \in K.
-\]
+    \end{itemize}
 
-Substituindo $X = a$, obtemos $\boxed{A(a) = r}$.  
+    Daí, se $M$ consiste nos \textbf{múltiplos} de $D$, onde $D$ é $0$ ou um \textbf{polinômio normalizado}, dizemos que 
+    $D$ é o \textbf{máximo divisor comum} de $A, B, \ldots, C$ e o denotamos por :
+    \[
+    (A, B, \ldots, C).
+    \]
 
-Se $r = 0$, dizemos que $a$ é uma \textbf{raiz} de $A$.  
-Assim, $A$ é um \textbf{múltiplo} de $X - a$ se, e somente se, $a$ é uma \textbf{raiz} de $A$.  
+    $D$ : \textbf{Divisor} de $A$ 
 
-Assim como a Proposição 5.2 foi derivada do Lema 4.1, teremos um \underline{análogo} para polinômios.
+    $B, \ldots, C$ e cada \underline{divisor comum} de $A, B, \ldots, C$ \textbf{divide} $D$.
 
-\vspace{0.3cm}
-\noindent\underline{\underline{\textbf{($\ast$) Proposição 6.2. }}} : Seja $M$ um conjunto não-vazio de polinômios sobre um corpo. 
-Se $M$ é \underline{fechado} com respeito à \textbf{subtração} e satisfaz a condição “se $A \in M$, então \underline{todos} 
-os \textbf{múltiplos} de $A$ pertencem a $M$”, então $M$ consiste em \underline{todos} os \textbf{múltiplos} de algum \textbf{polinômio} $D$, unicamente determinado a menos de
-multiplicação por uma \underline{constante não-nula}.
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item  Se $D = 1$, então $A, B, \ldots, C$ são ditos \textbf{mutuamente relativamente primos}. Isto ocorre se, e 
+        somente se, existem polinômios $P, Q, \ldots, R$ tais que : 
+            \[
+                \boxed{AP + BQ + \cdots + CR = 1}.
+            \]
+        \item Se $(A, B) = 1$, dizemos que $A$ é \underline{primo} a $B$, e que $B$ é \underline{primo} a $A$.
+        \item Um polinômio de grau $n > 0$ é \textbf{irredutível} se ele \textbf{não} possui \underline{divisor} de $grau$ $> 0$ e $< n$. 
+        \item Cada \underline{polinômio de $grau$ $1$ é irredutível}.   
+    \end{itemize}
 
-\vspace{0.2cm}
-\noindent\textit{Demonstração : }
+    \begin{exemplo}[: Polinômios Redutiveis]
+        Notemos que a propriedade de um polinômio ser irredutível não precisa ser \textbf{preservada} quando mudamos o 
+        \underline{corpo} dos coeficientes : \\ 
+        $\hookrightarrow$ $X^2 + 1$ é \textbf{irredutível} sobre $\mathbb{Q}$, e também sobre $\mathbb{R}$ \\ 
+        $\hookrightarrow$ Mas \textbf{não} sobre $\mathbb{C}$ pois $X^2 + 1 = (X+i)(X-i)$.    
+    \end{exemplo}
+    
+    Poderíamos mostrar que cada polinômio de $grau$ $> 0$ pode ser escrito de 
+    modo essencialmente \textbf{único} como um \underline{produto de \textbf{polinômios irredutíveis}}. Contudo, apenas faremos uso do
+    seguinte resultado mais fraco:
 
-Se $M = \{0\}$, tomamos $D = 0$. Caso contrário, tomamos um polinômio $D$ 
-de menor grau $d$ em $M$. Se $A \in M$, aplicamos o Lema 4.1 para $A$ e $D$ e escrevemos : 
-\begin{center}
-$A = DQ + R$, onde $R$ é $0$ ou possui $grau$ $< d$. 
-\end{center}
+    \underline{\underline{ \textbf{\textcolor{cinzaEscuro}{($\ast$) Proposição 6.3.}} }} : Se $A$ é um polinômio de grau $n > 0$ sobre um corpo $K$, então ele pode ser escrito,
+    unicamente a menos da ordem dos fatores, na forma :
+        
+        \[
+        A = (X - a_{1})(X - a_{2}) \cdots (X - a_{m})Q,
+        \]
+        
+        em que $0 \leq m \leq n$, $a_{1}, a_{2}, \ldots, a_{m} \in K$, e $Q$ não possui raiz alguma em $K$.
 
-Então $A + D(-Q) \in M$, donde é $0$ pela definição de $D$, e $A = DQ$. 
+    \textit{Demonstração:}  
 
-Se $D_{1}$ possui a \underline{mesma propriedade} de $D$, então ele é um \textbf{múltiplo} de $D$ e $D$ é um \textbf{múltiplo} de $D_{1}$, 
-de modo que ambos possuem o mesmo grau; escrevendo $D_{1} = DE$, vemos que $E$ possui $grau$ $0$, e 
-ele é uma \underline{constante não nula}.
+        Se $A$ \textbf{não} possui raiz, isto é claro; caso contrário, procedemos por \textbf{indução} sobre $n$.  
+        Se $A$ possui uma raiz $a$, escrevemos : $A = (X - a)A'$.
 
-\vspace{0.3cm}
-Se $aX^{d}$ é o termo de $grau$ $d$ em $D$, dentre os polinômios diferindo de $D$ por um fator \underline{constante não-nulo},
-existe um e exatamente um com \textbf{coeficiente} de mais alto $grau$ igual a $1$, a saber $a^{-1}D$. Chamamos tal
-polinômio de \textbf{normalizado}.
+        Como $A'$ possui $grau$ $n - 1$, podemos aplicar o teorema a ele.  
+        Escrevendo $A'$ na forma prescrita, obtemos um \underline{produto similar} para $A$.
 
-Podemos aplicar a \textbf{Proposição 6.2} ao conjunto $M$ de \underline{todas} as \textbf{combinações lineares} 
-$AP + BQ + \ldots + CR$ de qualquer número de dados polinômios $A, B, \ldots, C$, aqui $P, Q, \ldots, R$ 
-denotam \textbf{polinômios arbitrários}. 
+        Se $A$ pode ser escrito como acima e também como
+        \[
+        A = (X - b_{1})(X - b_{2}) \cdots (X - b_{r})R,
+        \]
+        em que $R$ \textbf{não} possui raiz em $K$, então a \textbf{raiz} $a$ de $A$ deve ocorrer dentre os $a_i$ e também dentre os $b_j$.  
+        Dividindo por $(X - a)$, obtemos para $A'$ dois produtos os quais, por \textbf{indução}, devem coincidir.
 
-Daí, se $M$ consiste nos \textbf{múltiplos} de $D$, onde $D$ é $0$ ou um \textbf{polinômio normalizado}, dizemos que 
-$D$ é o \textbf{máximo divisor comum} de $A, B, \ldots, C$ e o denotamos por :
-\[
-(A, B, \ldots, C).
-\]
-
-$D$ : \textbf{Divisor} de $A$ 
-
-$B, \ldots, C$ e cada \underline{divisor comum} de $A, B, \ldots, C$ \textbf{divide} $D$.
-
-Se $D = 1$, então $A, B, \ldots, C$ são ditos \textbf{mutuamente relativamente primos}. Isto ocorre se, e 
-somente se, existem polinômios $P, Q, \ldots, R$ tais que : 
-\[
-\boxed{AP + BQ + \cdots + CR = 1}.
-\]
-
-Se $(A, B) = 1$, dizemos que $A$ é \underline{primo} a $B$, e que $B$ é \underline{primo} a $A$.
-
-\vspace{0.2cm}
-Um polinômio de grau $n > 0$ é \textbf{irredutível} se ele \textbf{não} possui \underline{divisor} de $grau$ $> 0$ e $< n$. 
-Cada \underline{polinômio de $grau$ $1$ é irredutível}. 
-
-Notemos que a propriedade de um polinômio ser irredutível não precisa ser \textbf{preservada} quando mudamos o 
-\underline{corpo} dos coeficientes: por exemplo, $X^2 + 1$ é \textbf{irredutível} sobre $\mathbb{Q}$, e também sobre $\mathbb{R}$, 
-mas \textbf{não} sobre $\mathbb{C}$ pois $X^2 + 1 = (X+i)(X-i)$.
-
-\vspace{0.2cm}
-Poderíamos mostrar que cada polinômio de $grau$ $> 0$ pode ser escrito de 
-modo essencialmente \textbf{único} como um \underline{produto de \textbf{polinômios irredutíveis}}. Contudo, apenas faremos uso do
-seguinte resultado mais fraco:
-
-\vspace{0.2cm}
-
-\noindent\underline{\underline{\textbf{($\ast$) Proposição 6.3. }}} : Se $A$ é um polinômio de grau $n > 0$ sobre um corpo $K$, então ele pode ser escrito,
-unicamente a menos da ordem dos fatores, na forma :
-\[
-A = (X - a_{1})(X - a_{2}) \cdots (X - a_{m})Q,
-\]
-em que $0 \leq m \leq n$, $a_{1}, a_{2}, \ldots, a_{m} \in K$, e $Q$ não possui raiz alguma em $K$.
-
-\vspace{0.2cm}
-\noindent\textit{Demonstração:}  
-
-Se $A$ \textbf{não} possui raiz, isto é claro; caso contrário, procedemos por \textbf{indução} sobre $n$.  
-Se $A$ possui uma raiz $a$, escrevemos : $A = (X - a)A'$.
-
-Como $A'$ possui $grau$ $n - 1$, podemos aplicar o teorema a ele.  
-Escrevendo $A'$ na forma prescrita, obtemos um \underline{produto similar} para $A$.
-
-Se $A$ pode ser escrito como acima e também como
-\[
-A = (X - b_{1})(X - b_{2}) \cdots (X - b_{r})R,
-\]
-em que $R$ \textbf{não} possui raiz em $K$, então a \textbf{raiz} $a$ de $A$ deve ocorrer dentre os $a_i$ e também dentre os $b_j$.  
-Dividindo por $(X - a)$, obtemos para $A'$ dois produtos os quais, por \textbf{indução}, devem coincidir.
-
-\vspace{0.3cm}
-\noindent\underline{\underline{\textbf{($\ast$) Corolário 4.4. }}} :
-Um polinômio de grau $n > 0$ sobre um corpo possui no máximo $n$ raízes distintas.
+    \underline{\underline{ \textbf{\textcolor{cinzaEscuro}{($\ast$) Corolário 4.4.}} }} : Um polinômio de grau $n > 0$ sobre um corpo possui no máximo $n$ raízes distintas.
