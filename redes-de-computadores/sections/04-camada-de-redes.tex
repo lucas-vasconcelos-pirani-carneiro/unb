@@ -355,5 +355,370 @@
 
     \subsection{IP: Internet Protocol}
     
+        \begin{itemize}[left=0.5cm, align=left, nosep]
+            \item Protocolo \texttt{IP} : Define a padronização para troca de informações na camada de rede da Internet:
+            \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                \item Formato do datagrama
+                \item Endereçamento
+                \item Convenções para tratamento de pacotes
+            \end{itemize}
+            \item Protocolo \texttt{ICMP} : Trata da sinalização e troca de informações de controle na rede:
+            \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                \item Reporta erros
+                \item Transporta informações de sinalização
+            \end{itemize}
+        \end{itemize}
+
+
+        \begin{itemize}[left=0.5cm, align=left, nosep]
+            \item Módulos da Camada de Rede
+        \end{itemize}
+
+        \begin{center}
+            \includegraphics[width=0.45\textwidth]{img/cap-04/modulos-camada-de-rede.png}
+        \end{center}
+
+        \subsubsection*{Formato do Datagrama}
+
+            \begin{center}
+                \includegraphics[width=0.45\textwidth]{img/cap-04/formato-datagrama.png}
+            \end{center}
+
+        \subsubsection*{Endereçamento}
+           
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item \textbf{Endereço IP}: Identificador de 32 bits associado a cada \underline{interface} de um sistema final (host) ou roteador.  
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Uma máquina com \(n\) interfaces possui \(n\) endereços IP.
+                    \item Um mesmo host pode ter múltiplos endereços IP.
+                \end{itemize}
+
+                \item \textbf{Interface}: Conexão entre sistemas finais/roteadores e a camada de enlace.  
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Roteadores tipicamente possuem múltiplas interfaces.
+                    \item Sistemas finais, uma ou duas interfaces.
+                    \item Exemplos: rede sem fio (Wi-Fi), rede móvel (4G/5G), Bluetooth.
+                \end{itemize}
+
+                \begin{center}
+                    \includegraphics[width=0.45\textwidth]{img/cap-04/introducao-endereco-ip.png}
+                \end{center}
+
+                \item \textbf{Formato do Endereço IP}:  
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Organizado em quatro porções de 8 bits.
+                    \item Representado na forma decimal com pontos separando cada octeto (ex: \texttt{192.168.0.1}).
+                \end{itemize}
+
+                \[
+                    \textbf{223.1.1.1}
+                    =
+                    \underbrace{11011111}_{223} \;
+                    \underbrace{00000001}_{1} \;
+                    \underbrace{00000001}_{1} \;
+                    \underbrace{00000001}_{1}
+                \]
+            
+            \end{itemize}
+
+            \textbf{Sub-redes}
+
+                \begin{itemize}[left=0.5cm, align=left, nosep]
+                    \item Conjunto de interconexões que vinculam sistemas finais e interfaces de roteadores.
+                    \item Dispositivos que se conectam fisicamente sem precisar de um roteador intermediário pertencem à mesma sub-rede.
+                    \item Exemplo: Rede composta por três sub-redes.
+
+                    \begin{center}
+                        \includegraphics[width=0.45\textwidth]{img/cap-04/introducao-endereco-ip.png}
+                    \end{center}
+
+                    \item \textbf{Estrutura do Endereço IP :}
+                    \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                        \item Parte da sub-rede: bits mais significativos, comuns aos dispositivos da mesma rede.
+                        \item Parte do hospedeiro: bits menos significativos, distintos em cada interface.
+                    \end{itemize}
+
+                    \item \textbf{Definição de sub-redes :}
+                    \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                        \item Desvincula cada interface do host/roteador, criando “ilhas” ou redes isoladas.
+                        \item Cada uma dessas redes é chamada de sub-rede.
+                    \end{itemize}
+
+                    \begin{center}
+                        \includegraphics[width=0.45\textwidth]{img/cap-04/sub-redes.png}
+                    \end{center}
+
+                    \item \textbf{Padrões de endereçamento :}
+                    \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                        \item Bits do hospedeiro todos 0 $\rightarrow$ endereço da sub-rede.
+                        \item Bits do hospedeiro todos 1 $\rightarrow$ endereço de broadcast (datagrama enviado a todas as interfaces da sub-rede).
+                    \end{itemize}
+
+                    \begin{center}
+                        \includegraphics[width=0.45\textwidth]{img/cap-04/sub-redes2.png}
+                    \end{center}
+                
+                \end{itemize}
+                            
+            \textbf{CIDR (Classless Inter-Domain Routing)}
+
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item Permite definir sub-redes com máscaras de tamanho arbitrário, sem as restrições das classes A, B e C. 
+                \item Representação: \texttt{a.b.c.d/x}, onde \(x\) indica quantos dos bits mais significativos pertencem à parte da rede (prefixo).
+                \item Exemplo: o endereço \texttt{192.168.10.0/24} indica que os 24 bits iniciais identificam a rede.
+            \end{itemize}
+
+            \begin{center}
+                \includegraphics[width=0.45\textwidth]{img/cap-04/cidr.png}
+            \end{center}
+
+        \subsubsection*{Como conseguir um endereço IP?}
+
+            \textbf{Existem, na verdade, duas questões:}
+            \begin{enumerate}
+                \item Como um sistema final consegue um endereço IP dentro de uma rede? --> O sistema faz parte da rede.
+                \item Como uma rede obtém um endereço IP? --> A rede faz parte do endereço.
+            \end{enumerate}
+
+            \textbf{Como um sistema final consegue um endereço IP?}
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item Configuração manual : Administradores configuram manualmente o endereço nos arquivos da interface de rede.
+                \item DHCP (Dynamic Host Configuration Protocol) : Obtém dinamicamente endereços de um servidor.
+                    \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                        \item Plug and play  
+                    \end{itemize} 
+            \end{itemize}
+
+            \textbf{DHCP (Dynamic Host Configuration Protocol)}
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item Objetivo : Sistema final obtém dinamicamente um endereço IP ao entrar na rede.
+                \item Protocolo de aplicação baseado em UDP.
+                    \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                        \item Pode renovar o endereço reservado.
+                        \item Permite reutilização de endereços.
+                        \item Oferece suporte a usuários móveis que entram e saem da rede.
+                    \end{itemize} 
+                \item Visão geral $\rightarrow$ Processo de comunicação entre cliente e servidor DHCP :
+                    \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                        \item Sistema final envia uma mensagem em broadcast para descobrir servidores DHCP disponíveis [DHCP Discover].
+                        \item Servidor responde com mensagem \texttt{DHCP Offer}.
+                        \item Sistema final solicita o endereço IP $\rightarrow$ mensagem \texttt{DHCP Request}.
+                        \item Servidor confirma o endereço $\rightarrow$ mensagem \texttt{DHCP ACK}.
+                    \end{itemize}
+            \end{itemize}
+
+            \begin{center}
+                \includegraphics[width=0.45\textwidth]{img/cap-04/dhcp.png}
+            \end{center}
+
+            \texttt{Broadcast universal} : Todos os bits do endereço IP configurados com 1 (255.255.255.255).
+
+            \begin{center}
+                \includegraphics[width=0.45\textwidth]{img/cap-04/dhcp2.png}
+            \end{center}
+
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item DHCP pode fornecer informações adicionais além do endereço IP :
+                    \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                        \item Endereço do primeiro salto (roteador padrão).
+                        \item Nome e endereço IP do servidor DNS.
+                        \item Máscara da sub-rede : Usada para determinar os limites da rede e a porção de endereçamento IP destinada aos dispositivos locais.
+                    \end{itemize}    
+                \end{itemize}
+
+            \begin{center}
+                \includegraphics[width=0.45\textwidth]{img/cap-04/dhcp-exemplo.png}
+            \end{center}
+
+            \begin{center}
+                \includegraphics[width=0.45\textwidth]{img/cap-04/dhcp-exemplo2.png}
+            \end{center}
+
+
+            \textbf{Como uma rede obtém um endereço IP ?}
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item Cada sub-rede recebe um bloco de endereços a partir de um provedor de acesso à Internet (ISP).
+                
+                \[
+                    \textbf{Bloco do ISP:} \quad
+                    \uline{11001000 \; 00010111 \; 00010000} \; 00000000
+                    \quad 200.23.16.0/20
+                \]
+                
+                \item ISPs podem dividir esse bloco em sub-blocos menores.
+            \end{itemize}
+
+            \begin{center}
+                \begin{tabular}{l l l l l l}
+                    \textbf{Organization 0} & 11001000 & 00010111 & 00010000 & 00000000 & 200.23.16.0/23 \\
+                    \textbf{Organization 1} & 11001000 & 00010111 & 00010010 & 00000000 & 200.23.18.0/23 \\
+                    \textbf{Organization 2} & 11001000 & 00010111 & 00010100 & 00000000 & 200.23.20.0/23 \\
+                    \textbf{...}            & .....    & .....    & .....    & ....     & \\
+                    \textbf{Organization 7} & 11001000 & 00010111 & 00011110 & 00000000 & 200.23.30.0/23 \\
+                \end{tabular}
+            \end{center}
+
+            \subsubsection*{Endereçamento Hierárquico}
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item O endereçamento hierárquico permite divulgação eficiente de informações de roteamento (agregação de rotas).
+            \end{itemize}
+
+            \begin{center}
+                \includegraphics[width=0.45\textwidth]{img/cap-04/hierarquia-de-endereco.png}
+            \end{center}
+
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item Quando uma organização troca de provedor, o endereço pode ser mantido.
+                \item O roteamento usa o casamento de maior prefixo (rotas específicas).
+            \end{itemize}
+
+            \begin{center}
+                \includegraphics[width=0.45\textwidth]{img/cap-04/endereco-hierarquico.png}
+            \end{center}
+
+        \subsubsection*{Endereçamento de IP : Últimos Comentários}
+            \textbf{Como um ISP consegue um bloco de endereços ?}
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item ICANN (Internet Corporation for Assigned Names and Numbers) : Responsável por alocar blocos de endereços IP a grandes provedores.
+                    \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                        \item Coordena cinco registros regionais (RIRs).
+                        \item Administra os servidores raiz do DNS.
+                        \item Gerencia a delegação de domínios de topo (TLDs), como \texttt{.com}, \texttt{.edu}, etc.
+                    \end{itemize}     
+            \end{itemize}
+
+            \textbf{Temos endereços IPv4(IP 32-bits) suficientes?}
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item A ICANN alocou o último bloco de endereços IPv4 em 2011.
+                \item NAT prolonga a utilização do espaço IPv4.
+                \item IPv6 possui espaço de endereçamento de 128 bits.
+            \end{itemize}
+    
+        \subsubsection*{NAT: Network Address Translation}
+
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item Todos os dispositivos em uma rede local compartilham \underline{apenas um} endereço IPv4 do ponto de vista da Internet.
+
+                \begin{center}
+                    \includegraphics[width=0.45\textwidth]{img/cap-04/nat.png}
+                \end{center}
+
+                \item Dispositivos em uma rede local possuem um espaço de endereçamento IP privado de 32 bits, prefixos 10/8, 172.16/12 e 192.168/16 (válido apenas dentro da rede local).
+
+                \item Vantagens : 
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Apenas um endereço público é suficiente para todos os dispositivos internos.  
+                    \item Mudança de endereços internos sem necessidade de informar a rede externa.  
+                    \item Troca de provedor de Internet sem impacto no espaço interno.  
+                    \item Segurança : Dispositivos internos não são diretamente acessíveis externamente.
+                \end{itemize}     
+                
+                \item Implementação : Ocorre na borda da rede.
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Datagramas de saída : substitui (endereço IP de origem, número da porta) por (endereço válido do NAT, novo número de porta)
+                        \begin{itemize}[left=0.5cm, nosep, label=$-$]
+                            \item Clientes e servidores externos respondem a esse novo par.
+                        \end{itemize}
+                    \item A tabela NAT mapeia (endereço IP de origem, número da porta) para (endereço NAT, nova porta). 
+                    \item Datagramas de entrada : Realiza o processo inverso, substituindo (endereço NAT, nova porta) por (endereço interno, porta original).  
+                \end{itemize}
+
+                \begin{center}
+                    \includegraphics[width=0.45\textwidth]{img/cap-04/nat2.png}
+                \end{center}
+
+                \item NAT é controverso
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Roteadores deveriam operar apenas até a camada 3.
+                    \item A escassez de endereços deveria ser resolvida pelo IPv6.
+                    \item Viola o princípio fim-a-fim (endereços e portas são modificados pela camada de rede).
+                    \item Atravessar NAT : Como um cliente externo se conecta a um servidor atrás do NAT ?
+                \end{itemize}    
+
+                \item Apesar disso, NAT continua amplamente usado :
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Presente em redes domésticas, institucionais e em infraestruturas 4G/5G.
+                \end{itemize}  
+            
+            \end{itemize}
+
+        \subsubsection*{IPv6}
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item \textbf{Motivação inicial} : O espaço de endereçamento IPv4 (32 bits) foi completamente alocado.
+                \item \textbf{Motivação adicional} :
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Maior velocidade de processamento e encaminhamento, cabeçalho fixo de 40 bytes.  
+                    \item Permite diferentes tratamentos de fluxo na camada de rede.
+                \end{itemize}     
+                
+                \item Formato do datagrama IPv6
+                \begin{center}
+                    \includegraphics[width=0.4\textwidth]{img/cap-04/ipv6-formato}
+                \end{center}
+
+                \item Diferenças em relação ao IPv4 :
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Sem campo de checksum (reduz o custo de processamento nos roteadores).  
+                    \item Sem fragmentação ou remontagem de datagramas.  
+                    \item Sem campo de opções, controle feito pelo cabeçalho de extensão (next header).
+                \end{itemize} 
+
+            \end{itemize}
+
+        \subsubsection*{Transição do IPv64 para o IPv6}
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item Nem todos os roteadores podem ser atualizados simultaneamente
+                
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Sem “flag days” (substituição coletiva).  
+                    \item Como a Internet lida com roteadores operando IPv4 e IPv6 simultaneamente?
+                \end{itemize}     
+
+                \item Tunelamento : Datagrama IPv6 encapsulado dentro de um datagrama IPv4 entre roteadores IPv4 (pacotes dentro de pacotes). 
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Técnica usada também em outros contextos, como redes 4G/5G.
+                \end{itemize} 
+
+                \begin{center}
+                    \includegraphics[width=0.4\textwidth]{img/cap-04/tunelamento.png}
+                \end{center}
+
+                \begin{center}
+                    \includegraphics[width=0.4\textwidth]{img/cap-04/tunelamento-encapsulamento.png}
+                \end{center}
+
+                \begin{center}
+                    \includegraphics[width=0.4\textwidth]{img/cap-04/tunelamento-encapsulamento2.png}
+                \end{center}
+
+                \begin{center}
+                    \includegraphics[width=0.4\textwidth]{img/cap-04/tunelamento2.png}
+                \end{center}
+
+                \item Adoção do IPv6 : 
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Google : 30\% dos clientes acessam via IPv6
+                    \item NIST : Cerca de $\frac{1}{3}$ dos domínios do governo dos EUA têm suporte a IPv6.  
+                    \item Processo de migração LONGO!! 
+                    \begin{itemize}[left=0.5cm, nosep, label=$-$]
+                        \item Mais de 25 anos 
+                        \item Comparação: mudanças drásticas na camada de aplicação (WWW, redes sociais, streaming, jogos etc.).           
+                    \end{itemize} 
+                \end{itemize}    
+                
+                \begin{center}
+                    \includegraphics[width=0.4\textwidth]{img/cap-04/adocao-ipv6.png}
+                \end{center}
+
+            \end{itemize}           
+            
+            %\begin{itemize}[left=0.5cm, align=left, nosep]
+            %    \item \\
+            %    \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            %        \item \\
+            %    \end{itemize}     
+            %\end{itemize}
+
+
     \subsection{MiddleBox}
 
