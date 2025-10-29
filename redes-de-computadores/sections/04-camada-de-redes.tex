@@ -1,26 +1,38 @@
 \section{Camada de Redes}
 
+    %\begin{itemize}[left=0.5cm, align=left, nosep]
+            %    \item \\
+            %    \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            %        \item \\
+            %    \end{itemize}     
+            %\end{itemize}
     \subsection{Introdução}
 
         \begin{itemize}[left=0.5cm, align=left, nosep]
-            \item \textbf{Função principal:} fornece o transporte de segmentos dos hospedeiros de origem até os hospedeiros de destino. \\        
-                $\hookrightarrow$ \textbf{Transmissor:} encapsula os segmentos em datagramas e encaminha para a camada de enlace; \\
-                $\hookrightarrow$ \textbf{Receptor:} entrega os segmentos ao protocolo da camada de transporte.
-        \end{itemize}
-
-        \begin{center}
-            \includegraphics[width=0.65\textwidth]{img/cap-04/camada-de-redes-introd.png}
-        \end{center}
-
-        \begin{itemize}[left=0.5cm, align=left, nosep]
+            
+            \item \textbf{Função principal:} fornece o transporte de segmentos dos hospedeiros de origem até os hospedeiros de destino.   
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item \textbf{Transmissor:} encapsula os segmentos em datagramas e encaminha para a camada de enlace; 
+                    \item \textbf{Receptor:} entrega os segmentos ao protocolo da camada de transporte.
+                \end{itemize}     
+                
+                \begin{center}
+                    \includegraphics[width=0.5\textwidth]{img/cap-04/camada-de-redes-introd.png}
+                \end{center}
+            
             \item A camada de redes deve estar implementada em todos os dispositivos ao longo da rota entre origem e destino.
+        
         \end{itemize}
 
         \subsubsection*{Roteadores}
             \begin{itemize}[left=0.5cm, align=left, nosep]
-            \item \textbf{Função :} \\
-                $\hookrightarrow$ Examinar os cabeçalhos dos datagramas IP para extrair o endereço de destino; \\
-                $\hookrightarrow$ Decidir para qual interface de saída o pacote será encaminhado.
+            
+                \item \textbf{Função :}
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Examinar os cabeçalhos dos datagramas IP para extrair o endereço de destino; 
+                    \item Decidir para qual interface de saída o pacote será encaminhado.
+                \end{itemize} 
+                 
             \end{itemize}
 
         \subsubsection*{Funções Principais da Camada de Rede}
@@ -36,7 +48,7 @@
             \end{itemize}
 
             \begin{center}
-                \includegraphics[width=0.55\textwidth]{img/cap-04/viagem.png}
+                \includegraphics[width=0.5\textwidth]{img/cap-04/viagem.png}
             \end{center}
 
         \subsubsection*{Plano de Dados}
@@ -46,7 +58,7 @@
             \end{itemize}
 
             \begin{center}
-                \includegraphics[width=0.65\textwidth]{img/cap-04/plano-de-dados.png}
+                \includegraphics[width=0.4\textwidth]{img/cap-04/plano-de-dados.png}
             \end{center}
 
         \subsubsection*{Plano de Controle}
@@ -56,20 +68,24 @@
                 
                 \begin{enumerate}[left=0.5cm, align=left, nosep]
                     
-                    \item \textbf{Algoritmos tradicionais de roteamento :} \\
-                        $\hookrightarrow$ Implementados nos roteadores; \\
-                        $\hookrightarrow$ Cada roteador executa uma parte do algoritmo de forma distribuída.
+                    \item \textbf{Algoritmos tradicionais de roteamento :} 
+                        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                            \item Implementados nos roteadores; 
+                            \item Cada roteador executa uma parte do algoritmo de forma distribuída.
+                        \end{itemize} 
                     
                     \begin{center}
-                        \includegraphics[width=0.6\textwidth]{img/cap-04/algorimo-roteamento.png}
+                        \includegraphics[width=0.5\textwidth]{img/cap-04/algorimo-roteamento.png}
                     \end{center}
                     
-                    \item \textbf{SDN (Software Defined Networking) :} \\
-                        $\hookrightarrow$ Implementado em controladores remotos; \\
-                        $\hookrightarrow$ Controladores calculam e instalam as tabelas de encaminhamento nos roteadores.
-                    
+                    \item \textbf{SDN (Software Defined Networking) :} 
+                        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                            \item Implementado em controladores remotos; 
+                            \item Controladores calculam e instalam as tabelas de encaminhamento nos roteadores.
+                        \end{itemize} 
+                         
                     \begin{center}
-                        \includegraphics[width=0.6\textwidth]{img/cap-04/sdn.png}
+                        \includegraphics[width=0.5\textwidth]{img/cap-04/sdn.png}
                     \end{center}
                 
                 \end{enumerate}
@@ -78,15 +94,21 @@
 
         \subsubsection*{Modelo de Serviço de Redes para Datagramas}
             \begin{itemize}[left=0.5cm, align=left, nosep]
-                \item \textbf{Serviços para datagramas individuais :} \\
-                    $\hookrightarrow$ Garantia de entrega; \\
-                    $\hookrightarrow$ Garantia de entrega com atraso menor que 40 ms; \\
-                    $\hookrightarrow$ Garantia de integridade; \\
-                    $\hookrightarrow$ Garantia de confiabilidade.
+                \item \textbf{Serviços para datagramas individuais :}
+                    \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                        \item Garantia de entrega; 
+                        \item Garantia de entrega com atraso menor que 40 ms; 
+                        \item Garantia de integridade; 
+                        \item Garantia de confiabilidade.
+                    \end{itemize} 
+                     
                 \item \textbf{Serviços para fluxos de datagramas :}
-                    $\hookrightarrow$ Entrega em ordem; \\
-                    $\hookrightarrow$ Garantia de taxa mínima de transferência; \\
-                    $\hookrightarrow$ Restrição de variação de atraso (jitter).
+                    \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                        \item Entrega em ordem;
+                        \item Garantia de taxa mínima de transferência; 
+                        \item Restrição de variação de atraso (jitter).
+                    \end{itemize} 
+                     
             \end{itemize}
 
         \textbf{Modelo da Internet:} \textit{"Best Effort"} — não há garantias de entrega, temporização, ordenação ou taxa mínima de transmissão.
@@ -121,30 +143,35 @@
 
     \subsection{O tem dentro de um roteador ?}
         
-        \begin{itemize}[left=0.5cm, align=left, nosep]
-            \item \textbf{Arquitetura geral de um roteador :}
+        \subsubsection{Arquitetura geral de um roteador :}
         
             \begin{center}
-                \includegraphics[width=0.65\textwidth]{img/cap-04/arquitetura-geral-roteador.png}
+                \includegraphics[width=0.45\textwidth]{img/cap-04/arquitetura-geral-roteador.png}
             \end{center}
 
-            \item \textbf{Porta de Entrada :}
+        \subsubsection{Porta de Entrada :}
             
             \begin{center}
                 \includegraphics[width=0.55\textwidth]{img/cap-04/porta-de-entrada.png}
             \end{center}
-            
+
+        \begin{itemize}[left=0.5cm, align=left, nosep]    
             \item \textbf{Caixa Verde (Camada Física):} recepção dos bits;
             \item \textbf{Azul (Camada de Enlace):} Ethernet;
-            \item \textbf{Vermelho:} operações de checagem do endereço de destino do pacote (lookup); \\
-                $\hookrightarrow$ Objetivo da interface: encaminhar o pacote para a matriz de comutação na velocidade de linha; \\
-                $\hookrightarrow$ Enfileiramento dos pacotes para evitar perdas em caso de chegada de datagramas for superior à capacidade \\
-                $\hookrightarrow$ Decisão de encaminhamento :
-                \begin{itemize}
+            \item \textbf{Vermelho:} operações de checagem do endereço de destino do pacote (lookup); 
+            
+            \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                \item Objetivo da interface: encaminhar o pacote para a matriz de comutação na velocidade de linha; 
+                \item Enfileiramento dos pacotes para evitar perdas em caso de chegada de datagramas for superior à capacidade
+                \item Decisão de encaminhamento :
+                
+                \begin{itemize}[left=0.5cm, nosep, label=$-$]
                     \item Tradicional: Encaminhamento é baseado somente no endereço de IP do destino contido no cabeçalho;
                     \item Generalizado: Encaminhamento é baseado em qualquer informação contida no cabeçalho do datagrama
                 \end{itemize}
-            
+        
+            \end{itemize}
+        
         \end{itemize}
 
         \subsubsection*{Decisão de Encaminhamento :} 
@@ -153,7 +180,7 @@
                 \item O roteador possui uma tabela de encaminhamento que referencia endereços de destino e indica a interface de saída correspondente.
             
                 \begin{center}
-                    \includegraphics[width=0.65\textwidth]{img/cap-04/tabela-de-encaminhamento.png}
+                    \includegraphics[width=0.45\textwidth]{img/cap-04/tabela-de-encaminhamento.png}
                 \end{center}
 
                 \item \textbf{Casamento de maior prefixo:} busca o endereço que melhor coincide com o endereço de destino do pacote na tabela.
@@ -187,10 +214,13 @@
         \subsubsection*{Matrizes de Comutação} 
 
             \begin{itemize}[left=0.5cm, align=left, nosep]
+                
                 \item Transportam pacotes da interface de entrada até a interface de saída apropriada
-                \item \textbf{Taxa de comutação :} Velocidade com que pacotes podem ser transferidos das entradas para as saídas \\
-                    $\hookrightarrow$ Frequentemente medida como múltiplo da taxa de linha de entrada/saída; \\
-                    $\hookrightarrow$ Taxa ideal = $N \times R$ (onde $N$ = número de entradas e $R$ = taxa dos enlaces das interfaces).
+                \item \textbf{Taxa de comutação :} Velocidade com que pacotes podem ser transferidos das entradas para as saídas
+                    \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                        \item Frequentemente medida como múltiplo da taxa de linha de entrada/saída; 
+                        \item  Taxa ideal = $N \times R$ (onde $N$ = número de entradas e $R$ = taxa dos enlaces das interfaces). 
+                    \end{itemize}
                     
                 \begin{center}
                     \includegraphics[width=0.65\textwidth]{img/cap-04/taxa-de-comutacao.png}
@@ -201,44 +231,54 @@
                     \includegraphics[width=0.65\textwidth]{img/cap-04/implementacao-matriz-de-comutacao.png}
                 \end{center}
 
-                \item \textbf{Memória :} \\ 
-                    $\hookrightarrow$ Roteadores da primeira geração \\
-                    $\hookrightarrow$ Usam computador tradicional com duas placas de rede \\
-                    $\hookrightarrow$ Pacote é copiado para a memória do sistema antes do encaminhamento \\
-                    $\hookrightarrow$ Problemas :
-                    \begin{itemize} 
-                        \item Contenção de barramento (depois que utilizado um barramento ninguem pode mais utiliza-lo)
-                        \item Passagem dupla do pacote pelo barramento, limitando a velocidade.
+                \item \textbf{Memória :}  
+                    \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                        \item Roteadores da primeira geração 
+                        \item Usam computador tradicional com duas placas de rede 
+                        \item Pacote é copiado para a memória do sistema antes do encaminhamento 
+                        
+                        \item Problemas :
+                        \begin{itemize}[left=0.5cm, nosep, label=$-$] 
+                            \item Contenção de barramento (depois que utilizado um barramento ninguem pode mais utiliza-lo)
+                            \item Passagem dupla do pacote pelo barramento, limitando a velocidade.
+                        \end{itemize}
+                    
                     \end{itemize}
-            
+                        
                 \begin{center}
-                    \includegraphics[width=0.65\textwidth]{img/cap-04/matriz-de-comutacao-memoria.png}
+                    \includegraphics[width=0.45\textwidth]{img/cap-04/matriz-de-comutacao-memoria.png}
                 \end{center}
 
-                \item \textbf{Barramento :} \\
-                    $\hookrightarrow$ Datagrama sai da porta de entrada para a porta de saída por um barramento compartilhado \\
-                    $\hookrightarrow$ Contenção do Barramento : Limitação de velocidade pela banda do barramento. \\
-                    $\hookrightarrow$ Restrição de contenção do barramento, uma vez que tem um pacote trafegando no barramento ninguem pode mais trafegar 
-            
+                \item \textbf{Barramento :}
+                    \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                        \item Datagrama sai da porta de entrada para a porta de saída por um barramento compartilhado.
+                        \item Contenção do Barramento : Limitação de velocidade pela banda do barramento.
+                        \item Restrição de contenção do barramento, uma vez que tem um pacote trafegando no barramento ninguem pode mais trafegar 
+                    \end{itemize}
+                     
                     \begin{center}
-                        \includegraphics[width=0.65\textwidth]{img/cap-04/matriz-de-comutacao-barramento.png}
+                        \includegraphics[width=0.45\textwidth]{img/cap-04/matriz-de-comutacao-barramento.png}
                     \end{center}
 
-                \item \textbf{Interconexão :} \\
-                    $\hookrightarrow$ Barra cruzada: série de barramentos interconectados, permitindo algum nível de paralelismo; \\
-                    $\hookrightarrow$ Continua ocorrendo contenção
-                    
+                \item \textbf{Interconexão :} 
+                    \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                        \item \textbf{Barra cruzada :} Série de barramentos interconectados, permitindo algum nível de paralelismo; 
+                        \item Continua ocorrendo contenção
+                    \end{itemize}
+                     
                     \begin{center}
                         \includegraphics[width=0.55\textwidth]{img/cap-04/barra-cruzada.png}
                     \end{center}
 
-                \item Comutação em múltiplos estágios: consiste em switches \(n \times n\) compostos por vários estágios, estruturados como uma interconexão de matrizes de comutação menores. \\
-                    $\hookrightarrow$ Permite níveis de paralelismo. \\
-                    $\hookrightarrow$ Fragmenta o datagrama em células de tamanho fixo, possibilitando a paralelização do envio dessas células. \\
-                    $\hookrightarrow$ Comuta as células através da matriz de comutação e remonta os datagramas na saída.
-                
+                \item Comutação em múltiplos estágios: consiste em switches \(n \times n\) compostos por vários estágios, estruturados como uma interconexão de matrizes de comutação menores. 
+                    \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                        \item Permite níveis de paralelismo. 
+                        \item Fragmenta o datagrama em células de tamanho fixo, possibilitando a paralelização do envio dessas células.
+                        \item Comuta as células através da matriz de comutação e remonta os datagramas na saída.
+                    \end{itemize}
+                     
                     \begin{center}
-                        \includegraphics[width=0.65\textwidth]{img/cap-04/comutacao-em-multiplos-estagios.png}
+                        \includegraphics[width=0.45\textwidth]{img/cap-04/comutacao-em-multiplos-estagios.png}
                     \end{center}
 
                 \item É possível escalar esse processo ainda mais parelizando as matrizes de comuração
@@ -252,54 +292,66 @@
         \subsubsection*{Enfileiramento em Interfaces}    
 
             \begin{itemize}[left=0.5cm, align=left, nosep]
-                \item Enfileramento na interface de entrada \\
-                    $\hookrightarrow$ Se a matriz de comutação é mais lenta do que as portas de entrada combinadas $\rightarrow$ enfileramento ocorrerá na entrada de filas. \\
-                    $\hookrightarrow$ Head of Lines (HOL) blocking : um datagrama enfileirado na frente da fila previne outros na fila de moverem para frente.     
-
+                \item Enfileramento na interface de entrada
+                    \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                        \item Se a matriz de comutação é mais lenta do que as portas de entrada combinadas $\rightarrow$ enfileramento ocorrerá na entrada de filas. 
+                        \item \textbf{Head of Lines} (HOL) blocking : um datagrama enfileirado na frente da fila previne outros na fila de moverem para frente.    
+                    \end{itemize}
+                     
                     \begin{center}
-                        \includegraphics[width=0.65\textwidth]{img/cap-04/hol.png}
+                        \includegraphics[width=0.45\textwidth]{img/cap-04/hol.png}
                     \end{center}
 
-                \item Enfileramento na interface de saida \\
-                    $\hookrightarrow$ Buffering (Descarte): É necessario quando datagramas chegam da matriz de comutação mais rápidos do que a taxa de transmissao do enlace \\
-                    $\hookrightarrow$ Politica de descarte ? 
-                        \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item Enfileramento na interface de saida
+                    \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                        \item Buffering (Descarte): É necessario quando datagramas chegam da matriz de comutação mais rápidos do que a taxa de transmissao do enlace 
+                        
+                        \item Politica de descarte ? 
+                        \begin{itemize}[left=0.5cm, nosep, label=$-$]
                             \item Datagramas podem ser perdidos devido ao congestionamento,falta de buffer
                         \end{itemize}
-                    $\hookrightarrow$ Disciplinas de escalonamento : formas de lidar com a organização dos pacotes nessa fila de interface de saida para permitir priorizar trafego ou eventualmente reduzir o impacto do infileiramento na comunicação fim a fim     
+                        
+                        \item Disciplinas de escalonamento : formas de lidar com a organização dos pacotes nessa fila de interface de saida para permitir priorizar trafego ou eventualmente reduzir o impacto do infileiramento na comunicação fim a fim     
                        
-                    \begin{center}
-                        \includegraphics[width=0.65\textwidth]{img/cap-04/enfileiramento-interface-saida.png}
-                    \end{center}
+                        \begin{center}
+                            \includegraphics[width=0.45\textwidth]{img/cap-04/enfileiramento-interface-saida.png}
+                        \end{center}
 
-                    \begin{center}
-                        \includegraphics[width=0.65\textwidth]{img/cap-04/enfileiramento-interface-saida2.png}
-                    \end{center}
+                        \begin{center}
+                            \includegraphics[width=0.45\textwidth]{img/cap-04/enfileiramento-interface-saida2.png}
+                        \end{center}
 
-                    $\hookrightarrow$ Descarte quando a taxa de chegada via switch excede a velocidade de linha de saida \\
-                    $\hookrightarrow$ Enfileiramento (atraso) e a perda devida o overflow(transbordo) do buffer da porta de saida
+                        \item Descarte quando a taxa de chegada via switch excede a velocidade de linha de saida 
+                        \item Enfileiramento (atraso) e a perda devida o overflow(transbordo) do buffer da porta de saida
 
-                    $\hookrightarrow$ \textbf{Quanto de memoria é preciso se alocada para essa fila ?}
-                        \begin{itemize}[left=0.5cm, align=left, nosep]
+                        \item \textbf{Quanto de memoria é preciso se alocada para essa fila ?}
+                        \begin{itemize}[left=0.5cm, nosep, label=$-$]
                             \item RFC 3429 : quantidade de buffer necessario para alocar será RTT vezes a capacidade do enlace C.
                             \item Recomendações recentes : com $n$ fluxos, $buffering = RTT * C / \sqrt{N}$
+                            
                             \item Porém muito buffer pode causar atraso (praticularmente em roteadores domesticos)
-                            \begin{itemize}[left=0.5cm, align=left, nosep]
+                            \begin{itemize}[left=0.5cm, nosep, label=$\blacktriangleright$]
                                 \item RTTs longos : desempenho ruim para aplicações de tempo real,
                                 \item recordar que o atraso baseado no controle de congestionamento  
                             \end{itemize}
+                        
                         \end{itemize}
-    
-                \item Manejamento do Buffer (AQM) \\
-                     $\hookrightarrow$ Gerenciar o uso das filas \\
-                     $\hookrightarrow$ Descarte : qual pacote adicionar, e qual descarta quando o buffer está cheio 
-                        \begin{itemize}[left=0.5cm, align=left, nosep]
-                            \item Descarta da cauda : descarta pacote chegando
-                            \item Prioridade : descartar/remover baseado em uma prioridade 
-                        \end{itemize}    
+                
+                    \end{itemize}
+                
+                \item Manejamento do Buffer (AQM)
+                    \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                        \item Gerenciar o uso das filas
+                        \item Descarte : qual pacote adicionar, e qual descarta quando o buffer está cheio
+                            \begin{itemize}[left=0.5cm, nosep, label=$-$]
+                                \item Descarta da cauda : descarta pacote chegando
+                                \item Prioridade : descartar/remover baseado em uma prioridade 
+                            \end{itemize}    
                     
-                    $\hookrightarrow$ Marcação : qual pacotes marcar para sinalixar um congestionamento (ECN,RED)
+                        \item Marcação : qual pacotes marcar para sinalixar um congestionamento (ECN,RED)
 
+                    \end{itemize} 
+                    
                     \begin{center}
                         \includegraphics[width=0.35\textwidth]{img/cap-04/manejamento-buffer.png}
                     \end{center}
@@ -310,45 +362,58 @@
             \begin{itemize}[left=0.5cm, align=left, nosep]
                 \item Decidir qual o proximo pacote que sera transmitido no enlace
                 
-                \item \textbf{FCFS} (Firt Come,FIrst Server): Pacotes são transmitidos em ordem atraves da porta de saida \\
-                    $\hookrightarrow$ FIFO
+                \item \textbf{FCFS} (Firt Come,FIrst Server): Pacotes são transmitidos em ordem atraves da porta de saida
+                    \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]    
+                        \item FIFO
+                    \end{itemize}
 
-                \item \textbf{Prioridade} : \\
-                    $\hookrightarrow$ Classifica os pacotes chegados enfileirado-os em classes de acordo com a prioridade.
-                        \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item \textbf{Prioridade} :
+                    \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]    
+                        
+                        \item Classifica os pacotes chegados enfileirado-os em classes de acordo com a prioridade.
+                        \begin{itemize}[left=0.5cm, nosep, label=$-$] 
                             \item Qualquer campo do cabeçalho pode ser usado para a classificação
-                        \end{itemize}    
-                    $\hookrightarrow$ Envia pacotes com maiores prioridade na fila que tem pacotes bufferizados     
-                        \begin{itemize}[left=0.5cm, align=left, nosep]
-                            \item FCFS sem a classe de prioridade
                         \end{itemize}  
 
+                        \item Envia pacotes com maiores prioridade na fila que tem pacotes bufferizados  
+                        \begin{itemize}[left=0.5cm, nosep, label=$-$] 
+                            \item FCFS sem a classe de prioridade
+                        \end{itemize}                     
+                    
+                    \end{itemize}
+                     
                     \begin{center}
                         \includegraphics[width=0.45\textwidth]{img/cap-04/prioridade.png}
                     \end{center}
                
-                \item \textbf{Round Robin} : \\
-                    $\hookrightarrow$ Classifica os pacotes chegados enfileirado-os em classes de acordo com a prioridade. 
-                        \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item \textbf{Round Robin} :
+                    \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$] 
+                        \item Classifica os pacotes chegados enfileirado-os em classes de acordo com a prioridade. 
+                        \begin{itemize}[left=0.5cm, nosep, label=$-$]
                             \item Qualquer campo do cabeçalho pode ser usado para a classificação
                         \end{itemize}      
-                    $\hookrightarrow$ Servidor ciclicamente,repetidamente escaneia as classes de filas, enviando um pacote completo de cada cada classe(se necessário) a cada turno. 
+                        
+                        \item Servidor ciclicamente,repetidamente escaneia as classes de filas, enviando um pacote completo de cada cada classe(se necessário) a cada turno. 
                     
-                    \begin{center}
-                        \includegraphics[width=0.65\textwidth]{img/cap-04/round-robin.png}
-                    \end{center}
+                        \begin{center}
+                            \includegraphics[width=0.45\textwidth]{img/cap-04/round-robin.png}
+                        \end{center}
                     
-                \item \textbf{Weighted Fair Queues} (WFQ) : \\
-                    $\hookrightarrow$ Generalização para o round robin \\
-                    $\hookrightarrow$ Cada classe,$i$, tem um peso, $W_i$, e recebe uma quantidade ponderada de serviço em cada ciclo
+                    \end{itemize}
+
+                \item \textbf{Weighted Fair Queues} (WFQ) :
+                    \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                        \item Generalização para o round robin
+                        \item Cada classe,$i$, tem um peso, $W_i$, e recebe uma quantidade ponderada de serviço em cada ciclo
                         \[
                             \frac{w_i}{\sum_{j}^{} w_j}  
-                        \]    
-                    
-                    $\hookrightarrow$ Banda minima garantida para as classes de baixa prioridade 
-                    
+                        \]  
+                        \item Banda minima garantida para as classes de baixa prioridade 
+                         
+                    \end{itemize}    
+                     
                     \begin{center}
-                        \includegraphics[width=0.65\textwidth]{img/cap-04/wfq.png}
+                        \includegraphics[width=0.45\textwidth]{img/cap-04/wfq.png}
                     \end{center}
             
             \end{itemize} 
@@ -712,12 +777,7 @@
 
             \end{itemize}           
             
-            %\begin{itemize}[left=0.5cm, align=left, nosep]
-            %    \item \\
-            %    \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
-            %        \item \\
-            %    \end{itemize}     
-            %\end{itemize}
+            
 
 
     \subsection{MiddleBox}
