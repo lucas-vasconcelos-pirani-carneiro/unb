@@ -1,1 +1,149 @@
 \section{Introdução}
+
+    \subsection{O que é Lógica ?}
+    
+        \begin{itemize}[left=0.5cm, align=left, nosep]
+            \item É a ciência que estuda a \underline{validade dos argumentos} 
+            \item Estuda os \underline{métodos} e \underline{pricípios} para comprovar os argumentos
+            \item \textbf{Argumento :} É uma \underline{sequência de fatos} que é usado para concluir algo.   
+            \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                \item Pode ser expresso em \textbf{linguagem natural} ou \textbf{linguagem formal}
+            \end{itemize}
+            \item \textbf{Argumento Correto :} É um argumento em que os fatos justificam, sem falhas, uma 
+            determinada conclusão
+        \end{itemize}
+   
+    \subsection{Linguagem}
+        \begin{itemize}[left=0.5cm, align=left, nosep]
+            \item \textbf{Linguagem Natural :} Uso cotidiano
+            \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                \item Prolixa
+                \item Ambiguidade
+            \end{itemize}
+        
+            \item \textbf{Linguagem Formal :} \underline{Sistema simbólico} preciso e operacional de modo a evitar a ambiguidade e a loquacidade das linguagens naturais
+            \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                \item Concisa
+                \item Exata
+                \item Exemplos: Matemática, Música, Relógio, Linguagens de Programação, \dots  
+            \end{itemize}
+        
+        \end{itemize}        
+
+        \subsubsection*{Dimensões da Linguagem}
+           
+            \begin{enumerate}[left=0.5cm, align=left, nosep]
+                \item \textbf{Sintaxe :} \underline{Ordem} de como são escritas as palavras
+                \item \textbf{Semântica :} \underline{Significado} que as palavras possuem
+                
+                Exemplo : $2 + 2 = 4$
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Estrutura matemática : sintaxe 
+                    \item Valor : semântica
+                \end{itemize}
+
+                \item \textbf{Pragmática :} Sem relação com a sintaxe e semântica, significado atribuido por 
+                questões históricas, sociais e culturais.
+                
+                Exemplo : Que horas são ?
+            
+            \end{enumerate}
+
+        \subsubsection*{Metalinguagem}
+            
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item \textbf{Metalinguagem :} É uma linguagem que explica qualquer outra linguagem   
+                \item \textbf{Linguagem Objeto :} É a linguagem da qual se fala
+                 
+                $\text{Ex}_1$ : "House" é o mesmo que "casa"   
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Metalinguagem : português
+                    \item Linguagem Objeto : inglês
+                    \item "\ "\ : Separar a metalinguagem da linguagem
+                \end{itemize}
+        
+                \vspace{0.5cm}
+                $\text{Ex}_2$ : $\int_{a}^{b} f(x) \,dx$   
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Metalinguagem : português
+                    \item Linguagem Objeto : matemática
+                \end{itemize}
+                
+                \item \textbf{Hierarquia infinita de metalinguagem :} Para ter consistência na análise da linguagem é 
+                preciso que uma linguagem de \underline{nível inferior} para explicá-la.
+                
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Ou seja, dada uma linguagem-objeto precisamos de uma metalinguagem para 
+                    explicá-la, que por sua vez precisa de uma metametalinguagem para explicá-la, 
+                    e assim sucessivamente. 
+                \end{itemize}
+
+                \vspace{0.5cm}
+
+                \begin{center}
+                    \begin{tikzpicture}[
+                        node distance=0.5cm,
+                        box/.style={
+                            draw, 
+                            rounded corners=3pt, 
+                            fill=gray!10, 
+                            minimum width=4cm, 
+                            align=center, 
+                            font=\sffamily\bfseries
+                        }
+                    ]
+                    \node[box] (obj) {Objeto};
+                    \node[box] (meta) [below=of obj] {Metaliguagem};
+                    \node[box] (metameta) [below=of meta] {Metametaliguagem};
+                    \node (dots) [below=of metameta] {$\ldots$};
+
+                    \foreach \i/\j in {obj/meta, meta/metameta, metameta/dots} {
+                        \draw[->, thick, shorten >=4pt, shorten <=4pt] (\i) -- (\j);
+                    }
+                    \end{tikzpicture}    
+                \end{center}
+
+                \vspace{-0.3cm}
+
+                Exemplo : $2 + 2 = 4$ \\
+                \textbf{Linguagem-objeto :} “$2 + 2 = 4$” — uma sentença da linguagem da \emph{aritmética}. \\
+                \textbf{Metaliguagem :} “A expressão ‘$2 + 2 = 4$’ é verdadeira.” — frase na linguagem natural (Português) 
+                    descrevendo a sentença da linguagem-objeto. \\
+                \textbf{Metametalinguagem :} “A frase ‘A expressão $2 + 2 = 4$ é verdadeira’ é uma afirmação correta 
+                    sobre a linguagem da aritmética.” — análise sobre a metalinguagem.
+            
+                \item \textbf{Teoria :} É um conjunto de explicações para descrever um fenômeno
+                \item \textbf{Metateoria :} É a teoria que investiga, analisa ou descreve a própria teoria
+            
+            \end{itemize}
+       
+    \subsection{Uso e Mensão}
+        
+        \begin{itemize}[left=0.5cm, align=left, nosep]
+            \item Relacionados diretamente com os \underline{níveis da linguagem} em que os termos aparecem.    
+            \item \textbf{Usa-se} um termo para afirmar certas coisas.
+            \item \textbf{Menciona-se} um termo quando falamos à respeito dele próprio.
+            
+            \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                \item $\text{Ex}_1$ : Gato é um animal bonitinho
+                \item $\text{Ex}_2$ : "Gato" tem cinco letras 
+                \item $\text{Ex}_3$ : "Lucas" é um nome bíblico
+            \end{itemize}
+           
+            \item \textbf{Número :} É um certo tipo de objeto matemático
+            \item \textbf{Numeral :} É o nome de um número
+            \item \textbf{Substituendos :} São expressões que podem ser colocados no lugar de variáveis
+            \item \textbf{Valores da variáveis :} É o domínio em que a variável está inserida.
+
+        \end{itemize}
+    
+        \subsubsection*{Exemplos}
+            $\text{Ex}_1$ : “Rosa” é dissílaba. \\
+            $\text{Ex}_2$ : Napoleão foi imperador da França. \\
+            $\text{Ex}_3$ : A palavra “water” tem o mesmo significado que a palavra portuguesa “água” \\
+            $\text{Ex}_4$ : “ “Logik” ” não pode ser usada como sujeito de uma sentença do português. \\
+            $\text{Ex}_5$ : “Pedro” não é o nome de Sócrates, mas é o nome de “Pedro”. \\
+            $\text{Ex}_6$ : O numeral “8” designa a soma de 4 mais 4. \\
+            $\text{Ex}_7$ : 2+2 é igual a 3+1, mas “3+1” é diferente de “4” \\
+            $\text{Ex}_8$ : A sentença nenhum gato é preto é falsa. A sentença “nenhum gato é preto” é falsa. \\
+            $\text{Ex}_9$ : “Todavia” e “contudo”, mas, não também têm o mesmo que significado que “mas”, contudo, não, não. 
