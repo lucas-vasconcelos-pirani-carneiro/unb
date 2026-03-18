@@ -8,9 +8,8 @@ engenharia-de-software/
 ├── 📂 anotacoes/
 ├── 📂 trabalho/
 ├── 📄 README.md
-├── 📄 lista-de-exercios.pdf
-├── 📄 slides.pdf
-├── 📄 sommerville_engenharia-de-software.pdf
 ├── 📄 link-ferramentas.txt
-└── 📄 plano-de-ensino.pdf
+├── 📄 lista-de-exercios.pdf
+├── 📄 plano-de-ensino.pdf
+└── 📄 slides.pdf
 ```
