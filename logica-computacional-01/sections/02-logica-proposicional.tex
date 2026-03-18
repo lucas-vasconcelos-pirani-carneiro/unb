@@ -1,0 +1,932 @@
+\section{Lógica Proposicional}
+    
+    \subsection{Introdução}
+        
+        \begin{itemize}[left=0.5cm, align=left, nosep]
+            \item \textbf{Raciocinar:} construir um argumento.
+            \item Argumentos corretos precisam ser definidos de forma \underline{rigorosa} e \underline{automática}.
+        \end{itemize}
+
+        \textbf{Exemplo 1:} Se o trem está atrasado e não existem táxis na estação, João chega atrasado.  
+        O trem chega atrasado. João não chega atrasado. Portanto, existem táxis na estação.
+
+        $p_1: \text{o trem está atrasado}$ \\ 
+        $q_1: \text{há táxis na estação}$ \\
+        $r_1: \text{João está atrasado}$
+    
+        Raciocínio: Se \(p_1\) e não \(q_1\), então \(r_1\). \(p_1\). \(r_1\). Portanto, não \(q_1\).
+
+        \textbf{Exemplo 2:} Se está chovendo e Maria não tem um guarda-chuva, então Maria está molhada.
+
+        $p_2: \text{está chovendo}$ \\
+        $q_2: \text{Maria tem um guarda-chuva}$ \\
+        $r_2: \text{Maria está molhada}$
+        
+        Raciocínio: Se \(p_2\) e não \(q_2\), então \(r_2\). \(p_2\), não \(r_2\). Portanto, \(q_2\).
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item O objetivo é ligar os fatos anteriores de forma \underline{sistemática}.
+        \end{itemize}
+
+        \subsubsection*{Sentenças Declarativas}
+        \begin{enumerate}[left=0.5cm, align=left, nosep]
+            \item A soma de 3 e 5 é 8.
+            \item Todo número par é maior ou igual à soma de dois primos (conjectura de Goldbach).
+            \item Maria reagiu \underline{violentamente} à atitude de João. (advérbio)
+            \item \underline{Todos} os marcianos gostam de pizza. (quantificador)
+            \item Albert Einstein foi um cientista. (passado)
+            \item A grama é vermelha. (exemplo de sentença falsa; questiona-se a referência)
+        \end{enumerate}
+
+        \subsubsection*{Proposições}
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item São afirmações de fatos estáticos, sem temporalidade.
+                \item Podem ser \underline{simples} ou \underline{compostas}.
+            \end{itemize}
+
+        \subsubsection*{Símbolos Proposicionais}
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item São formas de identificar proposições.
+                \item Normalmente, usa-se letras do final do alfabeto: \(p, q, r, \ldots, p_1, q_1, \ldots\)
+            \end{itemize}
+
+        \subsubsection*{Conectivos Lógicos}
+
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                
+                \item \textbf{Negação ($\neg$):} Inverte o valor semântico da proposição.
+                    
+                    \textbf{Exemplo:}
+                    \begin{center}
+                        O sol brilha = $p$ \\
+                        O sol não brilha = $\neg p$ \\
+                        Não é verdade que o sol não brilha = $\neg \neg p$ (\underline{Dupla Negação})    
+                    \end{center}
+                
+                \item \textbf{Conjunção ($\land$):} Junta duas proposições e retorna verdadeiro se ambas forem verdadeiras.
+                
+                    \textbf{Exemplo:} 
+                    \begin{center}
+                        João é médico = $p$ \\
+                        Pedro é advogado = $q$ \\ 
+                        João é médico e Pedro é advogado = $p \land q$     
+                    \end{center}
+                    
+                    \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                        \item A conjunção é \underline{comutativa}. No português, a ordem pode alterar o sentido:
+                        \begin{enumerate}[label=\arabic*., left=0.5cm, align=left, nosep]
+                            \item Eles casaram e tiveram filhos (1º - Casou, 2º - Teve filhos).
+                            \item Eles tiveram filhos e casaram (1º - Teve filhos, 2º - Casou).
+                            \item Ele estudou e não passou na matéria (Adversativa).
+                        \end{enumerate}
+                    \end{itemize}
+
+                \item \textbf{Disjunção ($\lor$):} Junta duas proposições e retorna verdadeiro se pelo menos uma for verdadeira.
+                
+                    \textbf{Exemplo:}      
+                    \begin{center}
+                        João é médico = $p$ \\
+                        Pedro é advogado = $q$ \\
+                        João é médico ou Pedro é advogado = $p \lor q$
+                    \end{center}
+                
+                    \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                        \item A disjunção é comutativa e não excludente: $p \lor q \equiv q \lor p$.
+                        \item Nem sempre é excludente no português:
+                        \begin{enumerate}[label=\arabic*., left=0.5cm, align=left, nosep]
+                            \item Pedro está em Fortaleza ou Porto Alegre.
+                        \end{enumerate}
+                    \end{itemize}
+
+                \vspace{0.5cm}
+                \item \textbf{Implicação ($\rightarrow$):} Relaciona duas proposições de modo que retorna falso somente quando o antecedente é verdadeiro e o consequente é falso.
+                
+                    \textbf{Exemplo 1:}      
+                    \begin{center}
+                        João passar no concurso = $p$ \\
+                        Mudar para o interior = $q$ \\
+                        Se João passar no concurso, então ele mudará para o interior = $p \rightarrow q$
+                    \end{center}
+                
+                    \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                        \item Não é a única razão para mudar para o interior. 
+                        \item A implicação é como um "contrato" entre antecedente e consequente.
+                    \end{itemize}
+                
+                    \textbf{Exemplo 2:} Se chover, a rua estará molhada.
+                
+                    \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                        \item A rua pode estar molhada por outro motivo.
+                    \end{itemize}
+                
+                    \textbf{Exemplo 3:}
+                    \begin{enumerate}[label=\arabic*., left=0.5cm, align=left, nosep]
+                        \item O carro $x$ é roubado, e a seguradora paga $y$.
+                        \item O carro $x$ é roubado, mas a seguradora não paga $y$.
+                        \item O carro $x$ não é roubado, e a seguradora paga $y$.
+                        \item O carro $x$ não é roubado, e a seguradora não paga $y$.
+                    \end{enumerate}
+
+                \item \textbf{Dupla-Implicação ($\leftrightarrow$):} Relaciona duas proposições de modo que retorna verdadeiro se ambas forem verdadeiras ou ambas forem falsas.
+                
+                    \textbf{Exemplo 1:}      
+                    \begin{center}
+                        Roberto vai à praia = $p$ \\
+                        Faz sol = $q$ \\
+                        Roberto vai à praia se, e somente se, faz sol = $p \leftrightarrow q$
+                    \end{center}    
+                    \textbf{Exemplo 2:}      
+                    \begin{center}
+                        A luz está acesa = $p$ \\
+                        O interruptor está ligado = $q$ \\
+                        A luz está acesa se, e somente se, o interruptor está ligado = $p \leftrightarrow q$
+                    \end{center}    
+
+            \end{itemize}
+      
+    \subsection{Sintaxe}
+        
+        \begin{itemize}[left=0.5cm, align=left, nosep]
+            \item O conjunto de \textit{símbolos lógicos} da linguagem proposicional é dado pela união dos seguintes conjuntos:
+            \begin{enumerate}[label=\arabic*., left=0.5cm, align=left, nosep]
+                \item $\mathcal{P} = \{p, q, r, \ldots, p_1, q_1, r_1, \ldots\}$, um conjunto enumerável de símbolos;
+                \item $\{\neg, \land, \lor, \rightarrow, \leftrightarrow\}$;
+                \item $\{(, )\}$.
+            \end{enumerate}
+
+            \item Os elementos do conjunto $\mathcal{P}$ são chamados de \textit{símbolos proposicionais} ou 
+            \textit{variáveis proposicionais}.
+            \item Os elementos do conjunto $\{\neg, \land, \lor, \rightarrow, \leftrightarrow\}$ são chamados de 
+            \textit{conectivos lógicos} ou \textit{operadores lógicos}.
+            \item O símbolo ``$\neg$'' é chamado de \textit{conectivo unário}.
+            \item Os símbolos contidos no conjunto $\{\land, \lor, \rightarrow, \leftrightarrow\}$ são chamados de 
+            \textit{conectivos binários}.
+            \item Os elementos do conjunto $\{(, )\}$ são chamados de \textit{símbolos de pontuação}.
+            \item Os símbolos lógicos definem o \textit{alfabeto da linguagem proposicional}.
+            \item Uma \textit{fórmula} é qualquer \underline{sequência finita} de símbolos lógicos.
+            \item A \textit{Linguagem Lógica Proposicional}, denotada por $\mathcal{L}_P$, é equivalente ao seu 
+            \textit{conjunto de fórmulas bem-formadas}, denotado por $\text{FBF}_{\mathcal{L}_P}$, que é definido indutivamente, 
+            como se segue:
+            \begin{enumerate}[left=0.5cm, align=left, nosep]
+                \item Se $p \in \mathcal{P}$, então $p \in \text{FBF}_{\mathcal{L}_P}$;
+                \item Se $\varphi \in \text{FBF}_{\mathcal{L}_P}$, então $\neg \varphi \in \text{FBF}_{\mathcal{L}_P}$;
+                \item Se $\varphi \in \text{FBF}_{\mathcal{L}_P}$ e $\psi \in \text{FBF}_{\mathcal{L}_P}$, então 
+                $(\varphi \wedge \psi)$, $(\varphi \vee \psi)$, $(\varphi \rightarrow \psi)$ e $(\varphi \leftrightarrow \psi)$ 
+                $\in \text{FBF}_{\mathcal{L}_P}$.
+            \end{enumerate}
+            \item  Fórmulas que não são bem-formadas, isto é, que não pertencem a $\text{FBF}_{\mathcal{L}_P}$, são chamadas de 
+            \textit{fórmulas mal-formadas}.
+            \item Seja $\varphi \in \text{FBF}_{\mathcal{L}_P}$. Se $\varphi \in \mathcal{P}$, então $\varphi$ é chamada de 
+            \textit{fórmula atômica}.
+            \item Seja $\varphi \in \text{FBF}_{\mathcal{L}_P}$. Se $\varphi \notin \mathcal{P}$, isto é, se $\varphi$ não é uma 
+            fórmula atômica, então $\varphi$ é chamada de \textit{fórmula molecular}.
+
+            \item Sejam $\varphi$, $\psi$ e $\chi \in \text{FBF}_{\mathcal{L}_P}$. Seja $Sub : \text{FBF}_{\mathcal{L}_P} 
+            \rightarrow 2^{\text{FBF}_{\mathcal{L}_P}}$ uma função. O \textit{conjunto de subfórmulas} de $\varphi$, 
+            $Sub(\varphi)$, é dado por:
+            \begin{enumerate}[left=0.5cm, align=left, nosep]
+                \item Se $\varphi \in \mathcal{P}$, então $Sub(\varphi) = \{\varphi\}$;
+                \item Se $\varphi$ é da forma $\neg \psi$, então $Sub(\varphi) = \{\varphi\} \cup Sub(\psi)$;
+                \item Se $\varphi$ é da forma $(\psi * \chi)$, onde $* \in \{\wedge, \vee, \rightarrow, \leftrightarrow\}$, então
+                $Sub(\varphi) = \{\varphi\} \cup Sub(\psi) \cup Sub(\chi)$.
+            \end{enumerate}
+        
+            \item \underline{Operador Principal:} Sejam $\varphi,\psi,\chi \in \mathrm{FBF}_{\mathcal{L}_p}$ e $op: \mathrm{FBF}_{\mathcal{L}_p}
+            \rightarrow \{ \neg, \land, \vee, \rightarrow ,\leftrightarrow \}$, o operador principal de $\varphi$ é definado 
+            da seguinte maneira : 
+
+            \begin{enumerate}[left=0.5cm, align=left, nosep]
+                \item Se $\varphi \in \mathcal{P}$, então $op(\varphi)$ não está definido.
+                \item Se $\varphi$ é da forma $\neg \psi$, então $op(\varphi) = \neg$.
+                \item Se $\varphi$ é da forma $(\psi * \chi)$, com $* \in \{\wedge, \vee, \rightarrow, \leftrightarrow\}$, então 
+                $op(\varphi) = *$. \\
+                \textbf{Observação:}
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item \textbf{Operador Principal:} Conectivo de \textbf{maior nível} dentro da estrutura da fórmula. 
+                    \item Aplicado por último na construção da fórmula a partir das subfórmulas.
+                \end{itemize} 
+            \end{enumerate}
+
+            \item \underline{Subfórmulas Imediatas:} Sejam $\varphi,\psi,\chi \in \mathrm{FBF}_{\mathcal{L}_p}$. Seja $Ime: 
+            \mathrm{FBF}_{\mathcal{L}_p} \rightarrow 2^{\mathrm{FBF}_{\mathcal{L}_p}}$ o conjunto de subfórmulas imediatas 
+            é dado por : 
+
+            \begin{enumerate}[left=0.5cm, align=left, nosep]
+                \item Se $\varphi \in \mathcal{P}$, então $Ime(\varphi) = \emptyset$  
+                \item Se $\varphi$ é da forma $\neg \psi$, então $Ime(\varphi) = \{ \psi \}$ 
+                \item Se $\varphi$ é da forma $(\psi * \chi)$, com $* \in \{\wedge, \vee, \rightarrow, \leftrightarrow\}$, então $Ime(\varphi) = \{ \psi,\chi \}$
+            \end{enumerate}
+
+            \item \underline{Comprimento:} Sejam $\varphi,\psi,\chi \in \mathrm{FBF}_{\mathcal{L}_p}$. Seja $C: 
+            \mathrm{FBF}_{\mathcal{L}_p} \rightarrow \mathbb{N}$ a função que associa a cada fórmula bem formada o seu 
+            comprimento é dado por :  
+
+            \begin{enumerate}[left=0.5cm, align=left, nosep] 
+                \item Se $\varphi \in \mathcal{P}$, então $C(\varphi) = 1$. 
+                \item Se $\varphi$ é da forma $\neg \psi$, então $C(\varphi) = 1 + C(\psi)$. 
+                \item Se $\varphi$ é da forma $(\psi * \chi)$, com $* \in \{\wedge, \vee, \rightarrow, \leftrightarrow\}$, então $C(\varphi) = 3 + C(\psi) + C(\chi)$. 
+            \end{enumerate}
+
+            \item \underline{N° de Subfórmulas:} Sejam $\varphi,\psi,\chi \in \mathrm{FBF}_{\mathcal{L}_p}$. Seja $Q: 
+            \mathrm{FBF}_{\mathcal{L}_p} \rightarrow \mathbb{N}$ a função que associa a cada fórmula bem formada o número de 
+            subfórmulas distintas contidas nela. A definição é:
+        
+            \begin{enumerate}[left=0.5cm, align=left, nosep] 
+                \item Se $\varphi \in \mathcal{P}$, então $Q(\varphi) = 1$. 
+                \item Se $\varphi$ é da forma $\neg \psi$, então $Q(\varphi) = 1 + Q(\psi)$. 
+                \item Se $\varphi$ é da forma $(\psi * \chi)$, com $* \in \{\wedge, \vee, \rightarrow, \leftrightarrow\}$, então $Q(\varphi) = 1 + Q(\psi) + Q(\chi)$. 
+            \end{enumerate}
+
+            \item Uma \textit{árvore sintática} para $\varphi$, onde $\varphi \in \text{FBF}_{\mathcal{L}_P}$, é constituída de 
+            uma \textit{raiz} com zero ou mais filhos, dependendo da \textit{estrutura} (ou seja, da forma) de $\varphi$:
+            \begin{enumerate}[left=0.5cm, align=left, nosep]
+                \item Se $\varphi \in \mathcal{P}$, então a raiz é rotulada por $\varphi$ e tem zero filhos;
+                \item Se $\varphi$ é da forma $\neg \psi$, então a raiz é rotulada por $\neg$ e tem um único filho, que é a raiz 
+                da árvore sintática de $\psi$;
+                \item Se $\varphi$ é da forma $(\psi * \chi)$, onde $* \in \{\wedge, \vee, \rightarrow, \leftrightarrow\}$, então 
+                a raiz é rotulada por $*$ e tem dois filhos,o da esquerda e da direita, $\psi$ e $\chi$, respectivamente.
+            \end{enumerate}
+
+        \end{itemize}
+
+    \subsection{Semântica}
+
+        \begin{itemize}[left=0.5cm, align=left, nosep]
+            \item O conjunto $\mathcal{V} = \{V, F\}$ é chamado de \textit{conjunto de valores de verdade} e cada um 
+            de seus elementos é chamado de \textit{valor de verdade}.
+        
+            \item Uma \textit{função booleana} é aquela que tem apenas \underline{dois elementos} em sua imagem.
+
+            \item Uma \textit{valoração booleana} $\nu_0$ para os símbolos proposicionais de $\mathcal{L}_P$, 
+            $\mathcal{P}$, é uma função booleana $\nu_0 : \mathcal{P} \longrightarrow \mathcal{V}$.
+    
+            \item Uma \textit{valoração booleana} (ou \textit{interpretação}) $v$ para as fórmulas bem-formadas de 
+            $\mathcal{L}_P$ é uma função booleana $v : \text{FBF}_{\mathcal{L}_P} \longrightarrow \mathcal{V}$, que estende uma 
+            valoração booleana $v_0 : \mathcal{P} \longrightarrow \mathcal{V}$ para símbolos proposicionais de $\mathcal{L}_P$, 
+            da seguinte forma (onde $\varphi, \psi \in \text{FBF}_{\mathcal{L}_P}$):
+            \begin{enumerate}[left=0.5cm, align=left, nosep]
+                \item $v(\varphi) = v_0(\varphi)$, se $\varphi \in \mathcal{P}$;
+                \item $v(\neg \varphi) = V$, se, e somente se, $v(\varphi) = F$;
+                \item $v(\varphi \wedge \psi) = V$, se, e somente se, $v(\varphi) = v(\psi) = V$;
+                \item $v(\varphi \vee \psi) = V$, se, e somente se, $v(\varphi) = V$ ou $v(\psi) = V$ ou ambos;
+                \item $v(\varphi \rightarrow \psi) = V$, se, e somente se, $v(\varphi) = F$ ou $v(\psi) = V$ ou ambos;
+                \item $v(\varphi \leftrightarrow \psi) = V$, se, e somente se, $v(\varphi) = v(\psi)$.
+            \end{enumerate}
+    
+            \item Seja $\varphi \in \text{FBF}_{\mathcal{L}_P}$. Dizemos que $\varphi$ é \textit{satisfatível} se existe uma 
+            valoração booleana $v : \text{FBF}_{\mathcal{L}_P} \longrightarrow \mathcal{V}$ tal que $v(\varphi) = V$. Neste caso, 
+            dizemos que $v$ é um \textit{modelo para} $\varphi$ ou que $v$ \textit{satisfaz} $\varphi$.
+
+            \textbf{Observação.} Usaremos o símbolo $\mathcal{L}$ para nos referirmos a uma linguagem lógica qualquer. 
+            Denotamos por $\text{FBF}_{\mathcal{L}}$ o conjunto de fórmulas bem-formadas da linguagem lógica $\mathcal{L}$.
+
+            Considere $\varphi, \psi \in \text{FBF}_{\mathcal{L}}$ e $\Gamma \subseteq \text{FBF}_{\mathcal{L}}$ para as seguintes 
+            definições:
+
+            \item $\varphi$ é \textit{falsificável} se existe um modelo $\mathbb{M}$ para $\neg \varphi$. Neste caso, 
+            dizemos que $\mathbb{M}$ \textit{não satisfaz} ou \textit{falsifica} $\varphi$.
+
+            \item $\varphi$ é \textit{insatisfatível} ou que é uma \textit{contradição} se \underline{não existe} um modelo 
+            para $\varphi$.
+
+            \item $\varphi$ é uma \textit{tautologia} se \underline{toda interpretação} é um modelo para $\varphi$.
+
+            \item $\varphi$ é uma \textit{contingência} se $\varphi$ é satisfatível e falsificável.
+
+            \item $\varphi$ e $\psi$ são \textit{semanticamente equivalentes}, denotado por $\varphi \Lbimodels \psi$, se, 
+            para \underline{toda interpretação} $\mathbb{M}$, temos que $\mathbb{M}$ é um modelo para $\varphi$ se, e somente se, 
+            $\mathbb{M}$ é um modelo para $\psi$.
+
+            \item $\Gamma$ é \textit{consistente} ou \textit{satisfatível} se existe uma interpretação $\mathbb{M}$ que satisfaz 
+            \textbf{todas as fórmulas} de $\Gamma$. Neste caso, dizemos $\mathbb{M}$ \textit{satisfaz} ou é um \textit{modelo} 
+            para $\Gamma$.
+
+            \item $\Gamma$ é \textit{inconsistente} ou \textit{insatisfatível} se \underline{não existe} uma modelo para $\Gamma$. 
+        
+            \item $\varphi$ é \textit{consequência lógica} de $\Gamma$, denotado por $\Gamma \models_{\mathcal{L}} \varphi$, se 
+            \underline{todo modelo} para $\Gamma$ também é um modelo para $\varphi$.
+
+            \item $\varphi$ é \textit{consequência lógica} de $\Gamma$, denotado por $\Gamma \vDash_{\mathcal{L}} \varphi$, se 
+            \underline{não existe} um modelo para $\Gamma$ que não seja um modelo para $\varphi$.
+
+            \item Se $\emptyset \vDash_{\mathcal{L}} \varphi$, também denotado por $\vDash_{\mathcal{L}} \varphi$, nós dizemos 
+            que $\varphi$ é \textit{consequência lógica do vazio} ou que $\varphi$ é \textit{válida}.
+
+        \end{itemize}
+
+    \subsection{Formas Normais}
+
+        \begin{itemize}[left=0.5cm, align=left, nosep]
+            
+            \item Estendemos o conjunto de símbolos lógicos da $\mathcal{L_P}$ acrescentando:
+            \begin{enumerate}[start=4, left=0.5cm, align=left, nosep]
+                \item $\{\top, \bot\}$.
+            \end{enumerate}
+            
+            \item Os elementos do conjunto $\{\top, \bot\}$ são chamados de \textit{constantes lógicas} ou \textit{conectivos 
+            nulários}.
+            \item Estendemos o conjunto de fórmulas bem-formadas da linguagem proposicional, acrescentando:
+            \begin{enumerate}[start=4, left=0.5cm, align=left, nosep]
+                \item Se $\varphi \in \{\top, \bot\}$, então $\varphi \in \text{FBF}_{\mathcal{L_P}}$.
+            \end{enumerate}
+
+            \item Estendemos a definição de valoração booleana para fórmulas bem-formadas da lógica proposicional com os seguintes 
+            itens:
+            \begin{enumerate}[start=7, left=0.5cm, align=left, nosep]
+                \item $v(\top) = V$;
+                \item $v(\bot) = F$.
+            \end{enumerate}
+
+            \item Um \textit{literal} é um \underline{símbolo proposicional} ou sua \underline{negação}.
+            \item Uma \textit{cláusula} é uma \underline{disjunção de literais}.
+        
+            \item Seja $\varphi \in \text{FBF}_{\mathcal{L_P}}$. Nós dizemos que $\varphi$ está na \textit{Forma Normal Negada} 
+            (FNN) se contém \underline{apenas} os conectivos $\neg, \vee, \wedge$ e o conectivo de negação é aplicado apenas a 
+            símbolos proposicionais.
+
+            \item A transformação na FNN é dada pelo seguinte procedimento:
+            \begin{enumerate}[left=0.5cm, align=left, nosep]
+                \item Substitua toda subfórmula na forma $(\psi \leftrightarrow \chi)$ por $((\psi \rightarrow \chi) \wedge 
+                (\chi \rightarrow \psi))$;
+                \item Substitua toda subfórmula na forma $(\psi \rightarrow \chi)$ por $(\neg\psi \vee \chi)$;
+                \item Aplique as leis de De Morgan, isto é, substitua toda subfórmula na forma $\neg(\psi \wedge \chi)$ por 
+                $(\neg\psi \vee \neg\chi)$ e substitua toda subfórmula na forma $\neg(\psi \vee \chi)$ por $(\neg\psi \wedge \neg\chi)$;
+                \item Elimine duplas negações, ou seja, substitua toda subfórmula na forma $\neg\neg\psi$ por $\psi$.
+            \end{enumerate}
+
+            \item A simplificação de fórmulas aplica as seguintes regras de reescrita:
+            \begin{enumerate}[left=0.5cm, align=left, nosep]
+                \item Substitua toda subfórmula na forma $(\psi \vee \psi)$ por $\psi$;
+                \item Substitua toda subfórmula na forma $(\psi \wedge \psi)$ por $\psi$;
+                \item Substitua toda subfórmula na forma $(\psi \vee \neg\psi)$ por $\top$;
+                \item Substitua toda subfórmula na forma $(\psi \wedge \neg\psi)$ por $\bot$;
+                \item Substitua toda subfórmula na forma $(\psi \vee \top)$ por $\top$;
+                \item Substitua toda subfórmula na forma $(\psi \wedge \bot)$ por $\bot$;
+                \item Substitua toda subfórmula na forma $(\psi \vee \bot)$ por $\psi$;
+                \item Substitua toda subfórmula na forma $(\psi \wedge \top)$ por $\psi$.
+            \end{enumerate}
+
+            \item Seja $\varphi \in \text{FBF}_{\mathcal{L_P}}$. Nós dizemos que $\varphi$ está na \textit{Forma Normal Conjuntiva} 
+            (FNC) se é uma \underline{conjunção de cláusulas}.
+
+            \item A transformação de uma fórmula $\varphi$ em uma fórmula semanticamente equivalente, $\varphi'$, na 
+            \textit{Forma Normal Conjuntiva}, é dada pelo seguinte procedimento:
+            \begin{enumerate}[left=0.5cm, align=left, nosep]
+                \item Transforme $\varphi$ na FNN;
+                \item Aplique as leis de distribuição até que a fórmula esteja na FNC:
+            \end{enumerate}
+
+                \hspace{2cm} $\varphi \vee (\psi \wedge \chi) \leftrightarrow (\varphi \vee \psi) \wedge (\varphi \vee \chi)$
+
+                \hspace{2cm} $\varphi \wedge (\psi \vee \chi) \leftrightarrow (\varphi \wedge \psi) \vee (\varphi \wedge \chi)$
+            
+            \item Seja $\varphi \in \text{FBF}_{\mathcal{L_P}}$. Nós dizemos que $\varphi$ está na \textit{Forma Normal Disjuntiva}
+            (FND) se é uma \underline{disjunção de conjunções de literais}.
+
+            \item A transformação de uma fórmula $\varphi$ em uma fórmula semanticamente equivalente, $\varphi'$, na 
+            \textit{Forma Normal Disjuntiva}, é dada pelo seguinte procedimento:
+            \begin{enumerate}[left=0.5cm, align=left, nosep]
+                \item Transforme $\varphi$ na FNN;
+                \item Aplique as leis de distribuição até que a fórmula esteja na FND:
+            \end{enumerate}
+
+            \hspace{2cm} $\varphi \vee (\psi \wedge \chi) \leftrightarrow (\varphi \vee \psi) \wedge (\varphi \vee \chi)$
+
+            \hspace{2cm} $\varphi \wedge (\psi \vee \chi) \leftrightarrow (\varphi \wedge \psi) \vee (\varphi \wedge \chi)$ 
+
+        \end{itemize}
+
+    \subsection{Exercícios}
+        \begin{enumerate}[label=\arabic*., left=0.5cm, align=left, nosep]
+            \item Escrever as seguintes sentenças na linguagem da Lógica Proposicional ($\mathcal{L}_p$):
+
+                \begin{enumerate}[label=(\alph*), left=0.5cm, align=left, nosep]
+                    
+                    \item Se o sol brilhar hoje, não brilhará amanhã.
+                    \begin{center}
+                        $p$ : o sol brilhar hoje \\
+                        $q$ : brilhará amanhã \\
+                        $p \rightarrow \neg q$     
+                    \end{center}
+                    
+                    \item Se o barômetro cair, ou irá chover ou irá nevar (mas não ambos).
+                    \begin{center}
+                        $p$ : o barômetro cair \\
+                        $q$ : irá chover \\
+                        $r$ : irá nevar \\
+                        $p \rightarrow (q \lor r) \land \neg(q \land r)$
+                    \end{center}
+
+                    \textbf{Observação :} $(q \lor r) \land \neg(q \land r)$ = $\oplus$ - Ou Exclusivo.
+                    
+                    \item Se a taxa de juros aumenta, o preço das ações cai.
+                    \begin{center}
+                        $p$ : a taxa de juros aumenta \\
+                        $q$ : o preço das ações cai \\
+                        $p \rightarrow q$ 
+                    \end{center}    
+                    
+                    \item Minha irmã quer um gato preto e branco.
+                    \begin{center}
+                        $p$ : Minha irmã quer um gato preto \\
+                        $q$ : Minha irmã quer um gato branco \\
+                        $p \land q$
+                    \end{center}
+
+                \end{enumerate}    
+                
+            \item Escrever as seguintes sentenças na linguagem da Lógica Proposicional ($\mathcal{L}_p$):
+                
+                    \begin{center}
+                        \begin{tabular}{|c|l|}
+                            \hline
+                            $p$ & João joga tênis \\
+                            \hline
+                            $q$ & Chove \\
+                            \hline
+                            $r$ & João vê televisão \\
+                            \hline
+                            $s$ & João dorme cedo \\
+                            \hline
+                            $t$ & João vai ao cinema \\
+                            \hline
+                        \end{tabular}
+                    \end{center}
+
+                \begin{enumerate}[label=(\alph*), left=0.5cm, align=left, nosep]
+                    \item João jogará tênis se não chover: $\neg q \rightarrow p$.
+                    \item Se chover, João não jogará tênis nem irá ao cinema: $q \rightarrow (\neg p \land \neg t)$.
+                    \item João vê televisão ou dorme cedo, quando chove: $q \rightarrow (r \lor s)$.  
+                    \item Não é o caso de João dormir cedo: $\neg s$.                
+                \end{enumerate} 
+            
+            \item Reescreva as fórmulas proposicionais reintroduzindo os parênteses nos lugares adequados, 
+                \underline{ordem de precedência} entre os operadores: $\neg, \land, \lor, \rightarrow, \leftrightarrow$ :
+
+                \begin{enumerate}[label=(\alph*), left=0.5cm, align=left, nosep]
+                    \item $\neg p \land q \rightarrow r$ : $(\neg p \land q) \rightarrow r$ 
+                    \item $(p \rightarrow q) \land \neg (r \lor p \rightarrow q)$ : $(p \rightarrow q) \land (\neg ((r \lor p) \rightarrow q))$.
+                    \item $p \lor q \leftrightarrow \neg p \land r$ : $(p \lor q) \leftrightarrow (\neg p \land r)$
+                \end{enumerate}    
+                
+            \item Quais das seguintes fórmulas não pertencem à linguagem da Lógica Proposicional? Justifique suas respostas de acordo com a definição de fórmula bem-formada.
+
+                \begin{enumerate}[label=(\alph*), left=0.5cm, align=left, nosep]
+                    \item $(p \leftrightarrow ((p \leftrightarrow q)))$ \\
+                    Não pertence pois falta um operador binário após a $\mathrm{FBF}_{\mathcal{L}_p}$ $(p \leftrightarrow q)$ . 
+                    \item $p \rightarrow \neg q \land r$ \\
+                    Não pertence pois o não existe o símbolo proposicional $p \rightarrow$
+                    \item $(\neg (\neg p \land \neg q))$ \\
+                    Não pertence pois após os parênteses esperava-se encontrar uma $\mathrm{FBF}_{\mathcal{L}_p}$ seguido 
+                    por um operador binário seguido por uma $\mathrm{FBF}_{\mathcal{L}_p}$ o que não ocorre.
+                    \item $(\neg s \rightarrow (\neg t \leftrightarrow (u \land (v \lor w))))$ \\
+                    Pertence pois a expressão cumpre todos os requisitos da definição. 
+        
+                \end{enumerate} 
+            
+            \item Liste todas as suas subfórmulas:
+                \begin{enumerate}[label=(\alph*), left=0.5cm, align=left, nosep]
+                    \item $p$
+        
+                    Subfórmulas: $\{p\}$
+                    
+                    \item $p \land q$
+                    
+                    Subfórmulas: $\{p \land q,\ p,\ q\}$
+
+                    \item $p \land (\neg q \rightarrow \neg p)$
+                    
+                    Subfórmulas: \\ $\{p \land (\neg q \rightarrow \neg p),\ p,\ \neg q \rightarrow \neg p,\ \neg q,\ q,\ \neg p\}$        
+
+                    \item $\neg ((\neg q \land (p \rightarrow r)) \land (r \rightarrow q))$
+                    
+                    Subfórmulas:\\
+                    $\{ \neg ((\neg q \land (p \rightarrow r)) \land (r \rightarrow q)),\ (\neg q \land (p \rightarrow r)) \land (r \rightarrow q),\ \neg q \land (p \rightarrow r),\ r \rightarrow q, \ \neg q,\ q,\ p \rightarrow r,\ p,\ r \}$
+                    
+                    \item $(s \lor (\neg p \rightarrow \neg p))$
+                    
+                    Subfórmulas: $\{s \lor (\neg p \rightarrow \neg p),\ s,\, \neg p \rightarrow \neg p,\ \neg p,\ p\}$
+
+                    \item $(p \rightarrow q) \land (\neg r \rightarrow (q \lor (\neg p \land r)))$
+                    
+                    Subfórmulas:\\
+                    $\{(p \rightarrow q) \land (\neg r \rightarrow (q \lor (\neg p \land r))),\ p \rightarrow q,\ p,\, q,\, \neg r \rightarrow (q \lor (\neg p \land r)),\, \neg r,\, r,\, q \lor (\neg p \land r),\, \neg p \land r,\, \neg p\}$
+
+                    \item $(s \rightarrow r \lor t) \lor (\neg q \land r) \rightarrow (\neg (p \rightarrow s) \rightarrow r)$
+                    
+                    Subfórmulas:\\
+                    $\{
+                    ((s \rightarrow (r \lor t)) \lor (\neg q \land r)) \rightarrow (\neg (p \rightarrow s) \rightarrow r),
+                    \ (s \rightarrow (r \lor t)) \lor (\neg q \land r),
+                    \ s \rightarrow (r \lor t),
+                    \ s,
+                    \ r \lor t,
+                    \ r,
+                    \ t,
+                    \ \neg q \land r,
+                    \ \neg q,
+                    \ q,
+                    \ r,
+                    \ \neg (p \rightarrow s) \rightarrow r,
+                    \ \neg (p \rightarrow s),
+                    \ p \rightarrow s,
+                    \ p \}$
+
+                \end{enumerate} 
+
+            \item Obtenha a(s) subfórmula(s) imediata(s) de cada uma das fórmulas bem-formadas abaixo:
+                \begin{enumerate}[label=(\alph*), left=0.5cm, align=left, nosep]
+                    \item $p$ - Não possui subfórmulas imediatas (fórmula atômica).
+                    \item $p \land q$ - Subfórmulas imediatas: $\{ p,q \}$
+                    \item $p \land \neg q \rightarrow \neg p$ - Subfórmulas imediatas: $\{ p \land \neg q, \neg p \}$
+                    \item $\neg ((\neg q \land (p \rightarrow r)) \land (r \rightarrow q))$ - Subfórmula imediata: $ \{ (\neg q 
+                    \land (p \rightarrow r)) \land (r \rightarrow q) \}$
+                    \item $(s \lor (\neg p \rightarrow \neg p))$ - Subfórmulas imediatas: $\{ s, \neg p \rightarrow \neg p \}$
+                    \item $(((s \rightarrow (r \lor t)) \lor (\neg q \land r)) \rightarrow ((\neg (p \rightarrow s)) \rightarrow 
+                    r))$ - Subfórmulas imediatas: $ \{ ((s \rightarrow (r \lor t)) \lor (\neg q \land r)), ((\neg (p \rightarrow 
+                    s)) \rightarrow r) \}$ 
+                    \item $(p \rightarrow q) \land (\neg r \rightarrow (q \lor (\neg p \land r)))$ - Subfórmulas imediatas: $ \{ p 
+                    \rightarrow q, \neg r \rightarrow (q \lor (\neg p \land r)) \}$
+                \end{enumerate} 
+
+            \item Dadas as seguintes fórmulas bem-formadas, desenhe as respectivas árvores sintáticas:
+                \begin{enumerate}[label=(\alph*), left=0.5cm, align=left, nosep]
+                    \item $p$
+        
+                        \begin{forest}
+                            for tree={draw, circle, minimum size=6mm, inner sep=1pt}
+                            [$p$]
+                        \end{forest}
+
+                    \item $p \land (\neg q \rightarrow \neg p)$
+                        
+                        \begin{forest}
+                            for tree={draw, circle, minimum size=6mm, inner sep=1pt}
+                            [$\land$
+                                [$p$]
+                                [$\rightarrow$
+                                    [$\neg$
+                                        [$q$]
+                                    ]
+                                    [$\neg$
+                                        [$p$]
+                                    ]
+                                ]
+                            ]
+                        \end{forest}
+                        
+                    \vspace{0.5cm}
+                    \item $\neg ((\neg q \land (p \rightarrow r)) \land (r \rightarrow q))$
+                        
+                        \begin{forest}
+                            for tree={draw, circle, minimum size=6mm, inner sep=1pt}
+                            [$\neg$
+                                [$\land$
+                                    [$\land$
+                                        [$\neg$
+                                            [$q$]
+                                        ]
+                                        [$\rightarrow$
+                                            [$p$]
+                                            [$r$]
+                                        ]
+                                    ]
+                                    [$\rightarrow$
+                                        [$r$]
+                                        [$q$]
+                                    ]
+                                ]
+                            ]
+                        \end{forest}
+                        
+                    \item $(p \rightarrow q) \land (\neg r \rightarrow (q \lor (\neg p \land r)))$
+                    
+                        \begin{forest}
+                            for tree={draw, circle, minimum size=6mm, inner sep=1pt}
+                            [$\land$
+                                [$\rightarrow$
+                                    [$p$]
+                                    [$q$]
+                                ]
+                                [$\rightarrow$
+                                    [$\neg$
+                                        [$r$]
+                                    ]
+                                    [$\lor$
+                                        [$q$]
+                                        [$\land$
+                                            [$\neg$
+                                                [$p$]
+                                            ]
+                                            [$r$]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        \end{forest}
+                
+                \end{enumerate} 
+
+            \vspace{0.5cm}
+            \item Encontre a fórmula bem-formada que é representada pela árvore sintática abaixo:
+    
+                \begin{center}
+                    \begin{forest}
+                    for tree={draw, circle, minimum size=6mm, inner sep=1pt}
+                        [$\neg$
+                        [$\rightarrow$
+                            [$\neg$
+                            [$\vee$
+                                [$p$]
+                                [$\land$
+                                [$q$]
+                                [$\neg$
+                                    [$p$]
+                                ]
+                                ]
+                            ]
+                            ]
+                            [$r$]
+                        ]
+                        ]
+                    \end{forest}
+                \end{center}
+
+                \hspace{5cm} $\varphi = \lnot \big( (\lnot (p \lor (q \land \lnot p))) \to r \big)$
+            
+            \vspace{0.5cm}
+            \item Verifique os status semântico (tautologia, contradição, contingência) das seguintes fórmulas:
+                \begin{enumerate}[label=(\alph*), left=0.5cm, align=left, nosep]
+                    \item$(p \to q) \to p$
+                        
+                        Contingência pois a fórmula é satisfatível tomando $v(p) = V$ temos que $v((p \to q) \to p) = V$, independentemente 
+                        da valoração de $q$, e falsificável tomando $v(p) = F$ temos que $v((p \to q)) = V$, logo $v((p \to q) \to p) = F$, 
+                        independentemente da valoração de $q$.
+
+                    \item $p \to (q \to p)$
+                        
+                        Tautologia pois para $v(p) = F$ temos $v(p \to (q \to p)) = V$ para qualquer valoração de $q$, além disso para
+                        $v(p) = V$ temos que $v(q \to p) = V$, logo $v(p \to (q \to p)) = V$ para qualquer valoração de $q$. Assim,
+                        todos os modelos são uma interpretação para essa fórmula.
+
+                    \item $(p \to q) \to (p \land \neg q)$
+                    
+                        Contingência pois a fórmula é satisfatível para $v(p) = V$ e $v(q) = F$ já que $v((p \to q)) = F$, logo
+                        $(p \to q) \to (p \land \neg q) = V$. E insatisfatível para o restante das interpretações pois para 
+                        $v(p) = F$ temos que $v(p \to q) = V$, logo $v((p \to q) \to (p \land \neg q) = F$ para qualquer valoração 
+                        de $q$, e para $v(p) = V$ e $v(q) = V$ temos que $v(p \to q) = V$ e $v(p \land \neg q) = F$, logo 
+                        $v((p \to q) \to (p \land \neg q) = F$. 
+                  
+                \end{enumerate}
+        
+            \item Verifique se os seguintes conjuntos são consistentes ou não:
+                \begin{enumerate}[label=(\alph*), left=0.5cm, align=left, nosep]
+                    \item $\{p, q, p \to q\}$
+
+                        É consistente. Existe uma e única interpretação que satisfaz todas as fórmulas do conjunto.
+                        Esse modelo seria $v(p) = V$ e $v(q) = V$ pois caso contrário $p,q \in \Gamma$ não seriam satisfeitos.
+                        Além disso, pela definição do conectivo $\to$, se $v(p) = V$ e $v(q) = V$, então $v(p \to q) = V$.                                 
+
+                        \vspace{0.5cm}
+                    \item $\{p, p \to q, \neg q\}$
+                    
+                        Não é consistente pois não existe uma interpretação que satisfaça todas as fórmulas do conjunto. Isso 
+                        acontece pois $v(p) = V$ e $v(q) = F$, necessariamente, pois caso contrário $p,q \in \Gamma$ não seriam 
+                        satisfeitos, logo, pela definição do conectivo $\to$, se $v(p) = V$ e $v(q) = F$, então $v(p \to q) = F$.
+                
+                    \end{enumerate}
+            
+            \item Mostrar que as seguintes fórmulas são semanticamente equivalentes:
+                \begin{enumerate}[label=(\alph*), left=0.5cm, align=left, nosep]
+                    \item $p \to q$, $\neg q \to \neg p$ (Contrapositiva)
+
+                        Para $p \to q$ tem-se que o único modelo possível é $v(p) = F$ ou $v(q) = V$, pela definição de $\to$.
+                        De forma análoga, para $\neg q \to \neg p$ tem-se que o único modelo possível é $v(\neg q) = F$ ou 
+                        $v(\neg p) = V$, ou seja, $v(q) = V$ ou $v(p) = F$. Portanto, como todo modelo de para $p \to q$ 
+                        também é um modelo para $\neg q \to \neg p$ e vice-versa, as fórmulas são semanticamente equivalentes.
+                
+                \end{enumerate}
+        
+            \item Demonstrar as seguintes equivalências semânticas (onde $\varphi, \psi, \chi \in \mathrm{FBF}_{\mathcal{L}_p}$):
+                \begin{enumerate}[label=(\alph*), left=0.5cm, align=left, nosep]
+                    \item $(\varphi \land \psi) \land \chi \Lpbimodels \varphi \land (\psi \land \chi)$
+
+                    Para $(\varphi \land \psi)$ $\land \chi$ o único modelo possível é $v(\varphi) = V$, $v(\psi) = V$ e $v(\chi) 
+                    = V$, pela definição de $\land$. De forma análoga, para $\varphi \land (\psi \land \chi)$ o único modelo possível
+                    é $v(\varphi) = V$, $v(\psi) = V$ e $v(\chi) = V$. Portanto, como todo modelo de para $(\varphi \land \psi) \land
+                    \chi$ também é um modelo para $\varphi \land (\psi \land \chi)$, as fórmulas são semanticamente equivalentes.
+
+                    \item $\neg(\varphi \land \psi) \Lpbimodels (\neg \varphi \lor \neg \psi)$
+    
+                    Para $\neg(\varphi \land \psi)$ as interpretações possíveis são $v(\varphi) = F$ ou $v(\psi) = F$, pela definição
+                    de $\land$ e $\neg$. Além disso, para $(\neg \varphi \lor \neg \psi)$ as interpretações possíveis são $v(\varphi) 
+                    = F$ ou $v(\psi) = F$ pela definição de $\lor$ e $\neg$. Portanto, como todo modelo de para $\neg(\varphi \land
+                    \psi)$ também é um modelo para $(\neg \varphi \lor \neg \psi)$, as fórmulas são semanticamente equivalentes.
+
+                    \item $(\varphi \to \psi) \Lpbimodels (\neg \varphi \lor \psi)$
+                    
+                    Para $(\varphi \to \psi)$ as interpretações possíveis são $v(\varphi) = F$ ou $v(\psi) = V$, pela definição
+                    de $\to$. Além disso, para $(\neg \varphi \lor \psi)$ as interpretações possíveis são $v(\varphi) = F$ ou $v(\psi) 
+                    = V$ pela definição de $\lor$ e $\neg$. Portanto, como todo modelo de para $(\varphi \to \psi)$ também é um modelo
+                    para $(\neg \varphi \lor \psi)$, as fórmulas são semanticamente equivalentes.
+
+                    \item $\neg(\varphi \to \psi) \Lpbimodels (\varphi \land \neg \psi)$
+            
+                    Para $\neg(\varphi \to \psi)$ o único modelo possível é $v(\varphi) = V$ e $v(\psi) = F$, pela definição
+                    de $\to$ e $\neg$. Além disso, para $(\varphi \land \neg \psi)$ o único modelo possível é $v(\varphi) = V$ e
+                    $v(\psi) = F$ pela definição de $\land$ e $\neg$. Portanto, como todo modelo de para $\neg(\varphi \to \psi)$ 
+                    também é um modelo para $(\varphi \land \neg \psi)$, as fórmulas são semanticamente equivalentes.
+
+                    \item $\neg\neg \psi \Lpbimodels \psi$
+
+                    Para $\neg\neg \psi$ o único modelo possível é $v(\psi) = V$, pela definição de $\neg$. Além disso, para
+                    $\psi$ o único modelo possível é $v(\psi) = V$ pois caso contrário, $\psi \in \Gamma$ não seria satisfeita. 
+                    Portanto, como todo modelo de para $\neg\neg \psi$ também é um modelo para $\psi$, as fórmulas são 
+                    semanticamente equivalentes.
+
+                \end{enumerate}
+            
+            \vspace{0.5cm}
+            \item Mostre que $q$ é consequência lógica de $\{p \to q, p\}$.
+                
+                Nota-se que $v(p) = V$ é a única interpretação possível pois caso contrário $p \in \Gamma$ não seria satisfeito.
+                Daí, para $p \to q \in \Gamma$ ser satisfeito $v(q) = V$, obrigatoriamente, por causa da definição de $\to$. Além
+                disso, a conclusão $q$ tem dois modelos que a satisfazem $v(q) = V$, obrigatoriamente, e $v(p) = V$ ou $v(p) = F$
+                já que ela não depende do valor semântico de $p$. Portanto, todo modelo para $\{p \to q, p\}$ também é um modelo para 
+                $q$.
+            
+            \item Mostrar que os seguintes argumentos são corretos:
+                
+                Para mostrar que um argumento é correto é preciso que a conclusão seja 
+                consequência lógica das premissas( $\Gamma \models_{\mathcal{L}_p} \varphi$), 
+                ou seja, todo modelo para $\Gamma$ também é um modelo para $\varphi$
+                
+                \begin{enumerate}[label=(\alph*), left=0.5cm, align=left, nosep]
+                    \item \textit{Modus Ponens}  
+            
+                        Se chove, então a rua está molhada.\\              
+                        Chove. \\
+                        \rule{7cm}{0.4pt}\\
+                        A rua está molhada.
+                        
+                        Tome as premissas $p$ e $q$ como sendo chover e a rua estar molhada, respectivamente.
+                        Traduzindo a para a linguagem proposicional os argumetos e conclusão teríamos : $p \to q, p \; / q$.
+                        Ou seja, precisamos mostrar que $\{ p \to q, p \} \models_{\mathcal{L}_p}  q$. Para o conjunto temos que
+                        $v(p) = V$, necessariamente, pois caso contrário a condição $p \in \Gamma$ não seria satisfeita, e 
+                        $v(q) = V$, necessariamente, pois, pela definição, do conectivo $\to$ se $v(p) = V$, então $v(p \to q) = V$
+                        sse $v(q) = V$. Já para a conclusão temos que $v(q) = V$, necessariamente, pois caso contrário a condição 
+                        $q \in \Gamma$ não seria satisfeita, e $v(p) = V$ ou $v(q) = F$ pois o valor semântico de $p$ não é 
+                        relevante para a conclusão. Logo, o argumento é correto pois todos os modelos de $\{p \to q, p\}$ são modelos
+                        para $q$.
+
+                    \item \textit{Modus Tollens}  
+                        
+                        Se chove, então a rua está molhada. \\ 
+                        A rua não está molhada. \\ 
+                        \rule{7cm}{0.4pt}\\
+                        Não chove.
+                    
+                        Tome as premissas $p$ e $q$ como sendo chover e a rua estar molhada, respectivamente. Traduzindo a para a
+                        linguagem proposicional os argumetos e conclusão teríamos : $p \to q, \neg q \; / \neg p$. Ou seja, 
+                        precisamos mostrar que $\{ p \to q, \neg q \} \models_{\mathcal{L}_p} \neg p$. Para o conjunto temos que 
+                        $v(q) = F$, necessariamente, pois caso contrário a condição $q \in \Gamma$ não seria satisfeita, e 
+                        $v(p) = F$, necessariamente, pois, pela definição, do conectivo $\to$ se $v(p) = V$, então $v(p \to q) = V$ 
+                        não seria satisfeita. Já para a conclusão temos que $v(p) = F$, necessariamente, pois caso contrário 
+                        a condição $p \in \Gamma$ não seria satisfeita, e $v(q) = V$ ou $v(q) = F$ pois o valor semântico de $q$ não
+                        é relevante para a conclusão. Logo,o argumento é correto pois todos os modelos de $\{p \to q, \neg q\}$ são 
+                        modelos para $\neg p$.
+
+                    \item \textit{Eliminação da conjunção}  
+                        
+                        A maçã é azul e o céu é vermelho. \\  
+                        \rule{7cm}{0.4pt}\\
+                        O céu é vermelho.
+                        
+                        Tome as premissas $p$ e $q$ como sendo maça é azul e céu é vermelho, respectivamente.Traduzindo a para a 
+                        linguagem proposicional os argumetos e conclusão teríamos : $p \land q \; / q$. Ou seja, precisamos mostrar 
+                        que $\{ p \land q \} \models_{\mathcal{L}_p} q$. Para o conjunto temos que $v_0(p) = V$ e $v_0(q) = V$, 
+                        necessariamente, pois, pela definição do conectivo $\land$ se $v(p) = V$ e $v(q) = V$, então $v(p \land q) = 
+                        V$. Já para a conclusão temos que $v_1(q) = V$, necessariamente, pois caso contrário a condição $q \in 
+                        \Gamma$ não seria satisfeita, e $v_1(p) = V$ ou $v_1(q) = F$ pois o valor semântico de $p$ não é relevante 
+                        para a conclusão. Logo, o argumento é correto pois todos os modelos de $\{p \land q\}$ são modelos para $q$.
+
+                    \item \textit{Resolução}  
+                        
+                        Pedro comprou um livro de física ou um de matemática.\\  
+                        Pedro não comprou um livro de matemática ou foi ao cinema.\\ 
+                        \rule{7cm}{0.4pt}\\
+                        Pedro comprou um livro de física ou foi ao cinema.
+                        
+                        Tome as premissas $p,q$ e $r$ como sendo Pedro comprou um livro de física, Pedro comprou um livro de 
+                        matemática e Pedro foi ao cinema, respectivamente. Traduzindo a para a linguagem proposicional os argumetos 
+                        e conclusão teríamos : $ p \lor q, \neg q \lor r \; \ p \lor r$. Ou seja, precisamos mostrar que 
+                        $\{ p \lor q, \neg q \lor r \} \models_{\mathcal{L}_p} p \lor r$. Para o conjunto temos que os seguintes 
+                        modelos os satisfazem : $v_0(p) = V, v_0(q) = V, v_0(r) = V$; $v_1(p) = V, v_1(q) = F, v_1(r) = V$; $v_2(p)
+                        = V, v_2(q) = F, v_2(r) = F$ e $v_3(p) = F, v_3(q) = V, v_3(r) = V$. Já para a conclusão temos que os 
+                        seguintes modelos os satisfazem : $v_4(p) = V, v_4(r) =V $; $v_5(p) = V, v_5(r) = F$ e $v_6(p) = F, v_6(r) = 
+                        V$, o valor de $q$ é irrelevante pois a conclusão não depende dele. Logo, o argumento é correto pois todos 
+                        os modelos de $\{ p \lor q, \neg q \lor r \}$ são modelos para $p \lor r$.
+                        
+                    \item \textit{Caso especial de Resolução}  
+                        
+                        Pedro comprou um livro de física ou um de matemática.\\
+                        Pedro não comprou um livro de matemática.\\  
+                        \rule{7cm}{0.4pt}\\
+                        Pedro comprou um livro de física.
+                    
+                        Tome as premissas $p$ e $q$ como sendo pedro comprou um livro de física e pedro comprou um livro de matemática,
+                        respectivamente. Traduzindo a para a linguagem proposicional os argumetos e conclusão teríamos : $p \lor q, 
+                        \neg q \; / p$. Ou seja, precisamos mostrar que $\{ p \lor q, \neg q \} \models_{\mathcal{L}_p} p$. Para o 
+                        conjunto temos que $v(q) = F$, necessariamente, caso contrário $p \in \Gamma$ não seria satisfeito,e $v(p) = 
+                        V$, necessariamente, pois, pela definição do conectivo $\lor$ se $v(p) = F$, então $v(p \lor q) = V$ não 
+                        seria satisfeito. Já para a conclusão temos que $v(p) = V$, necessariamente, pois caso contrário a condição
+                        $p \in \Gamma$ não seria satisfeita, e $v(q) = V$ ou $v(q) = F$ pois o valor semântico de $q$ não é relevante
+                        para a conclusão. Logo, o argumento é correto pois todos os modelos de $\{p \lor q, \neg q\}$ são 
+                        modelos para $p$.
+                \end{enumerate} 
+            
+            \item Para cada uma das fórmulas abaixo, apresente as fórmulas equivalentes na FNN, FNC e FND:
+                \begin{enumerate}[label=(\alph*), left=0.5cm, align=left, nosep]
+
+                    \item $((p \to q) \to p) \to p$
+
+                        FNN :
+                        \vspace{-0.7em}
+                        \begin{flalign*}
+                        ((p \to q) \to p) \to p &&\\
+                        ((\neg p \lor q) \to p) \to p &&\\
+                        (\neg(\neg p \lor q) \lor p) \to p &&\\
+                        \neg(\neg(\neg p \lor q) \lor p) \lor p &&\\
+                        \neg((p \land \neg q) \lor p) \lor p &&\\
+                        ((\neg p \lor q) \land \neg p) \lor p &&\\
+                        \boxed{\top} &&
+                        \end{flalign*}
+
+                        FNC : \boxed{\top} \\
+                        FND : \boxed{\top} 
+
+                
+                    \item $p \lor \neg(q \land (r \to q))$
+
+                        FNN :
+                        \vspace{-0.7em}
+                        \begin{flalign*}
+                        p \lor \neg(q \land (r \to q)) &&\\
+                        p \lor \neg(q \land (\neg r \lor q)) &&\\
+                        p \lor (\neg q \lor \neg(\neg r \lor q)) &&\\
+                        \boxed{p \lor \neg q \lor (r \land \neg q)} &&
+                        \end{flalign*}
+
+                        FNC :
+                        \vspace{-0.7em}
+                        \begin{flalign*}
+                        p \lor \neg q \lor (r \land \neg q) &&\\
+                        (p \lor \neg q \lor r) \land (p \lor \neg q) &&\\
+                        \boxed{(p \lor \neg q \lor r) \land (p \lor \neg q)} &&
+                        \end{flalign*}
+
+                        FND : \boxed{p \lor \neg q \lor (r \land \neg q)}
+                    
+                    \item $(p \land q) \to (p \lor q)$
+
+                        FNN :
+                        \vspace{-0.7em}
+                        \begin{flalign*}
+                        (p \land q) \to (p \lor q) &&\\
+                        \neg(p \land q) \lor (p \lor q) &&\\
+                        (\neg p \lor \neg q \lor p \lor q) &&\\
+                        \top &&\\
+                        \boxed{\top} &&
+                        \end{flalign*}
+
+                        FNC : \boxed{\top} \\
+                        FND : \boxed{\top} 
+
+                
+                    \item $((p \to \neg q) \to \neg p) \to q$
+
+                        FNN :
+                            \vspace{-0.7em}
+                            \begin{flalign*}
+                            ((p \to \neg q) \to \neg p) \to q &&\\
+                            ((\neg p \lor \neg q) \to \neg p) \to q &&\\
+                            (\neg(\neg p \lor \neg q) \lor \neg p) \to q &&\\
+                            ((p \land q) \lor \neg p) \to q &&\\
+                            \neg((p \land q) \lor \neg p) \lor q &&\\
+                            ((\neg p \lor \neg q) \land p) \lor q &&\\
+                            \boxed{((\neg p \lor \neg q) \land p) \lor q} &&
+                            \end{flalign*}
+
+                        FNC :
+                            \vspace{-0.7em}
+                            \begin{flalign*}
+                            ((\neg p \lor \neg q) \land p) \lor q &&\\
+                            (p \lor q) \land (\neg p \lor \neg q \lor q) &&\\
+                            (p \lor q) \land \top &&\\
+                            \boxed{p \lor q} &&
+                            \end{flalign*}
+
+                        FND : \boxed{p \lor q}
+
+                \end{enumerate}
+
+        \end{enumerate}          

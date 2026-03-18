@@ -1,0 +1,203 @@
+\section{Lógica de Primeira-Ordem}
+    
+    % \mathcal{L}_p \revmodels \models
+    % \rule{7cm}{0.4pt}\\
+
+    \subsection{Introdução}
+
+        \begin{itemize}[left=0.5cm, align=left, nosep]
+            \item Extensão da Linguagem Proposicional ($\mathcal{L}_{p}$) 
+            \item $\mathcal{L}_{p}$ é um fragmento da LPO
+            \item $\mathcal{L}_{p}$ não expressa adequadamente relações entre indivíduos
+            \item Permite descrever propriedades de objetos e relações entre eles
+        \end{itemize}
+
+        \textbf{Exemplos :}
+        \begin{enumerate}[left=0.5cm, align=left, nosep]
+            \item Todo homem é mortal \\
+                Sócrates é homem \\ 
+                \rule{4.5cm}{0.4pt} \\
+                Sócrates é mortal
+            \item Todas as pessoas têm um progenitor
+            \item Alguns progenitores têm mais de um filho
+            \item Minha sogra tem netos
+            \item Toda tia tem sobrinha ou sobrinho
+        \end{enumerate} 
+
+        \subsubsection*{Constantes e Funções}
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item Usamos constantes e funções para referenciar ou construir indivíduos únicos.
+                \item Constantes são símbolos funcionais com \underline{zero} argumentos.
+                \item Funções são operadores que, a partir de um ou mais argumentos, retornam um único indivíduo.
+            \end{itemize}
+
+            \textbf{Exemplos :}
+            \begin{enumerate}[left=0.5cm, align=left, nosep]
+                \item $c$ = Sócrates 
+                \item $m(x)$ = $x$ é mãe 
+                \item $f(x,y)$ = $x$ é filho de $y$ 
+            \end{enumerate}
+
+        \subsubsection*{Relações}
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item Relações (ou predicados) representam propriedades e associações entre indivíduos.
+                \item Uma relação $P^n$ tem \underline{aridade $n$}, isto é, atua sobre $n$ objetos.
+            \end{itemize}
+    
+            \textbf{Exemplos :}
+            $P^1 =$ \dots ser homem, $Q^2 =$ \dots amar \dots, $R^3 =$ \dots estar entre \dots e \dots
+    
+            \begin{enumerate}[left=0.5cm, align=left, nosep]
+                \item $P^1(c) =$ Sócrates é homem
+                \item $Q^2(a,b) =$ Romeu ama Julieta 
+                \item $R^3(c_1,c_2,c_3) =$ São Paulo está entre Rio de Janeiro e Curitiba
+            \end{enumerate} 
+
+        \subsubsection*{Quantificadores e Variáveis}
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item $\forall$ : \textit{quantificador universal} — “para todo”
+                \item $\exists$ : \textit{quantificador existencial} — “existe pelo menos um”
+                \item Variáveis são marcadores que representam indivíduos genéricos.
+            \end{itemize}
+
+            \textbf{Exemplos :}
+            \begin{enumerate}[left=0.5cm, align=left, nosep]
+                \item $H(x)$ = “$x$ é homem”, $M(x)$ = “$x$ é mortal”                
+                    
+                    \hspace{2cm} $\forall x ( H(x) \rightarrow  M(x) )$
+            
+                \item
+                \item
+                
+            
+                mover mais para a direita e colocar exemplos do caderno 
+            
+            
+            \end{enumerate}
+    
+    \subsection{Sintaxe}
+        \textbf{Definição.} O \textit{conjunto de símbolos lógicos} da Linguagem de Primeira-Ordem é dado pela 
+        união dos seguintes conjuntos : 
+            \begin{enumerate}[left=0.5cm, align=left, nosep]
+                \item $\mathcal{P}$ = $\{ P^{n_P},Q^{n_Q},R^{n_R},\dots,P_1^{n_{P_1}},Q_1^{n_{Q_1}},R_1^{n_{R_1}},\dots \}$;
+                \item $\mathcal{F}$ = $\{ f^{n_f},g^{n_g},h^{n_h},\dots,f_1^{n_{f_1}},g_1^{n_{g_1}},h_1^{n_{h_1}},\dots \}$;
+                \item $\mathcal{C}$ = $\{a,b,c,\dots,a_1,b_1,c_1,\dots\}$;
+                \item $\mathcal{V}$ = $\{x,y,z,\dots,x_1,y_1,z_1,\dots\}$;
+                \item $\{ \forall,\exists \}$;  
+                \item $\{ \neg,\land,\lor,\rightarrow,\leftrightarrow \}$;  
+                \item $($ e $)$.   
+            \end{enumerate}
+
+        \textbf{Definição.} Os elementos do conjunto $\mathcal{P}$ são chamados de \textit{símbolos predicativos} 
+        
+        \textbf{Definição.} Os elementos do conjunto $\mathcal{F}$ são chamados de \textit{símbolos funcionais} 
+        
+        \textbf{Definição.} Os elementos do conjunto $\mathcal{C}$ são chamados de \textit{constantes} 
+        
+        \textbf{Definição.} Os elementos do conjunto $\mathcal{V}$ são chamados de \textit{variáveis} 
+        
+        \textbf{Definição.} Os elementos do conjunto $\{ \forall,\exists \}$ são \textit{operadores} ou \textit{conectivos} unários chamados de 
+        \textit{quantificadores}.O \textit{quantificador universal} é denotado por $\forall$ e o \textit{quantificador existencial} é denotado por $\exists$ 
+        
+        \textbf{Definição.} A \textit{aridade} de um símbolo predicativo ou de um símbolo funcional é o número fixo de seus argumentos. A aridade de um símbolo predicativo ou funcional é indicado pelo \underline{índice superior}.
+        
+        \textbf{Observação.} Símbolos predicativos e funcionais têm número fixo de argumentos (aridade). 
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item Símbolos predicativos de \underline{aridade zero} referem-se a preposições;
+                \item Símbolos funcionais de \underline{aridade zero} referem-se a indivíduos.
+            \end{itemize}
+        
+        \textbf{Definição.} O conjunto de termos $\mathcal{T}$ da Linguagem de Primeira-Ordem é definido indutivamente:
+            \begin{enumerate}[left=0.5cm, align=left, nosep]
+                \item Se $t \in \mathcal{V} \cup \mathcal{C}$, então $t \in \mathcal{T}$;
+                \item Se $f^n \in \mathcal{F}$ e $t_1,\dots,t_n \in \mathcal{T}$, então $f(t_1,\dots,t_n) \in \mathcal{T}$
+            \end{enumerate}
+
+        \textbf{Definição.} A Linguagem de Primeira-Ordem, denotada por $\mathcal{L}_{PO}$, é dada pelo conjunto de suas 
+        fórmulas bem-formadas, denotado por $\text{FBF}_{\mathcal{L}_{PO}}$, o qual é obtido indutivamente por:
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item $P^n(t_1,\dots,t_n) \in \text{FBF}_{\mathcal{L}_{PO}}, \text{ onde } P^n \in \mathcal{P}, \text{ para } t_i \in \mathcal{T}, 0 \leq i \leq n, n \in \mathbb{N} $;
+                \item Se $\varphi,\psi \in \text{FBF}_{\mathcal{L}_{PO}} \text{ e } x \in \mathcal{V}, \text{ então } \neg \varphi ,(\varphi \land \psi),(\varphi \lor \psi),(\varphi \rightarrow \psi),(\varphi \leftrightarrow \psi), \forall x \varphi , \exists x \varphi \in \text{FBF}_{\mathcal{L}_{PO}}$   
+            \end{itemize}
+        
+        \textbf{Observação.} Parênteses podem ser omitidos, se a leitura não for ambígua. A precedência dos operadores é dada por: $\neg, \land, \lor, \rightarrow, \leftrightarrow$. 
+  
+        \textbf{Definição.} Uma \textit{árvore sintática} para $\varphi$, onde $\varphi \in \text{FBF}_{\mathcal{L}_{PO}}$, é constituída de uma raiz com zero ou mais filhos, dependendo da \textit{estrutura} (ou seja, da forma) de $\varphi$:
+        
+        \begin{enumerate}[left=0.5cm, align=left, nosep]
+            \item se $t$ é um termo da forma $u^0$, então a árvore sintática tem raiz rotulada por $u^0$ e tem zero filhos;
+            
+            \item se $t$ é um termo da forma $u^n(t_1, \ldots, t_n)$, $n > 0$, então a raiz é rotulada por $u^n$ e tem $n$ filhos, que são as raízes das árvores sintáticas para cada um dos termos $t_1, \ldots, t_n$;
+            
+            \item se $\varphi$ é da forma $P^n(t_1, \ldots, t_n)$, então a raiz é rotulada por $P^n$ e tem $n$ filhos, que são raízes das árvores sintáticas para cada um dos termos $t_1, \ldots, t_n$;
+            
+            \item se $\varphi$ é da forma $*\psi$, onde $* \in \{\neg, \forall x, \exists x\}$, para algum $x \in \mathcal{V}$, então a raiz é rotulada por $*$ e tem um único filho, que é a raiz da árvore sintática de $\psi$;
+            
+            \item se $\varphi$ é da forma $(\psi * \chi)$, onde $* \in \{\land, \lor, \rightarrow, \leftrightarrow\}$, então a raiz é rotulada por $*$ e tem dois filhos, onde o da esquerda é a raiz da árvore sintática de $\psi$ e o da direita é a raiz da árvore sintática de $\chi$.
+        \end{enumerate}
+
+        \textbf{Definição.} Sejam $x \in \mathcal{V}$ e $\varphi \in \text{FBF}_{\mathcal{L}_{PO}}$. O \textit{escopo} de $\forall x$ (ou $\exists x$) na fórmula $\forall x \psi$ (ou $\exists x \psi$) é $\varphi$, exceto por subfórmulas de $\varphi$ na forma $\forall x \psi$ ou $\exists x \psi$. 
+        
+        \textbf{Definição.} Sejam $x \in \mathcal{V}$ e $\varphi \in \text{FBF}_{\mathcal{L}_{PO}}$. A ocorrência de uma variável $x$ em uma fórmula bem-formada $\forall x \varphi$ ou $\exists x \varphi$ é \textit{ligada} se $x$ ocorrer em $\varphi$. 
+        
+        \textbf{Definição.} Sejam $x \in \mathcal{V}$ e $\varphi \in \text{FBF}_{\mathcal{L}_{PO}}$. A ocorrência de uma variável $x$ em uma fórmula $\varphi$ é \textit{livre} se esta ocorrência de $x$ não for ligada em qualquer subfórmula de $\varphi$. 
+        
+        \textbf{Definição.} Uma \textit{sentença} é uma fórmula \underline{sem variáveis livres}. 
+        
+        \textbf{Definição.} Sejam $t \in \mathcal{T}$, $x \in \mathcal{V}$ e $\varphi \in \text{FBF}_{\mathcal{L}_{PO}}$. Nós denotamos por $\varphi[t/x]$ o resultado da substituição de todas as ocorrências livres de $x$ em $\varphi$ por $t$. 
+        
+        \textbf{Definição.} Sejam $t \in \mathcal{T}$, $x \in \mathcal{V}$ e $\varphi \in \text{FBF}_{\mathcal{L}_{PO}}$. Nós dizemos que $t$ é livre para a variável $x$ na fórmula $\varphi$ se as variáveis em $t$ não se tornarem ligadas em $\varphi[t/x]$  
+
+        \subsubsection*{Exemplos}
+            exemplos do caderno e de alguns exercicios da lista
+    
+    \subsection{Semântica}
+        
+        \textbf{Definição.} Uma \textit{interpretação} $\mathcal{M}$ para o par $(\mathcal{P}, \mathcal{F})$ consiste de:
+        \begin{itemize}[left=0.5cm, align=left, nosep]
+            \item um conjunto não-vazio $\mathcal{A}$ (\textit{universo});
+            \item uma função $f^M : \mathcal{A}^n \to \mathcal{A}$, para cada símbolo funcional $f^n \in \mathcal{F}$;
+            \item um subconjunto $P^M \subseteq \mathcal{A}^n$, para cada símbolo predicativo $P^n \in \mathcal{P}$.
+        \end{itemize}
+
+        \textbf{Definição.} A \textit{função de avaliação} $v$ para uma interpretação $\mathcal{M} = (\mathcal{A}, \{f^M\}_{f \in \mathcal{F}}, \{P^M\}_{P \in \mathcal{P}})$ para $(\mathcal{P}, \mathcal{F})$ é o mapeamento de variáveis a valores do universo $v : \mathcal{V} \rightarrow \mathcal{A}$.
+
+        \textbf{Definição.} O valor de um termo $t$ em uma interpretação $\mathcal{M}$ é relativo à função de avaliação $v$ e é definido indutivamente:
+        \[
+            t^{M,v} =
+            \begin{cases}
+                v(t), & \text{se } t \in \mathcal{V} \\
+                f^{M,v}(t_1^{M,v}, \ldots, t_n^{M,v}), & \text{se } t = f(t_1, \ldots, t_n)
+            \end{cases}
+        \]
+
+        \textbf{Definição.} Sejam $\mathcal{M} = (\mathcal{A}, \{f^M\}_{f \in \mathcal{F}}, \{P^M\}_{P \in \mathcal{P}})$ uma interpretação para $(\mathcal{P}, \mathcal{F})$, $v$ uma 
+        função de avaliação, $x \in \mathcal{V}$ e $\varphi, \psi \in \text{FBF}_{\mathcal{L}_{PO}}$:
+        \begin{enumerate}[left=0.5cm, align=left, nosep]
+            \item $\mathcal{M} \models_v P(t_1, \ldots, t_n)$ se, e somente se, $(t_1^{M,v}, \ldots, t_n^{M,v}) \in P^M$;
+            \item $\mathcal{M} \models_v \neg \varphi$ se, e somente se, $\mathcal{M} \not\models_v \varphi$;
+            \item $\mathcal{M} \models_v \varphi \land \psi$ se, e somente se, $\mathcal{M} \models_v \varphi$ e $\mathcal{M} \models_v \psi$;
+            \item $\mathcal{M} \models_v \varphi \lor \psi$ se, e somente se, $\mathcal{M} \models_v \varphi$ ou $\mathcal{M} \models_v \psi$ ou ambos;
+            \item $\mathcal{M} \models_v \varphi \rightarrow \psi$ se, e somente se, $\mathcal{M} \models_v \neg \varphi \lor \psi$;
+            \item $\mathcal{M} \models_v \forall x \varphi$ se, e somente se, $\mathcal{M} \models_v \varphi[a/x]$ \underline{para todo} $a \in \mathcal{A}$;
+            \item $\mathcal{M} \models_v \exists x \varphi$ se, e somente se, $\mathcal{M} \models_v \varphi[a/x]$ \underline{para algum} $a \in \mathcal{A}$.
+        \end{enumerate}
+
+        \textbf{Lema.} Seja $\mathcal{M}$ uma interpretação. Se $\varphi$ é uma sentença, então:
+        \[
+            \mathcal{M} \models_v \varphi \iff \mathcal{M} \models_{v'} \varphi
+        \]
+        para todas as funções de avaliação $v$ e $v'$.
+
+        \textbf{Definição.} Uma fórmula $\varphi$ é \textit{satisfatível} se existir uma interpretação $\mathcal{M}$ e função de 
+        avaliação $v$ tal que $\mathcal{M} \models_v \varphi$. Neste caso, dizemos que $\mathcal{M}_v$ \textit{satisfaz} $\varphi$ ou que $\mathcal{M}_v$ 
+        é um \textit{modelo} para $\varphi$.
+
+        \textbf{Definição.} Uma sentença $\varphi$ é \textit{satisfatível} se existir uma interpretação $\mathcal{M}$ tal que 
+        $\mathcal{M} \models \varphi$. Neste caso, dizemos que $\mathcal{M}$ \textit{satisfaz} $\varphi$ ou é um \textit{modelo} para $\varphi$.
+
+        \textbf{Observação.} Satisfatibilidade,tautologia,contradição,contingência,equivalência semântica,
+        consequência de conjuntos, consequência lógica e validade já foram definidos.
+
+        \subsubsection*{Exemplos}
+        
