@@ -12,5 +12,5 @@ seguranca-computacional/
 ├── 📄 README.md
 ├── 📄 notas-de-estudo-01.pdf
 ├── 📄 notas-de-estudo-02.pdf
-├── 📄 notas-de-estudo-03.pdf
+└── 📄 notas-de-estudo-03.pdf
 ```
