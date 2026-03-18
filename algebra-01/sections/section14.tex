@@ -1,0 +1,152 @@
+\section{Homomorfismo}
+
+Consideremos inicialmente a categoria dos anéis associativos comutativos unitários.
+Seus objetos são os tais anéis. Entre quaisquer dois tais anéis $A$ e $B$,
+consideramos a coleção $\mathrm{Hom}(A,B)$ consistindo em todas as funções
+$f : A \to B$, chamadas \underline{homomorfismos} de $A$ em $B$, tais que
+\begin{center}
+$f(x+y) = f(x) + f(y)$, \\
+$f(xy) = f(x)f(y)$, e\\
+$f(1) = 1$.
+\end{center} 
+
+Para quaisquer tais anéis $A$, $B$ e $C$, notemos duas propriedades fundamentais:
+
+(C1) a composição de funções define uma operação binária associativa
+\[
+\mathrm{Hom}(A,B) \times \mathrm{Hom}(B,C) \to \mathrm{Hom}(A,C), (f,g) \mapsto gf;
+\]
+
+(C2) a aplicação identidade $\mathrm{id}_B \colon B \to B$, $x \mapsto x$,
+é um homomorfismo que satisfaz $\mathrm{id}_B \circ f = f$ e $g \circ \mathrm{id}_B = g$
+para quaisquer $f \in \mathrm{Hom}(A,B)$ e $g \in \mathrm{Hom}(B,C)$.
+
+\begin{definicao}
+Dizemos que dois tais anéis $A$ e $B$ são \underline{isomorfos} se existem
+$f \in \mathrm{Hom}(A,B)$ e $g \in \mathrm{Hom}(B,A)$ tais que $gf = \mathrm{id}_A$
+e $fg = \mathrm{id}_B$.
+\end{definicao}
+
+Por simplicidade, passaremos à categoria dos grupos para demonstrarmos
+uma versão multiplicativa mais vigorosa da Proposição 13.2 sobre isomorfismos.
+Por definição, um homomorfismo $f : X \to Y$ entre grupos multiplicativos $X$ e $Y$ deve satisfazer
+$f(xx') = f(x)f(x')$ para quaisquer $x, x' \in X$.
+
+Fixemos primeiramente as notações de imagem direta e imagem inversa.
+Se $f : G \to Z$ é uma função qualquer e $G' \subseteq G$ e
+$Z' \subseteq Z$ são subconjuntos de $G$ e $Z$, respectivamente, escrevemos
+\[
+f(G') = \{f(x) : x \in G'\}
+\quad \text{e} \quad
+f^{-1}(Z') = \{x \in G : f(x) \in Z'\}.
+\]
+
+Quando $f$ é um homomorfismo entre grupos $G$ e $Z$, dizemos que $f(G)$
+é a imagem de $f$ e que $f^{-1}(\{e\})$ é o \underline{núcleo} de $f$.
+Se $G''$ é também um subconjunto de $G$, denotamos o subconjunto
+$\{g'g'' : g' \in G', g'' \in G'' \}$ por $G'G''$.
+
+\begin{proposicao}
+Seja $f : G \to Z$ um homomorfismo entre grupos. Sejam $K$ o núcleo de $f$,
+$G'$ um subgrupo de $G$ e $Z'$ um subgrupo de $Z$. Valem:
+\end{proposicao}
+
+\begin{enumerate}[label=(\alph*), left=0.5cm, align=left, nosep]
+    \item Os subconjuntos $f(G')$ e $f^{-1}(Z')$ são subgrupos de $Z$ e $G$,
+    respectivamente.
+
+    \item Se $Z'$ está contido em $f(G)$, então a restrição
+    $G \to f(G)$ de $f$ induz uma bijeção entre os conjuntos quocientes
+    $G/f^{-1}(Z')$ e $f(G)/Z'$.
+
+    \item O subgrupo $K$ é normal em $G$ e os subgrupos
+    $f^{-1}(f(G'))$, $KG'$ e $G'K$ coincidem.
+
+    \item Se $N$ é um subgrupo normal de $G'$ que contém $K$, então $f$ induz
+    um isomorfismo entre os grupos $G'/N$ e $f(G')/f(N)$.
+\end{enumerate}
+
+\begin{proof}
+Deixamos as primeiras três afirmações de (a) e (c) como um exercício trivial. Agora, $x \in f^{-1}(f(G'))$ 
+se, e somente se, $f(x) = f(y)$ para algum $y \in G'$, e isto equivale a $xy^{-1} = k$ para algum $k \in K$.
+Obtemos $f^{-1}(f(G')) = G'K$ de modo semelhante. \\
+(b) Como $f(a) \in Z'$ se, e somente se, $a \in f^{-1}(Z')$, a função induzida
+$f_* : G/f^{-1}(Z') \to f(G)/Z'$ (como definida na Proposição 13.1) é injetiva. Sendo a dada restrição sobrejetiva,
+$f_*$ também o é. \\
+(d) Como no argumento do item (b), vemos que a injetividade de $f_* : G'/N \to f(G')/f(N)$ decorre de $f^{-1}(f(N)) = N$, 
+pelo item (c). A propriedade de $f_*$ respeitar as operações multiplicativas é herdada de $f$.    
+\end{proof}
+
+Por exemplo, se $N$ é um subgrupo normal de um grupo $G$ e $H$ é um subgrupo qualquer de $G$, então a composição 
+$H \to HN \to HN/N$ da aplicação inclusão com a projeção canônica induz um isomorfismo $H/(H \cap N) \to HN/N$. 
+De fato, basta aplicarmos o Teorema do Isomorfismo (ou a sua generalização no item (d) da Proposição 14.2), já que 
+$N$ é um subgrupo normal do grupo $HN$ e a composição $h \mapsto (h \bmod N)$, é um homomorfismo sobrejetivo com núcleo $H \cap N$.
+
+Finalmente, voltemos aos anéis. A imagem inversa de cada ideal por um homomorfismo qualquer também é um ideal. Agora, 
+por exemplo, seja $f$ o único elemento em $\mathrm{Hom}(\mathbb{Z}, B)$. (1) Se $B = \mathbb{Q}$, sendo este um corpo, 
+ele possui exatamente dois ideais. Então a imagem do ideal $m\mathbb{Z}$ de $\mathbb{Z}$ em $\mathbb{Q}$ só é um ideal 
+de $\mathbb{Q}$ se $m = 0$; entretanto, é evidente que $f(m\mathbb{Z})$ é um ideal da imagem $f(\mathbb{Z})$ para qualquer $m$.
+(2) Se $B = \mathbb{Z}[i]$ e $J = (2+i)\mathbb{Z}[i]$ é o ideal de $B$ gerado por $2+i$, então $f^{-1}(J)$ é o ideal 
+$5\mathbb{Z}$ de $\mathbb{Z}$ e o ideal de $B$ gerado por $f(f^{-1}(J))$ é $5\mathbb{Z}[i]$, o qual está contido propriamente em $J$.
+
+\begin{exemplo}[Subgrupos Normais e Homomorfismos]
+\leavevmode
+    \begin{enumerate}[left=0.5cm, align=left, nosep]
+        \item Dê exemplos de subgrupos normais e relacione-os com homomorfismos.
+        
+        Recordemos que um subgrupo $H$ de um grupo $G$ é normal se ele satisfaz uma das seguintes condições equivalentes:
+        \begin{enumerate}[label=(N\arabic*), left=0.5cm, align=left, nosep]
+            \item $ghg^{-1} \in H$ para quaisquer $g \in G$ e $h \in H$;
+            \item $ghg^{-1} = H$ para qualquer $g \in G$;
+            \item $H$ é o núcleo de um homomorfismo
+        \end{enumerate}
+
+        Verifiquemos as equivalências entre essas condições. Que (N2) implica (N1) é imediato, reciprocamente,
+        $H = g(g^{-1}Hg)g^{-1} \subseteq gHg^{-1} \subseteq H$. Agora, se $H$ é o núcleo de um homomorfismo, então ele 
+        satisfaz (N1), pois $f(ghg^{-1}) = f(g)$ e $f(g)^{-1} = e$. Reciprocamente, se $N$ é um subgrupo normal de $G$, 
+        então o núcleo da aplicação canônica $G \to G/H$. Evidentemente, os subgrupos $\{e\}$ e $G$ são normais em $G$.  
+        Se $G$ for comutativo, cada subgrupo de $G$ é normal.
+
+        Agora, seja $G$ o grupo $\mathrm{Perm}(X)$, em que $X = \{1,2,3\}$.
+        Seja $H$ o subgrupo de $G$ gerado pela permutação
+        $\sigma =
+        \begin{pmatrix}
+        1 & 2 & 3 \\
+        2 & 3 & 1
+        \end{pmatrix},
+        $ de ordem $3$. Verifiquemos que $H$ é um subgrupo normal de $G$ de três modos diferentes.
+
+        (1) O homomorfismo $C_g : G \to G, x \mapsto gxg^{-1}$ é bijetivo, pois $C_g \cdot C_{g^{-1}} = \mathrm{id} = C_{g^{-1}} 
+        \cdot C_g$. Como $H$ consiste nos elementos de $G$ que possuem ordem que divide $3$, $C_g(H) \subseteq H$ para cada 
+        $g \in G$. \\
+        (2) Notemos que as classes laterais à esquerda de $H$ em $G$ são $H$ e $\tau H$ em que 
+        $\tau =
+        \begin{pmatrix}
+        1 & 2 & 3 \\
+        2 & 1 & 3
+        \end{pmatrix}$. Enquanto isso, as classes laterais à direita são $H$ e $H\tau$.
+        Então, $\tau H = H \tau$, ou seja, $\tau H \tau^{-1} = H$. \\
+        Sempre que $H$ é um subgrupo com exatamente duas classes laterais, ele é um subgrupo normal.
+
+        (3) Seja $K$ o núcleo do homomorfismo $G \to \mathrm{Perm}(G/H)$, $g \mapsto f(g)$, em que a permutação $f(g): G/H \to G/H$ 
+        é dada por $xh \mapsto gxh$. Em geral, podemos descrever $K$ como a interseção dos subgrupos $xHx^{-1}$, com $x \in G$.
+        De $K \subseteq H \neq G$ e, pela proposição 13.2, temos as desigualdades $1 < |G/H| \leq |G/K| \leq 2$, existem apenas 
+        3 subgrupos normais, logo $K = H$.
+        Por fim, como $\mathrm{Perm}(\{1,2,3\})$ é pequeno, não é difícil verificar diretamente que ele possui 
+        exatamente $6$ subgrupos.
+
+        Por outro lado, $\mathrm{Perm}(\{1,2,3\})$ é isomorfo a $\mathrm{SL}_2(\mathbb{Z}/2\mathbb{Z})$, (isto é, existe um
+        isomorfismo $\sigma \mapsto \begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix}$ e $\tau \mapsto \begin{pmatrix} 0 & 1 \\ 
+        1 & 0 \end{pmatrix}$). Ocorre que, para cada primo $p$, o grupo $G = \mathrm{SL}_2(\mathbb{Z}/p\mathbb{Z})$
+        possui o elemento $\begin{pmatrix} -1 & 0 \\ 0 & -1 \end{pmatrix}$, o qual contém todos os elementos de $G$. Daí, o 
+        subgrupo $N$ gerado por ele é normal em $G$. Um fato bem conhecido é que, se $p > 2$, então o grupo $G/N$ é simples,
+        no sentido de que possui exatamente dois subgrupos normais.
+
+        \item A segunda asserção implica a primeira. Agora, se $z \in \mathbb{C}$, então $z = a + bi$, com $a,b \in \mathbb{R}$ 
+        e $i^2 = -1$. Notemos por outro lado, se $f \in A$, então, pela divisão euclidiana, temos que  $f = (X^2 + 1)q + r$,
+        com $r = a + bX, \; a,b \in \mathbb{R}$. Donde $(f \bmod I) = (a \bmod I) + (b \bmod I)(X \bmod I)$, com $(X \bmod I)^2 = -1$.
+        Consideremos $\psi : \mathbb{C} \to A/I$, $\psi(a+bi) = (a \bmod I) + (b \bmod I)(X \bmod I)$.Vemos que $\psi$ é um 
+        homomorfismo de anéis associativos, comutativos e unitários, com núcleo nulo, isto é $\psi$ é um isomorfismo.
+    
+    \end{enumerate}
+\end{exemplo}

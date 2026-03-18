@@ -1,0 +1,139 @@
+\section{Inteiros Gaussianos}
+
+Recordemos o conceito de um número complexo; este é um número da forma
+$x + iy$, onde $x$ e $y$ são números reais, e satisfaz $i^2 = -1$, e as
+regras para a adição e a multiplicação são as usuais:
+\[
+(x + iy) + (x' + iy') = (x + x') + i(y + y'),
+\]
+\[
+(x + iy)(x' + iy') = (xx' - yy') + i(yx' + xy').
+\]
+
+Provida desta adição e multiplicação, o conjunto $\mathbb{C}$ dos números
+complexos torna-se um anel associativo, comutativo, e unitário com
+$1 = 1 + i0$. Se $a = x + iy$, escrevemos $\bar{a} = x - iy$ e chamamos
+$\bar{a}$ de o \underline{conjugado} complexo de $a$; o conjugado complexo de
+$\bar{a}$ é $a$. A aplicação $a \mapsto \bar{a}$ é uma aplicação bijetiva
+de $\mathbb{C}$ sobre si mesmo que preserva as operações de adição e
+multiplicação; logo, ela é um automorfismo de $\mathbb{C}$, isto é, um
+isomorfismo de $\mathbb{C}$ em $\mathbb{C}$.
+
+Escrevemos $N(a) = a\bar{a}$ e chamamos $N(a)$ de \underline{norma} de $a$. Pela
+regra da multiplicação, se $a = x + iy$ então $N(a) = x^2 + y^2$; pela
+comutatividade da multiplicação temos $N(ab) = N(a)N(b)$. A norma de $a$
+é $0$ se, e somente se, $a = 0$; caso contrário ela é um número real
+$> 0$. Consequentemente, para cada $a = x + iy \neq 0$, consideramos
+\[
+a' = N(a)^{-1}\bar{a}
+     = \frac{x}{N(a)} - i\frac{y}{N(a)},
+\]
+e então $aa' = 1$ e, para cada $b$, $a(a'b) = b$; reciprocamente, se
+$az = b$, então $z = a'b$, donde, pela associatividade, obtemos
+$z = a'b$. Isso mostra que $\mathbb{C}$ é um corpo.
+De maneira usual, fazemos corresponder o número complexo
+$a = x + iy$ ao ponto $(x,y)$ no plano euclidiano; sua distância da
+``origem'' $0$ é então $|a| = \sqrt{x^2 + y^2} = \sqrt{N(a)}$;
+isto é também chamado de ``valor absoluto'' de $a$.
+
+Para nossos propósitos, vamos considerar, em vez de $\mathbb{C}$, o
+subconjunto $\mathbb{Z}[i]$ de $\mathbb{C}$ consistindo nos números
+complexos $x + iy$ onde $x$ e $y$ pertencem a $\mathbb{Z}$, isto é,
+$x$ e $y$ são inteiros ordinários. Pode ser imediatamente verificado
+que $\mathbb{Z}[i]$ é um anel associativo, comutativo, e unitário com
+$1 = 1 + i0$; ele é chamado \emph{anel Gaussiano}, e seus elementos são
+chamados \underline{inteiros Gaussianos}. A bijeção
+$a \mapsto \bar{a}$ preserva as operações desse anel. Se $a$ é um inteiro
+Gaussiano qualquer, então $N(a) = a\bar{a}$ é um inteiro $\ge 0$.
+Ocasionalmente também consideramos os números $x + iy$ com $x$ e $y$
+pertencentes a $\mathbb{Q}$, i.e., $x$ e $y$ são números racionais; como
+anteriormente, podemos ver que eles formam um corpo (o ``corpo
+Gaussiano'').
+
+Se $a, b$ e $c$ são inteiros Gaussianos e $b = ac$, dizemos que $b$ é um
+múltiplo de $a$, e que $a$ divide $b$, ou que $a$ é um divisor de $b$.
+Quando isso ocorre, $N(a)$ divide $N(b)$. Cada inteiro Gaussiano divide
+a sua norma.
+
+Um divisor de $1$ é chamado \underline{invertível}. Se $a = x + iy$ é um
+invertível, então $N(a)$ deve dividir $1$ e portanto deve ser igual a
+$1$; como $x$ e $y$ são inteiros isso resulta em um deles ser igual a
+$\pm 1$ e o outro igual a $0$. Portanto, os inteiros Gaussianos
+invertíveis são $\pm 1$ e $\pm i$.
+
+Dois inteiros Gaussianos não-nulos $a$ e $b$ dividem um ao outro se, e
+somente se, diferem apenas por um fator invertível (i.e., $a = ub$ com
+$u = \pm 1$ ou $u = \pm i$); neste caso eles são chamados
+\underline{associados}. Dentre os quatro associados de um dado inteiro
+Gaussiano $b$, existe um apenas um, digamos $a = x + iy$, satisfazendo
+$x > 0$ e $y \ge 0$; este será chamado de \underline{normalizado}. Por exemplo,
+dentre os associados $\pm 1 \pm i$ de $1 + i$, vemos que $1 + i$ e
+nenhum outro é normalizado. Geometricamente, os pontos no plano
+correspondentes aos associados são obtidos a partir de $b$ por uma
+rotação em torno de $0$ por um ângulo $\frac{n\pi}{2}$ com $n = 0, 1, 2$
+ou $3$. O normalizado é aquele que está no semieixo real positivo ou no
+``primeiro quadrante''.
+
+Dizemos que um inteiro Gaussiano de norma $> 1$ é um \underline{primo
+Gaussiano} se seus divisores são exatamente os seus associados e os
+invertíveis. Isso é o mesmo que dizer que $q$ é um \emph{primo Gaussiano} se ele não é $0$, não é
+invertível, e não possui divisor cuja norma $> 1$ e $< N(q)$.
+Inteiros ordinários que são primos no sentido usual (da Aula 4) serão
+denominados \emph{primos racionais} (ou ``primos ordinários'').
+Se $q$ é um inteiro Gaussiano e $N(q)$ é um primo racional, então $q$ é
+um primo Gaussiano; a recíproca, porém, não é verdadeira (e.g.,
+$N(3) = 9$). Os associados de um primo Gaussiano também são primos
+Gaussianos e, como vimos, existe apenas um que é normalizado. Se $q$ é
+um primo Gaussiano qualquer, então $\bar{q}$ também o é. Se $a$ é um
+inteiro Gaussiano não nulo nem invertível, então cada divisor seu de
+menor norma $> 1$ deve ser um primo Gaussiano.
+
+Gauss, quem introduziu os inteiros Gaussianos em Teoria dos Números,
+descobriu que eles têm propriedades algébricas e aritméticas muito
+semelhantes às dos inteiros ordinários. Provaremos isso com os mesmos
+métodos das Aulas 3 e 4 (e 6).
+
+Começamos com um lema fundamental, análogo aos das Aulas 3 e 6.
+
+\begin{lema}[Divisão Euclidiana]
+Se $a$ e $b$ são inteiros Gaussianos com $b \neq 0$, então existe um
+múltiplo $bq$ de $b$ tal que
+\[
+N(a - bq) \le \frac{1}{2} N(b).
+\]  
+\end{lema}
+
+\begin{proof}
+Para cada número real $t$, existe um maior inteiro $m \le t$ tal que
+$m \le t < m + 1$; por um inteiro $m'$ mais próximo de $t$ entendemos
+$m$ ou $m + 1$ de acordo com quando $t - m \le m + 1 - t$ ou não; temos
+então $|t - m'| \le \frac{1}{2}$. Agora, seja $z = x + iy$ um número
+complexo qualquer; sejam $m$ um inteiro mais próximo de $x$ e $n$ um
+inteiro mais próximo de $y$, e tomemos $q = m + in$. Então, $q$ é um
+inteiro Gaussiano e obtemos
+\[
+N(z - q) = (x - m)^2 + (y - n)^2 \le \frac{1}{2}.
+\]
+Apliquemos isso para $z = \frac{a}{b}$ quando $a$ e $b$ são inteiros Gaussianos
+no lema. O inteiro Gaussiano $q$ possui a propriedade desejada.    
+\end{proof}
+
+Exemplos:
+
+\begin{enumerate}
+\item[(1)] Se $a = 11 + 10i$ e $b = 4 + i$, então
+\[
+\frac{a}{b} = \frac{a\bar{b}}{N(b)}
+= \frac{(11 + 10i)(4 - i)}{17}
+= \frac{54 + 29i}{17},
+\]
+e logo $x = \frac{54}{17} \approx 3{,}17$ e $y = \frac{29}{17} \approx 1{,}71$;
+tomando $q = 3 + 2i$, chegamos em $a - bq = 1 - i$ e $N(a - bq) \le \frac{1}{2} N(b)$.
+
+\item[(2)] Para $a = 3i$ e $b = 1 + i$ no Lema, temos $4$ possíveis $q$ e
+vemos que a desigualdade não pode ser aprimorada e ainda ser válida em geral.
+\end{enumerate}
+
+\textbf{Questão 7.2} (“Fossas Gaussianas”).
+Existe uma sequência infinita de primos Gaussianos distintos tal que haja uma
+limitação para as diferenças entre os números consecutivos da sequência?

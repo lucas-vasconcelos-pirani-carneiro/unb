@@ -1,0 +1,102 @@
+\vspace{1cm}
+
+\section{Equações Diofantinas}
+
+Sejam $a,b, \text{e } c \in \mathbb{Z}$. A equação : $aX + bY = c$
+
+\begin{enumerate}[label=\roman*., left=0.5cm, align=left, nosep]
+    \item Possui \underline{uma} solução \textbf{inteira} se, e somente se, \underline{$d$ divide $c$}, neste caso, temos \underline{infinitas} 
+    tais soluções 
+    \item Além disso, se $ ax_0 + by_0 = c $ com $x_0,y_0 \in \mathbb{Z}$, então \underline{todas} as soluções são dadas por : 
+\end{enumerate}
+\[
+x = x_0 + \frac{b}{d} \cdot t , \text{com } t \in \mathbb{Z} \quad \text{e} \quad y = y_0 - \frac{a}{d} \cdot t , \text{com } t \in \mathbb{Z}
+\]
+
+\begin{proof}
+
+    Se $ax_0 + by_0 = c$, então $d \mid c$. Reciprocamente, se $c \mid d$, então $c = d \cdot e$.
+    Como existem inteiros $v$ e $s$ tais que $av + bs = d$, temos:
+
+    \[
+    a \cdot \Big(x_0 + \frac{b}{d} \cdot t\Big) + b \cdot \Big(y_0 - \frac{a}{d} \cdot t\Big) 
+    = ax_0 + by_0 = c, \quad \forall t \in \mathbb{Z}.
+    \]
+
+    Além disso, se $ax + by = c$, então
+    \[
+    a \cdot \Big(x_0 + \tfrac{b}{d} \cdot t\Big) = b \cdot \Big(y_0 - \tfrac{a}{d} \cdot t\Big) \tag{1}
+    \]
+
+    Daí,
+    \[
+    \frac{b}{d} \mid \frac{a}{d}(x-x_0).
+    \]
+
+    Como $mdc\!\left(\tfrac{a}{d}, \tfrac{b}{d}\right) = 1$, existe $t \in \mathbb{Z}$ tal que
+    \[
+    \boxed{x = x_0 + \tfrac{b}{d}t} \tag{2}
+    \]
+
+    Substituindo (2) em (1), obtemos:
+    \[
+    \boxed{y = y_0 - \tfrac{a}{d}t}.
+    \]
+\end{proof}
+
+Exemplos:
+
+\begin{enumerate}[left=0.5cm, align=left, nosep]
+
+\item 9X + 12Y = 1
+
+    Nota-se que $(9,12) = 3$ que \textbf{não} divide 1, logo a equação não possui solução em $\mathbb{Z}$. 
+
+\item 28X + 90Y = 22
+
+    Note que,
+    \begin{minipage}[t]{0.45\linewidth}
+        \begin{align*}
+                90 &= (3)\cdot 28 + 6 \\
+                28 &= (4)\cdot 6 + 4 \\
+                6  &= (1)\cdot 4 + 2 \\
+                4  &= (2)\cdot 2 + 0
+        \end{align*}
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.45\linewidth}
+        \begin{align*}
+            2  &= 6 + (-1)\cdot 4 \\
+            2  &= (-1)\cdot 28 + (5)\cdot 6 \\
+            2  &= (-16)\cdot 28 + (5)\cdot 90
+        \end{align*}
+    \end{minipage}
+
+    Dando 
+    \[
+        (28,90) = 2 = (-16)\cdot 28 + (5)\cdot 90
+    \]
+
+    Assim, 
+    \[
+        (-16 \cdot 11)\cdot 28 + (5 \cdot 11)\cdot 90 = 22
+    \]
+
+    Portanto, todas as soluções da equação são:
+    \[
+        x = -176 + 45t, \quad y = 55 - 14t, \quad t \in \mathbb{Z}.
+    \]
+
+\item 12X + 25Y = 1
+
+    Pela divisão euclidiana temos : 
+    
+    $25 = (2)12 + + 1$ ,Ou Seja
+    
+    $1 = 25(1) + (-2)12$
+    
+    Assim, as soluções da equação são : 
+    \[
+        x = -2 + 25t, \quad y = 1 - 12t, \quad t \in \mathbb{Z}.
+    \]
+
+\end{enumerate}

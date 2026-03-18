@@ -1,0 +1,117 @@
+\vspace{1.5cm}
+\section{Congruência Módulo m}
+
+\begin{definicao}
+Um conjunto $G$ juntamente com uma operação binária $*: G \times G \to G$ é um grupo se as seguintes
+condições são satisfeitas:
+    \begin{enumerate}[label=\textbf{G\arabic*.}, left=0.5cm, align=left, nosep]
+        \item (associatividade) $x * (y * z) = (x * y) * z$ para quaisquer $x,y \text{ e } z$
+        em $G$;
+        \item existe um elemento $e$ em $G$, chamado elemento identidade, tal que $e * x = x$ 
+        para cada $x$ em $G$;
+        \item para quaisquer $x$ e $y$ em $G$, a equação $z * x = y$ possui uma única solução
+        em $G$ (escrita $z = y * x^{-1}$).
+    \end{enumerate}      
+    Se além disso, tal grupo também satisfaz a condição 
+    \begin{enumerate}[label=\textbf{G4.}, left=0.5cm, align=left, nosep]
+        \item (comutatividade) $x * y = y * x$ para quaisquer $x$ e $y$ em $G$,  
+    \end{enumerate}    
+    dizemos que ele é um grupo comutativo (ou abelinos)
+\end{definicao}
+
+Por exemplo, com a operação adição, o conjunto $\mathbb{Z}$ (respectivamente, $\mathbb{Q}, \mathbb{R}$ e 
+$\mathbb{C}$) é um grupo comutativo. Com a operação multiplicação, $\mathbb{Q} - \{0\}$ (respectivamente, o 
+conjunto de todas $p^n$-ésimas raízes complexas da unidade, onde $p$ é um primo e $n$ percorre os inteiros positivos)
+é um grupo comutativo. Se a operação de um grupo é escrita como uma adição (respectivamente, multiplicação) é comum
+usarmos a notação 0 (respectivamente, 1), em vez de de $e$ em \textbf{G2}, e $z = y - x$ (respectivamente, $z = y x^{-1}$)
+em \textbf{G3}.
+
+Um subconjunto $H$ de $G$ que se torna um grupo ao restringirmos a $H$ a operação de $G$ é chamado \underline{subgrupo} de $G$.
+Um subconjunto não-vazio de $G$ é um subgrupo se, e somente se, ele é fechado em relação às operações $(x,y) \mapsto x * y$ e 
+$x \mapsto x^{-1}$ em $G$. No caso aditivo, isso se resume ao fechamento para a subtração (\emph{cf.} demosntração da Proposição 3.2).
+A Proposição 3.2 pode ser concisamente enunciada ao escrevermos que \emph{cada subgrupo de $\mathbb{Z}$ é da forma $m\mathbb{Z}$, 
+com $m \ge 0$.}
+
+A próxima proposição nos dará exemplos mais básicos de grupos finitos.
+
+\begin{definicao}
+Se $m,x$ e $y$ são inteiros e $m > 0$, dizemos que $x$ e $y$ são \textbf{congruentes módulo $m$} se $x - y$ for um 
+múltiplo de $m$; neste caso, escrevos $x \equiv y\ (\text{mod } m)$
+\end{definicao}
+
+Por exemplo, $35 \equiv 1 \ (\text{mod } 2), 35 \equiv 3 \ (\text{mod } 32), 35 \equiv 35 \ (\text{mod } 1024); 10 \equiv -1 \ (\text{mod } 11),$
+$20 \equiv -2 \ (\text{mod } 11), 100 \equiv 1 \ (\text{mod } 1);$ e ,
+$n^3 - n \equiv 0 \ (\text{mod } 0)$ para cada $n$ em $\mathbb{Z}$ (pois $n^3 - n = (n - 1) n (n + 1)$).
+
+A divisão euclidiana (Lema 3.1) mostra que cada inteiro é congruente módulo $m$ a um e apenas um dos inteiros $0,1,2, \ldots ,m -1$,
+e que dois inteiros são congruentes módulo $m$ se, e somente se, eles têm o mesmo resto na divisão por $m$.
+
+A relação de congruência módulo $m$ possui as seguintes propriedades:
+
+\begin{enumerate}[label=(P\arabic*), left=0.5cm, align=left, nosep]
+    \item (reflexividade) $x \equiv x \ (\text{mod } m);$
+    \item (simetria) se $x \equiv y \ (\text{mod } m)$, então $y \equiv x \ (\text{mod } m);$
+    \item (transitividade) se $x \equiv y \ (\text{mod } m)$ e $y \equiv z \ (\text{mod } m)$, então
+    $x \equiv z \ (\text{mod } m);$
+    \item se $x \equiv x' \ (\text{mod } m)$ e $y \equiv y' \ (\text{mod } m)$, então
+    $x + y\equiv x' + y' \ (\text{mod } m)$ e $x - y \equiv x' - y' \ (\text{mod } m)$
+    \item se $x \equiv x' \ (\text{mod } m)$ e $y \equiv y' \ (\text{mod } m)$, então 
+    $xy \equiv x'y' \ (\text{mod } m)$
+    \item se $d > 0$ divide $m, x$ e $y$, então $x \equiv y \ (\text{mod } m)$ se, e somente se,
+    $\frac{x}{d} \equiv \frac{y}{d} \ (\text{mod } \frac{m}{d})$  
+\end{enumerate} 
+
+A propriedade (P5) é consequência da identidade
+\[
+    xy - x'y' = x(y - y') + (x - x')y'
+\]
+A verificação das outras propriedades é imediata.
+
+As propriedades (P1), (P2) e (P3) são expressas ao dizermos que a relação de congruência módulo $m$ é uma 
+\emph{relação de equivalência} sobre inteiros.
+
+\begin{definicao}
+Uma \underline{classe de congruência} de inteiros módulo $m$ é o conjunto formado por todos os inteiros que são
+congruentes a um dado inteiro módulo $m$. Se $x$ for um inteiro qualquer, denotamos a classe de congruência dos 
+inteiros congruentes a $x$ módulo $m$ por $(x \text{ mod } m)$. O conjunto de todas as clases de congruência de inteiros
+módulo $m$ é denotado por $\mathbb{Z}/m\mathbb{Z}$
+\end{definicao}
+
+Por exemplo, para $m = 2$, vemos que $(0 \text{ mod } 2)$ é o conjunto dos números pares e $(1 \text{ mod } 2)$ é o 
+conjunto dos números ímpares, e $\mathbb{Z}/2\mathbb{Z} = \{ (0 \text{ mod } 2), (1 \text{ mod } 2) \}$. Para $m = 5$,
+fazemos uma ilustração
+
+\[
+\begin{array}{ccc}
+    & \textbf{(0 mod 5)} & \\[6pt]
+    & \ldots,\,-10,\,-5,\,0,\,5,\,10,\,\ldots & \\[12pt]
+
+\textbf{(4 mod 5)} &  & \textbf{(1 mod 5)} \\[6pt]
+\ldots,\,-1,\,4,\,9,\,\ldots &  & \ldots,\,-4,\,1,\,6,\,11,\,\ldots \\[12pt]
+
+\textbf{(3 mod 5)} &  & \textbf{(2 mod 5)} \\[6pt]
+\ldots,\,-2,\,3,\,8,\,\ldots &  & \ldots,\,-8,\,-3,\,2,\,7,\,12,\,\ldots
+\end{array}
+\]
+
+Por (P1), $x$ pertence à classe $(x \text{ mod } m)$; ele é chamado de um \emph{representante} da classe $(x \text{ mod } m)$.
+De (P1),(P2) e (P3) segue-se que quaisquer duas classes $(x \text{ mod } m)$ e $(y \text{ mod } m)$ coincidem se $x \equiv y \ (\text{mod } m)$
+e são disjuntas caso contrário. Assim, o conjunto $\mathbb{Z}$ é particionado em $m$ classes disjuntas $(0 \text{ mod } m), (1 \text{ mod } m),
+\ldots (m - 1 \text{ mod } m)$ 
+
+Finalmente, a partir da adição de $\mathbb{Z}$ definimos a adição de classes de congruência em $\mathbb{Z}/m\mathbb{Z}$ por
+\[
+    (x \text{ mod } m) + (y \text{ mod } m) = (x + y \text{ mod } m)
+\]
+Isso faz sentido pois, por (P4), o lado direito desta igualdade depende apenas das duas classes do lado esquerdo e não depende da 
+escolha dos representantes $x$ e $y$ dessas classes.
+
+\begin{proposicao}
+Para cada inteiro $m > 0$, o conjunto $\mathbb{Z}/m\mathbb{Z}$ com respeito à adição é um grupo comutativo de $m$ elementos.
+\end{proposicao}
+
+\begin{proof}
+As propriedades G1, G2 e G3 do grupo aditivo $\mathbb{Z}$ implicam as respectivas propriedades de $\mathbb{Z}/m\mathbb{Z}$. Notemos
+que $(0 \text{ mod } m)$ é o elemento neutro, e que, dados $x$ e $y$ em $\mathbb{Z}$, a equação $(z \text{ mod } m) + (x \text{ mod } m)
+= (y \text{ mod } m)$ possui a única solução $(y - x \text{ mod } m)$.
+\end{proof}

@@ -1,0 +1,177 @@
+\section{O Anel \texorpdfstring{$\mathbb{Z}/m\mathbb{Z}$}{Z/mZ}}
+
+Seja $m$ um inteiro $> 0$. Definimos a multiplicação de classes de congruência módulo $m$ por 
+\[
+    (x \text{ mod } m) (y \text{ mod } m) = (xy \text{ mod } m) 
+\]
+
+A propriedade (P5) da aula 9 ($x \equiv x'\ (\text{mod } m)$ e $y \equiv y'\ (\text{mod } m)$ implicam
+$xy \equiv x'y'\ (\text{mod } m)$) diz que lado direito da igualdade depende apenas das classes do lado
+esquerdo, e não dos representantes $x$ e $y$.
+
+\begin{definicao}
+Um \underline{anel} é um conjunto $R$ junto com duas operações binárias, uma adição (escrita $+$)
+e uma multiplicação (escrita $\cdot$), com as seguintes propriedades :
+
+\begin{enumerate}[label=\textbf{A\arabic*.}, left=0.5cm, align=left, nosep]
+    \item $R$ é um grupo comutativo com respeito à adição;
+    \item a multiplicação é distributiva com respeito à adição: $x \cdot (y + z) = x \cdot y + x \cdot z$
+    e $(x + y) \cdot z = x \cdot z + y \cdot z$ para quaisquer $x, y$ e $z$ em $R$.
+\end{enumerate}
+
+\end{definicao}
+
+Se a multiplicação em um anel $R$ for associativa, diremos que $R$ é um anel associativo. Se ela for comutativa
+diremos que $R$ é um anel comutativo. Frequentemente omite-se o símbolo $\cdot$ da operação de multiplicação. Se 
+existe em $R$ um elemento $e$ tal que $ex = x = xe$ para todo $x$ em $R$, ele é único; pois, se $f$ também possui tal 
+propriedade, então $fe = e = ef = f$; um tal elemento é chamado de elemento identidade e é frequentemente denotado 
+por $1$.Um anel é chamado \textbf{unitário} se ele possui um \underline{elemento identidade}. O anel $\mathbb{Z}$ (respectivamente, $\mathbb{Q}$)
+é associativo, comutativo e unitário.
+
+\begin{proposicao}
+Para cada inteiro $m > 0$, o conjunto $\mathbb{Z}/m\mathbb{Z}$ juntamente com a adição e a multiplicação é um anel associativo, 
+comutativo e unitário de $m$ elementos.
+\end{proposicao}
+
+\begin{proof}
+Como na Proposição 9.4, as desejadas propriedades algébricas de $(\mathbb{Z}/m\mathbb{Z}, +, \cdot)$ são herdadas das respectivas
+propriedades de $(\mathbb{Z}, +, \cdot)$.
+\end{proof}
+
+É usual escrevermos 1 e 0 em vez de $(1 \text{ mod } m)$ e $(0 \text{ mod } m)$. O anel $\mathbb{Z}/6\mathbb{Z}$ mostra que
+$x \cdot y$ pode ser $0$ sem que $y$ seja $0$ (\emph{eg.} $x = (2 \text{ mod } 6) \text{ e } y = (3 \text{ mod } 6)$).
+Quando isso ocorre, dizemos que $x$ é um \underline{divisor de zero}. O anel $\mathbb{Z}$ (respectivamente, $\mathbb{Q}$) 
+não possui divisores de zero.
+
+Se um inteiro $a$ é primo a $m$, e $a' = a + mt$, então cada divisor comum de $a'$ e $m$ é um divisor de $a$.
+Logo, todos os inteiros na classe de congruência $(a \text{ mod } m)$ são primos a $m$. Uma tal classe será 
+chamada de classe prima a $m$. Se $(a \text{ mod } m)$ e $(b \text{ mod } m)$ são primas a $m$, então $(ab \text{ mod } m)$ também é prima
+a $m$ pelo Corolário 4.5. Em particular, tais classes não podem ser divisores de zero no anel $\mathbb{Z}/m\mathbb{Z}$.
+
+\begin{proposicao}
+Sejam $m$, $a$ e $b$ inteiros com $m > 0$. Se $d = (a,m)$, então a congruência
+$ax \equiv b \pmod{m}$ possui exatamente $d$ soluções módulo $m$ ou nenhuma solução. 
+Ela possui solução se, e somente se, $b \equiv 0 \pmod{d}$. Existem exatamente $\frac{m}{d}$ 
+classes distintas de congruência $(b \bmod m)$ para as quais isso ocorre.
+\end{proposicao}
+
+\begin{proof}
+De fato, $x$ é uma solução se, e somente se, existe um inteiro $y$ tal que
+$ax - b = my$, ou seja, $ax - my = b$. Pelo primeiro corolário da Proposição 3.2, esta equação 
+possui uma solução se, e somente se, $d \mid b$, isto é, $b = dz$  para algum $z \in \mathbb{Z}$. 
+Conseguimos todos os valores distintos de $(b \bmod m)$ desta forma fazendo $z$ percorrer 
+os valores $0, 1, \ldots, \frac{m}{d} - 1$. Agora, se $x$ é uma solução de $ax \equiv b \pmod{m}$, 
+então $x'$ é também uma solução se, e somente se, $a(x - x') \equiv 0 \pmod{m}$.
+Pela propriedade (P6) da Aula 11, isto é equivalente a $\frac{a}{d}(x - x') \equiv 0 \pmod{\frac{m}{d}}$,
+e portanto $x \equiv x' \pmod{\frac{m}{d}}$ pelo Corolário 4.3 e pela Proposição 4.4. Isso mostra que todas 
+as soluções de $ax' \equiv b \pmod{m}$ podem ser escritas como $x' = x + \frac{m}{d}t$.
+As soluções distintas são obtidas fazendo $t$ percorrer os valores $0, 1, \ldots, d - 1$.
+\end{proof}
+
+\begin{corolario}
+O conjunto de todas as classes primas a $m$ módulo $m$ sob a multiplicação formam um grupo comutativo.
+\end{corolario}
+
+(Este grupo será denotado por $(\mathbb{Z}/m\mathbb{Z})^\times$ e chamado de \underline{grupo multiplicativo} de 
+$\mathbb{Z}/m\mathbb{Z}$.)
+
+\begin{proof}
+Isto segue-se do Corolário 4.5, do fato de $(1 \bmod m)$ ser o elemento identidade para a multiplicação 
+em $\mathbb{Z}/m\mathbb{Z}$, e da Proposição 10.3.
+\end{proof}
+
+\begin{definicao}
+Para cada inteiro $m > 0$, o número de classes de congruência primas a $m$ módulo $m$ é denotado 
+por $\varphi(m)$; $\varphi$ é a chamada \emph{função de Euler}.
+\end{definicao}
+
+Temos os seguintes valores:
+\[
+\begin{array}{c|cccccccccc}
+m      & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\ \hline
+\varphi(m) & 1 & 1 & 2 & 2 & 4 & 2 & 6 & 4 & 6 & 4
+\end{array}
+\]
+
+Se $m \geq 2$, então $\varphi(m)$ pode ser definido como o número de inteiros positivos primos a 
+$m$ e $< m$. Se $p$ é um primo, então $\varphi(p) = p - 1$.
+
+\begin{definicao}
+Um \underline{corpo} é um anel cujos elementos não-nulos formam um grupo comutativo sob a operação de multiplicação.    
+\end{definicao}
+
+O anel $\mathbb{Q}$ é um corpo, o anel $\mathbb{Z}$ não é um corpo. Um corpo não possui divisores de zero; o exemplo 
+de $\mathbb{Z}$ mostra que a recíproca não é verdadeira.
+
+\begin{proposicao}
+Para cada inteiro $m > 1$, o anel $\mathbb{Z}/m\mathbb{Z}$ é um corpo se, e somente se, $m$ é um primo.
+\end{proposicao}
+
+\begin{proof}
+Se $m$ é um primo, então todas as classes de congruência módulo $m$ diferentes de $(0 \bmod m)$ são primas 
+a $m$ e portanto formam um grupo comutativo, pelo Corolário 10.4. Reciprocamente, se $m$ não é um primo, ele 
+possui um divisor $d$ tal que $1 < d < m$, donde $1 < \frac{m}{d} < m$, e logo as classes $(d \bmod m)$ e 
+$\left(\frac{m}{d} \bmod m\right)$ são diferentes de $0$ e o produto delas é $0$. Portanto, elas são divisores 
+de zero, e $\mathbb{Z}/m\mathbb{Z}$ não é um corpo.
+\end{proof}
+
+Se $p$ é um primo, o corpo das classes de congruência módulo $p$ será denotado por $\mathbb{F}_p$; ele possui 
+exatamente $p$ elementos.
+
+\begin{exemplo}[Equações Diofantinas e Composição de Funções]
+    \leavevmode
+    \begin{enumerate}[left=0.5cm, align=left, nosep]
+        \item Para cada equação a seguir, determine a existência de solução sobre $\mathbb{Z}$ em algum
+        $\mathbb{Z}/m\mathbb{Z}$ : 
+        
+        A ideia é a seguinte : Seja $f(X_1,\ldots,X_n)$ um polinômio com coeficientes inteiros, se a equação
+        $f(X_1,\ldots,X_n) = 0$ possui uma solução sobre $\mathbb{Z}$, então ela possui solução $y_1,\ldots,y_n$ com os $y_i$
+        em $\mathbb{Z}/m\mathbb{Z}$, de fato, a congruência $f(X_1,\ldots,X_n) \equiv 0 \pmod m$ possui uma solução inteira.
+        Portanto, se existe algum $m$ tal que a congruência $f(X_1,\ldots,X_n) \equiv 0 \pmod m$ não possui uma solução inteira,
+        então $f(X_1,\ldots,X_n) = 0$ não possui solução sobre $\mathbb{Z}$
+
+        \begin{enumerate}[label=(\alph*), left=0.5cm, align=left, nosep]
+            \item $X^2 - 1 - 3Y^2 = 0$. A equação não possui solução sobre $\mathbb{Z}$. Com efeito, para cada inteiro $x$, vê-se 
+            que $x^2$ é congruente a $0$ ou $1$ módulo $3$, dando $x^2 + 1$ é congruente a $1$ ou $2$ módulo $3$, $\therefore$ a
+            equação não possui solução sobre $\mathbb{Z}/3\mathbb{Z}$.
+            \item $2X^2 + 219Y^{1707} = 1$. A equação possui solução uma solução sobre $\mathbb{Z}/2\mathbb{Z}$, mas como ela 
+            não possui solução uma solução sobre $\mathbb{Z}/3\mathbb{Z}$, ela não possui uma solução sobre $\mathbb{Z}$. De fato, 
+            os coeficientes da equação sugerem que obtemos para $m = 2$ e $m = 3$ (pois $219 = 3(73)$). De pronto temos as soluções
+            $(0,1)$ e $(1,1)$ sobre $\mathbb{Z}/2\mathbb{Z}$. Agora o argumento do item (a) nos dá que $2x^2 + 219y^{1707}$ é congruente
+            a $0$ ou a $2$ módulo $3$; ou seja, $2x^2 + 219y^{1707} \equiv 1 \pmod 3$ não possui solução.
+            \item $6XY - 2X -3Y = 1$. A equação não possui solução sobre $\mathbb{Z}$, mas possui uma solução sobre $\mathbb{Z}/m\mathbb{Z}$
+            para cada $m > 0$ com efeito notamos que $6xy - 2x -3y = 1 = (3y - 1)(2x - 1)$, a primeira afirmação decorre isso.
+            Por outro lado, escrevermos 
+            \[
+                \begin{aligned}
+                m &= 2^{r - 1}(2s - 1), \quad r,s \in \mathbb{Z}_{>0}, \text{ temos} \\
+                2^{r+2}m
+                &= 2^{r+1}(2s - 1) \\
+                &= (2^{r+1} + 1 - 1)(2s - 1) \\
+                &= \bigl((2^{r+1} - (-1)^{2r+1}) - 1\bigr)(2s - 1) \\
+                &= (3t - 1)(2s - 1).
+                \end{aligned}
+            \]
+            para cada inteiro $t$, ao usarmos na última igualdade a identidade $a^n - b^n = (a-b)(a^{n-1} + \ldots + b^{n-1})$.
+            Portanto $6st - 2s - 3t + 1$ é congruente a módulo $m$.
+        \end{enumerate}
+        
+        \item Para quaisquer subgrupos $K$ dentre $G,N,H$ e $\{1\}$ vale que $gkg^{-1} \in K$ sempre que $k \in K$ e $g \in G$.
+        Prove que (i) O conjunto $G$ das funções $\mathbb{R} \rightarrow \mathbb{R}$, $x \mapsto ax + b$ em que
+        $a \in \mathbb{R}^*$ e $b \in \mathbb{R}$ é um grupo com respeito à composição de funções; (ii) O subconjunto
+        $N(\text{varput}, H)$ consistindo em tais funções com $a = 1$, $(\text{varput}, b = 0)$ é o subgrupo de $G$; 
+        (iii) valem $G = \{ nh : n \in \mathbb{N}, h \in \mathbb{N} \}$ e $N \cap H = \{ 1\}$.  
+        
+        Sejam $T_{a,b} : x \mapsto ax + b$ e $T_{c,d} : x \mapsto cx + d$ em $G$ (i) Note que $T_{a,b} \cdot T_{c,d} : \mapsto
+        cax + (cb + d) \in G$ pois $ca \neq 0$. Associatividade é automática, pois a compsição de funções arbitrárias é associativa.
+        Tomando-se $a=1$ e $b=0$ tem-se a transformação identidade. Formalmente, $(T_{a,b})^{-1} = T_{c,d}$ pois $c = a^{-1}$ e $d = -a^{-1}b$
+        (ii) Dos cálculos de (i), $ T_{1,d} \cdot T_{1,b} = T_{1,b+d}$ e $(T_{1,b})^{-1} = T_{1,-b}$ pertencem a $N$ e $T_{c,0} \cdot 
+        T_{a,a} = T_{ac,0}$, $T_{1,0}$ e $(T_{a,0})^{-1} = T_{a^{-1},0}$ pertencem a $H$. 
+        (iii) Com $T_{a,b} = T_{1,b} \cdot T_{a,0}$ vale $G = \{nh : n \in N, h \in H\}$. De outra parte, se $T_{1,b} = T_{a,0}$, 
+        então $x + b = ax$ para cada $x \in \mathbb{R}$, fazendo $x = 0$ obtemos $b = 0$ e daí, $x = 1$ implica $a = 1$. 
+        Por fim, a condição sobre $K$ é imediatamente válida para $G$ ou $\{1\}$. Ora, $T_{a,b} T_{c,d} (T_{a,b})^{-1} = T_{aca^{-1}, 
+        a(c(-a^{-1}b) + d)+ b} = T_{c,ad-bc + b}$ pois $\mathbb{R}$ é um corpo, logo, apenas $H$ não satisfaz a condição (\emph{e.g},
+        $T_{1,1} \cdot T_{1,0} (T_{1,1})^{-1} = T_{-1,2}$).
+    \end{enumerate}
+
+\end{exemplo}

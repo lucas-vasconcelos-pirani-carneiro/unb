@@ -1,0 +1,230 @@
+\section{Grupos Cíclicos e o Teorema de Lagrange}
+
+A Proposição 3.2 mostra que cada subgrupo $M$ de $\mathbb{Z}$ ou é $\{0\}$ ou é gerado pelo 
+seu menor elemento $m > 0$. No último caso ele é gerado por $m$ ou $-m$, mas por nenhum outro 
+elemento.
+
+Para buscarmos entender o que acontece nos grupos finitos gerados por um elemento, consideremos 
+inicialmente o grupo multiplicativo $(\mathbb{Z}/13\mathbb{Z})^\times$. Temos
+
+\[
+\begin{array}{c|cccccccccccc}
+n & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 \\ \hline
+2^n \,(\bmod\, 13) 
+& 2 & 4 & 8 & 3 & 6 & 12 & 11 & 9 & 5 & 10 & 7 & 1
+\end{array}
+\]
+
+Donde, ao denotarmos $(x \bmod 13)$ excepcionalmente por $x$, obtemos:
+\[
+\langle 1 \rangle = \{1\};
+\]
+\[
+\langle 2^6 \rangle = \{2^6, 1\};
+\]
+\[
+\langle 2^4 \rangle = \{2^4, 2^8, 1\} = \langle 2^8 \rangle;
+\]
+\[
+\langle 2^3 \rangle = \{2^3, 2^6, 2^9, 1\} = \langle 2^9 \rangle;
+\]
+\[
+\langle 2^2 \rangle = \{2^2, 2^4, 2^6, 2^8, 2^{10}, 1\} = \langle 2^{10} \rangle;
+\]
+\[
+\langle 2 \rangle = (\mathbb{Z}/13\mathbb{Z})^\times = \langle 2^5 \rangle = \langle 2^7 \rangle = \langle 2^{11} \rangle.
+\]
+
+Ocorre que todos os subgrupos de $(\mathbb{Z}/13\mathbb{Z})^\times$ encontram-se no seguinte diagrama:
+
+\[
+\begin{array}{c c c}
+\text{Ordens} & \text{Subgrupos} & \text{N.\ de geradores} \\[6pt]
+12 & \langle 2 \rangle = \langle 2^5 \rangle & 4 = \varphi(12) \\[4pt]
+6  & \langle 2^2 \rangle                  & 2 = \varphi(6)  \\[4pt]
+4  & \langle 2^3 \rangle                  & 2 = \varphi(4)  \\[4pt]
+3  & \langle 2^4 \rangle                  & 2 = \varphi(3)  \\[4pt]
+2  & \langle 2^6 \rangle                  & 1 = \varphi(2)  \\[4pt]
+1  & \langle 1 \rangle                    & 1 = \varphi(1)
+\end{array}
+\]
+
+Doravante, $G$ será um grupo multiplicativo.
+
+\begin{proposicao}
+Seja $G$ um grupo cíclico de ordem $m$ gerado por um elemento $x$. Se $H$ é um subgrupo de $G$, 
+então existe um divisor $d$ de $m$ tal que $H$ é o grupo cíclico de ordem $\frac{m}{d}$ gerado 
+por $x^d$.
+\end{proposicao}
+
+\begin{proof}
+Seja $M$ o conjunto não-vazio de todos os inteiros $a$ tais que $x^a \in H$. A fórmula
+$x^{a-b} = x^a (x^b)^{-1}$ mostra que $M$ é um subgrupo de $\mathbb{Z}$. Como $m$ é o menor inteiro 
+$>0$ tal que $x^m = 1$ (Aula 14), por um lado, $M$ consiste nos múltiplos de algum divisor $d$ de 
+$m$; portanto, $H$ consiste nos elementos $x^{dz}$ com $z \in \mathbb{Z}$, ou seja, $H$ é gerado por $x^d$.
+Por outro lado, temos $x^{da} = x^{db}$ se, e somente se, $da \equiv db \pmod{m}$, isto equivale a 
+$a \equiv b \pmod{\frac{m}{d}}$.
+\end{proof}
+
+\begin{corolario}
+Para cada divisor positivo $n$ de $m$, um grupo cíclico de ordem $m$ possui um e somente um subgrupo de ordem $n$.
+\end{corolario}
+
+\begin{proof}
+Seja $G$ como na Proposição 12.1, tomemos $d = \frac{m}{n}$. Um subgrupo $H$ de $G$ de ordem $n$ deve ser gerado por $x^d$.
+\end{proof}
+
+\begin{corolario}
+Sendo $G$, $m$, $x$ e $H$ como na Proposição 12.1, um elemento $x^a$ de $G$ gera $H$ se, e somente se, $(a,m) = d$.
+\end{corolario}
+
+\begin{proof}
+Escrevendo $(a,m) = ar + ms$ e $a = (a,m)t$, temos
+\[
+x^{(a,m)} = (x^a)^r (x^m)^s = (x^a)^r
+\quad \text{e} \quad
+x^a = \bigl(x^{(a,m)}\bigr)^t.
+\]
+Logo, o subgrupo gerado por $x^a$ coincide com o subgrupo gerado por $x^{(a,m)}$ de ordem
+$\frac{m}{(a,m)}$. O resultado segue-se do Corolário 12.2.
+\end{proof}
+
+\begin{corolario}
+Sendo $G$, $m$ e $x$ como na Proposição 12.1, um elemento $x^a$ de $G$ gera $G$ se, e somente se, $(a,m)=1$, e $G$ possui 
+exatamente $\varphi(m)$ geradores.
+\end{corolario}
+
+\begin{corolario}
+Para cada inteiro $m > 0$, tem-se
+\[
+\sum_{0 < d \mid m} \varphi(d) = m.
+\]
+\end{corolario}
+
+\begin{proof}
+Seja $G$ um grupo cíclico de ordem $m$. Pelo Corolário 12.2, para cada divisor $d > 0$ de $m$, $G$ possui exatamente um 
+subgrupo $H_d$ de ordem $d$. Logo, $d \longmapsto H_d$ é uma correspondência bijetiva entre os divisores positivos de $m$ 
+e os subgrupos de $G$. Para cada $d$, seja $X_d$ o conjunto de todos os distintos geradores de $H_d$, cujo número é 
+$\varphi(d)$ pelo Corolário 12.4. Cada elemento de $G$ pertence a um e apenas um conjunto $X_d$, pois ele gera um e apenas 
+um subgrupo de $G$.
+\end{proof}
+
+Seja $X$ um subconjunto qualquer de um grupo multiplicativo $G$. Para cada elemento $a \in G$ escrevemos $aX$ para denotar 
+o conjunto de todos os elementos $ax$ com $x \in X$. A definição de grupo implica a bijetividade da aplicação $x \longmapsto ax$ 
+de $X$ em $aX$, de modo que, se $X$ é finito, então todos os conjuntos $aX$ possuem o mesmo número de  elementos de $X$.
+
+\begin{definicao}
+Se $G$ é um grupo e $H$ é um subgrupo de $G$, dizemos que o conjunto $xH$ para algum $x \in G$ é uma \emph{classe lateral} 
+de $H$ em $G$.
+\end{definicao}
+
+\begin{lema}
+Se $xH$ e $yH$ são duas classes laterais de um subgrupo $H$ em $G$, então ou elas não possuem elemento em comum, ou $xH = yH$.
+\end{lema}
+
+\begin{proof}
+Se elas possuem um elemento em comum, este pode ser escrito como $xh$ com $h \in H$ e também como $yh'$ com $h' \in H$. 
+Isso resulta em $y^{-1}x = h'h^{-1} \in H$, donde $xH = y(y^{-1}x)H = y(h'h^{-1})H = yH$.
+\end{proof}
+
+\begin{teorema}[``\underline{Teorema de Lagrange} sobre grupos finitos'']
+Se $H$ é um subgrupo de um grupo finito $G$, então ordem de $H$ divide a ordem de $G$.
+\end{teorema}
+
+\begin{proof}
+Cada elemento $x$ de $G$ pertence a alguma classe lateral de $H$ (a saber, $xh$), e, pelo Lema 12.7, apenas a uma classe.
+Como o número de elementos de cada classe é igual à ordem de $H$, vemos que a ordem de $G$ deve ser um múltiplo da ordem de 
+$H$. 
+\end{proof}
+
+\begin{corolario}
+Se $x$ é um elemento de um grupo finito de ordem $m$, a ordem de $x$ divide $m$, e $x^m = 1$.    
+\end{corolario}
+
+\begin{proof}
+Como a ordem $d$ de $x$ é a ordem do subgrupo de $G$ gerado por $x$, o Teorema de Lagrange mostra que ela divide $m$.
+Então, $x^m = (x^d)^\frac{m}{d} = 1$.
+\end{proof}
+
+\begin{corolario}[``\underline{Teorema de Euler} sobre aritmética modular'']
+Se $m$ é um inteiro $> 0$ e $x$ um inteiro primo a $m$, então
+\[
+    x^{\varphi(m)} \equiv 1 \ (\bmod \ m).
+\]
+\end{corolario}
+
+\begin{proof}
+Aplica-se o Corolário 12.9 a $(\mathbb{Z}/m\mathbb{Z})^\times$
+\end{proof}
+
+\begin{corolario}[``\underline{Pequeno teorema de Fermat}'']
+Se $p$ é um primo, então $x^{p - 1} \equiv 1 \pmod p$ para cada $x$ primo a $p$; isto é, $x^p \equiv x \pmod p$
+para cada $x$.
+\end{corolario}
+
+Exemplos: (1) Como $2^4 \equiv 1 \pmod {15}$, temos $2^{14} = (2^4)^3 \cdot 2^2 \equiv 4 \pmod {15}$; logo, 15 não primo.
+(2) Seja $x$ um inteiro primo a $561$. Como $561 = 3 \cdot 11 \cdot 17$, temos $x^2 \equiv 1 \pmod 3, x^{10} \equiv 1 \pmod {11},
+\text{ e } x^{16} \equiv 1 \pmod {17}$; donde $x^{80}$ é congruente a $1$ módulo $3,11 \text{ e } 17$ e, logo, 
+$x^{560} = (x^{80})^7 \equiv 1 \pmod {561}$. Portanto, a recíproca do Pequeno teorema de Fermat não vale. 
+
+\begin{exemplo}[Grupo de Simetria e Grupos Multiplicativos]
+    \leavevmode
+    \begin{enumerate}[left=0.5cm, align=left, nosep]
+        \item Uma simetria de uma figura plana $F$ é uma bijeção $\psi : F \to F$ que é uma isometria, no sentido de que a distância
+        de quaisquer dois pontos $p$ e $q$ de $F$ é igual à distância entre suas imagens $\psi(p)$ e $\psi(q)$. É difícil não ver que
+        as simetrias de $F$ formam um grupo sob a operação de composições de funções. Consideramos um polígono regular $F$ de $n$ lados
+        e centro $O$, isto é, $F$ é equiregular e equilátero e a distância de cada um dos vértices a $O$ é a mesma. Seja $G$ o grupo das
+        simetrias de $F$.
+        \begin{enumerate}[label=(\alph*), left=0.5cm, align=left, nosep]
+            \item É comutativa ?
+            \item Qual é a ordem de $G$ ?
+        \end{enumerate}
+
+        Digamos que os vértices de $F$ seguem enumerados por $1,2,\ldots,n$ ao percorreremos $\sigma$ no sentido horário. Seja $\sigma$
+        a rotação em torno de $O$ no sentido horário de ângulo $\frac{2\pi}{n}$ e $\tau$ a reflexão em torno da reta que passa por $O$ e $1$.
+        Então, $\sigma$ e $\tau$ definem simetrias de $F$ que permitem os vertíces de $F$ da seguinte forma:
+        
+        \begin{itemize}[left=0.5cm, align=left, nosep]
+            \item $\sigma: 1 \to 2, 2 \to 3, \ldots, n-1 \to n, n \to 1$
+            \item $\tau: 1 \to 1, 2 \to n, 3 \to n-1, \ldots$
+        \end{itemize}
+
+        Temos $\sigma^n = id = \tau^2$ e $\tau \sigma = \sigma^{n-1} \tau$. Ademais, note que os $2n$ elementos $\sigma, \sigma^2, 
+        \ldots, \sigma^{n-1}, \tau, \sigma\tau, \sigma^2\tau, \ldots, \sigma^{n-1}\tau$ são todos distintos. De fato, se 
+        $\sigma^j = \sigma^k$ então $j+1$ = $\sigma^j(1) = k + 1$, se $\sigma^j = \sigma^k\tau$ então $\sigma^j(1) = j + 1 = 
+        \sigma^k\tau(1) = \sigma^k(1) = k + 1$; contra $id = \tau$. Finalmente, se $\sigma^j = \sigma^k$ e $j = k$.
+        
+        (a) O grupo não é comutativo, pois como vimo $\tau \sigma \neq \sigma \tau$.
+        (b) Afirmamos que a ordem de $G$ é $2n$. Com efeito, se $\psi$ é uma simetria qualquer existem $n$ possibilidades para 
+        $\psi(1)$, como a distância de $\psi(1)$ e $\psi(2)$ é igual à distância de $1$ a $2$, existem 2 possibilidades para 
+        $\sigma$ vertíce $\psi(2)$ uma vez já escolhido $\psi(1)$, Estando determinados $\psi(1)$ e $\psi(2)$ também ficam determinados
+        os $\psi(j)$ com $3 \leq j \leq n$. Logo existem no máximo $2$ simetrias que mandam $1$ para $j + 1$, nomealmente $\sigma^j$ 
+        e $\sigma^j \tau$. Portanto, $G$ possui ordem $2n$.
+
+        \item Os grupos multiplicativos $G(m) = (\mathbb{Z}/m\mathbb{Z})^\times$ são isomorfos entre si para quais $m$ em $\{17, 32,
+        35, 56, 70\}$ ?
+
+        De pronto, a ordem de $G(m)$ é $\varphi(m)$, a qual é facilmente calculada da fatoração de $m$ em primos. Assim, existem
+        bijeções que não necessariamente são isomorfismos entre $G(17)$ e $G(32)$, pois $\varphi(17) = 16 = \varphi(32)$, entre 
+        $G(35)$, $G(56)$ e $G(70)$, já que $\varphi(35) = 24 = \varphi(56) = \varphi(70)$.
+
+        Uma tática elementar para ver-se que dois grupos de mesma ordem são não isomorfos é verificar que eles não possuem a mesma quantidade de elementos de uma certa ordem, pois se $f$ é um isoformismo então $x$ e $f(x)$ possuem a mesma ordem.(Com efeito, notemos
+        que $f(1) = 1$, já que $f(1) f(1) = f(1 \cdot 1) = f(1)$. Se $x^n = 1$, então $f(x)^n = f(x^n) = f(1) = 1$; e, se $gf = id$ e 
+        $f(x)^m = 1$, então $x^m = gf(x^m) = g(f(x)^m) = g(f(1)) = 1$).
+
+        Por inspeção, $G(32)$ não possui um elemento de ordem $16$, enquanto que $(3 \bmod 17)$ que $G(17)$.[Mais rapidamente, apenas
+        $(-1 \bmod 17)$ possui ordem $2$, enquanto que $(\pm 17 \bmod 32)$ também possuem]. Logo, $G(17)$ e $G(32)$ não são isomorfos.
+
+        Agora, em $G(35)$, os elementos $(-1 \bmod 35)$ e $(2 \bmod 35)$ possui ordem $2$ e $12$, respectivamente; ademais, cada
+        elemento do grupo comutativo $G(35)$ pode ser escrito de modo único como um produto $(-1 \bmod 35)^\epsilon (2 \bmod 35)^k$
+        com $0 \leq \epsilon \leq 1$ e $0 \leq k \leq 11$; em particular, os elementos de ordem $2$ são $(-1 \bmod 35)(2^6 \bmod 35)
+        = (-6 \bmod 35)$ e $(-1 \bmod 35)(-6 \bmod 35) = (6 \bmod 35)$.
+
+        Por outro lado, $(\pm 3^3 \bmod 56), (\pm 13 \bmod 56)$ e $(-1 \bmod 56)$ possuem ordem $2$, de modo que $G(35)$ e $G(56)$ 
+        não são isomorfos.  
+
+        Finalmente, a aplicação $G(35) \to G(70)$, dada por $(2 \bmod 35) \mapsto (3 \bmod 70)$ e $(-1 \bmod 35) \mapsto 
+        (-1 \bmod 70)$ define um isomorfismo.
+
+    \end{enumerate} 
+\end{exemplo}

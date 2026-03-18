@@ -1,0 +1,121 @@
+\section{X² + Y² = p}
+
+\begin{proposicao}
+Seja $\mathcal{M}$ um conjunto não-vazio de inteiros Gaussianos. Se $\mathcal{M}$ é fechado com respeito à subtração
+e satisfaz a condição ``se $a$ pertence a $\mathcal{M}$, então todos os múltiplos de $a$ pertencem a $\mathcal{M}$'',   
+então $\mathcal{M}$ consiste em todos os múltiplos de algum inteiro Gaussiano $d$, unicamente determinado a menos de um 
+fator invertível.
+\end{proposicao}
+
+\begin{proof}
+Se $\mathcal{M}=\{0\}$, a proposição é verdadeira com $d=0$.  
+Senão, tomemos em $\mathcal{M}$ um elemento $d$ de menor norma $>0$.  
+Se $a \in \mathcal{M}$, podemos aplicar a divisão euclidiana em $\mathbb{Z}[i]$ (Lema 7.1)
+e escrever $a = dq + r$ com $N(r) \leq \tfrac{1}{2}N(d)$.  
+Então, $r = a - dq \in \mathcal{M}$ e portanto $r=0$,ou seja, $a$ é um múltiplo de $d$.
+Quanto à unicidade, se $d'$ possui a mesma propriedade, então $d$ e $d'$ dividem um ao outro, 
+e portanto são associados.  
+\end{proof}
+
+Assim como nas Aulas 4 e 6, podemos aplicar a Proposição 8.1 ao conjunto de todas as combinações lineares
+$ax + by + \ldots + cz$ onde $a,b, \ldots, c$ são inteiros Gaussianos dados e $x,y, \ldots, z$ são inteiros 
+Gaussianos arbitrários, e assim definir o $m.d.c. (a,b, \ldots, c)$. Este será unicamente determinado se 
+prescrevermos que ele deve ser \emph{normalizado} (no sentido da Aula 7). Se ele for 1, diremos que 
+$a,b, \ldots, c$ são mutuamente relativamente primos. Podemos, então, repetir todos os conteúdos da Aula 4 
+(\emph{e.g} a versão análoga da Proposição 4.8 seria: se um primo Gaussiano divide um produto de certos inteiros
+Gaussianos, então ele divide pelo menos um dos fatores), exceto que na demonstração do Teorema 4.9 foi utilizado 
+indução sobre um inteiro $a$, enquanto que agora usaremos indução sobre a norma $N(a)$. A conclusão é :
+
+\begin{proposicao}
+Todo inteiro Gaussiano não-nulo pode ser escrito de modo
+``essencialmente único'' como um produto de um invertível e de primos
+Gaussianos.
+\end{proposicao}
+
+Aqui, as palavras ``essencialmente único'' têm o seguinte sentido.
+Sejam
+\[
+a = u q_1 \cdots q_r = u' q'_1 \cdots q'_s
+\]
+dois produtos do tipo desejado para algum $a \neq 0$, em que $u$ e $u'$
+são invertíveis e $q_j$ e $q'_k$ são primos Gaussianos. Então, o teorema
+deve ser entendido por dizer que $r = s$ e que os $q'_k$ podem ser
+ordenados de modo que $q'_j$ seja um associado de $q_j$ para
+$1 \le j \le r$; se $a$ for invertível, então $r = 0$.
+Se escrevermos que os fatores primos de $a$ sejam ``normalizados'',
+então o produto é unicamente determinado a menos da ordem dos fatores.
+
+Inteiros ordinários também são inteiros Gaussianos; para obtermos a
+decomposição deles em primos Gaussianos, basta fazermos isso para os
+primos ``ordinários''.
+
+\begin{proposicao}
+Se $p$ é um primo racional ímpar, então ele é um primo Gaussiano ou a
+norma de um primo Gaussiano $q$; neste último caso,
+$p = q\bar{q}$, e $q$ e $\bar{q}$ não são associados, e os únicos
+divisores de $p$ são $q$, $\bar{q}$ e os associados deles.
+\end{proposicao}
+
+\begin{proof}
+Escrevamos $p = u q_1 \cdots q_r$ como na Proposição 8.2.
+Tomando a norma, encontramos $p^2 = N(q_1) N(q_2) \cdots N(q_r)$.
+Se um dos $N(q_j)$ for $p^2$, então $r = 1$, $p = u q_j$, e $p$ seria um
+primo Gaussiano. Caso contrário, cada $N(q_j)$ é $p$, e podemos escrever
+$p = N(q) = q \bar{q}$, com $q$ e $\bar{q}$ primos Gaussianos. Digamos 
+que $q = x + iy$; se $\bar{q}$ fosse um associado de $q$, ele seria 
+$\pm q$ ou $\pm iq$; disso, teríamos $y = 0$ e $p = x^2$, ou $x = 0$ e $p = y^2$, 
+ou $y = \pm x$ e $p = 2x^2$, o que não pode acontecer, pois $p$ é um primo ímpar.
+\end{proof}
+
+Para $p = 2$, temos a decomposição
+\[
+2 = N(1 + i) = (1 + i)(1 - i) = i^3(1 + i)^2,
+\]
+ou seja, 2 possui um único fator primo normalizado $1 + i$.
+
+\begin{proposicao}
+Se $p$ é um primo racional ímpar, então $p$ é um primo Gaussiano ou a
+norma de um primo Gaussiano de acordo quando ele deixar resto $3$ ou $1$
+na divisão por $4$.
+\end{proposicao}
+
+\begin{proof}
+Se $p$ for a norma de $x + iy$, então $p = x^2 + y^2$,
+em que um dos inteiros $x$ ou $y$ deve ser ímpar e o outro par.
+Logo, um dos quadrados $x^2$ ou $y^2$ deve deixar resto $1$ na divisão
+por $4$, enquanto o outro deixa resto $0$.
+
+Reciprocamente, se $p - 1$ é um múltiplo de $4$, existe um inteiro
+ordinário $x$ tal que $x^2 + 1$ é um múltiplo de $p$ (não é difícil ver
+isso de várias maneiras; e.g., Corolário 17.6). Como
+$x^2 + 1 = (x + i)(x - i),$
+isto, se $p$ fosse um primo Gaussiano, resultaria em $p$ dividir
+$x + i$ ou $x - i$. Simplesmente, isso não pode acontecer. 
+\end{proof}
+
+\begin{corolario}
+Cada primo Gaussiano é $\pm 1 \pm i$, ou um associado de um primo
+racional que deixa resto $3$ na divisão por $4$, ou ainda sua norma é
+um primo racional que deixa resto $1$ na divisão por $4$.    
+\end{corolario}
+
+\begin{proof}
+Cada primo Gaussiano $q$ deve dividir algum fator primo racional $p$
+de sua norma $q\bar{q}$; aplicando a Proposição~8.4 se $p$ for ímpar,
+e as observações anteriores se $p = 2$, obtemos o desejado.
+\end{proof}
+
+\begin{corolario}[Fermat]
+Um primo racional pode ser escrito como uma soma de dois quadrados se,
+e somente se, ele é igual a $2$ ou deixa resto $1$ na divisão por $4$.
+\end{corolario}
+
+\begin{proof}
+Se $p = x^2 + y^2$, então $p$ não pode ser um primo Gaussiano pois ele
+possui divisores $x \pm iy$. A recíproca é dada pela
+Proposição~8.4.
+\end{proof}
+
+Vale ressaltar que este famoso resultado sobre inteiros racionais foi
+mostrado utilizando-se de um anel maior, o anel dos inteiros
+Gaussianos.

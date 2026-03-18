@@ -1,0 +1,177 @@
+\section{Números Coprimos e Números Primos}
+
+\begin{definicao}
+Dizemos que inteiros $a, b, \ldots, c$ são \underline{mutuamente relativamente primos} 
+(ou \emph{coprimos}) se o $m.d.c.$ deles for $1$.
+\end{definicao}
+
+Em outras palavras, eles são mutuamente relativamente primos se não possuem 
+um divisor comum positivo diferente de $1$.
+
+Se $a$ e $b$ são mutuamente relativamente primos, dizemos que $a$ é \underline{primo} a $b$ 
+e que $b$ é primo a $a$. Quando isso ocorre, observamos que cada divisor de $a$ 
+é primo a $b$, e que cada divisor de $b$ é primo a $a$.
+
+Exemplos:
+\begin{enumerate}[left=0.5cm, align=left, nosep]
+    \item Os números $6$, $10$ e $15$ são mutuamente relativamente primos, pois
+    $(6,10,15) = 1$ (o que segue diretamente de $6 + 10 - 15 = 1$).
+    
+    \item A fração $\dfrac{21n + 4}{2n + 5}$ é irredutível para cada inteiro $n > 0$, pois
+    $(-2)(21n + 4) + (3)(14n + 3) = 1$.
+    
+    \item Para qualquer $m$, $(1,m) = 1$; e $(k,m) = 1$ se, e somente se, $(m-k,m) = 1$.
+    (De fato, se $kx + my = 1$ é $(m-k)x' + my' = 1$ para $x' = -x$ e $y' = x + y$.)
+\end{enumerate}
+
+\begin{proposicao}
+Os inteiros $a, b, \ldots, c$ são mutuamente relativamente primos se, e somente se, 
+a equação $ax + by + \cdots + cz = 1$ possui uma solução em inteiros $x, y, \ldots, z$.    
+\end{proposicao}
+
+\begin{proof}
+Se a equação possui uma solução, então cada divisor comum $d \geq 0$ de 
+$a, b, \ldots, c$ deve dividir $1$, logo, deve ser $1$. 
+Reciprocamente, se $(a, b, \ldots, c) = 1$, então a Proposição~3.2 garante que 
+a equação possui uma solução.
+\end{proof}
+
+\begin{corolario}
+Se $d > 0$ é o $m.d.c.$ dos inteiros $a, b, \ldots, c$, então 
+$\frac{a}{d}, \frac{b}{d}, \ldots, \frac{c}{d}$
+são mutuamente relativamente primos.
+\end{corolario}
+
+\begin{proof}
+Isto segue de escrever-se $d = ax_0 + by_0 + \cdots + cz_0$.
+\end{proof}
+
+\begin{proposicao}
+Se $a, b, c$ são inteiros tais que $a$ é primo a $b$ e $a$ divide $bc$, então 
+$a$ divide $c$.
+\end{proposicao}
+
+\begin{proof}
+Escrevemos $1 = ax_0 + by_0$ e obtemos $c = cax_0 + cby_0$.
+Como $a$ divide ambos os termos do lado direito dessa igualdade, $a$ divide $c$.
+\end{proof}
+
+\begin{corolario}
+Se $a, b, c$ são inteiros e $a$ é primo a ambos $b$ e $c$, então $a$ é primo a $bc$.
+\end{corolario}
+
+\begin{proof}
+Se $d \geq 0$ divide $a$ e $bc$, então $d$ é primo a $b$ (pois $d$ é um divisor de $a$), 
+logo $d$ divide $c$, pela Proposição~4.4. Como $(a,c) = 1$, $d$ deve ser 1.
+\end{proof}
+
+\begin{corolario}
+Se um inteiro é primo a cada um dos inteiros $a, b, \ldots, c$, então ele é primo 
+ao produto $abc$.
+\end{corolario}
+
+\begin{proof}
+Isto decorre do Corolário~4.5 por indução sobre o número de fatores no produto.
+\end{proof}
+
+\begin{definicao}
+Dizemos que um inteiro $p > 1$ é \emph{primo} se ele não possui outros divisores 
+positivos além de si mesmo e $1$; caso contrário, ele é dito \emph{composto}.
+\end{definicao}
+
+Em outros termos, ele é primo se possui exatamente dois divisores positivos.
+
+Cada inteiro $> 1$ possui pelo menos um divisor primo; a saber, seu menor divisor 
+$> 1$. Se $a$ é um inteiro qualquer e $p$ é um primo, então ou $p$ divide $a$ 
+ou $p$ é primo a $a$.
+
+Exemplos:
+\begin{enumerate}[left=0.5cm, align=left, nosep]
+    \item Os primos $\leq 50$ estão circulados na seguinte tabela:   
+    \[
+        \begin{array}{cccccccc}
+        1 & \circled{2} & \circled{3} & 4 & \circled{5} & 6 & \circled{7} & 8 \\
+        \circled{9} & 10 & \circled{11} & 12 & \circled{13} & 14 & 15 & 16 \\
+        \circled{17} & 18 & \circled{19} & 20 & 21 & 22 & \circled{23} & 24 \\
+        25 & 26 & \circled{27} & 28 & \circled{29} & 30 & \circled{31} & 32 \\
+        33 & 34 & 35 & 36 & \circled{37} & 38 & \circled{39} & 40 \\
+        \circled{41} & 42 & \circled{43} & 44 & 45 & 46 & \circled{47} & 48 \\
+        49 & 50 &   &   &   &   &   &   
+        \end{array}
+    \]
+    
+    \begin{center}
+        (Crivo de Eratóstenes – números primos circulados).      
+    \end{center}
+
+    \item O maior primo conhecido pode ser visto em \texttt{www.mersenne.org} (Great Internet Mersenne Prime Search).  
+    \item Temos $2014 = 2 \cdot 1007 = 2 \cdot 19 \cdot 53$, $1484 = 2 \cdot 742 = 2^2 \cdot 371 = 2^2 \cdot 7 \cdot 53$, e $2 \cdot 3 \cdot 5 \cdot 7 \cdot 11 \cdot 13 + 1 = 59509$.  
+\end{enumerate}
+
+\begin{proposicao}
+Se um primo divide um produto de certos inteiros, então ele divide pelo menos um dos fatores.
+\end{proposicao}
+
+\begin{proof}
+Isto decorre da Proposição 4.4 por indução sobre o número de fatores no produto.
+\end{proof}
+
+\begin{teorema}["Teorema Fundamental da Aritmética"]
+Cada inteiro $> 1$ pode ser escrito como um \underline{produto de primos}, e pode ser assim escrito de modo único exceto pela ordem dos fatores.
+\end{teorema}
+
+\begin{proof}
+Seja $a > 1$ e seja $p$ um divisor primo de $a$. 
+Se $a = p$, o teorema vale para $a$. 
+Senão, $\frac{a}{p}$ é > 1 e < $a$. 
+Se a primeira afirmação do teorema vale para $\frac{a}{p}$, então ela vale para $a$. 
+Portanto, a primeira afirmação segue-se por indução sobre $a$.
+
+A segunda afirmação do teorema também pode ser provada por indução. 
+De fato, suponhamos que $a$ seja escrito de duas maneiras como um produto de primos, 
+digamos $a = p \cdot q \cdots r = p' \cdot q' \cdots s'$.
+Como $p$ divide $a$, a Proposição~4.8 garante que $p$ deve dividir um dos primos 
+$p', q', \ldots, s'$, digamos $p'$. Então $p = p'$. 
+Aplicando a segunda parte do teorema para $\frac{a}{p}$, segue-se que 
+$q' \cdots s'$ deve ser o mesmo que $q \cdots r$, a menos da ordem. 
+Por indução, a segunda parte do teorema está provada.
+\end{proof}
+
+vale observar outra demonstração da unicidade nesse teorema. 
+
+Escrevamos $a$ como um produto de primos,
+
+$a = p \cdot q \cdot \cdots r$.
+Seja $P$ um primo qualquer, e seja $n$ o número de vezes que $P$ aparece dentre os 
+fatores $p, q, \ldots, r$ de $a$. 
+Por um lado, $a$ é um múltiplo de $P^n$; por outro lado, $a$ não é um múltiplo de 
+$P^{n+1}$ (pois, pela Proposição~4.8, $a \cdot P^n$ não é um múltiplo de $P$, já que $a \cdot P^{-n}$ 
+é um produto de primos distintos de $P$). 
+Assim, $n$ é unicamente determinado como o maior inteiro tal que $P^n$ divide $a$, 
+e podemos escrever $n = v_P(a)$. 
+Logo, em quaisquer duas maneiras de escrever $a$ como um produto de primos, 
+os mesmos primos devem aparecer, e devem ocorrer o mesmo número de vezes em ambos os produtos. 
+Isso também prova a segunda parte do teorema.
+
+Por exemplo, a fatoração única pode ser usada para se determinar o $m.d.c.$ 
+de inteiros $> 0$. De fato, se
+\[
+a = \prod_{p \text{ primo}} p^{\nu_p(a)}
+\quad \text{e} \quad
+b = \prod_{p \text{ primo}} p^{\nu_p(b)}
+\]
+(em que quase todos os expoentes são $0$), então
+\[
+(a,b) = \prod_{p \text{ primo}} p^{\min\{v_p(a), v_p(b)\}}.
+\]
+
+(\textit{E.g.}, temos $(2014,1484) = 2 \cdot 53 = 106$.)
+
+\begin{teorema}
+Existe uma quantidade infinita de primos.
+\end{teorema}
+
+\begin{proof}
+(Argumento de Euclides). Se $p, q, \ldots , r$ são primos, então \textbf{cada divisor primo} de $p \cdot q \cdots r +1$
+deve ser diferente de $p, q, \ldots , r$.
+\end{proof}

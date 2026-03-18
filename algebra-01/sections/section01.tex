@@ -1,0 +1,162 @@
+\section{Princípios Básicos}
+
+Assumimos conhecidos os conceitos de ``conjunto'' e ``subconjunto''. 
+O símbolo $\in$ significa ``é elemento de''. 
+Usaremos os símbolos $\mathbb{N}, \mathbb{Z}, \mathbb{Q}, \mathbb{R}$ e $\mathbb{C}$ 
+para os conjuntos dos números naturais, inteiros, racionais, reais e complexos, 
+respectivamente. Sobre esses conjuntos numéricos, assumimos as seguintes propriedades:
+
+\begin{enumerate}[label=\textbf{A\arabic*.}, left=0.5cm, align=left, nosep]
+    \item $(x + y) + z = x + (y + z)$
+    \item $0 + x = x$
+    \item A equação $a + x = b$ possui uma única solução em $\mathbb{Z}$ 
+    (respectivamente, $\mathbb{Q}, \mathbb{R}, \mathbb{C}$), se $a, b \in \mathbb{Z}$ 
+    (respectivamente, $\mathbb{Q}, \mathbb{R}, \mathbb{C}$).
+    \item $x + y = y + x$
+\end{enumerate}
+
+\begin{enumerate}[label=\textbf{M\arabic*.}, left=0.5cm, align=left, nosep]
+    \item $(xy)z = x(yz)$
+    \item $1x = x$
+    \item A equação $ax = b$ possui uma única solução em $\mathbb{Q}$ 
+    (respectivamente, $\mathbb{R}, \mathbb{C}$), se $a, b \in \mathbb{Q}$ 
+    (respectivamente, $\mathbb{R}, \mathbb{C}$) e $a \neq 0$.
+    \item $xy = yx$
+\end{enumerate}
+
+\begin{enumerate}[label=\textbf{MA.}, left=0.5cm, align=left, nosep]
+    \item $x(y + z) = xy + xz$ e $(x + y)z = xz + yz$ \textnormal{(lei distributiva)}
+\end{enumerate}
+
+A única solução da equação $a + x = b$ é escrita $x = b - a$. 
+Para $a \neq 0$, a única solução da equação $ax = b$ é escrita $\dfrac{b}{a}$.
+
+Por $\mathbb{Z}$ possuir \textbf{A1, A2, A3, A4} e \textbf{MA}, diremos que 
+$\mathbb{Z}$ é um \emph{anel}. 
+Por $\mathbb{Q}$ (ou $\mathbb{R}$, $\mathbb{C}$) possuir todas as propriedades 
+anteriores, diremos que ele é um \emph{corpo}. 
+As definições precisas serão apresentadas na segunda parte do curso.
+
+Um número real é \emph{positivo} $(\geq 0)$ ou \emph{negativo} $(\leq 0)$; apenas $0$ é 
+positivo e negativo. 
+Escrever $b \geq a$ (ou $a \leq b$) significa $b - a \geq 0$; 
+e $b > a$ (ou $a < b$) significa $b \geq a$ e $b \neq a$. 
+Se $x > 0$ e $y > 0$, então $x + y > 0$ e $xy > 0$.
+
+Se $a, b, c \in \mathbb{Z}$ e $b = ac$, dizemos que $b$ é um múltiplo de $a$, 
+que $a$ \underline{divide} $b$, ou que $a$ é um divisor de $b$, e, quando isso ocorre, 
+escrevemos $a \mid b$. 
+Dizemos que um inteiro $b$ é \emph{par} se $2 \mid b$; caso contrário, $b$ é 
+\emph{ímpar}.
+
+Por exemplo, a soma dos divisores positivos de $6$ é 
+$1 + 2 + 3 + 6 = 12$, de $15$ é $24$, de $945$ é $1920$.
+
+\textbf{Questão 2.1 (Números perfeitos).} 
+Existe um número ímpar $n$ tal que a soma dos seus divisores positivos seja igual a $2n$?
+
+Agora, apresentamos o fundamental \underline{Princípio da Boa Ordenação}:
+
+\textbf{PBO.} 
+Cada conjunto não-vazio de inteiros positivos contém um menor elemento.
+
+Por exemplo, provemos que não existe um número inteiro $x$ tal que $0 < x < 1$. 
+De fato, se o conjunto de todos os inteiros $x$ tais que $0 < x < 1$ fosse não-vazio, 
+o Princípio da Boa Ordenação garante que existiria um menor inteiro $m$ tal que 
+$0 < m < 1$. Então teríamos $0 < m^{2} < m < 1$; uma contradição.
+
+Uma formulação equivalente do Princípio da Boa Ordenação é o 
+\underline{Princípio da Indução Matemática}:
+
+\textbf{PIM.} 
+Se uma sentença sobre um inteiro positivo $n$ é verdadeira para $n = 0$; 
+e se sua veracidade para cada $n$ com $0 \leq n < N$ implica sua veracidade 
+para $n = N$, então ela é verdadeira para todo $n \geq 0$.
+
+Já veremos no primeiro exemplo de uso do Princípio da Indução Matemática, 
+que a brincadeira pode começar de outro número natural que não seja o zero. 
+Mostremos que a igualdade
+\begin{equation}
+    1 + 2 + \cdots + n = \frac{n(n+1)}{2}
+\end{equation}
+vale para cada inteiro $n \geq 1$.
+
+De fato, para $n = 1$ temos $1 = \frac{1(1+1)}{2}$. Suponhamos a veracidade de $1 + 2 + \cdots + n = \frac{n(n+1)}{2}$
+para cada $n$ com $1 \leq n < N$. Daí,
+\begin{align*}
+    1 + 2 + \cdots + N 
+    &= 1 + 2 + \cdots + (N-1) + N \\[4pt]
+    &= \frac{(N-1)\big((N-1)+1\big)}{2} + N \\[4pt]
+    &= \frac{N(N+1)}{2}.
+\end{align*}
+
+Logo, pelo Princípio da Indução Matemática, a igualdade afirmada está demonstrada
+para cada $n \geq 1$.
+
+Outro exemplo. Vamos demonstrar a validade de
+\[
+2^{n} > 18(n+1)
+\]
+para cada inteiro $n \geq 8$. Para $n = 8$, temos $2^{8} = 256 > 162 = 18(9)$. Agora, vamos supor a veracidade de
+$2^{n} > 18(n+1)$ para cada $n$ com $8 \leq n < N$. Daí,
+\begin{align*}
+    2^{N} 
+    &= 2 \cdot 2^{N-1} \\[4pt]
+    &> 2 \cdot 18N = 18N + 18N \\[4pt]
+    &> 18N + 18 = 18(N+1).
+\end{align*}
+
+Logo, pelo Princípio da Indução Matemática, a afirmação é válida para cada $n \geq 8$.
+
+\begin{exemplo}[Sequências]
+    \begin{equation*}
+        a_n =\; \begin{cases}
+            1, & \text{se } n = 1,\\
+            a_{n-1}+3, & \text{se } n \ge 2,
+        \end{cases}
+    \end{equation*}
+
+    \begin{equation*}
+        b_n = a_1 + \dotsc + a_n \;=\; \sum_{k=1}^{n} a_k
+    \end{equation*}
+
+    Para cada $n \ge 1$ mostre que :
+    \begin{enumerate}[label=\roman*., left=0.5cm, align=left, nosep]
+        \item $a_{n} = 1 + 3 \cdot (n-1)$
+        \item $b_{n} = \frac{3n^{2} - n}{2}$
+    \end{enumerate}
+    
+\end{exemplo}
+
+De fato, para $n = 1$ temos :
+\begin{align*}
+    a_n = 1 + 3 \cdot (1 - 1) = 1
+\end{align*}
+
+Suponhamos que a afirmação seja válida para cada n com $1 \leq n < N$. 
+
+Daí,
+\begin{align*}
+    a_{N} &= a_{N-1} + 3 \\
+    &= 1 + 3 \cdot ((N-1) - 1) + 3 \\
+    &= 1 + 3 \cdot ((N-1) - 1 + 1) = 1 + 3 \cdot (N - 1) 
+\end{align*}
+
+Logo, pelo Princípio da Indução Matemática a afirmação é válida para todo $n \ge 1$.
+
+Por outro lado, para $n = 1$ temos : 
+\begin{align*}
+    b_{N} = 1 = \frac{3(1)^2 - (1)}{2}
+\end{align*}
+
+Suponhamos que a afirmação seja válida para cada n com $1 \leq n < N$.
+
+Daí,
+\begin{align*}
+    b_{N} &= a_1 + \dotsc + a_{N-1} + a_{N} \\
+    &= \frac{3(N-1)^2 - (N-1)}{2} + 1 + 3 \cdot (N - 1) \\
+    &= \frac{ 3N^{2} -6N + 3 -N + 1 + 2 + 6N + 3 }{2} \\
+    &= \frac{3N^{2} - N}{2}
+\end{align*}
+
+Logo, pelo Princípio da Indução Matemática a afirmação é válida para cada $n \ge 1$.

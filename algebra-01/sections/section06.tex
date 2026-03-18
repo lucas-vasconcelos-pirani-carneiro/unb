@@ -1,0 +1,134 @@
+\section{Polinômios}
+
+Recordamos agora algumas propriedades elementares de polinômios sobre um corpo arbitrário. 
+Estas são independentes da natureza do corpo, e análogas às propriedades dos inteiros 
+descritas nas Aulas 4 e 5.
+
+Doravante, seja $K$ um corpo qualquer. 
+Um polinômio $P$ sobre $K$ (\textit{i.e.}, com coeficientes em $K$), em uma indeterminada $X$, 
+é dado por uma expressão
+\[
+P = a_0 + a_1 X + \ldots + a_n X^n,
+\]
+com $a_0, a_1, \ldots, a_n \in K$. 
+Se $a_n \neq 0$, dizemos que $P$ possui grau $n$ e escrevemos $grau(P) = n$; 
+cada polinômio exceto 0 (o polinômio com todos os coeficientes nulos possui um grau), possui um grau. 
+A adição e a multiplicação sendo definidas da maneira usual, fazem com que os polinômios 
+sobre $K$ formem um anel, usualmente denotado por $K[X]$. 
+Se $P$ e $Q$ são polinômios não-nulos, então
+\[
+grau(PQ) = grau(P) + grau(Q).
+\]
+
+\begin{lema}[Divisão Euclidiana]
+Se $A$ e $B$ são polinômios sobre um corpo com $B \neq 0$, então existe um único polinômio $Q$ 
+tal que $A - BQ$ é $0$ ou possui grau menor do que $grau(B)$.    
+\end{lema}
+
+\begin{proof}
+Se $A = 0$ ou $grau(A) < grau(B)$, tomamos $Q = 0$; caso contrário, procedemos por indução 
+sobre $n = grau(A)$. 
+Sejam $bX^m$ o termo de grau $m$ em $B$ e $aX^n$ o termo de grau $n$ em $A$. 
+Como o polinômio $A' = A - B\left(\frac{a}{b} X^{n-m}\right)$
+é de grau $< n$, podemos escrevê-lo como $BQ' + R$ com $R = 0$ ou $grau(R) < m$, 
+pela hipótese de indução. 
+Então, $A = BQ + R$, com $Q = Q' + \frac{a}{b} X^{n-m}$.
+Quanto à unicidade de $Q$, se $A - BQ$ e $ A - BQ_1$
+são nulos ou possuem graus $< m$, o mesmo vale para $B(Q - Q_1)$; 
+como este possui grau $m + grau(Q - Q_1)$, a menos que $Q - Q_1$ seja 0,
+$Q$ deve ser igual a $Q_1$. 
+\end{proof}
+
+Se $R = A - BQ$ for $0$, então $A = BQ$; neste caso dizemos que $A$ é um 
+\underline{múltiplo} de $B$ e que $B$ é um \emph{divisor} de $A$. 
+Se $B = X - a$, então $R$ deve ser $0$ ou de grau $0$, isto é, deve ser uma 
+``constante'' (um elemento de $K$), de modo que podemos escrever
+\[
+A = (X - a)Q + r,
+\]
+com $r \in K$. Substituindo $X$ por $a$ em ambos os lados desta equação, obtemos
+$A(a) = r$; se $r = 0$, dizemos que $a$ é uma \underline{raiz} de $A$. Assim, $A$ é um múltiplo de 
+$X - a$ se, e somente se, $a$ é uma raiz de $A$.
+
+Assim como a Proposição~3.2 foi derivada do Lema~3.1, temos:
+
+\begin{proposicao}
+Seja $M$ um conjunto não-vazio de polinômios sobre um corpo. 
+Se $M$ é fechado com respeito à subtração e satisfaz a condição 
+``se $A$ pertence a $M$, então todos os múltiplos de $A$ pertencem a $M$'', 
+então $M$ consiste em todos os múltiplos de algum polinômio $D$, 
+unicamente determinado a menos de multiplicação por uma constante não-nula.
+\end{proposicao}
+
+\begin{proof}
+Se $M = \{0\}$, tomamos $D = 0$. Caso contrário, tomamos um polinômio $D$ de menor 
+grau $d$ em $M$. 
+Se $A$ pertence a $M$, aplicamos o Lema~6.1 para $A$ e $D$ e escrevemos
+$A = DQ + R$, onde $R$ é $0$ ou possui grau $< d$. 
+Então $A + D(-Q) $ pertence a $M$, donde é $0$ pela definição de $D$, 
+e $A = DQ$. 
+Se $D_1$ possui a mesma propriedade de $D$, então ele é um múltiplo de $D$ 
+e $D$ é um múltiplo de $D_1$, de modo que ambos possuem o mesmo grau; 
+escrevendo $D_1 = DE$, vemos que $E$ possui grau $0$, isto é, 
+$E$ é uma constante não-nula.    
+\end{proof}
+
+Se $aX^d$ é o termo de grau $d$ em $D$, dentre os polinômios diferindo de $D$ 
+por um fator constante não-nulo, existe um e exatamente um com coeficiente de 
+mais alto grau igual a $1$, a saber, $a^{-1}D$. 
+Chamamos tal polinômio de \underline{normalizado}.
+
+Assim como na Aula~4, podemos aplicar a Proposição~6.2 para o conjunto $M$ 
+de todas as combinações lineares $AP + BQ + \ldots + CR$
+de qualquer número de polinômios dados $A, B, \ldots, C$; aqui $P, Q, \ldots, R$ 
+denotam polinômios arbitrários. 
+Daí $M$ consiste nos múltiplos de $D$, onde $D$ é $0$ ou um polinômio normalizado; 
+dizemos que $D$ é o \emph{máximo divisor comum} de $A, B, \ldots, C$ e o denotamos por
+$(A,B,\ldots,C)$.
+Como na Aula~4, $D$ é um divisor de $A, B, \ldots, C$ e cada divisor comum de 
+$A, B, \ldots, C$ divide $D$. 
+Se $D = 1$, então $A, B, \ldots, C$ são ditos \underline{mutuamente relativamente primos}. 
+Isto ocorre se, e somente se, existem polinômios $P, Q, \ldots, R$ tais que
+\[
+AP + BQ + \cdots + CR = 1.
+\]
+Se $(A,B) = 1$, dizemos que $A$ é primo a $B$, e que $B$ é primo a $A$.
+
+Um polinômio de grau $n > 0$ é \underline{irredutível} se ele não possui divisor de grau 
+$> 0$ e $< n$. 
+Cada polinômio de grau $1$ é irredutível. 
+Notemos que a propriedade de um polinômio ser irredutível não precisa ser preservada 
+quando mudamos o corpo dos coeficientes: por exemplo, $X^2 + 1$ é irredutível sobre 
+$\mathbb{Q}$, e também sobre $\mathbb{R}$, mas não sobre $\mathbb{C}$, pois
+$X^2 + 1 = (X + i)(X - i)$.
+
+Exatamente como na Aula~5, poderíamos mostrar que cada polinômio de grau $> 0$ 
+pode ser escrito de modo essencialmente único como um produto de polinômios 
+irredutíveis. Contudo, apenas faremos uso do seguinte resultado mais fraco:
+
+\begin{proposicao}
+Se $A$ é um polinômio de grau $n > 0$ sobre um corpo $K$, então ele pode ser escrito,
+unicamente a menos da ordem dos fatores, na forma
+\[
+A = (X - a_1)(X - a_2)\cdots(X - a_m)Q,
+\]
+em que $0 \le m \le n$, $a_1, a_2, \ldots, a_m$ em $K$, e $Q$ não possui raiz alguma em $K$.    
+\end{proposicao}
+
+\begin{proof}
+Se $A$ não possui raiz, isto é claro; caso contrário, procedemos por indução sobre $n$.
+Se $A$ possui uma raiz $a$, escreva $A = (X - a)A'$;
+como $A'$ possui grau $n - 1$, podemos aplicar o teorema a ele; escrevendo $A'$ na forma
+prescrita, obtemos um produto similar para $A$.
+Se $A$ pode ser escrito como acima e também como
+\[
+A = (X - b_1)(X - b_2)\cdots(X - b_r)R,
+\]
+em que $R$ não possui raiz em $K$, então a raiz $a$ de $A$ deve ocorrer dentre os $a_i$
+e também dentre os $b_j$; e então, dividindo por $X - a$, obtemos para $A'$ dois produtos,
+os quais, por indução, devem coincidir.
+\end{proof}
+
+\begin{corolario}
+    Um polinômio de grau $n > 0$ sobre um corpo possui no máximo $n$ raízes distintas.
+\end{corolario}

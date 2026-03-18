@@ -1,0 +1,160 @@
+\section{Estruturas Quocientes}
+
+Sejam $A$ e $B$ dois conjuntos quaisquer. Uma relação $R$ entre $A$ e $B$ é um conjunto 
+consistindo em pares $(a,b)$ com $a \in A$ e $b \in B$. Quando $B = A$, dizemos que $R$ 
+é uma relação sobre $A$.
+
+Por exemplo, uma função $f \colon A \to B$ é uma relação entre $A$ e $B$ tal que para 
+cada $a \in A$ existe um único $b \in B$ com $(a,b)$ na relação. Usualmente, tal $b$ 
+é denotado por $f(a)$.
+
+Relembremos e estendamos alguns fatos sobre relações de equivalência das Aulas 11 e 15. 
+Uma relação $R$ sobre $A$ é uma relação de equivalência se para quaisquer $a,b,c \in A$ tem-se:
+$(a,a) \in R$; se $(a,b) \in R$, então $(b,a) \in R$; e, se $(a,b) \in R$ e $(b,c) \in R$, então $(a,c) \in R$.
+
+Quando $(a,b) \in R$, escreveremos $a \equiv b \pmod{R}$. Para cada $a \in A$, o subconjunto
+$(a \bmod R) = \{x \in A : (x,a) \in R\}$ é a classe de equivalência de $a$ com respeito a 
+$R$. O conjunto de todas as classes de equivalência com respeito a $R$ é chamado o \underline{conjunto quociente} 
+de $A$ por $R$ e é denotado por $A/R$.
+
+Por exemplo, se $A = \mathbb{Z} = B$ e $m \in \mathbb{Z}$, então
+$R = \{(a,b) \in \mathbb{Z} \times \mathbb{Z} : a - b \text{ é um múltiplo de } m\}$
+é a relação de congruência módulo $m$, e $A/R$ é $\mathbb{Z}/m\mathbb{Z}$.
+
+Em geral, temos as seguintes propriedades esperadas: \\
+(E1) a união das classes $(a \bmod R)$, com $a$ percorrendo $A$, é igual a $A$; \\
+(E2) se $(a,b) \in R$, então $(a \bmod R) = (b \bmod R)$; \\
+(E3) se $(a,b) \notin R$, então $(a \bmod R)$ e $(b \bmod R)$ não possuem um elemento em comum.
+
+A função $p_{A/R} : A \to A/R$ definida por $a \longmapsto (a \bmod R)$
+é chamada de \underline{projeção} de $A$ sobre $A/R$.
+
+\begin{proposicao}
+Sejam $A$ e $B$ conjuntos com relações de equivalência $R$ e $S$, respectivamente. Se $f : A \to B$
+preserva tais relações (isto é, $(a,a') \in R$ implica $(f(a),f(a')) \in S$), então existe uma única função
+$f_{*} : A/R \to B/S$ tal que o diagrama 
+\[
+\begin{tikzcd}
+A \arrow[r, "f"] \arrow[d, "p_{A/R}"'] 
+  & B \arrow[d, "p_{B/S}"] \\
+A/R \arrow[r, dashed, "f_*"'] 
+  & B/S
+\end{tikzcd}
+\]
+comuta (i.e., $p_{B/S} \circ f = f_{*} \circ p_{A/R}$).
+\end{proposicao}
+
+(Tal função $f_*$ é chamada de induzida de $f$ por ``passagem aos quocientes'').
+
+\begin{proof}
+A relação $f_*$ dada por 
+\begin{center}
+  $f_*((a \bmod R)) = (f(a) \bmod S)$
+\end{center}
+define uma função (pois se $(a' \bmod R) = (a \bmod R)$ então $( f(a') \bmod S ) = (f(a) \bmod S)$ pela
+hipótese sobre $f$ e pelas propriedades (E2) e (E3)) que faz o diagrama comutar. Além disso, $f_*$ é 
+única porque $p_{A/R}$ é sobrejetiva.
+\end{proof}
+
+Por exemplo, se $f$ é a função identidade sobre $A$, com $A = \mathbb{Z} = B$, e $R$ e $S$ são as relações
+de congruência módulo 4 e 2, respectivamente, então $f_*( (a \bmod 4) ) = (a \bmod 2)$.
+
+Agora, seja $A$ um grupo aditivo não \emph{necessariamente abeliano}. Se $H$ é um subgrupo de $A$, consideremos
+a relação $a \equiv b \ (\bmod \ R)$ definida por $a - b \in H$. Para que a desejada operação sobre $A/R$, 
+\[
+  (a \bmod R) + (b \bmod R) = (a + b \bmod R), 
+\]
+esteja bem definida, isto é, não haja dependência da escolha de representantes, é necessário e suficiente que 
+$a + h - a \in H$ para quaisquer $a$ em $A$ e $h$ em $H$. (Se a operação de $A$ fosse multiplicativa, a condição 
+se escreveria como $aha^{-1} \in H$). Um subgrupo com esta propriedade é chamado de \underline{subgrupo normal}. 
+Neste caso, o conjunto quociente $A/R$ é um grupo que passa a ser denotado por $A/H$.
+
+\begin{proposicao}[``Teorema do isomorfismo'']
+Seja $f : A \to B$ uma função entre grupos aditivos tal que $f(x+y) = f(x) + f(y)$ para quaisquer $x,y \in A$.
+Se $K = \{x \in A : f(x) = 0\}$ e $f(A) = \{f(x) : x \in A\}$, então $K$ é um subgrupo normal de $A$, $f(A)$ 
+é um subgrupo de $B$, e a aplicação
+\[
+\bar{f} : A/K \to f(A)
+\]
+definida por $\bar{f}((x \bmod K)) = f(x)$ é um isomorfismo entre grupos.
+\end{proposicao}
+
+\begin{proof}
+As duas primeiras afirmações são de fácil e direta verificação. Ademais, as seguintes condições são equivalentes:
+$x \equiv x' \ (\bmod \ K)$; $x - x' \in K$; $f(x - x') = 0$; e, $f(x) = f(x')$.
+Isso diz que $\bar{f}$ está bem definida e que ela é injetiva. Logo, ela é um isomorfismo.
+\end{proof}
+
+Finalmente, suponhamos que $A$ seja um anel associativo comutativo e unitário. Sob as notações da Proposição 13.2, 
+observemos que $K$ é um \underline{ideal} de $A$ (\emph{i.e.,} ele é um subconjunto não vazio de $A$ tal que para quaisquer 
+$x,y \in K$ e $a \in A$ tem-se $x - y \in K$ e $ay \in K$) e que $f(A)$ é um \underline{subanel} de $B$ (i.e., ele é um 
+subconjunto não vazio de $B$ tal que para quaisquer $x,y \in f(A)$ tem-se $x - y \in f(A)$ e $xy \in f(A)$). Como esperado, 
+o grupo aditivo quociente $A/K$ torna-se um anel associativo comutativo unitário com respeito à multiplicação definida por
+\[
+(a \bmod K)(b \bmod K) = (ab \bmod K).
+\]
+Ademais, se $f$, além de transformar a adição de $A$ na adição de $B$, possui as propriedades $f(xy) = f(x)f(y)$ para quaisquer 
+$x,y \in A$, e $f(1) = 1$, então a bijeção $\bar{f}$ herda essas propriedades; assim, $\bar{f}$ é um isomorfismo entre anéis unitários.
+
+\begin{exemplo}[Quocientes e Anel Quociente]
+  \leavevmode
+  \begin{enumerate}[left=0.5cm, align=left, nosep]
+    \item Descreva os quocientes de $A = \mathbb{R}$ pelas seguintes relações de equivalência:
+
+      $R: a - b \in \mathbb{Z}$ \\
+      $S: a = b$ ou $a$ e $b$ são inteiros.
+
+      Além disso, determine se aplicação induzida $A/R \to A/R$ da multiplicação por 2 de $\mathbb{R}$ em $\mathbb{R}$ é um 
+      isomorfismo.
+
+      Primeiramente, verifiquemos que $R$ e $S$ são relações de equivalência. De fato, para quaisquer $a,b,c \in A$, temos:
+      $a - a = 0 \in \mathbb{Z}$, se $a - b \in \mathbb{Z}$, então $b - a = -(a - b) \in \mathbb{Z}$, e se além disso,
+      $b - c \in \mathbb{Z}$ então $a - c = (a - b) + (b - c) \in \mathbb{Z}$; e $(a,a) \in S$, se $(a,b) \in S$, então 
+      $(b,a) \in S$, e também se $(b,c) \in S$, então ou $a = b = c$ ou ambos $a$ e $c$ são inteiros, donde $(a,c) \in S$.
+
+      Seja $a \in A$. Temos $(a \bmod R) = a + \mathbb{Z}$. Por outro lado, qualquer $b \in R$ com $b \notin \mathbb{Z}$ vemos que
+      $(a \bmod S)$ é igual à $(b \bmod S)$ se, e somente se, $a = b$. Geometricamente, $A/R$ é a circunferência e $A/S$ é 
+      um ``buquê'' conexo de laços em quantidade contavelmente infinita.  
+    
+      Se $S$ é uma relação de equivalência sobre $B$,
+      \[
+        \begin{tikzcd}
+        A \arrow[r, "f"] \arrow[d] 
+          & B \arrow[d] \\
+          A/R \arrow[r, dashed, "f_*"'] 
+          & B/S
+        \end{tikzcd} 
+      \]
+      \begin{center}
+        $(a \bmod R) \mapsto (f(a) \bmod S)$
+      \end{center}
+
+      Além disso, como $R$ é uma relação de equivalência induzida pelo subgrupo $\mathbb{Z}$ de $R$, podemos denotar 
+      $A/R$ por $R/\mathbb{Z}$.
+
+      Seja $f: \mathbb{R} \to \mathbb{R}$, $f(x) = 2x$. Temos  $f_*((x \bmod R)) = (f(x) \bmod \mathbb{Z})$. Observemos que $f_*$
+      possui a adição de $\mathbb{R}/\mathbb{Z}$: de fato, $f_*( (x \bmod \mathbb{Z}) + (y \bmod \mathbb{Z}) ) = f_*( (x + y) \bmod 
+      \mathbb{Z}) = f_*(2(x + y) \bmod \mathbb{Z}) = f_*( (x \bmod \mathbb{Z}) ) + f_*( (y \bmod \mathbb{Z}) )$. Além disso, como
+      $f$ é sobrejetiva, $f_*$ também é. Por fim, para quaisquer $a$ e $a'$ em $A$, se $(f(a), f(a')) \in R$ então nem sempre vale 
+      que $(a, a') \in R$, por exemplo, para $a = \frac{1}{2}$ e $a' = 0$. Logo, $f_*$ não é injetiva e portanto, não temos um 
+      isomorfismo.
+
+    \item Sejam $A$ um anel associativo comutativo e unitáio e $I$ um ideal $\neq A$ de $A$. Quando que o anel quociente 
+    $A/I$ (i) possui divisores de zero ? (ii) é um corpo ? 
+  
+    (i) Dizer que $xy = 0$ implica que $x = 0$ ou $y = 0$, equivale a dizer que $ab \in I$ implica que $a \in I$ ou $b \in I$. 
+    Assim, para que $A/I$ não possui divisores de zero é necessário e suficiente que $I$ possua a seguinte propriedade para 
+    quaisquer $a,b \in I$ se $ab \in I$ então $a \in I$ ou $b \in I$ (Nessas condições dizemos que \textit{o ideal próprio} 
+    $I$ é um ideal primo de $A$).
+
+    (ii) Ora, igualdade $xy = 1$ é equivalente a $ab - 1 \in I$. Usaremos isso para verificarmos que $A/I$ é um corpo se, e somente
+    se, $I \neq A$ e qualquer ideal de $A$ contendo $I$ é diferente de $A$ deve ser igual a $I$. (Nessas condições, dizemos que 
+    \textit{o ideal próprio} $I$ é um ideal maximal de $A$).
+
+    De fato, seja $I$ um ideal de $A$ contendo $I$ e consideremos $a \in I'$ com $a \notin I$. Se $A/I$ é um corpo, então $xy = 1$ 
+    implica $1 - ab \in I$. Daí, $1 = (1 - ab) + ab \in I'$. Portanto, $I' = A$. Reciprocamente, tomemos $I' = \{ ar + s: r \in  
+    A, s \in I \}$ \emph{i.e} $I'$ é o mesmo ideal de $A$ contendo $a$ e $I$, De $I' = A$ obtemos $1 - ab \in I$; donde $xy = 1$.
+    Logo, cada elemento de $A/I$ possui um elemento inverso e $A/I$ é um corpo.
+
+  \end{enumerate}
+\end{exemplo}

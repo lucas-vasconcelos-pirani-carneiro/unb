@@ -1,0 +1,126 @@
+\section{Divisão Euclidiana e Máximo Divisor Comum}
+
+Para vermos que o máximo divisor comum de $2014$ e $1484$ é $106$, 
+usávamos no colégio as seguintes igualdades:
+\[
+\begin{aligned}
+2014 &= 1\cdot 1484 + 530,\\
+1484 &= 2\cdot 530 + 424,\\
+530  &= 1\cdot 424 + 106,\\
+424  &= 4\cdot 106 + 0.
+\end{aligned}
+\]
+
+Pois, indo de baixo para cima, $106$ divide $1484$ e $106$ divide $2014$; 
+e, de cima para baixo, se um inteiro $d$ divide $2014$ e $1484$, 
+então $d$ divide $106$. Essa última constatação também pode ser observada 
+ao reescrevermos, de cima para baixo, todas menos a última das igualdades 
+em termos de $2014$ e $1484$ do seguinte modo:
+\[
+\begin{aligned}
+530 &= 2014 + (-1)\cdot 1484,\\
+424 &= 1484 + (-2)\cdot 530 = (-2)\cdot 2014 + 3\cdot 1484,\\
+106 &= 530 + (-1)\cdot 424 = 3\cdot 2014 + (-4)\cdot 1484.
+\end{aligned}
+\]
+
+\medskip
+
+\begin{lema}[Divisão Euclidiana]
+Se $a$ e $d$ são inteiros com $d > 0$, então existe um único maior múltiplo de $qd$
+de $d$ que é menor do que ou igual a $a$; ele pode ser caracterizado por 
+$q d \leq a < (q+1)d$, ou, também por
+\[
+a = qd + r, \quad \text{com } 0 \leq r < d.
+\]
+
+(Aqui, $r$ é chamado de \emph{o resto da divisão de $a$ por $d$}; 
+$d$ é chamado de \emph{o divisor}, e $q$ é \emph{o quociente}.)
+
+\end{lema}
+
+\begin{proof}
+O conjunto dos inteiros positivos da forma $a - zd$ com $z \in \mathbb{Z}$ é não-vazio, 
+pois podemos tomar $z = -N$ em que $N$ é um inteiro não-negativo suficientemente grande. 
+Pelo Princípio da Boa Ordenação, digamos que seja $r$ o menor elemento, 
+e escrevamos $r = a - qd$. Então, $r \geq 0$; e $r < d$, 
+pois caso contrário $a - (q+1)d$ pertenceria ao conjunto e seria $< r$.
+\end{proof}
+
+Por exemplo, os números ímpares são da forma $2n + 1$, com $n \in \mathbb{Z}$, 
+e a diferença de quaisquer dois números ímpares é um número par.
+
+\begin{proposicao}
+Seja $M$ um conjunto não-vazio de inteiros. 
+Se $M$ é fechado com respeito à subtração, então existe um único $m \geq 0$ 
+tal que $M$ é o conjunto de todos os múltiplos de $m$:
+\[
+M = \{ mz : z \in \mathbb{Z} \} = m\mathbb{Z}.
+\]
+\end{proposicao}
+
+\begin{proof}
+Comecemos com algumas observações. 
+Se $x \in M$, então pela hipótese $0 = x - x \in M$, e $-x = 0 - x \in M$. 
+Se, além disso, $y \in M$, então $y + x = y - (-x) \in M$. 
+Logo, $M$ é fechado com respeito à adição. 
+Se $x \in M$ e $xn \in M$, em que $n$ é um inteiro não-negativo qualquer, 
+então $(n+1)x \in M$. 
+Portanto, pelo Princípio da Indução Matemática, $nx \in M$ para cada $n \in \mathbb{Z}$. 
+Finalmente, todas as combinações lineares de elementos de $M$ com coeficientes inteiros 
+ainda pertencem a $M$. Como essa propriedade resulta em $M$ ser fechado com respeito 
+à adição e à subtração, ela é equivalente à hipótese sobre $M$.
+
+Se $M = \{0\}$, a proposição é verdadeira tomando-se $m = 0$. 
+Caso contrário, o conjunto dos elementos $> 0$ em $M$ é não-vazio. 
+Tomemos $m$ como o menor desses elementos. 
+Todos os múltiplos de $m$ pertencem a $M$. 
+Para cada $x$ em $M$, aplicamos o Lema~4.1 e escrevemos
+$x = my + r$, com $0 \leq r < m$; então $r = x - my \in M$. 
+Pela definição de $m$, isto implica $r = 0$, ou seja, $x = my$. 
+Portanto, $M = m\mathbb{Z}$. 
+Finalmente, como $m$ é o menor elemento $> 0$ em $m\mathbb{Z}$, 
+ele é unicamente determinado quando $M$ é dado.
+\end{proof}
+
+\begin{corolario}
+Se $a, b, \ldots, c$ são inteiros em qualquer quantidade finita, 
+então existe um único inteiro $d \ge 0$ tal que o conjunto de todas as combinações lineares $ax + by + \cdots + cz$ de 
+$a, b, \ldots, c$ com coeficientes inteiros $x, y, \ldots, z$ consiste em todos os múltiplos de $d$.
+\[
+\{ax + by + \ldots + cz : x,y,\ldots,z \in \mathbb{Z} \} = d\mathbb{Z}
+\]
+\end{corolario}
+
+\begin{proof}
+Aplique a Proposição 3.2 ao conjunto das tais combinações lineares.
+\end{proof}
+
+\begin{corolario}
+Sob as notações e hipóteses do Corolário 3.3, vale que $d$ é um 
+divisor de cada um dos inteiros $a, b, \ldots, c$ e cada divisor comum desses inteiros é um divisor de $d$.
+\end{corolario}
+
+\begin{proof}
+Cada um dos inteiros $a, b, \ldots, c$ pertence ao conjunto das suas combinações lineares; e cada divisor comum de 
+$a, b, \ldots, c$ é um divisor de cada uma das suas combinações lineares, e em particular, de $d$.
+\end{proof}
+
+\begin{definicao}
+O inteiro $d$ definido nos corolários da Proposição 3.2 é chamado 
+de o \underline{máximo divisor comum} (ou abreviadamente $m.d.c.$) de $a, b, \ldots, c$; ele é denotado por $(a, b, \ldots, c)$. 
+
+Como o $m.d.c.$ $(a, b, \ldots, c)$ pertence ao conjunto das combinações lineares, ele pode ser escrito da forma: 
+\[
+(a, b, \ldots, c) = ax_0 + by_0 + \ldots + cz_0,
+\]
+em que $x_0, y_0, \ldots, z_0$ são inteiros.
+\end{definicao}
+
+Exemplos:
+\begin{enumerate}[left=0.5cm, align=left, nosep]
+    \item Temos $(6, 10, 15) = 1$, $(6, 10) = 2$, $(6, 15) = 3$, e $(10, 15) = 5$.
+    \item Para $a \ge 0$, temos $(a, b) = a$ se, e somente se, $a \mid b$.
+    \item Se $a = qb + c$, então $(a, b) = (b, c)$.
+\end{enumerate}
+

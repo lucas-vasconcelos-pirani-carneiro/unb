@@ -1,0 +1,99 @@
+\section{\texorpdfstring{$\mathbb{Z}$}{Z} Versus \texorpdfstring{$\mathbb{Z}/m\mathbb{Z}$}{Z/mZ}}
+
+As definições de grupo e subgrupo tornam claro que a interseção de qualquer coleção --- 
+ainda que infinita --- de subgrupos de um grupo $G$ é também um subgrupo de $G$. (De fato, 
+o elemento identidade pertence à interseção, e se $g_1$ e $g_2$ pertencem à interseção, então 
+$g_1 g_2 \text{ e } g_1^{-1}$ também pertence).
+
+\begin{definicao}
+Sejam $a, b, \ldots, c$ elementos de um grupo $G$. Dizemos que a interseção $H$ de todos os 
+subgrupos de $G$ (incluindo o próprio $G$) que contêm $a, b, \ldots, c$ é o \textbf{subgrupo gerado} por 
+$a, b, \ldots, c$ e que estes formam um conjunto gerador de $H$. Neste caso, escreveremos
+$H = \langle a, b, \ldots, c \rangle$.
+\end{definicao}
+
+Isto pode ser expresso ao dizermos que $\langle a, b, \ldots, c \rangle$ é o menor subgrupo de $G$ 
+contendo $a, b, \ldots, c$; pode acontecer dele ser o próprio $G$ (e.g., no grupo aditivo $\mathbb{Z}$, 
+temos $\langle 2, 3 \rangle = \mathbb{Z}$).
+
+Seja $G$ um grupo e seja $x$ um elemento de $G$. Se $G$ é um grupo aditivo, escrevemos $0x$ para o elemento 
+neutro $0$ de $G$, $-x$ para o elemento $x'$ definido por $x' + x = 0$, escrevemos $nx$, quando $n$ é um inteiro 
+$> 0$, para a soma $x + \cdots + x$ de $n$ termos iguais a $x$, e $(-n)x$ para $-(nx)$. Por indução vemos que
+$\{ nx : n \in \mathbb{Z} \}$ está contido em $\langle x \rangle$. Também por indução verifica-se as fórmulas
+\[
+mx + nx = (m+n)x
+\quad \text{e} \quad
+m(nx) = (mn)x,
+\]
+para quaisquer $m, n \in \mathbb{Z}$. A primeira fórmula diz que $\{ nx : n \in \mathbb{Z} \}$ é um subgrupo de $G$. Logo,
+$\{ nx : n \in \mathbb{Z} \}$ contém $\langle x \rangle$, e portanto deve ser igual a $\langle x \rangle$.
+Por conveniência, enunciamos isto como uma proposição apenas no caso em que $G$ é multiplicativo. Neste caso, 
+escrevemos $x^0$ para o elemento neutro $1$ de $G$, $x^{-1}$ para o elemento $x'$ de $G$ definido por $x x' = 1$, 
+escrevemos $x^n$, quando $n$ é um inteiro $> 0$, para o produto
+$x \cdots x$ de $n$ fatores iguais a $x$, e $x^{-n}$ para $(x^n)^{-1}$
+
+\begin{proposicao}
+Se $G$ for um grupo multiplicativo, então para cada elemento $x$ de $G$, o subgrupo gerado por $x$ consiste 
+em todos os elementos $x^n$ com $n \in \mathbb{Z}$.
+\end{proposicao}
+
+Sejam $G$ como na Proposição 11.2, e seja $M$ o conjunto de todos os inteiros $a$ tais que $x^a = 1$. Como 
+$x^0 = 1$, $M$ é não-vazio. Além disso, para qualquer inteiro $a$ e qualquer inteiro $b$, a fórmula
+$x^{a-b} = x^a (x^b)^{-1}$ mostra que $x^a = x^b$ se, e somente se, $a - b \in M$. Em particular, $M$ é 
+fechado para a subtração. Portanto, $M$ satisfaz as hipóteses da Proposição 3.2 (em outras palavras, ele 
+é um subgrupo de $\mathbb{Z}$) e consiste em todos os múltiplos de algum inteiro $m \ge 0$; se $m \ne 0$, 
+ele é o menor inteiro $> 0$ tal que $x^m = 1$. Logo, se $m = 0$, então todos os elementos $x^a$ são distintos; 
+e se $m > 0$, $x^a$ é igual a $x^b$ se, e somente se, $a \equiv b \pmod{m}$.
+
+\begin{definicao}
+Um isomorfismo entre dois grupos $G$ e $G'$ é uma aplicação bijetiva
+$f : G \to G'$
+tal que $f$ transforma a operação $\ast_G$ do grupo $G$ na operação $\ast_{G'}$ do grupo $G'$(\emph{i.e.},
+$f(x \ast_G y) = f(x) \ast_G' f(y) \text{ para quaisquer } x, y \in G$). 
+\end{definicao}
+
+Por exemplo, entre os grupos aditivos $\mathbb{Z}/2014\mathbb{Z}$ e $\mathbb{Z}/2015\mathbb{Z}$ não existe 
+isomorfismo algum. Por outro lado, temos o seguinte isomorfismo $f$ entre o grupo multiplicativo 
+$(\mathbb{Z}/9\mathbb{Z})^\times$ e o grupo aditivo $\mathbb{Z}/6\mathbb{Z}$.
+
+\begin{center}
+$f((2^n \text{ mod } 9)) = (n \text{ mod } 6)$.    
+\end{center}
+
+De fato, cada elemento de $(\mathbb{Z}/9\mathbb{Z})^\times$ é da forma $(2^n \bmod 9)$, a aplicação é bijetiva, e
+$f\big((2^{n_1} \bmod 9)\big) + f\big((2^{n_2} \bmod 9)\big)
+= (n_1 + n_2 \bmod 6) = f\big((2^{n_1+n_2} \bmod 9)\big).$
+
+O conceito de isomorfismo pode ser transportado de uma maneira óbvia para anéis e corpos.
+
+\begin{proposicao}
+Seja $G$ um grupo multiplicativo gerado por um elemento $x$. Então: ou $G$ é infinito e a aplicação
+$x^n \mapsto n$ é um isomorfismo entre $G$ e o grupo aditivo $\mathbb{Z}$, ou $G$ é finito consistindo 
+em $m$ elementos e a aplicação $x^n \mapsto (n \bmod m)$ é um isomorfismo entre $G$ e o grupo aditivo 
+$\mathbb{Z}/m\mathbb{Z}$.
+\end{proposicao}
+
+Claramente, se $G$ é um grupo qualquer e $x$ é um elemento qualquer de $G$, a Proposição 11.4 pode ser aplicada 
+para o subgrupo de $G$ gerado por $x$.
+
+\begin{definicao}
+O número de elementos de um grupo finito é chamado de sua \underline{ordem}. Se um grupo finito puder ser gerado por 
+um elemento, dizemos que ele é \underline{cíclico}. Se um elemento $x$ de um grupo qualquer gera um grupo finito de 
+ordem $m$, dizemos que $m$ é a ordem de $x$.
+\end{definicao}
+
+Por exemplo, a ordem do grupo aditivo $\mathbb{Z}/m\mathbb{Z}$ é $m$ e a ordem do grupo multiplicativo 
+$(\mathbb{Z}/m\mathbb{Z})^\times$ é $\varphi(m)$. O grupo $\mathbb{Z}/m\mathbb{Z}$ é cíclico gerado por $(1 \bmod m)$ 
+ou $(-1 \bmod m)$, enquanto que o grupo $(\mathbb{Z}/8\mathbb{Z})^\times$ possui ordem $4$ e não é cíclico. De fato, 
+este último grupo não possui elemento de ordem $4$.
+
+\[
+\begin{array}{c|cccc}
+\text{elemento em } (\mathbb{Z}/8\mathbb{Z})^\times 
+& (1 \bmod 8) & (3 \bmod 8) & (5 \bmod 8) & (7 \bmod 8) \\ \hline
+\text{ordem} & 1 & 2 & 2 & 2
+\end{array}
+\]
+
+(Nota-se, contudo, que qualquer subconjunto de dois elementos de $(\mathbb{Z}/8\mathbb{Z})^\times$ que não contenha 
+$(1 \bmod m)$ gera todo o grupo.)

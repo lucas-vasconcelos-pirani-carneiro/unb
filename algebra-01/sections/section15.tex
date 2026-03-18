@@ -1,0 +1,152 @@
+\section{Anéis de Frações}
+
+A maneira mais usual de obtermos $\mathbb{Q}$ a partir de $\mathbb{Z}$ é acrescentarmos a $\mathbb{Z}$ os inversos 
+dos elementos de $\mathbb{Z} \setminus \{0\}$ por meio de frações. O formalismo dessa construção é essencialmente 
+o mesmo para o caso de um \emph{anel associativo comutativo unitário} $A$ qualquer.
+
+Se um subconjunto $S$ de $A$ é tal que $1 \in S$ e, para quaisquer $s$ e $s'$ em $S$, tem-se $ss' \in S$, dizemos 
+que ele é \underline{multiplicativo}. Neste caso, consideramos a relação de equivalência sobre o conjunto
+$A \times S$ entre $(a,s)$ e $(a',s')$ definida por: ``existe $s'' \in S$ tal que $s''(s'a - sa') = 0$''.
+Denotando a classe de equivalência de $(a,s)$ por $a/s$, o conjunto quociente de $A \times S$ por essa relação 
+torna-se um anel associativo comutativo unitário sob as operações
+\[
+(a/s) + (a'/s') = (s'a + sa')/(ss'),
+\]
+\[
+(a/s)(a'/s') = (aa')/(ss').
+\]
+
+\begin{definicao}
+Tal \emph{anel} é chamado de \underline{anel das frações} de $A$ com respeito a $S$ e será denotado por $S^{-1}A$. 
+A aplicação $\iota : A \to S^{-1}A$, $a \mapsto a/1$, é chamada de \emph{homomorfismo canônico} de $A$ em $S^{-1}A$.
+\end{definicao}
+
+Suponhamos que $0 \notin S$; caso contrário, $S^{-1}A = \{0\}$. Se $A$ é um \underline{domínio de integridade} 
+(i.e., $A$ também é não nulo e não possui divisores de zero), então $S^{-1}A$ também o é, e $\iota$ é injetiva.
+Se, além disso, $S = A \setminus \{0\}$, então $S^{-1}A$ é um corpo, chamado de \underline{corpo das frações} do domínio $A$.
+
+Em geral, os casos mais importantes da construção são quando $S$ consiste: (1) nas potências $t^n$, com $n \geq 0$, 
+de um elemento $t$ em $A$, caso em que o anel $S^{-1}A$ é frequentemente denotado por $A_t$; ou, (2) no conjunto complementar 
+$A \setminus P$ de um ideal primo $P$ de $A$ (o fato que $S$ é multiplicativo pode ser tomado como a definição de um ideal primo), 
+caso em que o anel $S^{-1}A$ é denotado por $A_P$.
+
+Seja $I$ um ideal de $A$. Escrevamos $S^{-1}I = \{\, b/s : b \in I,\ s \in S \,\}$. Se $J$ é um ideal de $S^{-1}A$ e 
+$I = \iota^{-1}(J)$, observamos que $S^{-1}I = J$.
+
+\begin{proposicao}
+O homomorfismo canônico $\iota : A \to S^{-1}A$ induz uma correspondência bijetiva entre o conjunto dos ideais primos de 
+$S^{-1}A$ e o conjunto dos ideais primos de $A$ que não intersectam $S$.
+\end{proposicao}
+
+\begin{proof}
+Sejam $Y$ e $X$ o primeiro e o segundo conjuntos de ideais, respectivamente. Se $J \in Y$, então $\iota^{-1}(J) \in X$.
+De fato, a imagem inversa de qualquer ideal primo por um homomorfismo é ideal primo, e se $a$ em $\iota^{-1}(J)$ pertencesse a $S$, 
+então $\iota(a)$ seria um elemento invertível de $S^{-1}A$ no ideal $J$; contra $J \neq S^{-1}A$.
+Agora, basta mostrarmos a sobrejetividade da correspondência, pois a observação precedente à Proposição fornece a injetividade.
+Dado $I \in X$, temos $I \subset \iota^{-1}(S^{-1}I)$. Para a inclusão no outro sentido, tomemos $a$ em $\iota^{-1}(S^{-1}I)$.
+De $\iota(a) \in S^{-1}I$, existem $b$ em $I$ e $s, s'$ em $S$ tais que $s'(sa - b) = 0$; donde $s'sa \in I$. Como $s's \in S$ 
+e o ideal primo $I$ não intersecta $S$, obtemos $a \in I$.
+\end{proof}
+
+Por exemplo, se $A = \mathbb{Z}$ e $(p) = p\mathbb{Z}$ com $p$ primo, então apesar de 
+\[
+\mathbb{Z}_{(p)} = \{\, a/s : a \in \mathbb{Z},\ s \in \mathbb{Z} \setminus (p) \,\}
+\]
+não ser um corpo, ele possui um único ideal maximal, nomeadamente, $p\mathbb{Z}_{(p)}$. De fato, a passagem de 
+$\mathbb{Z}$ para $\mathbb{Z}_{(p)}$ ``mata'' os ideais primos que não estão contidos em $(p)$; em outros termos, o
+processo é uma \emph{localização} em $(p)$. Ademais, por um lado, o corpo $\mathbb{Z}_{(p)}/p\mathbb{Z}_{(p)}$ é o corpo 
+das frações de $\mathbb{Z}/(p)$. Por outro lado, sem muita perda de informação, os domínios de integridade $\mathbb{Z}$ e 
+$\mathbb{Z}_{(p)}$ possuem o mesmo corpo das frações.
+
+Finalmente, diversas propriedades de $A_P$, quando $P$ percorre todos os
+ideais primos de $A$, são compartilhadas com $A$. Ilustremos esse aspecto
+de ``passagem do local para o global'' com o seguinte resultado.
+
+\begin{proposicao}
+As seguintes afirmações são equivalentes: $A = \{0\}$; $A_P = \{0\}$, para cada ideal primo $P$ de $A$; e,$A_M = \{0\}$, para 
+cada ideal maximal $M$ de $A$.
+\end{proposicao}
+
+\begin{proof}
+Evidentemente, a primeira asserção implica a segunda, a qual, por sua vez, implica a terceira. Seja $a \in A$, basta vermos 
+que $1$ pertence ao ideal $I = \{\, x \in A : xa = 0 \,\}$. Como cada anel associativo comutativo unitário não nulo $B$ possui um
+ideal maximal, se a projeção canônica $f : A \to B$, para $B = A/I$, tivesse imagem $\neq \{0\}$, então a imagem inversa de um 
+ideal maximal de $B$ por $f$ seria um ideal maximal $M$ de $A$ contendo $I$ (\emph{cf.} Proposição 14.2(d)). Ora, de 
+$a/1 \in A_M = \{0\}$, existe $s \in A \setminus M$ que pertence a $I$. Logo, $I = A$ e $a = 0$.
+\end{proof}
+
+\begin{exemplo}[Anel Quociente e Domínio de Integridade]
+    \leavevmode
+    \begin{enumerate}[left=0.5cm, align=left, nosep]
+        \item Mostre que um anel quociente $\mathbb{Q}[X][Y]/(X^2 + Y^2 - 1)$ é um domínio de integridade com corpo das frações 
+        isomorfas ao corpo das funções do anel dos polinômios em uma indeterminada com coeficientes em $\mathbb{Q}$.
+        
+        Seja $I$ o ideal gerado por $p = X^2 + Y^2 - 1$ em $\mathbb{Q}[X][Y]$ e $A = \mathbb{Q}[X][Y]/(p) = I$.
+        De pronto, $A$ é um anel associativo, comutativo e com $1 \neq 0$. Como $p$ não se decompõe como um produto de fatores 
+        lineares. O ideal $I$ é primo e, logo, $A$ é um domínio de integridade.
+
+        Se $x = (X \bmod I)$ e $y = (Y \bmod I)$, então $x^2 + y^2 = 1$ em $A$. A seguinte parametrização racional da circunferência
+        unitária $\mathbb{T} \mapsto y/x + 1$ estende-se a um único homomorfismo entre o corpo das frações de $\mathbb{Q}[T]$
+        e o corpo das frações de $A$, o homomorfismo inverso é dado por $x \longmapsto \frac{1 - T^2}{1 + T^2}$,
+        $y \longmapsto \frac{2T}{1 + T^2}$.
+
+        \item Se $A$ é um domínio de integridade e $G$ é um subgrupo finito de $A^{\times}$ (\emph{i.e} consiste nos elementos $u$ 
+        em $A$ que existe $v$ em $A$ tal que $uv = 1$), então $G$ é ciclico.
+    
+        Se $K$ o corpo das frações de um domínio $A$, então o homomorfismo canônico $\iota : A \to K$,  $a \mapsto \frac{a}{1}$ 
+        é injetivo, pois $\iota(a)=0$ implica que $a=0$. Como o homomorfismo entre anéis invertíveis leva elementos invertíveis
+        em elementos invertíveis, e sua restrição $f : A^\times \to K^\times$ é um homomorfismo injetivo entre grupos. Logo, 
+        sendo $G$ isomorfo ao subgrupo finito $f(G)$ de $K^\times$, ele é ciclico.
+
+        \item Determine quais dos seguintes grupos são isomorfos entre si:
+        \begin{enumerate}[label=(\alph*), left=0.5cm, align=left, nosep]
+            \item $(\mathbb{Z}/15\mathbb{Z})^\times$;
+        
+            Ora, $(-1 \bmod 15)$ e $(2 \bmod 15)$ possuem ordens $2$ e $4$, respectivamente, ademais, cada elemento do grupo 
+            comutativo $(\mathbb{Z}/15\mathbb{Z})^\times$ pode ser escrito de modo único como um produto $(-1 \bmod 15)^\epsilon 
+            (2 \bmod 15)^k$ com $0 \leq \epsilon \leq 1$ e $0 \leq k \leq 3$. Assim, o grupo é isomorfo a $\mathbb{Z}/2\mathbb{Z} 
+            \times \mathbb{Z}/4\mathbb{Z}$. Como $3$ e $5$ são mutualmente relativamente primos, o Teorema Chinês do Resto diz que 
+            o homomorfismo entre anéis $\mathbb{Z}/15\mathbb{Z} \to \mathbb{Z}/3\mathbb{Z} \times \mathbb{Z}/5\mathbb{Z}$, isto é, 
+            $(x \bmod 15) \mapsto (x \bmod 3) \cdot (x \bmod 5)$ é bijetiva. Ele define então um isomorfismo entre 
+            $(\mathbb{Z}/15\mathbb{Z})^\times \to (\mathbb{Z}/3\mathbb{Z})^\times \times (\mathbb{Z}/5\mathbb{Z})^\times$. Logo, o 
+            grupo dado é $\mathbb{Z}/2\mathbb{Z} \times \mathbb{Z}/4\mathbb{Z}$
+            
+            \item $(\mathbb{Z}/17\mathbb{Z})^\times / \{\pm 1\}$;
+            
+            Como o grupo $(\mathbb{Z}/17\mathbb{Z})^\times$ é ciclico, gerado por $3$, o grupo dado é ciclico gerado por 
+            $(3 \bmod \{\pm 1\})$. Alternativamente, o homomorfismo $\mathbb{Z}/17\mathbb{Z}^\times \to \mathbb{Z}/8\mathbb{Z}$, 
+            dado por $(3^n \bmod 17) \mapsto (n \bmod 8)$ é sobrejetiva é possui núcleo $= \{\pm 1\}$; logo pelo Teorema do Isomorfismo,
+            o grupo dado é isomorfo a $\mathbb{Z}/8\mathbb{Z}$.
+            
+            \item as raízes complexas de $X^8 - 1$;
+            
+            O grupo é ciclico de ordem $8$, gerado por $e^{2\pi i/8}$. Alternativamente, o grupo é ciclico pois é um subgrupo finito 
+            do grupo $\mathbb{C}^\times$; ele possui ordem $8$ pois cada polinômio de grau $> 0$ em $\mathbb{C}[X]$ possui uma raiz em 
+            $\mathbb{C}$.
+            
+            \item o grupo aditivo de um corpo com $8$ elementos;
+            
+            Seja $F$ um corpo com $8$ elementos. Então o subgrupo aditivo $\langle 1 \rangle$ gerado por $1$ de $F$ e 
+            $\mathbb{Z}/m\mathbb{Z}$. Consideremos o isomorfismo $\langle 1 \rangle \mapsto \mathbb{Z}/m\mathbb{Z}$,
+            $n \circ 1 \mapsto (n \bmod m)$. Se um divisor primo $p$ de um fosse $< m$, então $0 = 1 \cdot m = (1 \cdot p)
+            (1 \cdot \frac{m}{p}) \neq 0$. Assim, $m=p$ e $f$ é um isomorfismo entre corpos. Logo, $p=2$ e $1 + 1 = 0$ em $F$.
+            Agora, sabendo-se que um grupo abeliano de $8$ elementos é isomorfo a $\mathbb{Z}/8\mathbb{Z}$, $\mathbb{Z}/2\mathbb{Z}
+            \times \mathbb{Z}/4\mathbb{Z}$ ou $\mathbb{Z}/2\mathbb{Z} \times \mathbb{Z}/2\mathbb{Z} \times \mathbb{Z}/2\mathbb{Z}$,
+            a propriedade de $2x = 0$ para cada $x \in F$ exclui as duas primeiras opções.
+            
+            Alternativamente, seja $K = \{0,1\} \subset F$, teríamos os seguintes elementos em $F$: $e_1 = 1$, $e_2 \notin 
+            \{a e_1 : a \in K\}$, $e_3 \notin \{a_1 e_1 + a_2 e_2 : a_1,a_2 \in K\}$ então,
+            $\{ a_1 e_1 + a_2 e_2 + a_3 e_3 : a_1,a_2,a_3 \in K \}$ possui $8$ elementos, isto é, todo o grupo aditivo de $F$.
+            Assim, $F \to \mathbb{Z}/2\mathbb{Z} \times \mathbb{Z}/2\mathbb{Z} \times \mathbb{Z}/2\mathbb{Z}$,
+            $\sum a_i e_i \mapsto (a_1,a_2,a_3)$, é um isomorfismo.
+            
+            \item o subgrupo de $\mathrm{GL}_2(\mathbb{Z}/5\mathbb{Z})$ gerado por $\begin{pmatrix} -1 & 0 \\ 0 & 1 \end{pmatrix}$
+            e $\begin{pmatrix} 2 & 0 \\ 0 & 3 \end{pmatrix}$.
+        
+            Seja $G$ o subgrupo dado e sejam respectivamente $a$ e $b$ as matrizes dadas. Notamos que $a^2 = 1$, $b^4 = 1$ e 
+            $ab = ba$, verifica-se que a aplicação $(\mathbb{Z}/15\mathbb{Z})^\times \mapsto G$ definida por $(-1 \bmod 15) \mapsto a$
+            e $(2 \bmod 15) \mapsto b$ é um isomorfismo.
+        
+        \end{enumerate}
+    \end{enumerate}
+\end{exemplo}
