@@ -1,0 +1,6 @@
+Link - Vídeo Aulas
+1. Introdução - https://www.youtube.com/playlist?list=PLYwZrh5swok9Bwu-zUlcwAxeu0JEAhUdv
+2. Camada de Aplicação - https://www.youtube.com/playlist?list=PLm6RIeTHkGXj1odYNb4DaQWB2zJGm3pTS
+3. Camada de Transporte - https://www.youtube.com/playlist?list=PLUouDBud9PVWZPV4jRBcnzSNU1L1D472j
+4. Camada de Redes - https://www.youtube.com/playlist?list=PLYwZrh5swok8jEh9zYFr-TbdK7EaUuKU9
+5. Camada de Enlace - https://www.youtube.com/playlist?list=PLbjXYeam_XbZKEutFY6gq_4nSifm9HXUY
