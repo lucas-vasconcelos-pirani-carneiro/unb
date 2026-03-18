@@ -1,0 +1,728 @@
+\section{Camada de Redes - Plano de Controle}
+
+    \subsection{Introdução}
+
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Funções da camada de redes:   
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item \textbf{Encaminhamento}: Mover pacotes do entrada de um roteador para a saída correta.
+            \item \textbf{Roteamento}: Determinar o \underline{caminho/rota} que os pacotes devem seguir na rede.
+        \end{itemize}
+        
+        \item Duas maneiras de implementar o plano de controle: 
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Controle por roteador
+            \item Visão lógica centralizada (Redes definidas por software - SDN)
+        \end{itemize}
+        
+        \item Comoponentes individuais do algoritmo de roteamento interagem \textbf{em cada e em todo roteador} no plano de controle
+        \begin{center}
+            \includegraphics[width=0.5\textwidth]{img/cap-04.01/por-roteador.png}
+        \end{center}
+
+        \item Redes definidas por software (SDN): Controladores remotos controlam,instalam as tabelas de encaminhamento nos roteadores
+        \begin{center}
+            \includegraphics[width=0.5\textwidth]{img/cap-04.01/sdn.png}
+        \end{center}
+
+    \end{itemize}
+
+    \subsection{Protocolos de Roteamento}
+        \begin{itemize}[left=0.5cm, align=left, nosep]
+            \item Objetivo: Determinar \textbf{"bons" caminhos}(rotas) do hospedeiro de origem ao hospedeiro de destino    
+            \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                \item \textbf{Camiho:} Sequência de roteadores atravessados por um pacote para ir do hospedeiro de origem ao hospedeiro de destino
+                \item \textbf{"Bom":} Menor custo, encaminhamento mais rápido, menos congestionado, etc.
+                \item Roteamento é Top-10 desafios na área de redes de computadores 
+            \end{itemize}
+
+            \begin{center}
+                \includegraphics[width=0.5\textwidth]{img/cap-04.01/protocolo-de-roteamento.png}
+            \end{center}
+        
+        \end{itemize}
+    
+        \subsubsection*{Abstração por Grafos}
+
+            \begin{center}
+                \includegraphics[width=0.5\textwidth]{img/cap-04.01/grafo.png}
+            \end{center}
+
+            \begin{align*}
+                \text{Grafo: } &\quad G = (N, E) \\
+                N &= \text{ nós/roteadores } \{u,v,w,x,y,z\} \\
+                E &= \text{ arestas/enlaces } \{(u,v), (u,x), (v,x), (v,w), (w,y), (w,z), (x,w), (x,y), (y,z)\} \\[6pt]
+                c_{a,b} &: \text{ custo \textbf{direto} do enlace conectando } a \text{ e } b \\[4pt]
+                \text{Ex: } &\quad c_{w,z} = 5, \quad c_{w,x} = \infty
+            \end{align*}
+
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item Custo é definido pelo operador da rede:    
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Pode ser sempre 1 (número de saltos)
+                    \item Inversamento relacionamento da largura de banda (Dinâmico)
+                    \item Inverso do congestionamento do enlace (Dinâmico)
+                \end{itemize}
+
+                \item Classificação dos algoritmos de roteamento:
+
+                \begin{center}
+                    \includegraphics[width=0.6\textwidth]{img/cap-04.01/classificacao-algoritmo.png}
+                \end{center}
+
+            \end{itemize}
+            
+        \subsubsection*{Dijkstra (Link-State)}
+
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item \textbf{Centralizado:} Todos os roteadores sabem os custos dos enlaces na rede
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Difusão do estado do estado de enlace, a informação é propagada por toda a rede via \textit{broadcast}
+                    \item Todos os nós possuem a mesma informação sobre o estado da rede 
+                \end{itemize}
+                \item Ideia: Computa o caminho de menor custo de um nó (origem) para todos os outros nós
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Cada roteador executa o algoritmo de Dijkstra, calculando os caminhos de menor custo dele para os demais nós da rede
+                    \item Ao fim desse cálculo, o roteador alimenta sua \textbf{tabela de encaminhamento} para esse nó  
+                \end{itemize}
+                \item \textbf{Iterativo:} Após $k$ iterações, o nó conhece os caminhos de menor custo para $k$ destinos  
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item A cada iteração obtem-se a informação de alcançabilidade, caminho de menor custo, para um determinado nó  
+                \end{itemize}   
+                \item \textbf{Notação:} 
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item $\mathbf{c_{x,y}}:$ Custo \underline{direto} do enlace entre os nós $x$ e $y$, $= \infty$ se não houver enlace
+                    \item $\mathbf{D(v)}:$ A atual \underline{estimativa} do custo do caminho de menor custo do nó de origem até o nó $v$
+                    \item $\mathbf{p(v)}:$ Predecessor, nó que vem antes, de $v$ no caminho de menor custo do nó de origem até $v$
+                    \item $\mathbf{N'}:$ Conjuntos de nós para os quais o algoritmo já sabe \textit{definitivamente} o caminho de menor custo
+                \end{itemize}
+            \end{itemize}
+        
+            \begin{algorithm}
+                \caption{Algoritmo de Dijkstra}
+                \begin{algorithmic}[1]
+                    \State \textbf{Initialization:}
+                    \State $N' = \{u\}$  /* Computa o caminho de menor custo de $u$ para os outros nós */
+                    \For{all nodes $v$}
+                        \If{$v$ adjacent to $u$}  /* $u$ conhece só o custo direto apenas para vizinhos*/
+                            \State $D(v) = c_{u,v}$  /* Mas, pode não ser o custo mínimo! */
+                        \Else
+                            \State $D(v) = \infty$
+                        \EndIf
+                    \EndFor
+
+                    \State
+                    \State \textbf{Loop:}
+                    \Repeat
+                        \State find $w$ not in $N'$ such that $D(w)$ is minimum
+                        \State add $w$ to $N'$
+                        \State update $D(v)$ for all $v$ adjacent to $w$ and not in $N'$:
+                        \State $D(v) = \min(D(v), D(w) + c_{w,v})$
+                        \State /* O novo caminho mínimo para $v$ é o antigo custo de $v$ ou
+                        \State \ \ o custo mínimo conhecido para $w$ + o custo direto de $w$ para $v$. */
+                    \Until{all nodes in $N'$}
+                
+                \end{algorithmic}
+            \end{algorithm}
+
+            \begin{center}
+                \includegraphics[width=0.65\textwidth]{img/cap-04.01/dijkstra-exemplo01.png}
+            \end{center}
+
+            \begin{center}
+                \includegraphics[width=0.65\textwidth]{img/cap-04.01/dijkstra-exemplo02.png}
+            \end{center}
+
+            \begin{center}
+                \includegraphics[width=0.65\textwidth]{img/cap-04.01/dijkstra-exemplo03.png}
+            \end{center}
+
+            \begin{center}
+                \includegraphics[width=0.65\textwidth]{img/cap-04.01/dijkstra-exemplo04.png}
+            \end{center}
+
+            \begin{center}
+                \includegraphics[width=0.65\textwidth]{img/cap-04.01/dijkstra-exemplo05.png}
+            \end{center}
+
+            \begin{center}
+                \includegraphics[width=0.65\textwidth]{img/cap-04.01/dijkstra-exemplo06.png}
+            \end{center}
+
+            \begin{center}
+                \includegraphics[width=0.65\textwidth]{img/cap-04.01/dijkstra-exemplo07.png}
+            \end{center}
+
+            \begin{center}
+                \includegraphics[width=0.65\textwidth]{img/cap-04.01/dijkstra-exemplo08.png}
+            \end{center}
+
+            \begin{center}
+                \includegraphics[width=0.65\textwidth]{img/cap-04.01/dijkstra-exemplo09.png}
+            \end{center}
+
+            \begin{center}
+                \includegraphics[width=0.65\textwidth]{img/cap-04.01/dijkstra-exemplo10.png}
+            \end{center}
+
+            \vspace{0.5cm}
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item \textbf{Resultados :} 
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Constroi-se uma aŕvore de caminhhos de custo mínimo traçando os nós predecessores.
+                    \item Empates podem acontecer.(Podem ser resolvidos de forma arbitrariamente)
+                    \item A \textbf{tabela de encaminhamento} do roteador.
+                \end{itemize}
+                
+                \begin{center}
+                    \includegraphics[width=0.65\textwidth]{img/cap-04.01/resultado-dijkstra.png}
+                \end{center}
+            \end{itemize}
+
+            \textit{Outro Exemplo:}
+
+            \begin{center}
+                \includegraphics[width=0.65\textwidth]{img/cap-04.01/dijkstra-exemplo02_01.png}
+            \end{center}
+
+            \textbf{Complexidade do Algoritmo :} $n$ nós.
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item Cada uma das $n$ iterações : Precisa chegar todos os nós,$w$, que não estão em $N'$.
+                \item $\frac{n(n+1)}{2}$ comparações : Complexidade $O(n^2)$
+                \item Implementação mais eficiente possível : Complexidade $O(nlog n)$ 
+            \end{itemize}
+
+            \textbf{Complexidade da Mensagem :}
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item Cada roteador tem que fazer \textbf{broadcast}(difusão de informção) do estado de enlace para todos os outros $n$ roteadores.
+                \item Existem algoritmos eficientes de broadcast: $O(n)$ cruzamentos de enlaces para disseminar uma mensagem broadcast de uma origem.
+                \item Cada roteador tem que divulgar $O(n)$ mensagens: Complexidade de mensagem final $O(n^2)$.
+            \end{itemize}
+
+            \textbf{Possíveis Oscilações :}
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item Quando o custo do enlance depende do \underline{volume de tráfego}, \textbf{oscilações no roteamento} podem ocorrer. 
+                \item Exemplo simples: 
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Roteamento para o destino a, tráfego entrando em d, c, b com pesos 1, e (< 1), 1
+                    \item O custo dos enlaces são direcionais e dependem do volume.
+                    \item O roteamento "oscila" de um lado para o outro.
+                \end{itemize}
+                
+                \begin{center}
+                    \includegraphics[width=0.5\textwidth]{img/cap-04.01/oscilacoes-possiveis.png}
+                \end{center}
+            
+            \end{itemize}
+
+        \subsubsection*{Equação de \textbf{Bellman-Ford} (Distance-Vector)}
+
+            \textbf{Equação de Bellman-Ford:}
+            \begin{align*}
+                D_x(y) : \text{Custo do caminhho de menor custo de $x$ para $y$} \\
+                D_x(y) = \min_{v} \{c_{x,v} + D_v(y)\} \\
+                c_{x,v} : \text{Custo direto do enlace de $x$ para $v$}
+            \end{align*}    
+        
+           \textit{Exemplo :} Suponha que os nós vizinhos de $u$, $x,y,w$ sabem o destino para $z$ 
+
+            \begin{center}
+                \includegraphics[width=0.5\textwidth]{img/cap-04.01/bellman-ford-exemplo.png}
+            \end{center}
+            
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item \textbf{Ideia Principal :}
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item De tempos em tempos, cada nó \textbf{envia} seu própria estimativa do vetor de distâncias para todos os seus vizinhos.
+                    \item Quando um nó $x$ recebe uma estimativa do vetor de distâncias ($DV$) de um vizinho, ele \textbf{atualiza} sua própria 
+                    estimativa do vetor de distâncias, usando a equação de \textit{Bellman-Ford}.
+                    \begin{align*}
+                        D_x(y) \leftarrow \min_{v} \{c_{x,v} + D_v(y)\} \text{ para cada nó } y \in N
+                    \end{align*} 
+                    \item Em codições normais, a estimativa $D_x(y)$ converge para o atual menor custo de $x$, $d_x(y)$.
+                \end{itemize}
+                
+                \item \textbf{Para cada nó :}
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item \textbf{Espera} por uma mudança no custo de um enlace local ou por uma mensagem de atualização de um vizinho.
+                    \item \textbf{Recalcula} suas estimativas do vetor de distâncias $(DV)$ baseado nas novas informações recebidas do vizinho.
+                    \item \textbf{Se} o vetor de distâncias tiver alguma modificação, \textbf{notifica} os vizinhos.
+                    \item O processo se repete.
+                \end{itemize}
+            
+                \item \textbf{Iterativo, Assíncrono :} Cada iteração local é causado a por
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Mudança no custo do enlace local
+                    \item Mensagem de atualização do $DV$ de um vizinho
+                \end{itemize}
+            
+                \item  \textbf{Distribuído, Auto-controlado :} Cada nó notifica seus vizinhos somente quando seu $DV$ muda. 
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Vizinhos então notificam seus vizinhos, somente se necessário.
+                    \item Sem notificações recebidas, sem ações tomadas.
+                \end{itemize}
+            
+            \end{itemize}
+
+            \textit{Exemplo :}
+            \begin{center}
+                \includegraphics[width=0.6\textwidth]{img/cap-04.01/bellman-ford-exemplo01.png}
+            \end{center}
+            
+            \begin{center}
+                \includegraphics[width=0.6\textwidth]{img/cap-04.01/bellman-ford-exemplo02.png}
+            \end{center}
+
+            \begin{center}
+                \includegraphics[width=0.6\textwidth]{img/cap-04.01/bellman-ford-exemplo03.png}
+            \end{center}
+
+            \begin{center}
+                \includegraphics[width=0.6\textwidth]{img/cap-04.01/bellman-ford-exemplo04.png}
+            \end{center}
+
+            \begin{center}
+                \includegraphics[width=0.6\textwidth]{img/cap-04.01/bellman-ford-exemplo05.png}
+            \end{center}
+
+            \begin{center}
+                \includegraphics[width=0.6\textwidth]{img/cap-04.01/bellman-ford-exemplo06.png}
+            \end{center}
+            
+            \begin{center}
+                \includegraphics[width=0.6\textwidth]{img/cap-04.01/bellman-ford-exemplo07.png}
+            \end{center}
+
+            \begin{center}
+                \includegraphics[width=0.6\textwidth]{img/cap-04.01/bellman-ford-exemplo08.png}
+            \end{center}
+
+            O processo continua ...
+            
+            \textbf{Computação nos Nós}
+            \begin{center}
+                \includegraphics[width=0.6\textwidth]{img/cap-04.01/bellman-ford-exemplo09.png}
+            \end{center}
+
+            \begin{center}
+                \includegraphics[width=0.6\textwidth]{img/cap-04.01/bellman-ford-exemplo10.png}
+            \end{center}
+
+            \begin{center}
+                \includegraphics[width=0.6\textwidth]{img/cap-04.01/bellman-ford-exemplo11.png}
+            \end{center}
+
+            \textbf{Difusão das informações de estado}
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item Comunicação interativa
+                \item Etapas da computação para difundir as informações atráves da rede
+            \end{itemize}
+            
+            \begin{center}
+                \includegraphics[width=0.6\textwidth]{img/cap-04.01/bellman-ford-exemplo12.png}
+            \end{center}
+
+            \begin{center}
+                \includegraphics[width=0.6\textwidth]{img/cap-04.01/bellman-ford-exemplo13.png}
+            \end{center}
+
+            \begin{center}
+                \includegraphics[width=0.6\textwidth]{img/cap-04.01/bellman-ford-exemplo14.png}
+            \end{center}
+
+            \begin{center}
+                \includegraphics[width=0.6\textwidth]{img/cap-04.01/bellman-ford-exemplo15.png}
+            \end{center}
+
+            \textbf{Mudança no custo do enlace :}
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item Nó detecta mudança no custo do enlace local
+                \item Atualiza a informação de rota, calcula o vetor de distâncias ($DV$) local
+                \item Se o $DV$ mudou, notifica os vizinhos
+                \begin{center}
+                    \includegraphics[width=0.6\textwidth]{img/cap-04.01/mudanca-no-custo01.png}
+                \end{center}
+                
+                \textbf{``boas notícias viajam rápido''}
+
+                \[
+                    \begin{aligned}
+                    t_0 &:~ y ~\text{detecta a mudança no custo do enlace, atualiza seu DV e informa seus vizinhos}.\\[4pt]
+                    t_1 &:~ z ~\text{recebe a atualização de } y,\ \text{atualiza sua tabela, computa o novo menor}\\
+                        &\qquad \text{custo até } x,\ \text{e envia seu DV aos vizinhos}.\\[4pt]
+                    t_2 &:~ y ~\text{recebe a atualização de } z,\ \text{atualiza sua tabela de distâncias. Os menores}\\
+                        &\qquad \text{custos de } y\ \text{não mudam, portanto } y\ \text{\textit{não} envia uma mensagem para } z.
+                    \end{aligned}
+                \]
+
+                \begin{center}
+                    \includegraphics[width=0.6\textwidth]{img/cap-04.01/mudanca-no-custo02.png}
+                \end{center}
+                
+                \item Nó detecta mudança no custo do enlace local
+                \item \textbf{``Bad news travels slow''} : Problema de contagem ao infinito
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item $y$ vê que o enlace direto para $x$ agora tem custo $60$, mas $z$ disse que possui um caminho com custo $5$. Assim, $y$ calcula: “meu novo custo para $x$ será $6$, via $z$”; e notifica $z$ do novo custo $6$ para $x$.
+                    \item $z$ aprende que o caminho para $x$ via $y$ agora tem custo $6$, então $z$ calcula: “meu novo custo para $x$ será $7$ via $y$”; e notifica $y$ do novo custo $7$ para $x$.
+                    \item $y$ aprende que o caminho para $x$ via $z$ agora tem custo $7$, então $y$ calcula: “meu novo custo para $x$ será $8$ via $z$”; e notifica $z$ do novo custo $8$ para $x$.
+                    \item $z$ aprende que o caminho para $x$ via $y$ agora tem custo $8$, então $z$ calcula: “meu novo custo para $x$ será $9$ via $y$”; e notifica $y$ do novo custo $9$ para $x$.
+                    \item \dots
+                \end{itemize}
+
+                \item Algoritmos distribuídos são complicados!
+
+            \end{itemize}
+
+        \subsubsection*{Comparação entre Estado de Enlace e Vetor de Distância}
+
+            \textbf{Complexidade da mensagem} 
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item \textbf{LS:} \textbf{n} roteadores, $O(n^2)$ mensagens enviadas 
+                \item \textbf{DV:} Intercambio de informação entre vizinhos, tempo de convergência varia
+            \end{itemize}
+
+            \textbf{Velocidade de Convergência} 
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item \textbf{LS:} Algoritmo $O(n^2)$, mensagens $O(n^2)$.   
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Pode ter oscilações
+                \end{itemize}
+                \item \textbf{DV:} Tempo de convergência varia
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Pode ter loops de roteamento
+                    \item Contagem ao infinito
+                \end{itemize}
+            \end{itemize}
+
+            \textbf{Robustez:} O que acontece se um roteador tiver um mal funcionamento ou ser comprometido?
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item \textbf{LS:}  
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Roteador pode fazer a divulgação errada do custo do \textbf{enlace}
+                    \item Cada roteador computa somente a sua própria tabela de encaminhamento
+                \end{itemize}
+                \item \textbf{DV:}
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Roteador pode fazer a divulgação incorreta do custo do \textbf{caminho} : Buraco negro 
+                    \item Cada tabela do roteador é usado pelos outros : erro é propagado pela rede.
+                \end{itemize}
+            \end{itemize}
+
+    \subsection{Roteamento intra-ISP : OSPF}
+
+        \subsubsection*{Escalabilidade}
+        \begin{itemize}[left=0.5cm, align=left, nosep]
+            \item Até agora nos estudos de roteamento assumimos um cenário idealizado
+            \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                \item Todos os roteadores são idênticos
+                \item Rede é \textit{flat}, sem hierarquia
+            \end{itemize}
+            \item O que não ocorre na prática 
+            
+            \item \textbf{Escala:} bilhões de destinos
+            \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                \item Impossível armazenar todos os destinos nas tabelas de encaminhamento!
+                \item ``Inundando'' a internet de tanta mensagem de controle
+            \end{itemize}
+            \item \textbf{Autonomia Administrativa:} 
+            \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                \item Internet: Conjunto de redes interligadas
+                \item Cada administrador da rede quer controlar o roteamento da sua própria rede.
+            \end{itemize}
+
+            \item \textbf{Solução:} Agregar roteadores em \textbf{regiões} conhecidas como \textbf{Sistemas Autônomos (AS)}
+            
+            \item \textbf{intra-AS(intra-domínio):} Roteamento entre os roteadores de uma mesma AS    
+            \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                \item Todos os roteadores dentro de uma mesma AS executam o mesmo protocolo de roteamento \underline{intra-domínio}.
+                \item Roteadores em AS diferentes podem executar protocolos de roteamento intra-domínios diferentes.
+                \item \textbf{Roteador \textit{gateway}:} Roteador que fica na borda de rede conectando uma AS a outra AS.
+            \end{itemize}
+            
+            \begin{center}
+                \includegraphics[width=0.5\textwidth]{img/cap-04.01/intra-as.png}
+            \end{center}
+
+            \item \textbf{inter-AS(inter-domínio):} Roteamento \textbf{entre} ASs  
+            \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                \item Os \textit{gateways} realizam roteamento entre domínios. 
+            \end{itemize}
+
+            \begin{center}
+                \includegraphics[width=0.5\textwidth]{img/cap-04.01/inter-as.png}
+            \end{center}
+
+            \item \textbf{Tabelas de encaminhamento} são configuradas para algortimos roteamentos intra e inter-AS 
+            \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                \item Roteamento \textbf{intra-as} determina entradas para os destinos \underline{dentro} da AS
+                \item \textbf{inter-as} e \textbf{intra-as} determina as entradas para os \underline{destino externo}.
+            \end{itemize}
+
+            \begin{center}
+                \includegraphics[width=0.5\textwidth]{img/cap-04.01/tabela-de-encaminhamento.png}
+            \end{center}
+
+        \end{itemize}
+
+        \subsubsection*{Roteamento Inter-AS} : A função do intra-domínio para o encaminhamento
+        \begin{itemize}[left=0.5cm, align=left, nosep]
+            \item Suponha que o roteador em $AS1$ receba um datagrama destinado para fora do $AS1$
+            \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                \item O roteador deveria encaminhar o pacote para um roteador \textit{gateway}, mas qual ?
+            \end{itemize}
+            \item \textbf{O roteamento inter-domínio AS1 deve:} 
+            \begin{enumerate}[left=0.5cm, align=left, nosep]
+                \item Aprender quais destinos são atingíveis através dos \textit{gateways} AS2, AS3
+                \item Propagar essa informação de alcançabilidade para todos os roteadores dentro do AS1  
+            \end{enumerate}
+        \end{itemize}
+
+        \begin{center}
+            \includegraphics[width=0.5\textwidth]{img/cap-04.01/inter-domain.png}
+        \end{center}
+
+        \subsubsection*{Roteamento Intra-AS}
+            Protocolos de roteamento intra-domínio mais comuns:
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item \textbf{RIP: Routing Information Protocol} 
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Clássico protocolo de \underline{vetor de distância}: DVs trocam a cada 30 segundos
+                    \item Não é muito usado hoje em dia 
+                \end{itemize}
+            
+                \item \textbf{EIGRP: Enhanced Interior Gateway Routing Protocol} 
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Baseado em \underline{vetor de distância}
+                    \item Originalmente desenvolvido pela \textit{Cisco}, hoje um padrão aberto
+                \end{itemize}
+
+                \item \textbf{OSPF: Open Shortest Path First} 
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item Roteamento de \underline{Estado de enlace}
+                    \item protocolo IS-IS, essencialmente o mesmo que OSPF
+                    \item Mais utilizado atualmente
+                \end{itemize}
+            
+            \end{itemize}
+
+        \subsubsection*{Hierarquia OSPF}
+        \begin{itemize}[left=0.5cm, align=left, nosep]
+            \item \textbf{Dois níveis hierárquicos :} \textit{Áreas Locais} e \textit{Backbone}
+            \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                \item Minimizar o impacto da ``Inundação'' nas redes
+                \item O estado de enlace anuncia a inundação somente na Area ou no Backbone
+                \item Cada nó tem detalhadamente a área topologica, sabem somente a direção para alcançar outros destinos
+            \end{itemize}
+        
+            \begin{center}
+                \includegraphics[width=0.5\textwidth]{img/cap-04.01/hierarquia-ospf.png}
+            \end{center}
+
+        \end{itemize}
+
+    \subsection{Roteamento entre ISPs: BGP}
+    
+        \begin{itemize}[left=0.5cm, align=left, nosep]
+            \item É realizado por um único protocolo
+            \item \textbf{BGP: Border Gateway Protocol}
+            \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                \item A ``cola'' que mantém a internet unida.
+            \end{itemize}
+            \item Permite que uma sub-rede anuncie sua existência e os destinos que pode alcançar para o resto da internet.
+            \item Para cada AS o BGP provê:  
+            \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                \item \textbf{eBGP:} Obtém informações sobre quais as subredes que são alcançáveis a partir dos ASes vizinhos 
+                \item \textbf{iBGP:} Propaga a informação de alcançabilidade para todos os roteadores dentro do AS.
+                \item Determina ``boas'' rotas para outras redes baseadas em informações e \textbf{políticas} de alcance.
+            \end{itemize}   
+        
+            \begin{center}
+                \includegraphics[width=0.5\textwidth]{img/cap-04.01/conexoes-bgps.png}
+            \end{center}
+
+        \end{itemize}
+    
+        \subsubsection*{Funcionamento Básico}
+        \begin{itemize}[left=0.5cm, align=left, nosep]
+            \item \textbf{Sessão BGP:} Dois roteadores BGP (``pares'') trocam mensagens BGP através de uma conexão semi-permanente TCP:   
+            \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                \item Anunciam \textbf{caminhos} para diferentes destinos de prefixos na rede
+                \item Protocolo de ``vetor de caminhos'', rota de sistemas autônomos 
+            \end{itemize}
+            
+            \item \textit{Exemplo:} Quando um gateway 3a AS3 anunciam o caminho AS3,X para o gateway 2c em AS2:  
+            \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                \item O AS3 \textbf{divulga} ao AS2 que é possível alcançar/enviar datagramas para X por mim. 
+            \end{itemize}
+
+            \begin{center}
+                \includegraphics[width=0.5\textwidth]{img/cap-04.01/exemplo-bgp.png}
+            \end{center}
+
+            \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                 \item O roteador 2c do AS2 recebe o anúncio de caminho \textbf{AS3, X} (via eBGP) do roteador 3a do AS3.
+                \item Com base na política do AS2, o roteador 2c do AS2 aceita o caminho \textbf{AS3, X} e o propaga (via iBGP) para todos os roteadores do AS2.
+                \item Com base na política do AS2, o roteador 2a do AS2 anuncia (via eBGP) o caminho \textbf{AS2, AS3, X} para o roteador 1c do AS1.
+            \end{itemize}
+        
+            \item \textit{Exemplo2:} Múltiplos caminhos
+
+            \begin{center}
+                \includegraphics[width=0.5\textwidth]{img/cap-04.01/exemplo2-bgp.png}
+            \end{center}
+
+            \item O roteador gateway pode aprender sobre \textbf{múltiplos} caminhos até o destino:
+            \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                \item O roteador gateway do AS1, 1c, aprende o caminho \textbf{AS2, AS3, X} a partir de 2a.
+                \item O roteador gateway do AS1, 1c, aprende o caminho \textbf{AS3, X} a partir de 3a.
+                \item Com base na \textit{política}, o roteador gateway 1c do AS1 escolhe o caminho \textbf{AS3, X} e anuncia esse caminho dentro do AS1 via iBGP.
+            \end{itemize}
+            
+        \end{itemize}
+
+        \subsubsection*{Mensagem BGP}
+    
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item Mensagens BGP são trocadas entre pares através de uma conexão TCP
+                \item Tipos:
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item \textbf{OPEN:} abre uma conexão TCP com o par BGP remoto e autentica o par BGP remetente.  
+                    \item \textbf{UPDATE:} anuncia um novo caminho (ou retira um antigo).
+                    \item \textbf{KEEPALIVE:} mantém a conexão ativa na ausência de mensagens UPDATE; também confirma (ACK) o pedido OPEN.
+                    \item \textbf{NOTIFICATION:} reporta erros em mensagens anteriores; também é usada para encerrar a conexão.
+                \end{itemize}
+            
+                \item \textit{Voltando ao Exemplo2:}
+                
+                \begin{center}
+                    \includegraphics[width=0.15\textwidth]{img/cap-04.01/caminho-bgp.png}
+                \end{center}
+                
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item lembrar: 1a, 1b, 1d aprendem via iBGP a partir de 1c: ``o caminho para X passa por 1c''
+                    \item em 1d: roteamento intra-domínio OSPF: para chegar a 1c, use a interface 1
+                    \item em 1d: para chegar a X, use a interface 1
+                    \item em 1a: roteamento intra-domínio OSPF: para chegar a 1c, use a interface 2 
+                \end{itemize}
+
+                \begin{center}
+                    \includegraphics[width=0.15\textwidth]{img/cap-04.01/caminho-bgp2.png}
+                \end{center}
+
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item lembrar: 1a, 1b, 1d aprendem via iBGP a partir de 1c: ``o caminho para X passa por 1c''
+                    \item em 1d: roteamento intra-domínio OSPF: para chegar a 1c, use a interface 1
+                    \item em 1d: para chegar a X, use a interface 1 
+                \end{itemize}
+                
+            \end{itemize}
+    
+        \subsubsection*{Difirença entre Intra-, Inter-AS}
+        \begin{itemize}[left=0.5cm, align=left, nosep]
+            \item \textbf{Políticas :}
+            \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                \item \underline{inter-AS}: Admin quer ter o controle por onde o trafego será roteado, ou quem vai poder rotear o trafego através do seu AS. 
+                \item \underline{intra-AS}: Admin única, questões políticas não são tão relevantes.
+            \end{itemize}
+            
+            \item \textbf{Escalabilidade :}  
+            \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                \item Roteamento hierarquico salva bastante espaço nas tabelas de encaminhamento, reduzir o trafego de atualizações.
+            \end{itemize}
+        
+            \item \textbf{Desempenho :}
+            \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                \item \underline{inter-AS}: política domina, é mais relevante que o desempenho. 
+                \item \underline{intra-AS}: Pode focar no desempenho.
+            \end{itemize}
+
+        \end{itemize}
+        
+        \subsubsection*{Roteamento Hot Potato}
+        
+            \begin{center}
+                \includegraphics[width=0.5\textwidth]{img/cap-04.01/roteamento-hot-potato.png}
+            \end{center}
+
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item 2d aprende (via iBGP) que pode rotear para X via 2a ou 2c
+                \item Roteamento ``batata quente'' (\textit{hot potato}): escolher o gateway local que tem menor custo \textit{intra-domínio}
+                \item \textit{Exemplo:} 2d escolhe 2a, mesmo tendo mais saltos de AS até X; não se preocupar com o custo \textit{inter-domínio}!
+            \end{itemize}
+        
+        \subsubsection*{Definição das política}
+
+            \begin{center}
+                \includegraphics[width=0.5\textwidth]{img/cap-04.01/definicao-de-politicas.png}
+            \end{center}
+
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item ISP só quer rotear tráfego de/para as redes de seus clientes (não quer carregar tráfego de trânsito entre outros ISPs – uma política típica do ``mundo real'')
+                \item A anuncia o caminho Aw para B e para C
+                \item B escolhe \textit{não} anunciar BAw para C!
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item B não recebe nenhuma ``receita'' por rotear CBAw, já que nenhum de C, A ou w é cliente de B
+                    \item C não chega a aprender/conhecer o caminho CBAw
+                \end{itemize} 
+                \item x é \textbf{dual home} tem dois provedores de acesso: B e C
+                \item \textbf{Política de ``Força'' (\textit{enforce}):} x não quer rotear trafego de B para C através de x, x não anuncia para B a rota para C 
+            \end{itemize}
+
+        \subsubsection*{Seleção das rotas BGP}
+
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item o roteador pode aprender mais de uma rota para um AS de destino e seleciona a rota com base em:
+                \begin{enumerate}[left=0.5cm, align=left, nosep]
+                    \item Atributo de valor de preferência local (\textit{local preference}): decisão de política
+                    \item Caminho de AS mais curto (\textit{shortest AS-PATH})
+                    \item Roteador PRÓXIMO-SALTO (\textit{NEXT-HOP}) mais próximo: roteamento de ``batata quente'' (\textit{hot potato routing})
+                    \item Critérios adicionais
+                \end{enumerate}
+            \end{itemize}
+
+    \subsection{ICMP: Internet Control Message Protocol}
+        
+        \begin{itemize}[left=0.5cm, align=left, nosep]
+            \item Usado por roteadores e sistemas finais para comunicar informações do nível da camada de rede 
+            \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                \item Reportar erros: uma máquina hospedeira, rede, porta, protocolo não foi alcançável, congestionamento, tempo de vida excedido, etc.
+                \item Fazer requisições e respostas de echo (ping)   
+            \end{itemize}
+            \item Troca de pacotes ICMP é feita acima do IP
+            \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                \item Cada mensagem ICMP é encapsulada/transportada em um datagrama IP   
+            \end{itemize}
+            \item Mensagem ICMP: Tipo, código, checksum, dados e os primeiros 8 bytes do datagrama IP que causou o erro
+        \end{itemize}
+
+        \begin{center}
+            \includegraphics[width=0.5\textwidth]{img/cap-04.01/mensagem-icmp.png}
+        \end{center}
+    
+        \subsubsection*{Traceroute e ICMP}
+
+            \begin{center}
+                \includegraphics[width=0.5\textwidth]{img/cap-04.01/traceroute-icmp.png}
+            \end{center}
+
+            \begin{itemize}[left=0.5cm, align=left, nosep]
+                \item A origem envia conjuntos de segmentos UDP para o destino
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item O 1$^\text{o}$ conjunto tem TTL=1, o 2$^\text{o}$ conjunto tem TTL=2, etc.
+                \end{itemize}
+
+                \item O datagrama do $n$-ésimo conjunto chega ao $n$-ésimo roteador:
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item O roteador descarta o datagrama e envia para a origem uma mensagem ICMP (tipo 11, código 0)
+                    \item A mensagem ICMP possivelmente inclui o nome do roteador e seu endereço IP
+                \end{itemize}
+
+                \item Quando a mensagem ICMP chega à origem: registrar os RTTs
+
+                \item \textbf{Critérios de parada:}
+                \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                    \item O segmento UDP eventualmente chega ao host de destino
+                    \item O destino retorna uma mensagem ICMP ``porta inacessível'' (tipo 3, código 3)
+                    \item A origem interrompe o envio
+                \end{itemize}
+            \end{itemize}
