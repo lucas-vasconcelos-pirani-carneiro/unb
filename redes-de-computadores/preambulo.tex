@@ -1,0 +1,79 @@
+% Idioma e codificação
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% Fonte clássica
+\usepackage{lmodern}
+
+% Matemática
+\usepackage{amsmath, amssymb, amsthm}
+
+% Listas
+\usepackage{bussproofs}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{tikz}
+\usepackage{forest}
+\usepackage{tikz-cd}
+\usetikzlibrary{trees, positioning, babel}
+\usepackage{colortbl}
+\usepackage{array}
+\usepackage{tocloft}
+\usepackage[normalem]{ulem}
+\usepackage{multicol}
+
+% Margens
+\usepackage[
+  a4paper,
+  left=3cm,
+  right=3cm,
+  top=3cm,
+  bottom=3cm
+]{geometry}
+
+% Espaçamento
+\linespread{1.15}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+\usepackage{fancyhdr}
+
+% --- Configuração do Sumário ---
+\setlength{\cftbeforesecskip}{0.1em}
+\setlength{\cftbeforesubsecskip}{0.05em}
+\setlength{\cftbeforesubsubsecskip}{0.1em}
+
+% Altura correta do cabeçalho
+\setlength{\headheight}{15pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+% Cabeçalho
+\lhead{\textbf{Redes de Computadores}}
+
+% Rodapé
+\rfoot{\thepage}
+
+% Linhas no cabeçalho e rodapé
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% Estilo para páginas "plain" (sumário, capa)
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \rfoot{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0.4pt}
+}
+
+% Links (discretos, sem cores)
+\usepackage[hidelinks]{hyperref}
+
+% Controle de floats
+\usepackage{float}
+\usepackage{placeins}
+
+% Evita problemas de overfull
+\sloppy
