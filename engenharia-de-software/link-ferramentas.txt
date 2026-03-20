@@ -2,3 +2,5 @@ SQLite: https://www.sqlite.org/
 DBrowser: https://sqlitebrowser.org/
 Dbdrawn: http://dia-installer.de/
 Modelagem: https://astah.net/pt/
+
+Senha: CIC0105UNB
