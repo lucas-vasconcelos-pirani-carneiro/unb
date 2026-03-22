@@ -6,6 +6,7 @@
 ```plaintext
 banco-de-dados/
 ├── 📂 anotacoes/
+├── 📂 slides/
 ├── 📄 README.md
 └── 📄 plano-de-ensino.pdf
 ```
