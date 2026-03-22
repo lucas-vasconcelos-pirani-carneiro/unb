@@ -5,12 +5,17 @@
 ## 📁 Estrutura
 ```plaintext
 seguranca-computacional/
-├── 📂 anotacoes/
+├── 📂 img/
+├── 📂 output/
 ├── 📂 slides/
 ├── 📂 trabalhos/
 ├── 📂 seminario/
+├── 📄 Makefile
 ├── 📄 README.md
 ├── 📄 notas-de-estudo-01.pdf
 ├── 📄 notas-de-estudo-02.pdf
-└── 📄 notas-de-estudo-03.pdf
+├── 📄 notas-de-estudo-03.pdf
+├── 📄 main.tex
+├── 📄 plano-de-ensino.pdf
+└── 📄 preambulo.tex
 ```
