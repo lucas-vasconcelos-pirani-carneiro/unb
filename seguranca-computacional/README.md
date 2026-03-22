@@ -12,10 +12,9 @@ seguranca-computacional/
 ├── 📂 seminario/
 ├── 📄 Makefile
 ├── 📄 README.md
+├── 📄 main.tex
 ├── 📄 notas-de-estudo-01.pdf
 ├── 📄 notas-de-estudo-02.pdf
 ├── 📄 notas-de-estudo-03.pdf
-├── 📄 main.tex
-├── 📄 plano-de-ensino.pdf
 └── 📄 preambulo.tex
 ```
