@@ -6,6 +6,7 @@
 ```plaintext
 tecnicas-de-programacao-02/
 ├── 📂 anotacoes/
+├── 📂 slides/
 ├── 📄 README.md
 ├── 📄 cronograma-aulas.pdf
 ├── 📄 link-livro.txt
