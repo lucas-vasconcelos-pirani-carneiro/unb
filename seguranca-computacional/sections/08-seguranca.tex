@@ -1,0 +1,150 @@
+\section{Segurança de Redes}
+
+\subsection{O que é segurança de rede?}
+
+    \begin{itemize}[left=0.5cm, align=left, nosep]    
+        \item \textbf{Confidencialidade:} Apenas o emissor e o receptor pretendido devem “entender” o conteúdo da mensagem.
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Emissor: \underline{criptografa} a mensagem
+            \item Receptor: \underline{descriptografa} a mensagem
+        \end{itemize} 
+        \item \textbf{Autenticação:} O emissor e o receptor desejam confirmar a identidade um do outro.
+        \item \textbf{Integridade da mensagem:} O emissor e o receptor desejam garantir que a mensagem não foi alterada 
+        (durante a transmissão ou depois) sem detecção.
+        \item \textbf{Acesso e disponibilidade:} Os serviços devem ser acessíveis e disponíveis para os usuários.
+    \end{itemize}  
+
+    \textbf{Exemplo}
+    \begin{itemize}[left=0.5cm, align=left, nosep] 
+        \item Bob e Alice (amantes!) querem se comunicar ``com segurança''
+        \item Trudy (intrusa) pode interceptar, apagar e adicionar mensagens
+    \end{itemize}
+        
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.75\textwidth]{img/exemplo.png}
+    \end{figure}
+
+    Alice e Bob podem ser:
+    \begin{itemize}[left=0.5cm, align=left, nosep] 
+        \item Navegador web/servidor para transações eletrônicas (ex: compras online)
+        \item Cliente/servidor de banco online
+        \item Servidores DNS
+        \item Roteadores BGP trocando atualizações de tabelas de roteamento
+    \end{itemize}
+
+    Trudy, o ``bad guy'' pode ser:
+    \begin{itemize}[left=0.5cm, align=left, nosep] 
+        \item \textbf{Eavesdrop:} Interceptar mensagens.
+        \item Inserção \textbf{ativa} de  mensagens em uma conexão.
+        \item \textbf{Impersonation:} Pode falsificar (\textit{spoof}) o endereço de origem no pacote (ou qualquer campo do pacote).
+        \item \textbf{Hijacking:} ``Assumir'' uma conexão em andamento removendo o emissor ou o receptor e inserindo-se no lugar.
+        \item \textbf{Denial of service:} Impedir que o serviço seja usado por outros (ex: sobrecarregando recursos).
+    \end{itemize}
+
+\subsection{Princípios da criptografia}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.75\textwidth]{img/criptografia.png}
+    \end{figure}
+
+    \textbf{Quebrando um esquema de criptografia}
+
+    \begin{itemize}[left=0.5cm, align=left, nosep]    
+        \item \textbf{Ataque somente com texto cifrado (cipher-text only attack):} Trudy possui apenas o \underline{texto cifrado} (ciphertext) para analisar.
+        \item \textbf{Duas abordagens:}
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Força bruta: Testar todas as chaves possíveis
+            \item Análise estatística
+        \end{itemize}  
+        \item \textbf{Ataque com texto conhecido (known-plaintext attack):} Trudy possui o \underline{texto original} (plaintext) correspondente ao \underline{texto cifrado} 
+        (ciphertext).
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Ex: Em uma cifra monoalfabética, Trudy determina associações para a, l, i, c, e, b, o
+        \end{itemize} 
+        \item \textbf{Ataque com texto escolhido (chosen-plaintext attack):} Trudy pode obter o \underline{texto cifrado} (ciphertext) a partir de textos que ela mesma escolhe.
+    \end{itemize}  
+
+    \textbf{Criptografia com chave simétrica}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.65\textwidth]{img/criptografia-simetrica.png}
+    \end{figure}
+
+    \begin{itemize}[left=0.5cm, align=left, nosep]    
+        \item \textbf{Criptografia de chave \underline{simétrica}:} Bob e Alice compartilham a mesma chave (simétrica): K.
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Ex: A chave consiste em conhecer o padrão de substituição em uma cifra de substituição monoalfabética.
+        \end{itemize}  
+    \end{itemize}  
+
+    \textbf{Esquema de criptografia simples}    
+    \begin{itemize}[left=0.5cm, align=left, nosep]    
+        \item \textbf{Cifra de substituiçãos (substitution cipher):} Substitui um elemento por outro.
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Cifra \underline{monoalfabética}: Substitui uma letra por outra.
+        \end{itemize}  
+    \end{itemize}  
+    
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.65\textwidth]{img/esquema-de-criptografia.png}
+    \end{figure}
+
+    \begin{itemize}[left=0.5cm, align=left, nosep]    
+        \item \textbf{Chave de criptografia:} Mapeamento de um conjunto de 26 letras para outro conjunto de 26 letras.
+    \end{itemize}
+    
+    \textbf{Esquema de criptografia sofisticada}
+    \begin{itemize}[left=0.5cm, align=left, nosep]    
+        \item $n$ cifras de substituição: $M_1, M_2,\ldots, M_n$
+        \item Padrão cíclico:
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item e.g, $n = 4$: $M_1, M_3, M_4, M_3, M_2$; $M_1, M_3, M_4, M_3, M_2$; \ldots
+        \end{itemize}     
+        \item Para cada novo símbolo do \underline{texto original}, utiliza-se o próximo padrão de substituição no ciclo.
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item e.g, dog: d: $M_1$; o: $M_3$; g: $M_4$.
+        \end{itemize} 
+        \item \textbf{Chave de criptografia:} $n$ cifras de substituição e o padrão cíclico.
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item A chave não precisa ser apenas um padrão de $n$ bits.
+        \end{itemize} 
+    \end{itemize}  
+
+    \textbf{Criptografia de chave simétrica: DES}
+    \begin{itemize}[left=0.5cm, align=left, nosep]    
+        \item \textbf{DES (Data Encryption Standard):}
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Padrão de criptografia dos EUA [NIST 1993].
+            \item Chave simétrica de 56 bits, entrada de \underline{texto original} (plaintext) de 64 bits.
+            \item Cifra de bloco com encadeamento de blocos (cipher block chaining).
+        \end{itemize}     
+        
+        \item Quão seguro é o DES  
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item \textbf{DES Challenge:} Uma frase criptografada com chave de 56 bits foi \underline{descriptografada} (por força bruta) em menos de um dia.
+            \item Não há ataques analíticos eficazes conhecidos.
+        \end{itemize} 
+        
+        \item Tornando o DES mais seguro:
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]    
+            \item \textbf{3DES:} Criptografa 3 vezes com 3 chaves diferentes.
+        \end{itemize}
+    \end{itemize}  
+
+    \textbf{}
+    \begin{itemize}[left=0.5cm, align=left, nosep]    
+        \item 
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item 
+        \end{itemize}     
+    \end{itemize}  
+    
+    \begin{figure}[H]
+        \centering
+        %\includegraphics[width=0.5\textwidth]{img/02-camada-aplicacao/}
+    \end{figure}
+    
