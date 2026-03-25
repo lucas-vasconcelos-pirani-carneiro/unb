@@ -145,13 +145,13 @@
      - Ex: Faturamento periódico, como as contas de telefone, e
        os sistemas de folha de pagamento.
   5. **Sistemas de entretenimento**: São destinados para <u>uso pessoal</u>, para <u>entreter</u> o usuário. 
-    - Jogos de gêneros variados;
-    - A **qualidade da interação** com o usuário é a característica.
+      - Jogos de gêneros variados;
+      - A **qualidade da interação** com o usuário é a característica.
       diferenciadora mais importante dos **sistemas de entretenimento**.
   6. **Sistemas para modelagem e simulação**: São desenvolvidos por cientistas e enge­nheiros para <u>modelar processos físicos</u> ou situações que incluem muitos <u>objetos diferentes</u> e que <u>interagem</u>. 
-    - Costumam ter <u>alto custo computacional</u> e demandam <u>sistemas paralelos</u> de alto desempenho para a sua execução.
+      - Costumam ter <u>alto custo computacional</u> e demandam <u>sistemas paralelos</u> de alto desempenho para a sua execução.
   7. **Sistemas de coleta de dados e análise**: São aqueles que fazem a sua <u>coleta</u> no ambiente e <u>enviam esses dados</u> para outros sistemas, para processamento.
-    - A análise de *"Big Data"* (grandes volumes de dados) pode envolver sistemas baseados na <u>nuvem</u> executando análises estatísticas e procurando <u>relações</u> entre os dados coletados.
+      - A análise de *"Big Data"* (grandes volumes de dados) pode envolver sistemas baseados na <u>nuvem</u> executando análises estatísticas e procurando <u>relações</u> entre os dados coletados.
   8. **Sistemas de sistemas**: São utilizados em empresas e outras grandes organizações e são <u>compostos</u> de uma <u>série de outros sistemas de software</u>. 
 
 - Um software pode pertencer a mais de um tipo diferente.
@@ -159,18 +159,14 @@
 - Cada tipo de sistema exige técnicas especializadas de engenharia de software, pois cada um tem características diferentes.
 
 - Fundamentos que se aplicam a todos os tipos de sistemas de software:
-
   1. Devem ser desenvolvidos com o uso de um processo **gerenciado** e **com­preendido**. 
-
-     - A organização que está desenvolvendo o software deve **planejar** o processo de desenvolvimento. 
-
-     2. **Dependabilidade** e **desempenho** são importantes para todos os tipos de sis­tema. 
-       - O software deve não apresentar falhas, funcionando conforme o planejado, ter uma operação segura e ter proteção contra ataques externos. 
-       - O sistema deve ter um desempenho eficiente e não desperdiçar recursos.
-     3. É importante compreender e controlar a **especificação** e os **requisitos do software** (o que o software deve fazer). 
-     4. Os recursos existentes devem ser usados de modo eficaz.
-       - Deve-se reusar software que já tenha sido desenvolvido,
-         em vez de escrever um novo.
+    - A organização que está desenvolvendo o software deve **planejar** o processo de desenvolvimento. 
+  2. **Dependabilidade** e **desempenho** são importantes para todos os tipos de sis­tema. 
+    - O software deve não apresentar falhas, funcionando conforme o planejado, ter uma operação segura e ter proteção contra ataques externos. 
+    - O sistema deve ter um desempenho eficiente e não desperdiçar recursos.
+  3. É importante compreender e controlar a **especificação** e os **requisitos do software** (o que o software deve fazer). 
+  4. Os recursos existentes devem ser usados de modo eficaz.
+    - Deve-se reusar software que já tenha sido desenvolvido, em vez de escrever um novo.
 
 ### Engenharia de software para Internet
 
@@ -183,10 +179,10 @@
   - e-mail
   - armazenamento de vídeo
 
-  > [!NOTE]
-  >
-  > Uma **nuvem** de computação é uma quantidade enorme de
-  > sistemas computacionais <u>interligados</u> que é <u>compartilhada</u> por muitos usuários.
+> [!NOTE]
+>
+> Uma **nuvem** de computação é uma quantidade enorme de
+> sistemas computacionais <u>interligados</u> que é <u>compartilhada</u> por muitos usuários.
 
 - Mudanças que ocorrem:
   - O **reúso de software** se tornou a abordagem dominante para construir sistemas web.
