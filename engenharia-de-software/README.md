@@ -6,6 +6,7 @@
 ```plaintext
 engenharia-de-software/
 ├── 📂 anotacoes/
+├── 📂 questionarios/
 ├── 📂 trabalho/
 ├── 📄 README.md
 ├── 📄 link-ferramentas.txt
