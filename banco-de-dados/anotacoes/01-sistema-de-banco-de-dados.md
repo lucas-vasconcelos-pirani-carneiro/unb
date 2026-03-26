@@ -2,7 +2,7 @@
 
 - Conjunto de dados utilizados para realizar uma operação.
 
-![sistema-de-banco-de-dados](img/sistema-de-banco-de-dados.png)
+![sistema-de-banco-de-dados](img/01-sistema-de-banco-de-dados/sistema-de-banco-de-dados.png)
 
 - **SGBD**: Software onde é possível <u>criar</u>, <u>manipular</u> vários banco de dados. 
 - **Metadados**: Informação, descrição e explicação dos dados.
@@ -11,10 +11,10 @@
     - Estrutura do nosso banco de dados;
 - **Banco de Dados**: Conjunto de dados armazenados.
 
-![exemplo-banco-de-dados-01](img/exemplo-banco-de-dados-01.png)
-![exemplo-banco-de-dados-02](img/exemplo-banco-de-dados-02.png)
-![exemplo-banco-de-dados-03](img/exemplo-banco-de-dados-03.png)
-![exemplo-banco-de-dados-04](img/exemplo-banco-de-dados-04.png)
+![exemplo-banco-de-dados-01](img/01-sistema-de-banco-de-dados/exemplo-banco-de-dados-01.png)
+![exemplo-banco-de-dados-02](img/01-sistema-de-banco-de-dados/exemplo-banco-de-dados-02.png)
+![exemplo-banco-de-dados-03](img/01-sistema-de-banco-de-dados/exemplo-banco-de-dados-03.png)
+![exemplo-banco-de-dados-04](img/01-sistema-de-banco-de-dados/exemplo-banco-de-dados-04.png)
 
 ## Sistemas Gerenciadores de Bancos de Dados (SGBD)
 
@@ -76,21 +76,21 @@
 
 - **Esquema:** Estrutura (tabelas, colunas), <u>metadados</u>.
 
-![esquema](img/esquema.png)
+![esquema](img/01-sistema-de-banco-de-dados/esquema.png)
 
 - **Instância:** Os dados propriamente ditos.
 
-![instancia](img/instancia.png)
+![instancia](img/01-sistema-de-banco-de-dados/instancia.png)
 
 - **Estado:** "Fotografia" do banco de dados naquele momento.
   - Conjunto completo do banco de dados em um determinado momento.
 
-![estado](img/estado.png)
+![estado](img/01-sistema-de-banco-de-dados/estado.png)
 
 - **Dados:** "Bruto", conjunto de caracteres/números sendo armazenado.
 - **Informação:** A interpretação do dado via tabela.
 
-![dado-informacao](img/dado-informacao.png)
+![dado-informacao](img/01-sistema-de-banco-de-dados/dado-informacao.png)
 
 ## Modelo de Dados
 - É o conjunto de conceitos para **descrever** um banco de dados.
