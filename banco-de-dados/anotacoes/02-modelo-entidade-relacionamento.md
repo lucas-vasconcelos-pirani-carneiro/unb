@@ -1,4 +1,4 @@
-# Modelo Entidade Relacionameto
+# Modelo Entidade Relacionamento
 
 - É um modelo de dados **conceitual** de <u>alto nível</u>.
 - Está centrado na **percepção dos usuários** sobre os dados, não
@@ -63,3 +63,56 @@ Telefone = 11 91111-1111
 - **Domínio de um Atributo:**
   - Especifica os <u>possíveis valores</u> que podem estar associados a um atributo em cada entidade individual.
   - Ex: Domínio do atributo *Nome* seria um conjunto de <u>caracteres alfabéticos</u>.
+
+## Relacionamento
+
+- É um conjunto de **associações** entre entidades.
+- Relacionamento **liga** as instâncias dos dados
+
+![relacionamento-conjuntos](img/02-modelo-entidade-relacionamento/relacionamento-conjuntos.png)
+
+- **Grau** de um Tipo de Relacionamento:
+  - **Binário:** Relaciona <u>dois</u> entidades. 
+  - **Terciário:** Relaciona <u>três</u> entidades.
+  - **Não existe** um limite para quantas entidades podem participar de um relacionamento.
+
+![relacionamento-binario-terciario](img/02-modelo-entidade-relacionamento/relacionamento-binario-terciario.png)
+
+- Relacionamento **Recursivo**: A entidade se relaciona com ela <u>mesma</u>.
+  - Pré-requisito e uma disciplina;
+  - Funcionário e supervisor;
+
+![relacionamento-recursivo](img/02-modelo-entidade-relacionamento/relacionamento-recursivo.png)
+
+- É importante explicitar os papeis do relacionamento.
+- Exemplo de como fica na modelagem:
+
+![relacionamento-recursivo2](img/02-modelo-entidade-relacionamento/relacionamento-recursivo2.png)
+
+### Cardinalidade
+
+- Quantidade que as **instâncias** da entidade podem se relacionar.
+- `1:1` um para um
+
+![cardinalidade_1-1](img/02-modelo-entidade-relacionamento/cardinalidade_1-1.png)
+
+- `1:N`um para muitos
+- `N:1` muitos para um
+
+![cardinalidade_1-n](img/02-modelo-entidade-relacionamento/cardinalidade_1-n.png)
+
+- `N:N` muitos para muitos
+
+![cardinalidade_n-n](img/02-modelo-entidade-relacionamento/cardinalidade_n-n.png)
+
+### Participação
+
+- **Obrigatoriedade** que a entidade pode ter ao participar daquele relacionamento.
+- **Total:** Obrigatório.
+  - É representada por dois traços `===`.
+  - **Todas** as instâncias da entidade precisam estar <u>relacionadas</u> com as instâncias da outra entidade.
+- **Parcial:** Optativo.
+  - É representado por apenas um traço `---`.
+  - **Nem todas** as instâncias da entidade precisam estar relacionadas com as instâncias da outra entidade.
+
+![restricao-participacao](img/02-modelo-entidade-relacionamento/restricao-participacao.png)
