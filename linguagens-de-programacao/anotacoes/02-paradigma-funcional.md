@@ -7,7 +7,6 @@
   - **Relacional** (ou lógico): Declara a solução como <u>relação</u> entre <u>entidades</u> do discurso.
   - **Orientado a objetos:** Descreve o problema em <u>termos do próprio problema</u>, ao invés de descrevê-lo em termos de um algoritmo que o computador vai rodar.
 
-
 ### Linguagens Declarativas
 
 - Realizam o processamento **simbólico**. 
