@@ -135,16 +135,173 @@
         \end{itemize}
     \end{itemize}  
 
-    \textbf{}
+    \textbf{AES: Padrão de Criptografia Avançada (Advanced Encryption Standard)}
     \begin{itemize}[left=0.5cm, align=left, nosep]    
-        \item 
-        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
-            \item 
-        \end{itemize}     
+        \item Padrão de \textbf{chave simétrica} do NIST, que substituiu o DES (novembro de 2001)
+        \item Processa dados em \underline{blocos de 128 bits}.
+        \item Utiliza chaves de \underline{128, 192 ou 256 bits}.
+        \item A descriptografia por \underline{força bruta} (testando cada chave), que leva cerca de 1 segundo no DES, levaria aproximadamente 149 trilhões de anos no AES-128. 
     \end{itemize}  
     
+    \textbf{Criptografia de Chave Pública (Public Key Cryptography)}
+    \begin{itemize}[left=0.5cm, align=left, nosep]    
+        \item \textbf{Criptogrfia com chave simétrica:}
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Exige que o emissor e o receptor conheçam uma chave secreta \textbf{compartilhada}.
+            \item Como estabelecer essa chave, se nunca se emcontraram ?  
+        \end{itemize}
+        \item \textbf{Criptografia de chave pública:}
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Abordagem radicalmente diferente ([Diffie-Hellman76, RSA78])
+            \item Emissor e receptor \textbf{não compartilham} uma chave secreta.
+            \item Chave \textbf{pública} de \underline{criptografia}: conhecida por \textbf{todos}.
+            \item Chave \textbf{privada} de \underline{descriptografia}: conhecida apenas pelo \textbf{receptor}.   
+        \end{itemize}
+ 
+        \begin{figure}[H]
+        \centering
+            \includegraphics[width=0.65\textwidth]{img/criptografia-chave-publica.png}
+        \end{figure}
+
+        \item \textbf{Observação:} A criptografia de chave pública revolucionou um campo de 2000 anos (que antes utilizava apenas criptografia simétrica).
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Ideias semelhantes surgiram aproximadamente na mesma época, de forma independente nos EUA e no Reino Unido (inicialmente classificadas).
+        \end{itemize}
+
+    \end{itemize}  
+
+    \textbf{Algoritmos de criptografia de chave pública}
+    \begin{itemize}[left=0.5cm, align=left, nosep]    
+        \item \textbf{Algoritmo de criptografia:} É o \underline{método} ou conjunto de regras matemáticas usado para transformar um texto em forma ilegível.    
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Exemplos: AES, RSA, DES.
+        \end{itemize}          
+        \item \textbf{Chave de criptografia:} É um \underline{valor secreto} utilizado pelo algoritmo para realizar a criptografia e a descriptografia.  
+        \item \textbf{Analogia:}
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Algoritmo: tipo de cadeado.
+            \item Chave: chave que abre o cadeado.
+        \end{itemize}
+        
+        \item Requisitos:
+        \begin{enumerate}[left=0.5cm, align=left, nosep]
+            \item É necessário ter $K_{b}^{+}(\bullet) \text{ e } K_{b}^{-} (\bullet)$ tal que $K_{b}^{-} (K_{b}^{+} (m)) = m$.
+            \item Dada a chave pública $K_{b}^{+}$ deve ser impossível calcular/computar a chave privada $K_{b}^{-}$. 
+        \end{enumerate}
+    
+        \item \textbf{RSA (Rivest-Shamir-Adleman):} O algoritmo de criptografia de chave pública mais amplamente utilizado.
+    \end{itemize}  
+
+    \textbf{Pré-requisito: Aritmética Modular}
+    \begin{itemize}[left=0.5cm, align=left, nosep]    
+        \item $x \bmod n =$ resto de $x$ quando dividido por $n$.   
+        \item \textbf{Propriedades:} \\
+        $[(a \bmod n) + (b \bmod n)] \bmod n = (a + b) \bmod n$ \\
+        $[(a \bmod n) - (b \bmod n)] \bmod n = (a - b) \bmod n$ \\
+        $[(a \bmod n) \cdot (b \bmod n)] \bmod n = (a \cdot b) \bmod n$ 
+        \item Assim, $(a \bmod n)^{d}  \bmod n = a^d \bmod n$
+        \item \textbf{Exemplo:} $x = 14, n = 10, d = 2$: \\
+        $(x \bmod n)^{d} \bmod n = 4^{2} \bmod 10 = 16 \bmod 10 = 6$; \\
+        $x^{d} = 14^{2} = 196; x^{d} \bmod 10 = 6$ 
+    \end{itemize}
+
+    \textbf{RSA: Conceitos Básicos}
+    \begin{itemize}[left=0.5cm, align=left, nosep]    
+        \item \textbf{Mensagem:} É apenas um \underline{padrão} de bits.
+        \item Um \underline{padrão de bits} pode ser representado de forma \textbf{única} por um \underline{número inteiro}.
+        \item Assim, criptografar uma mensagem é equivalente a criptografar um número.
+        \item Exemplo: 
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item $m = 10010001$. Essa mensagem é representada de forma \textbf{única} pelo número decimal $145$.
+            \item Para criptografar $m$, criptografamos o número correspondente, o que gera um \underline{novo número} (o \underline{texto cifrado}).
+        \end{itemize}
+    \end{itemize}
+
+    \textbf{RSA: Criação do par de chaves pública/privada}
+    \begin{enumerate}[left=0.5cm, align=left, nosep]
+        \item Escolher dois \underline{números primos} grandes $p$ e $q$ (por exemplo, 1024 bits cada).
+        \item Calcular $\mathbf{n} = pq$ e $z = (p-1)(q-1)$.
+        \item Escolher $\mathbf{e}$ (com $e < n$) tal que não possua \underline{fatores comuns} com $z$ (ou seja, $e$ e $z$ são \underline{coprimos}).
+        \item Escolher $\mathbf{d}$ tal que $ed - 1$ seja exatamente \underline{divisível} por $z$ (ou seja, $ed \bmod z = 1$).
+       \item A chave \textbf{pública} é $\underbrace{(\mathbf{n}, \mathbf{e})}_{K_b^+}$ e a chave \textbf{privada} é $\underbrace{(\mathbf{n}, \mathbf{d})}_{K_b^-}$.
+    \end{enumerate}
+    
+    \textbf{RSA: Criptografia e Descriptografia}
+    \begin{enumerate}[left=0.5cm, align=left, nosep]
+        \item Dados $(\mathbf{n}, \mathbf{e})$ e $(\mathbf{n}, \mathbf{d})$ como calculados anteriormente.
+        \item Para criptografar uma mensagem $m$ ($m < n$), calcular: $c = m^e \bmod n$.
+        \item Para \underline{descriptografar} o padrão de bits recebido $c$, calcular: $m = c^d \bmod n$.
+    \end{enumerate}
+
+    \[
+    m = \left(\underbrace{m^e \bmod n}_{c}\right)^d \bmod n
+    \]
+
+    \textbf{Exemplo:} 
+    Bob escolhe: $p = 5, q = 7$. Então, $n = 35$ e $z = 24$. \\
+    $e = 5$ (Assim, $e$ e $z$ são relativamente coprimos). \\
+    $d = 29$ (Assim, $ed - 1$ é divisível por $z$, ou seja, $ed \bmod z = 1$). \\
+    Criptografando mensagens de 8 bits. 
     \begin{figure}[H]
         \centering
-        %\includegraphics[width=0.5\textwidth]{img/02-camada-aplicacao/}
+        \includegraphics[width=0.65\textwidth]{img/exemplo-rsa.png}
     \end{figure}
-    
+
+    \textbf{Por que o RSA funciona?}
+
+    \begin{enumerate}[left=0.5cm, align=left, nosep]
+        \item Deve-se mostrar que: $c^d \bmod n = m,\text{onde } c = m^e \bmod n$.
+        \item Fato: para quaisquer $x$ e $y$: $x^{y} \bmod n = x^{(y \bmod n)} \bmod n$
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Onde $n = pq$ e $z = (p-1)(q-1)$
+        \end{itemize} 
+        \item Então, 
+        \[
+        \begin{aligned}
+            c^d \bmod n &= (m^e \bmod n)^d \bmod n \\
+            &= m^{ed} \bmod n \\
+            &= m^{(ed \bmod z)} \bmod n \\
+            &= m^{1} \bmod n \\
+            &= m
+        \end{aligned}
+        \]
+    \end{enumerate}
+
+    \textbf{RSA: Outra Propriedade Importante}
+    \[
+    \begin{aligned}
+        \underbrace{K_B^{-}(K_B^{+}(m))}_{\substack{\text{Usa uma chave pública,} \\ \text{seguida por uma privada}}} = m = 
+        \underbrace{K_B^{+}(K_B^{-}(m))}_{\substack{\text{Usa uma chave privada,} \\ \text{seguida por uma pública}}}
+    \end{aligned}
+    \]
+
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Isso acontece diretamente da aritmética modular.
+    \end{itemize}
+    \[
+    \begin{aligned}
+    (m^e \bmod n)^d \bmod n &= m^{ed} \bmod n \\
+                            &= m^{de} \bmod n \\
+                            &= (m^d \bmod n)^e \bmod n
+    \end{aligned}
+    \]
+
+    \textbf{Por que o RSA é seguro?}
+
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Se você conheçe a chave pública de Bob $(n, e)$. Quão difícil é determinar $d$?
+        \item Essencialmente, é necessário encontrar os fatores de $n$ sem conhecer previamente os dois fatores $p$ e $q$.
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Fato: fatorar um número grande é computacionalmente difícil.
+        \end{itemize}
+    \end{itemize}
+
+    \textbf{RSA na prática: chaves de sessão}
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item A exponenciação no RSA é computacionalmente intensiva.
+        \item O DES é pelo menos 100 vezes mais rápido que o RSA.
+        \item Utiliza-se \underline{criptografia} de chave pública para estabelecer uma \textbf{conexão segura} e, em seguida, define-se uma segunda chave — a chave de 
+        sessão simétrica — para criptografar os dados; chave de sessão: $K_S$.
+        \item Bob e Alice usam RSA para trocar uma \textbf{chave de sessão} simétrica $K_S$.
+        \item Aós ambos possuírem $K_S$, utilizam criptografia de \underline{chave simétrica}.
+    \end{itemize}
