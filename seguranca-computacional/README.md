@@ -5,6 +5,7 @@
 ## 📁 Estrutura
 ```plaintext
 seguranca-computacional/
+├── 📂 anotacoes/
 ├── 📂 img/
 ├── 📂 output/
 ├── 📂 slides/
