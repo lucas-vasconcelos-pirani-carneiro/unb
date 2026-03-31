@@ -250,10 +250,10 @@ main(){
 
 ## **A Cifra de Vigenère**
 
-- A chave agora é uma **string**, não apenas um único caractere
-- Para criptografar, desloque cada caractere do texto original pela quantidade determinada pelo próximo caractere da chave
-  - Recomece (repita) a chave quando necessário
-- A descriptografia apenas **inverte o processo**
+- A chave agora é uma **string**, não apenas um único caractere.
+- Para criptografar, desloque cada caractere do texto original pela quantidade determinada pelo próximo caractere da chave.
+  - Recomece (repita) a chave quando necessário.
+- A descriptografia apenas **inverte o processo**.
 
 ![cifra-de-vigenere](img/cifra-de-vigenere.png)
 
@@ -274,15 +274,15 @@ main(){
 
 - Olhando para cada 14º caractere é (quase) como olhar para um **texto cifrado** (*ciphertext*) criptografado com a **cifra de deslocamento**.
   - Embora um ataque direto por **força bruta** não funcione…
-  - Por quê?
+  - Por quê? Teria que testar as 14 combinações, não sendo viável.
 
 ![frrequencia-de-letras](img/frrequencia-de-letras.png)
 
 - Observe cada 14º caractere do texto cifrado, começando pelo primeiro.
-  - Chame isso de uma **“sequência” (stream)**.
+  - Chame isso de uma **"sequência" (stream)**.
 
 - Seja $\alpha$ o caractere mais **frequente** que aparece nessa sequência.
-- Muito provavelmente, $\alpha$ corresponde ao caractere mais **comum** do texto original (ou seja, **‘e’**).
+- Muito provavelmente, $\alpha$ corresponde ao caractere mais **comum** do texto original (ou seja, **'e'**).
   - Então, supõe-se que o primeiro caractere da chave seja $\alpha$ - **'e'**.
 
 - Repita o processo para todas as outras posições.
@@ -292,11 +292,12 @@ main(){
 
 - Seja $p_i (0 \leq i \leq 25)$ a frequência da **i-ésima letra do alfabeto inglês** em um texto em inglês normal.
   - Pode-se calcular que $\sum {p_i}^2 \approx 0,065$.
-- Seja **qᵢ** a frequência observada da **i-ésima letra** em uma determinada sequência (*stream*) do texto cifrado.
+- Seja $q_i$ a frequência observada da **i-ésima letra** em uma determinada sequência (*stream*) do texto cifrado.
 - Se o deslocamento dessa sequência for **j**, espera-se que $q_{i + j} \approx 0,065$ para todo **i**.
   - Portanto, espera-se que $\sum p_i + q_{i + j} = 0,065$.
 - Teste **todos** os valores possíveis de **j** para encontrar o correto.
   - Repita o processo para cada sequência (*stream*).
+  - **j:** Daria qual foi o <u>deslocamento</u> e qual seria o <u>caractere</u> relativo a esse deslocamento.
 
 #### Encontrando o tamanho da chave
 
@@ -310,7 +311,7 @@ main(){
 
 - Quando usamos o **tamanho correto da chave**, as frequências do texto cifrado $\{q_i\}$ em uma sequência serão **versões deslocadas** de $\{p_i\}$.
   - Assim, $\sum {q_i}^2 \approx \sum {p_i}^2 \approx 0,065$.
-- Quando usamos um **tamanho de chave incorreto**, espera-se (heuristicamente) que as letras do texto cifrado estejam **uniformemente distribuídas**
+- Quando usamos um **tamanho de chave incorreto**, espera-se (heuristicamente) que as letras do texto cifrado estejam **uniformemente distribuídas**.
   - Então, $\sum {q_i}^2 \approx \sum (\frac{1}{26})^2 \approx 0,038$.
 - Na prática, isso já é suficiente para encontrar o **comprimento da chave N que maximiza** $\sum {q_i}^2$.
   - Podemos verificar observando outras sequências (*streams*) também.
