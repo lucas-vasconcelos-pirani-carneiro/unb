@@ -56,10 +56,7 @@ Fone = 222-2222
 ## Relacionamento
 
 - É um conjunto de **associações** entre entidades.
-- Relacionamento **liga** as instâncias dos dados
-
-![relacionamento-conjuntos](img/02-modelo-entidade-relacionamento/relacionamento-conjuntos.png)
-
+- Relacionamento **liga** as instâncias dos dados.
 - **Grau** de um Tipo de Relacionamento:
   - **Binário:** Relaciona <u>dois</u> entidades. 
   - **Terciário:** Relaciona <u>três</u> entidades.
@@ -67,47 +64,30 @@ Fone = 222-2222
 
 ![relacionamento-binario-terciario](img/02-modelo-entidade-relacionamento/relacionamento-binario-terciario.png)
 
+![relacionamento-ternario](img/02-modelo-entidade-relacionamento/relacionamento-ternario.png)
+
 - Relacionamento **Recursivo**: A entidade se relaciona com ela <u>mesma</u>.
   - Pré-requisito e uma disciplina;
   - Funcionário e supervisor;
+  - É importante explicitar os papeis do relacionamento.
 
 ![relacionamento-recursivo](img/02-modelo-entidade-relacionamento/relacionamento-recursivo.png)
-
-- É importante explicitar os papeis do relacionamento.
-- Exemplo de como fica na modelagem:
-
-![relacionamento-recursivo2](img/02-modelo-entidade-relacionamento/relacionamento-recursivo2.png)
 
 ### Cardinalidade
 
 - Quantidade que as **instâncias** da entidade podem se relacionar.
 - `1:1` um para um
-
-![cardinalidade_1-1](img/02-modelo-entidade-relacionamento/cardinalidade_1-1.png)
-
 - `1:N`um para muitos
 - `N:1` muitos para um
-
-![cardinalidade_1-n](img/02-modelo-entidade-relacionamento/cardinalidade_1-n.png)
-
 - `N:N` muitos para muitos
 
-![cardinalidade_n-n](img/02-modelo-entidade-relacionamento/cardinalidade_n-n.png)
-
-#### Cardinalidade (Mínima, Máxima)
-![cardinalidade-minima-maxima](img/02-modelo-entidade-relacionamento/cardinalidade-minima-maxima.png)
-
-- **Cardinalidade Mínima:** Substitui a participação. 
-  - 0: Parcial; 
-  - 1: Total.
-- **Cardinalidade Máxima:** Continua como antes.
-  - 1 ou N.
+![exemplos-cardinalidade](img/02-modelo-entidade-relacionamento/exemplos-cardinalidade.png)
 
 ### Participação
 
 - **Obrigatoriedade** que a entidade pode ter ao participar daquele relacionamento.
 - **Total:** Obrigatório.
-  - É representada por dois traços `===`.
+  - É representada por dois traços `==`.
   - **Todas** as instâncias da entidade precisam estar <u>relacionadas</u> com as instâncias da outra entidade.
 - **Parcial:** Optativo.
   - É representado por apenas um traço `---`.
@@ -115,9 +95,14 @@ Fone = 222-2222
 
 ![restricao-participacao](img/02-modelo-entidade-relacionamento/restricao-participacao.png)
 
-### Relacionamento Ternário
+#### Cardinalidade (Mínima, Máxima)
+- **Cardinalidade Mínima:** Substitui a participação. 
+  - 0: Parcial; 
+  - 1: Total.
+- **Cardinalidade Máxima:** Continua como antes.
+  - 1 ou N.
 
-![relacionamento-ternario](img/02-modelo-entidade-relacionamento/relacionamento-ternario.png)
+![cardinalidade-minima-maxima](img/02-modelo-entidade-relacionamento/cardinalidade-minima-maxima.png)
 
 ## Entidade Fraca
 
