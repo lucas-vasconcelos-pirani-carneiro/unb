@@ -110,6 +110,7 @@ Fone = 222-2222
 
 - **Não** tem um atributo que pode ser considerado **chave**, único.
   - Precisa de uma chave externa para se identificar unicamente. 
+- Depende de uma outra entidade para existir.
 - **Chave Composta:** Sua chave candidata + a chave da entidade forte.
   - (matriculaEmp , nomeDep)
 
@@ -232,9 +233,115 @@ Controla =N= Projeto
 
 ## Exemplo 02 - Detran
 - A especificação encontra-se me `/exercicios/lista-detran.pdf`
+- Se tiver código será uma entidade.
+- Identificada $\rightarrow$ Chave
+- **Relacionamento de Identificação:** Está relacionado com a chave da entidade fraca.
 
+```plantuml
+@startchen
 
+'Entidade e Atributos'
+entity Veiculo {
+    placa <<key>>
+    chassi
+    cor
+    ano_fabricacao
+}
 
+entity Modelo {
+    nome_modelo
+    cod_modelo <<key>>
+}
+
+entity Categoria {
+    nome_cateforia
+    cod_categoria <<key>>
+}
+
+entity Proprietario {
+    cpf <<key>>
+    nome
+    endereco {
+        bairro
+        cidade
+        estado
+    }
+    telefone <<multi>>
+    data_nasc
+    idade <<derived>>
+}
+
+entity Infracao <<weak>> {
+    data_hora <<key>>
+    vel_aferida
+}
+
+entity Local {
+    cod_local <<key>>
+    pos_geografica
+    vel_permitida
+}
+
+entity Tipo_Infracao {
+    cod_tipo_infracao <<key>>
+    valor
+}
+
+entity Agente_de_Transito {
+    matricula <<key>>
+    nome
+    data_contratacao
+    tempo_servico <<dereived>>
+}
+
+'Relacionamentos'
+relationship Possui {
+}
+
+Veiculo -(0,N)- Possui
+Possui -(1,1)- Modelo
+
+relationship Pertence {
+}
+
+Veiculo -(0,N)- Pertence
+Pertence -(1,1)- Categoria
+
+relationship Tem {
+
+}
+
+Proprietario -(1,1)- Tem
+Tem -(0,N)- Veiculo
+
+relationship Detem <<identifying>> {
+}
+
+Veiculo -(1,1)- Detem
+Detem -(0,N)- Infracao
+
+relationship TEM <<identifying>> {
+}
+
+Infracao -(1,N)- TEM
+TEM -(0,1)- Tipo_Infracao
+
+relationship Ocorre {
+}
+
+Infracao -(0,N)- Ocorre
+Ocorre -(1,1)- Local
+
+relationship Aplica {
+}
+
+Infracao -(0,N)- Aplica
+Aplica -(1,1)- Agente_de_Transito
+
+@endchen
+```
+
+![exemplo-detran](img/02-modelo-entidade-relacionamento/exemplo-detran.png)
 
 ## Especificação e Generalização
 
