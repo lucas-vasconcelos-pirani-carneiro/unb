@@ -91,7 +91,7 @@
      software que deve ser produzido e as <u>restrições</u> impostas à sua operação.
   2. **Desenvolvimento de software**: O software é <u>projetado</u> e <u>programado</u>.
   3. **Validação de software**: O programa é analisado para garantir que
-    seja aquilo de que o cliente precisa.
+      seja aquilo de que o cliente precisa.
   4. **Evolução do software**: Modificação para refletir a mudança de requisitos tanto do cliente quanto do mercado.
 
 - Não existem **métodos** ou **técnicas** <u>universais</u> de engenharia de software que possam ser utilizados.
@@ -191,3 +191,93 @@
 
 ## Estudos de Caso
 
+- A seguir será mostrado 4 exemplos de sistemas diferentes.
+  - **Sistema Embarcado:** Um sistema em que o software <u>controla</u> algum
+    <u>dispositivo de hardware</u> e está embarcado neste dispositivo.
+    - Tamanho físico; 
+    - A capa­cidade de resposta, 
+    - O gerenciamento da energia etc. 
+    - **Ex:** Software para controlar uma bomba de insulina para portadores de diabetes.
+  - **Sistema de Informação:**  <u>Geren­ciar</u> e <u>proporcionar</u> acesso a um banco de dados de informações.
+    - Segurança da informação (security);
+    - Usabilidade; 
+    - Privacidade;
+    - Manutenção da integridade dos dados.
+    - **Ex:** Sistema de registros médicos.
+  - **Sistema de coleta de dados baseado em sensores:** Finalidades principais são coletar dados de um <u>conjunto de sensores</u> e pro­cessá-los de alguma maneira. 
+    - Confiabilidade; 
+    - Manutenibilidade;
+    - **Ex:** Estação meteorológica na natureza.
+  - **Ambiente de Suporte:** É um conjunto integrado de ferramentas de software utilizadas para dar suporte a algum tipo de atividade. 
+    - IDE's.
+    - **Ex:** Ambiente digital de Aprendizagem.
+
+### Sistema de Controle para Bomba de Insulina
+
+- **Funcionamento do Sistema:** O sistema é composto por um microsensor, um controlador de software e uma bomba miniaturizada. 
+  - O sensor mede a condutividade elétrica do sangue (proporcional ao nível de açúcar) e envia esses dados ao controlador. 
+  - O software calcula a dose necessária e aciona a bomba por meio de pulsos para fornecer a insulina através de uma agulha.
+- **Vantagem sobre o Tratamento Convencional:** Diferente das injeções manuais, que dependem de medições periódicas e estimativas do paciente, o sistema automatizado monitora os níveis constantemente e fornece doses precisas. 
+  - Isso evita oscilações perigosas, como a **hipoglicemia** (glicose baixa), que pode causar perda de consciência, ou a **hiperglicemia** (glicose alta), que gera danos a longo prazo em órgãos como olhos e rins.
+- **Natureza Crítica do Sistema:** Por lidar diretamente com a vida do usuário, é classificado como um **sistema crítico em segurança**. 
+  - Falhas no funcionamento podem levar o paciente ao coma ou à morte.
+- **Requisitos de Alto Nível:** Para garantir a segurança, o sistema deve obrigatoriamente cumprir dois requisitos:
+- **Disponibilidade:** Deve estar sempre pronto para fornecer insulina quando necessário.
+- **Confiabilidade:** Deve calcular e entregar a quantidade exata de insulina para compensar o nível de açúcar atual
+
+![arquitetura-hardware](img/01-introducao/arquitetura-hardware.png)
+
+![modelo-bomba-insulina](img/01-introducao/modelo-bomba-insulina.png)
+
+### Sistema de Informação de pacientes de saúde mental
+
+- **Acesso e Mobilidade:** O Mentcare utiliza um banco de dados centralizado, mas permite que os profissionais baixem cópias locais dos registros em notebooks. 
+  - Isso garante que o sistema funcione mesmo em locais **sem conexão de rede segura**, assegurando a disponibilidade das informações durante o atendimento.
+- **Usuários e Funcionalidades:** O sistema atende tanto a equipe médica (médicos e enfermeiros) quanto a administrativa (recepcionistas e gestores). 
+  - Suas funções incluem o <u>registro de dados pessoais</u>, <u>históricos de consultas</u> e <u>tratamentos</u>, além da geração de relatórios de gestão e clínicos.
+
+- **Gestão do Cuidado e Monitoramento:** O software permite a gestão individualizada, oferecendo resumos para que médicos conheçam rapidamente o histórico do paciente. 
+  - Além disso, possui um sistema de **monitoramento que emite alertas** se um paciente perder consultas ou se houver necessidade de verificações legais em casos de internação.
+- **Natureza Crítica e Segurança:** Por lidar com pacientes que podem representar um risco para si mesmos ou para outros, o Mentcare é considerado um **sistema crítico em segurança (safety-critical)**. 
+  - Ele deve emitir avisos sobre comportamentos suicidas ou perigosos e garantir que a equipe atue em conformidade com as leis de saúde mental, especialmente em internações compulsórias.
+- **Desafios Éticos e Técnicos:** As fontes destacam um conflito entre a **privacidade** dos dados (melhor mantida em uma única cópia centralizada) e a **disponibilidade** (que exige múltiplas cópias locais para garantir o acesso à informação em qualquer circunstância), ambos requisitos essenciais para a segurança do paciente.
+
+![organizacao-mentcare](img/01-introducao/modelo-bomba-insulina.png)
+
+### Estação meteorológica na natureza
+
+- **Estrutura do Sistema:** Ele faz parte de uma infraestrutura maior composta por três subsistemas principais: 
+  1. **Sistema da própria estação:** Coleta e Processamento inicial;
+  2. **Sistema de gerenciamento e arquivamento:** Análise e armazenamento dos dados de todas as estações.
+  3. **Sistema de manutenção:** Monitoramento de falhas e atualizações via satélite).
+
+- **Funcionamento e Comunicação:** As estações coletam dados como temperatura, pressão, vento e chuva em intervalos frequentes. Como a conexão via satélite é lenta e possui largura de banda limitada, a estação realiza o **processamento e a agregação dos dados localmente** antes de transmiti-los. Se a conexão cair, os dados são armazenados localmente até que a comunicação seja restaurada.
+- **Autonomia e Desafios Ambientais:** Cada estação deve ser totalmente **autocontida**, operando com baterias carregadas por energia solar ou eólica, sem cabos de rede ou alimentação externa. Elas enfrentam condições ambientais severas e riscos de danos por animais em áreas selvagens.
+- **Responsabilidades do Software:** Devido à necessidade de independência, o software da estação é complexo e deve realizar tarefas além da coleta de dados, incluindo:
+  - **Monitoramento de hardware:** Relatar defeitos nos instrumentos e na comunicação.
+  - **Gestão de energia:** Controlar o carregamento das baterias e proteger geradores em condições climáticas extremas.
+  - **Reconfiguração dinâmica:** Permitir a atualização de software e a ativação de instrumentos de backup remotamente
+
+![ambiente-estacao](img/01-introducao/ambiente-estacao.png)
+
+### Ambiente Digital para Aprendizagem
+
+- **Framework Flexível:** O iLearn não é um software único, mas um framework que incorpora ferramentas de propósito geral e aplicações específicas de aprendizagem. Ele fornece serviços básicos essenciais, como **autenticação, comunicação e armazenamento**.
+
+- **Arquitetura Orientada a Serviços:** O sistema é um ambiente distribuído onde todos os componentes são considerados **serviços substituíveis** que podem ser acessados de qualquer lugar via internet.
+
+- **Tipos de Serviços:** O sistema organiza suas funcionalidades em três categorias principais:
+
+  - **Serviços Utilitários:** Fornecem funcionalidades básicas independentes, geralmente desenvolvidas especificamente para o sistema.
+  - **Serviços de Aplicação:** Incluem ferramentas como e-mail, videoconferência e acesso a conteúdos educacionais (filmes, recursos históricos), podendo ser gratuitos ou adquiridos de terceiros.
+  - **Serviços de Configuração:** Permitem adaptar o ambiente para diferentes perfis de usuários (alunos, professores e pais) e faixas etárias.
+
+- **Níveis de Integração:** O capítulo destaca que os serviços podem ser incorporados de duas formas:
+
+  - **Integrados:** Possuem uma <u>API</u> que permite a comunicação direta entre serviços, como no caso do serviço de autenticação, que evita que o usuário precise fazer login repetidamente em diferentes ferramentas.
+
+  - **Independentes:** São acessados via navegador e operam de forma isolada, exigindo ações explícitas do usuário (como copiar e colar) para compartilhar informações entre eles.
+
+- Em resumo, o objetivo desse sistema é fornecer um **ambiente adaptável** que possa <u>evoluir</u> e <u>integrar</u> novas ferramentas à medida que as necessidades pedagógicas e tecnológicas mudam.
+
+![arquitetura-ambiente-aprendizagem](image.png)
