@@ -31,3 +31,35 @@
 # Arquivos temporários
 *.tmp
 *.temp
+
+# Python 
+_pycache__/
+*.py[cod]
+*$py.class
+
+# Ambientes virtuais
+venv/
+.env/
+.venv/
+
+# Arquivos de build/distribuição
+build/
+dist/
+*.egg-info/
+
+# C / C++ 
+*.o
+*.out
+*.exe
+*.a
+*.so
+*.dll
+
+# Arquivos gerados por compiladores
+*.dSYM/
+*.stackdump
+
+# IDEs
+.vscode/
+.idea/
+*.code-workspace
