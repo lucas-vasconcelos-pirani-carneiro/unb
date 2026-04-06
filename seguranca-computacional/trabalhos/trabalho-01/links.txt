@@ -1,0 +1,7 @@
+Link 1: https://medium.com/@goldengrisha/a-simple-guide-to-implementing-a-vigen%C3%A8re-cipher-in-python-abc5918a392e
+Link 2: https://www.geeksforgeeks.org/dsa/vigenere-cipher/
+Link 3: https://www.youtube.com/watch?v=sxFObRNriUg
+Link 4: https://inventwithpython.com/cracking/chapter18.html
+Link 5: https://www.youtube.com/watch?v=qpTHLrcZzEk
+Link 6: https://www.youtube.com/watch?v=Ld8qsGd2t9U
+Link 7: https://www.youtube.com/watch?v=yqnapNYYn8g
