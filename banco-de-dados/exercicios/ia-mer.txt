@@ -1,0 +1,9 @@
+1) Qual ferramenta de IA foi utilizada? 
+Claude Sonnet 4.6
+
+2) Qual foi o prompt passado para a ferramenta?
+Suponha que você é o Administrador de Banco de Dados (DBA) de uma empresa e foi pedido para você fazer a modelagem, usando o modelo entidade relacionamento, da seguinte especificação: Copiei o o texto da especificação aqui.
+
+4) A ferramenta respondeu correta modelo? Caso não, quais os principais erros gerados?
+Em partes. A ferramenta não consegue gerar as formas de maneira coesa, as entidades fracas não estão corretamente formadas, os atributos multivalorados e derivados também não foram corretamente respeitados. Outro ponto de análise e que a restrição de participação do relacionamento, parcial ou obrigatória, também não foi respeitada ou representada. Por outro lado, a restrição de cardinalidade do relacionamentos foi feita com êxito em todas as ocorrências.
+
