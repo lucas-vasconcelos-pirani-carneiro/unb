@@ -349,17 +349,58 @@ Aplica -(1,1)- Agente_de_Transito
 
 ![especificacao-generalizacao-parcial](img/02-modelo-entidade-relacionamento/especificacao-generalizacao-parcial.png)
 
+## Observações
 
-## Tipos de Entidade
+### Entidade Associativa
+- É representada com um retangulo com Losango dentro.
+- Utiliza-se em um caso especial quando for preciso fazer **um relacionamento de um relacionamento**.
 
+![entidade-associativa](img/02-modelo-entidade-relacionamento/entidade-associativa.png)
 
+### Atributo x Entidade
+
+- **Atributo:** Informação adicional .
+  - Ex: Cor em Dentran
+- **Entidade:** A informação seria utilizada de forma mais aprofundada, fazer uma busca estatistica, gerar um relatório, fazer pesquisa.
+  - Ex: Cor em Concessionário
+
+![atributo_entidade](img/02-modelo-entidade-relacionamento/atributo_entidade.png)
+
+### Atributo x Especialização
+
+- A especialização ajuda a organizar melhor os dados, enquanto atributos não deixa muito claro o escopo do dado que estamos usando.
+
+![atributo_especializacao](img/02-modelo-entidade-relacionamento/atributo_especializacao.png)
+
+### Atributo Multivalorado x Entidade Fraca
+
+- São modelos equivalentes, contudo o uso da entidade fraca também organiza melhor os dados.
+
+![atributo_multivalorado-entidade_fraca](img/02-modelo-entidade-relacionamento/atributo_multivalorado-entidade_fraca.png)
+
+### Erros Comuns
+- **Compartilhar atributos**, atributos exclusivos da entidade alvo !!
+
+![compartilhar-atributos](img/02-modelo-entidade-relacionamento/compartilhar-atributos.png)
+
+- **Temporal/Histórico:** Guardar alguma informação ao ao longo do tempo. 
+  - `Data` se torna a nossa **chave**.
+
+![temporal](img/02-modelo-entidade-relacionamento/temporal.png)
+
+- No esquema da esquerda o semestre se refere ao momento, o agora. Enquanto, o modelo da direita guardar um **aspecto temporal**, por isso semestre vira chave.
+- No modelo da esquerda é possível armazenar quantas vezes uma pessoas vez a mesma disciplinas, caso haja reprovação nelas. 
+
+![exemplo-temporal](img/02-modelo-entidade-relacionamento/exemplo-temporal.png)
 
 ## Notação
-- Peter Chen
 
-- UML
+### UML
 ![exemplo-uml](img/02-modelo-entidade-relacionamento/exemplo-uml.png)
 
-- *Crow’s Foot Notation* - Notação Pé de Galinha
+### *Crow’s Foot Notation* - Notação Pé de Galinha
 ![notacao-pe-de-galinha](img/02-modelo-entidade-relacionamento/notacao-pe-de-galinha.png)
 
+> [!NOTE]
+>
+> A notação usada até agora foi a de ***Peter Chen***.
