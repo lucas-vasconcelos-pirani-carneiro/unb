@@ -321,9 +321,11 @@ Prelude> [1,2,3] ++ [5,6] ou (++) [1,2,3] [5,6]
 ```hugs
 [] \/ ys = ys
 (x:xs) \/ ys | membro x ys = xs \/ ys
-             | otherwise = x: xs \/ ys
+
+-- Função Membro             | otherwise = x: xs \/ ys
 membro z [] = False
-membro z (w:ws) = z==w || membro z ws
+membro z (w:ws) = z == w || membro z ws
+-- Vai consumindo a cabeça da lista até um momento que ela fica vazia
 ```
 
 - Funções e operadores podem fazer uso de **definições locais** com `let` ou `where`.
@@ -331,7 +333,9 @@ membro z (w:ws) = z==w || membro z ws
 ```hugs
 xs \/ ys | xs == [] = ys
          | membro x ys = resto
-         | otherwise = x:resto where (x:t)=xs; resto = t \/ ys
+         | otherwise = x:resto where (x:t) = xs; resto = t \/ ys
+-- t: Cauda de xs
+-- x: Cabeça de xs
 ```
 
 > [!IMPORTANT]
@@ -364,10 +368,12 @@ x $\oplus$ y $\oplus$ z = (x $\oplus$ y) $\oplus$ z -- à esquerda infixl
 ### Booleano
 
 ```hugs
-(&&), (||) :: Bool -> Bool -> Bool
+(&&), (||) :: Bool (Argumento) -> Bool -> Bool 
+-- &&, ||: Assinatura da função
+-- () é função pré-fixada
 
 True && x = x
-False && _ = False
+False && _ = False  -- Representa uma variável anônima
 
 True || _ = True
 False || x = x
@@ -379,6 +385,10 @@ not False = True
 otherwise :: Bool
 otherwise = True
 ```
+
+- Hugs implementa curto circuito.
+- Chacagem Estática: Declara o tipo, é imutávael.
+- Checagem Dinâmica: Não há a declaração.
 
 ### Char
 
@@ -402,20 +412,25 @@ otherwise = True
     chr :: Int -> Char
     ord :: Char -> Int
     ```
+- `Integer`: Inteiro para software.
+- `Int`: Inteiro para hardware.
 
 ### String
 
 - É uma **lista de caracteres**.
     - `type String = [Char]`, é um tipo **sinônimo**.
 - Strings podem ser abreviadas envolvendo os caracteres por aspas.
-    - `"string"` abrevia a notação `[' ', 's', 't', 'r', 'i', 'n', 'g']`.
+    - `" string"` abrevia a notação `[' ', 's', 't', 'r', 'i', 'n', 'g']`.
 - **Todas** as operações para <u>lista</u> se aplicam a <u>strings</u>.
 
 #### Strings e I/O
 
-- String são **objetos visíveis**: podem ser lidos ou impressos.
+- String são **objetos visíveis**: Podem ser lidos ou impressos.
+
 ```hugs
 Prelude> let { leia = do putStr "informe uma string >"; str <- getLine; putStr str}
+-- Imprime na tela o que foi digitado
+-- in leia: executa a função
 in leia informe uma string > lah vai a string, pega!
 lah vai a string, pega! :: IO ()
 
@@ -424,6 +439,7 @@ Isto eh uma string :: IO ()
 ```
 
 - Qualquer objeto para ser impresso deve antes ser **convertido** em string.
+
 ```hugs
 Prelude> putStr (show [1,2,3,4,5])
 [1,2,3,4,5] :: IO ()
@@ -434,15 +450,17 @@ Prelude> read "[1,2,3,4]" :: [Int] -- Converte string em objeto
 Prelude> show (23,5.4) -- Converte objeto em string
 "(23,5.4)" :: [Char]
 
-Prelude> read "[('a','b',4.5),('c','d',6.0)]" ::[(Char,Char,Float)]
+Prelude> read "[('a','b',4.5),('c','d',6.0)]" :: [(Char,Char,Float)]
 [('a','b',4.5),('c','d',6.0)] :: [(Char,Char,Float)]
 ```
+
+- <u>Tuplas</u> diferentemente das <u>listas</u> **não** precisam ser **homogêneas**!!
 
 ### Numéricos
 
 - `Int` e `Integer`
-    - `Int` tem valores **limitados**.
-    - `Integer` tem valores **ilimitado**.
+    - `Int` tem valores **limitados**, aritmética por hardware.
+    - `Integer` tem valores **ilimitado**, aritmética por software.
 
 - **Operadores** para inteiros:
     - `+`, `-`, `*`, `/`, `^` 
@@ -453,7 +471,7 @@ Prelude> read "[('a','b',4.5),('c','d',6.0)]" ::[(Char,Char,Float)]
 - `Complex`
 
 ### Listas
-- É um **tipo algébrico** de dois construtores: `[]` e `:`.
+- É um **tipo algébrico** de dois construtores: `[]`, terminador, e `:`, operador de composição de listas.
 - Há muitas funções no `Prelude` para manipular listas.
 
 ```hugs
@@ -468,7 +486,7 @@ Prelude> ['a'..'z']
 "abcdefghijklmnopqrstuvwxyz" :: [Char]
 
 Prelude> [0.1,0.3 .. 2.0]
-[0.1,0.3,0.5,0.7,0.9,1.1,1.3,1.5,1.7,1.9] :: [Double]
+[0.1,0.3,0.5,0.7,0.9,1.1,1.3,1.5,1.7,1.9] :: [Double] -- Soma de 0.2 em 0.2
 
 Prelude> length [1..10]
 10 :: Int
@@ -480,64 +498,66 @@ Prelude> length [1..10]
 #### Operadores e Funções sobre listas
 
 ```hugs
--- length: Retorna o tamanho da lista
+-- length: Retorna o tamanho da lista.
 length [1..1000] -- 1000
 
--- ++:
+-- ++: Concatena, usada como operador.
 [1,3..10]++[2,4..8]  -- [1,3,5,7,9,2,4,6,8]
 
--- : 
-[1,2]:[2,3]:[] -- [[1,2],[2,3]]
+-- : Composição/"Junção" de lista.
+[1,2]:[2,3]:[] -- [[1,2],[2,3]], lista da lista por causa da composição
 
--- filter:
+-- filter: Aplica uma regra, se retorna TRUE retorna o elemento, se for FALSE despreza o elemento.
 filter even [1..10]  -- [2, 4, 6, 8, 10]
 
--- concat: 
+-- concat: Concatena os elementos, retornando uma string.
 concat [['1'],['2'],['3']," abc"," efg"] -- "123 abc efg"
 
--- head:
--- tail:
+-- head: Pega o elemento que está na cabeça da lista.
+-- tail: Retorna a lista sem o elemento da sua cabeça.
 head (tail [1,5..200]) -- 5
 
--- drop:
--- take:
+-- drop: Despreva os primeiros n elementos de uma lista e retorna a mesma sem eles.
+-- take: Pega os primeiros n elementos de uma lista.
 drop 2 (take 4 ["jan","fev","mar","abr","mai","jun"]) -- "mar", "abr"
+-- Lista de strings, lista da lista de char.
 
--- last:
--- reverse:
+-- last: Retorna o último elemento da lista.
+-- reverse: Inverte a lista.
 last (reverse [1,10..200]) -- 1
 
--- replicate:
+-- replicate: Repete-se os elementos.
 replicate 5 'a' -- "aaaaa" 
-replicate 3 'a' -- ["a", "a", "a"] 
+replicate 3 "a" -- ["a", "a", "a"] 
 
--- elem:
+-- elem: Saber se o elemento está na lista.
 elem 13 [1,3..20] -- True
 
--- zip:
+-- zip: Faz um Par Ordenado, tupla, com os elementos, (1º Elem, 1º Elem), ... (Nº Elem, Nº Elem); ainda esão dentro de uma lista.
+-- Vai até a lista mais curta parar.
 [1,3..10] [0,2..15] -- [(1,0),(3,2),(5,4),(7,6),(9,8)]
 
--- unzip:
+-- unzip: Separar os pares ordenado.
 unzip (zip [1,3..10] [0,2..15]) -- ([1,3,5,7,9],[0,2,4,6,8])
 
--- and:
+-- and: Aplica a operação lógica and.
+-- map: Aplica o função (even) recursivamente.
 and (map even [1,2,3,4]) -- False 
 
--- or:
+-- or: Aplica a operação lógica or.
 or (map even [1,2,3,4]) -- True
 
--- foldl:
+-- foldl: Aplica a função acumulativamente da esquerda para a direita:
+-- foldl (+) valor_inicial lista
 foldl (+) 2 [-2..2] -- 2
 foldl (-) 2 [-2..2] -- 2 
 
--- foldl1:
+-- foldl1: Usa o primeiro elemento como acumulador inicial.
 foldl1 (+) [-2..2] -- 0
 foldl1 (-) [-2..2] -- 4
 
--- foldr:
+-- foldr: Envelopa da direita para esquerda.
 foldr (-) 2 [-2..2] -- -2
-
--- foldr1:
 foldr1 (-) [-2..2] -- 0
 ```
 
@@ -548,6 +568,16 @@ foldl (op) arg0 [a,b,c] = ((arg0 op a) op b) op c
 foldl1 (op) [a,b,c] = (a op b) op c
 foldr (op) arg0 [a,b,c] = a op (b op (arg0 op c))
 foldr1 (op) [a,b,c] = a op (b op c)
+```
+
+- Exemplo: foldl
+```txt
+= ((((2 - (-2)) - (-1)) - 0) - 1) - 2
+= (((4 - (-1)) - 0) - 1) - 2
+= ((5 - 0) - 1) - 2
+= (5 - 1) - 2
+= 4 - 2
+= 2
 ```
 
 ### Tuplas
@@ -582,7 +612,7 @@ continua, (s/n)? T :: IO [Char]
 ```
 
 ```hugs
-import Data.Char
+import Hugs.Char (ord, chr)
 tecla = do putStr "\n Qual a tecla? > "
     carac <- getChar
     putStr (show (ord carac))
@@ -595,6 +625,9 @@ Qual a tecla? > b98
 Qual a tecla? > B66
 Qual a tecla? > 27 :: IO ()
 ```
+
+- `chr: Int --> Int`
+- `ord: Char --> Int`
 
 ## Paradigma Funcional
 - Uma função é definida como um **conjunto de equações**.
