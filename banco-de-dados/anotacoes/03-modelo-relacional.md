@@ -26,14 +26,17 @@ DEPARTAMENTO
     - **Valor do Abritubo:** Valor de um determinado campo. 
         - Ex: 111, Joana, 12.000.
 
-- **Linha** ou **Tuplas:** São os registros da tabela.
+- **Linha** ou **Tuplas:** São os <u>registros</u> da tabela.
 - **Grau:** Número de atributos/colunas que uma tabela possue.
     - Ex: Possui grau 4.
 
-- **Chave Primária (*Primary Key - PK*):** Identifica unicamente uma tupla detre o conjunto de todas as tuplas.
-    - Ex: matricula, CodDe.
+- **Chave Primária (*Primary Key - PK*):** Identifica <u>unicamente</u> uma tupla detre o conjunto de todas as tuplas.
+    - Ex: matricula, CodDep.
 
-- **Chave Estrangeira:** É utilizado para fazer <u>relacionamento</u> entre tabelas.
+- **Chave Candidata:** Um possível atributo que <u>pode ser</u> a **chave primária**, ou seja, identificar unicamente a entidade.
+    - Ex: matricula, cpf.
+
+- **Chave Estrangeira:** É utilizado para fazer <u>relacionamento/ligamento</u> entre tabelas.
     - Incluí-se uma coluna nova na tabela e o valor dessa coluna está ligado com a outra tabela que está sendo relacionada.
     - Ex: `CodDep` é a chave **estrangeira (*Foreign Key - FK*)**.
 
@@ -49,7 +52,7 @@ DEPARTAMENTO
 - São as **regras** que o SGBD <u>vai ou não permitir</u> dentro do bando de dados.
 
 #### Restrição de Integridade de Domínio
-- **Domínio:** Conjunto de valores que um determinado atributo pode ter. 
+- **Domínio:** <u>Conjunto de valores</u> que um determinado atributo pode ter. 
 - O SGBD vai garantir essa restrição de valores, ou seja, não haverá dados fora do domínio especificado.
     - Ex: Nome = 23435.
 
@@ -70,7 +73,8 @@ DEPARTAMENTO
 
 > [!WARNING]
 >
-> Uma chave estrangeira também pode ser nula, ela pode ser um campo que não estaja preenchido se a chave estrangeira for `NOT NULL`.
+> Uma **chave estrangeira** também pode ser **nula**, ela pode ser um campo que não estaja preenchido se a chave estrangeira for `NOT NULL`.
+> - Isso ocorre quando o relacionamento é **Parcial**.
 
 ## Mapeamento MER $\rightarrow$ MR
 
@@ -81,7 +85,7 @@ DEPARTAMENTO
 ### Entidade
 
 - Cada **entidade** vira uma **tabela** no banco de dados.
-- Cada dessa entidade **atributo** gera uma da mesma **coluna**.
+- Cada dessa entidade **atributo** gera uma **coluna** da mesma.
 
 #### Atributo Composto
 
@@ -92,23 +96,24 @@ DEPARTAMENTO
 
 FUNCIOANRIO
 | matricula (PK) | nome | rua | cidade |
-| : -----------: | :--: | :-: | :----: |
+| :-----------: | :--: | :-: | :----: |
 
 #### Atributo Multivalorado
 
 - É preciso **criar** uma **nova tabela** para esse atributo.
+    - Isso ocorre para **evitar a repetição** da **chave primária** que seria um erro (Integridade de Entidade).
 - Ex: Funcionario e Telefone
     - A chave da tabela TELEFONE é composta pela **chave do funcionário** + o próprio **atributo telefone**.
-    - É uma **chave composta**.
+    - É uma **Chave Composta**.
 - Funcionario (<u>matricula</u>, nome, rua, cidade)
-- Telefone (matFunc, fone), onde `MatFunc` referencia Funcionario (matricula)
+- Telefone ((<u>matFunc(</u> (PK), (<u>fone</u>), onde `MatFunc` referencia Funcionario (matricula)
 
 FUNCIOANRIO
 | matricula (PK) | nome | rua | cidade |
 | :-----------: | :--: | :-: | :----:  |
 
 TELEFONE
-| matFunc (PK e FK) | fone (PK) |
+| matFunc (FK e PK) | fone (PK) |
 | :--------------: | :--------: |
 
 ![mapeamento-atributo-multivalorado](img/03-modelo-relacional/mapeamento-atributo-multivalorado.png)
@@ -117,10 +122,10 @@ TELEFONE
 
 - É uma entidade que precisa da **chave** de uma **outra entidade** para se identificar unicamente.
 - Ex: Funcionario e Dependete
-    - A chave da tabela DEPENDENTE é composta pela **chave do funcionário** + o nome do dependente.
-    - É uma **chave composta**.
+    - A chave da tabela DEPENDENTE é composta pela **chave do funcionário** + o **nome** do dependente.
+    - É uma **Chave Composta**.
 - Funcionario (<u>matricula</u>, nome, rua, cidade)
-- Telefone (matFunc, nome, data_nasc, parentesco), onde `MatFunc` referencia Funcionario (matricula)
+- Dependente (<u>matFunc</u>, <u>nome</u>, data_nasc, parentesco), onde `MatFunc` referencia Funcionario (matricula)
 
 FUNCIOANRIO
 | matricula (PK) | nome | rua | cidade |
@@ -130,7 +135,7 @@ TELEFONE
 | matFunc (PK e FK) | nome (PK) | data_nasc | parentesco |
 | :--------------: | :--------: | :-------: | :--------: | 
 
-![mapeamento-entidade-fraca](image.png)
+![mapeamento-entidade-fraca](img/03-modelo-relacional/mapeamento-entidade-fraca.png)
 
 ### Relacionamento
 
@@ -160,6 +165,7 @@ TELEFONE
 
 #### Relacionamento 1:N / N:1
 - Cria-se uma coluna de **chave estrangeira** na tabela que se relaciona uma **única** vez com a outra tabela, ou seja, do `lado N` na **modelagem MER**.
+- Caso fosse ao contrário ocorreria a duplicata da **chave primária (*pk*)**.
 
 ![card1-N](img/03-modelo-relacional/card1-N.png)  
 ![card1-N_tabela](img/03-modelo-relacional/card1-N_tabela.png)
