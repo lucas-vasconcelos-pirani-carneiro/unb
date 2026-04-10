@@ -626,22 +626,29 @@ Qual a tecla? > B66
 Qual a tecla? > 27 :: IO ()
 ```
 
-- `chr: Int --> Int`
-- `ord: Char --> Int`
+- `chr: Int --> Int`.
+- `ord: Char --> Int`.
 
 ## Paradigma Funcional
 - Uma função é definida como um **conjunto de equações**.
 - Cada equação é uma **regra de reescrita** (redução).
 
 ```hugs
-filtro p (x:xs)
-    | p x = x:filtro p xs
-    | otherwise = filtro p xs
+filtro p (x:xs) -- p: É uma variável, instância com qualquer coisa, função predicativa
+    | p x = x:filtro p xs  -- Se p é à aplicado x retorna true 
+    | otherwise = filtro p xs 
 filtro _ [] = []
 
 Main> filtro even [1..50]
 [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50] :: [Int]
 ```
+
+- `_`: É variável anônima.
+- A cada chamada ele tira um elemento.
+- Quando chega na lista unitária `[50] == 50:[]`.
+    - Ele para pois na última interação o `xs` fica com o final de lista `[]`.
+
+-  Se inverter a ordem das condições vai ficar testanto se tem **lista vazia** (`[]`) toda hora, perdendo perfomace.
 
 ### Casamento de Padrões
 - É o **processo de avaliar** um ou mais dos argumentos para determinar qual a **expressão** do **lado direito** que se aplica.
@@ -650,7 +657,7 @@ Main> filtro even [1..50]
 
 ### Guardas
 - Cada uma das equações na definição pode conter guardas.
-- Uma **guarda** é uma **função predicativa**.
+- Uma **guarda** é uma **função predicativa** $\rightarrow$ **função lógica**.
 - Se a guarda for **verdadeira**, a expressão correspondente na função é **executada**.
 
 ```hugs
@@ -660,6 +667,8 @@ fat n | n == 0 || n == 1 = 1
 Main> fat 5
 120 :: Integer
 ```
+
+- Se `n` for negativo vai dar erro.
 
 ### Recursão
 - É a única **estrutura de controle** entre comandos em uma linguagem funcional pura.
@@ -673,9 +682,15 @@ fat 1 = 1
 fat n = n * fat (n - 1) -- e se n < 0 ?
 ```
 
+- Se `n < 0` também ocorrerá um erro.
+- Como foi colocado 0 e 1 ele entende a assinatura da função, ou seja, já infere que os parâmetros da funções são inteiros.
+    - Nesse caso, já infere que os **parêmetros** são inteiros e a **saída** são do tipo **inteiro**.
+
 ## Polimorfismo
 - Tipos polimórficos descrevem **famílias** de diferentes tipos.
 - `[a]` **família de listas** para diferentes instâncias de tipos:
+- É uma função que os tipos dos parâmentro podem variar
+    - A função tem o mesmo nome, os tipos de paramentros mudam e "diferem" as funções.
 
 ```hugs
 a = Int, lista de inteiro [Int]
@@ -683,14 +698,14 @@ a = Char, lista de caracteres [Char]
 a = [Float], lista de lista de float [[Float]]
 ```
 
-- `a`: É uma variável de tipo.
-    - É mais geral que as instâncias de tipos Int, Char, [Float], etc.
+- `a`: É uma **variável de tipo**.
+    - É mais geral que as instâncias de tipos `Int`, `Char`, `[Float]`, etc.
 
 ### Funções Polimórficas
 - Uma função que se aplica a **qualquer tipo de parâmetro** é uma função polimórfica.
 
 ```hugs
-size (x:xs) = 1 + size xs
+size (x:xs) = 1 + size xs -- Vai somando 1 + 1 + 1 até a lista ficar vazia
 size [] = 0
 
 Main> size [1,3,15]
@@ -702,9 +717,12 @@ Main> size ['a'..'z']
 
 ```hugs
 somamenor m xs
-    | length xs <= 1 = []
-    | z < m = (x,y,z):somamenor m (y:t)
+    | length xs <= 0 = [] 
+    | z < m = (x,y,z):somamenor m (y:t) -- Corta o primeiro fazendo a composição do segundo elemento com a cauda
     | otherwise = somamenor m (y:t) where (x:y:t) = xs; z = x+y
+
+-- Execução
+-- (1,2,3):(2,3,5):(3,4,7):(4,5,9):[]
 
 Main> somamenor 10 [1,2,3,4,5,6,7,8,9]
 [(1,2,3),(2,3,5),(3,4,7),(4,5,9)]
@@ -712,6 +730,14 @@ Main> somamenor 10 [1,2,3,4,5,6,7,8,9]
 Main> somamenor 10 [1.5,2.5,3.5,4.5,5.5,6.5,7.5,8.5,9.5]
 [(1.5,2.5,4.0),(2.5,3.5,6.0),(3.5,4.5,8.0)]
 ```
+
+- `(x:y:t)` é `xs` que é o segundo elemento.
+    - `x`: Primeiro elemento
+    - `y`: Segundo elemento
+    - `t`: Cauda
+
+- `z`: **Soma** dos primeiros elementos da lista.
+- Vai tirando o primeiro elemento até que a soma dos primeiros seja menor ou igual ao último elemento e no final faz a composição com a lista vazia `[]`.
 
 ## Avaliação Preguiçosa
 - Uma expressão só é avaliada quando seu valor é requerido.
@@ -732,20 +758,20 @@ Program execution error: {primDivDouble 1.0 0.0}
 
 ### Avaliação Preguiçosa: qd x = x*x
 
-- Passagem de parâmetro por referência:
+- Passagem de parâmetro por **referência**, os endereços:
 ```hugs
 qd(qd (qd 2)) = (qd (qd 2)) * (qd (qd 2))
                 = (qd 2) * (qd 2) * (qd (qd 2))
                 = 2 * 2 * (qd 2) * (qd (qd 2))
-                = 4 * (qd 2) * (qd (qd 2))
+                = 4 * (qd 2) * (qd (qd 2)) -- Já está a operação, não ocorre a expansão
                 = 4 * 4 * (qd (qd 2))
                 = 16 * (qd (qd 2))
                 = 16 * 16 = 256
 ```
 
-- Passagem de parâmetro por valor:
+- Passagem de parâmetro por **valor**:
 ```hugs
-qd(qd(qd 2)) = qd(qd (2*2)) = qd(qd(4))=qd(4*4)
+qd(qd(qd 2)) = qd(qd (2*2)) = qd(qd(4)) = qd(4*4)
 = qd(16) = 16*16
 ```
 
@@ -756,21 +782,28 @@ qd(qd(qd 2)) = qd(qd (2*2)) = qd(qd(4))=qd(4*4)
 - Graças a avaliação preguiçosa é possível lidar com **lista infinitas**.
 
 ```hugs
-Main> let naturais n = take n [0..] in naturais 8
+Main> let naturais n = take n [0..] in naturais 8 -- n fica com 8
 [0,1,2,3,4,5,6,7] :: [Integer]
 
-Main> let impar n = take n [1,3..] in impar 10
+Main> let impar n = take n [1,3..] in impar 10 -- n fica 
 [1,3,5,7,9,11,13,15,17,19] :: [Integer]
 ```
+
+- Vai expandindo um por um até chegar no 8.
 
 #### Avaliação Preguiçosa e Objetos Infinitos
 
 ```hugs
-fiblst = 1:1:[x+y|(x,y) <- (zip fiblst (tail fiblst))]
+fiblst = 1:1:[ x+y | (x,y) <- (zip fiblst (tail fiblst))] 
 
 Main> take 10 fiblst
 [1,1,2,3,5,8,13,21,34,55] :: [Integer]
 ```
+
+- Faz um `zip` o primeiro e o último elemento da lista e a soma deles vai para a cauda.
+    - Pega o primeiro com o segundo, depois o segundo o terceiro, ...
+
+- Se o parâmetro for negativo retorna uma lista vazia `[]`.
 
 | i | fiblst               | anterior           | tail            | pares (x, y)                          |
 |---|----------------------|--------------------|-----------------|---------------------------------------|
@@ -782,8 +815,9 @@ Main> take 10 fiblst
 | 6 | [1,1,2,3,5,8]        | [1,1,2,3,5]        | [1,2,3,5]       | (1,1), (1,2), (2,3), (3,5)            |
 
 ```hugs
-primes = filterPrime [2..] where filterPrime (p:xs) =
-    p : filterPrime [x | x <- xs, x `mod` p /= 0]
+primes = filterPrime [2..] 
+    where filterPrime (p:xs) =
+    p : filterPrime [x | x <- xs, x `mod` p /= 0] -- Função `mod` já é nativa.
 
 Main> take 10 primes
 [2,3,5,7,11,13,17,19,23,29] :: [Integer]
