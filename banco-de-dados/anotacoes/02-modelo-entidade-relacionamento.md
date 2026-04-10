@@ -59,7 +59,7 @@ Fone = 222-2222
 - Relacionamento **liga** as instâncias dos dados.
 - **Grau** de um Tipo de Relacionamento:
   - **Binário:** Relaciona <u>duas</u> entidades. 
-  - **Terciário:** Relaciona <u>três</u> entidades.
+  - **Ternário:** Relaciona <u>três</u> entidades.
   - **Não existe** um limite para quantas entidades podem participar de um relacionamento.
 
 ![relacionamento-binario-terciario](img/02-modelo-entidade-relacionamento/relacionamento-binario-terciario.png)
@@ -105,6 +105,18 @@ Fone = 222-2222
 
 ![exemplo-cardinalidade-min-max](img/02-modelo-entidade-relacionamento/cardinalidade-min-max.png)
 ![cardinalidade-minima-maxima](img/02-modelo-entidade-relacionamento/cardinalidade-minima-maxima.png)
+
+### Relacionamento Ternário
+
+- Relacionamento que ocorre entre três entidades.
+- Aqui a cardinalidade não representada passando para o outro lado, e sim ao lado da entidade correspondente.
+- A análise da cardinalidade é feita em **pares de ocorrências**.
+- Ex: Cidade, Distribuidor e Produto
+  - Uma cidade e um produto podem estar relacionadas a quantos distribuidores: 1
+  - Um distribuidor e um produto podem estar em quantas cidades: Várias, N
+  - Uma cidade e um distribuidor podem ter quantos produtos: Várias, N
+
+![exemplo-relacionamento-ternario](img/02-modelo-entidade-relacionamento/exemplo-relacionamento-ternario.png)
 
 ## Entidade Fraca
 
@@ -345,9 +357,50 @@ Aplica -(1,1)- Agente_de_Transito
 
 ## Especificação e Generalização
 
+- Permite atribuir **propriedades particulares** a um subconjunto de ocorrências, ou as especificidades de uma entidade genérica.
+- São um <u>tipo específico</u> da entidade.
+- As entidades abaixo herdam os atributos e relacionamentos da entidade genérica, ou seja, as entidades especializadas <u>herdam</u> da generalização.
+- **Entidade Genérica:** Conceito superior que agrupa entidades especializadas.
+- **Entidade Especializada:** Subtipo que herda atributos e relacionamentos da genérica.
+
+### Representação
+
+- Representado por um **triângulo** no diagrama Entidade-Relacionamento (ER).
+- Na prática, a especialização é o **inverso** da generalização.
+- Generalização ocorre quando atributos de uma entidade de nível superior são compartilhados com outras de nível inferior.
+
+### Tipos de Participação 
+
+#### Total
+- **Todas** as ocorrências da entidade genérica têm correspondente em pelo menos uma entidade especializada, representada por `t` ou **linha dupla**.
+  - Ex: Todo Funcionário é Pessoa Física ou Pessoa Jurídica.
+
 ![especificacao-generalizacao-total](img/02-modelo-entidade-relacionamento/especificacao-generalizacao-total.png)
 
+#### Parcial
+- **Nem toda ocorrência** da genérica tem correspondente em uma especializada, representada por `c` ou **linha simples**.
+  - Ex: Funcionário pode assumir outros papéis além de Ger. de Marketing ou Ger. de Vendas.
+
 ![especificacao-generalizacao-parcial](img/02-modelo-entidade-relacionamento/especificacao-generalizacao-parcial.png)
+
+### Tipos de Disjuntividade
+
+#### Exclusiva 
+- Uma ocorrência da genérica pode ser especializada no máximo uma vez (representada por d ou círculo com d).
+  - Ex: Pessoa Física e Pessoa Jurídica, não pode ser ambas ao mesmo tempo.
+
+#### Compartilhada (Não Exclusiva) 
+- Uma ocorrência pode ser especializada em várias entidades especializadas (representada por o ou círculo com o).
+  - Ex: Um servidor também pode ser um aluno, o fato de ser um servidor não exclui uma pessoa de ser aluno na instituição.
+
+![exemplo-compartilhada](img/02-modelo-entidade-relacionamento/exemplo-compartilhada.png)
+
+### Herança Múltipla
+
+- É possível uma entidade ser especialização de **diversas genéricas**, similar a herança múltipla em OO.
+- **Recomendação:** Evitar heranças múltiplas para simplificar o modelo.
+
+![exemplo-heranca](img/02-modelo-entidade-relacionamento/exemplo-heranca.png)
 
 ## Observações
 
