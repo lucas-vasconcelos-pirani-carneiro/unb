@@ -26,12 +26,12 @@ d. Engenharia de Software enfoca aplicação de abordagem sistemática, discipli
 4. Combinação organizada de elementos que interagem para atingir propósitos definidos na qual software é elemento de importância primária. - **Sistema de Software**
 
 ### Questão 05 - Selecione todas as opções que designam classes de software.
-**a. Software embarcado.**
-**b. Software de engenharia/científico.**
-**c. Software de sistema.**
-**d. Software de aplicação.**
-**e. Software de inteligência artificial.**
-**f. Aplicativos móveis**.
+**a. Software embarcado.**  
+**b. Software de engenharia/científico.**  
+**c. Software de sistema.**  
+**d. Software de aplicação.**  
+**e. Software de inteligência artificial.**  
+**f. Aplicativos móveis**.  
 **g. Software para linha de produtos.**
 
 ### Questão 06 - Selecione opção falsa sobre classes de produtos de software.
@@ -65,8 +65,8 @@ e. Pode englobar regras.
 ### Questão 10 - Selecione todas as opções que designam nome de área de conhecimento em Engenharia de Software.
 **a. Manutenção de software.**  
 **b. Qualidade de software.**  
-**c. Construção de software.**
-d. Desenvolvimento de software.  
+**c. Construção de software.**  
+d. Desenvolvimento de software.    
 e. Revisão de software.  
 **f. Requisitos de software.**
 
