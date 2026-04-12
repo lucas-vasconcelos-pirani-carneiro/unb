@@ -131,7 +131,7 @@ FUNCIOANRIO
 | matricula (PK) | nome | rua | cidade |
 | :-----------: | :--: | :-: | :----:  |
 
-TELEFONE
+DEPENDENTE
 | matFunc (PK e FK) | nome (PK) | data_nasc | parentesco |
 | :--------------: | :--------: | :-------: | :--------: | 
 
@@ -176,4 +176,110 @@ TELEFONE
 ![cardN-N](img/03-modelo-relacional/cardN-N.png)  
 ![cardN-N_tabela](img/03-modelo-relacional/cardN-N_tabela.png)
 
-## Exemplo 
+### Relacionamento Ternário ou Maior que 2
+
+![mapeamento-rel3](img/03-modelo-relacional/mapeamento-rel3.png)
+
+- Cria-se uma **tabela** para o relacionamento que recebe como **chave estrangeira** e **primária**, as chaves primárias das outras entidades.
+
+| NumLote \<pk>, \<fk> | FNome \<pk>, \<fk> | NumProj \<pk>, \<fk> | Quantidade |
+| :------------------: | :----------------: | :------------------: |:---------: |
+
+### Generalização/Especialização
+- Existem três possíveis alternativas a se considerar.
+
+![gen_esp-ml](img/03-modelo-relacional/gen_esp-ml.png)
+
+#### Uso de uma **única tabela** para toda hierarquia;
+```
+Empregado (codEmp, nome, tipoEmp, cartHab, dtcartHab, CREA, codREng, codDep)
+
+    codREng referencia RamoEng(codREng)
+    codDep referencia Departamento(codDep)
+
+ProjEmp (codEmp, codProj)
+    codEmp referencia Empregado(codEmp)
+    codProj referencia Projeto(codProj)
+
+Projeto (codProj, nome)
+RamoEng (codREng, nome)
+Departamento (codDep, nome)
+```
+
+#### Uso de **subdivisão** da entidade genérica;
+
+```
+Empregado (codEmp, nome, tipoEmp, codDep)
+    codDep referencia Departamento(codDep)
+
+ProjEmp (codEmp, codProj)
+    codEmp referencia empregado(codEmp)
+    codProj referencia Projeto(codProj)
+
+Motorista (codEmp, CartHab, dtCartHab)
+    codEmp referencia Empregado(codEmp)
+
+Engenheiro (codEmp, CREA, codREng)
+    codEmp referencia Empregado(codEmp)
+    codREng referencia RamoEng (codREng)
+
+Projeto (codProj, nome)
+RamoEng (codREng, nome)
+Departamento (codDep, nome)
+```
+
+#### Uso de uma tabela **para cada** entidade.
+
+```
+EmpOutros (codEmp, nome, tipoEmp, codDep)
+    codDep referencia Departamento(codDep)
+
+ProjEmp (codEmp, codProj)
+    codEmp referencia Engenheiro(codEmp)
+    codProj referencia Projeto(codProj)
+
+Motorista (codEmp, nome, CartHab, dtCartHab, codDep)
+    codDep referencia Departamento(codDep)
+
+Engenheiro (codEmp, nome, CREA, codREng, codDep)
+    codDep referencia Departamento(codDep) 
+    codREng referencia RamoEng (codREng)
+
+Projeto (codProj, nome)
+RamoEng (codREng, nome)
+Departamento (codDep, nome)
+```
+
+## Exemplo - RH
+
+![exemplo-rh](img/02-modelo-entidade-relacionamento/exemplo-rh.png)
+
+PROJETO
+| cod_proj \<pk> | nome_proj | local | dep_con \<fk> | 
+| :------------: | :-------: | :---: | :-----------: |
+
+EMPREGADO
+| matricula \<pk> | nome_emp | endereco | salario | sexo | data_nasc | depart \<fk> | supervisor \<fk> | 
+| :-------------: | :------: | :------: | :-----: | :--: | :-------: | :----------: | :--------------: |
+
+> Auto-relacionamento, ligado pela própria chave primária.
+
+DEPARTAMENTO
+| nome_dep |  cod_dep \<pk> | gerente \<fk> | dt_inicio_gerente |
+| :------: | :------------: | :-----------: | :---------------: |
+
+LOCAL_DEP
+| cod_dep \<pk>, \<fk> | local \<pk> | 
+| :------------------: | :---------: |
+
+> Tabale local (cod_dep, local) cod_dep referencia Departamento (cod_dep).
+
+DEPENDENTE
+| nome \<pk> | sexo | parentesco | data_nasc | matricula \<pk>, \<fk> |   
+| :--------: | :--: | :--------: | :-------: | :--------------------: | 
+
+> Chave Composta: (matricula, nomeDep)
+
+EMP_PROJ
+| cod_proj \<pk>, \<fk> | cod_emp \<pk> ,\<fk> | horas |  
+| :-------------------: | :------------------: | :---: | 
