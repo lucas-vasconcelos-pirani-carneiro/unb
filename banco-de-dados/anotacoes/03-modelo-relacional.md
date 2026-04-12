@@ -193,7 +193,6 @@ DEPENDENTE
 #### Uso de uma **única tabela** para toda hierarquia;
 ```
 Empregado (codEmp, nome, tipoEmp, cartHab, dtcartHab, CREA, codREng, codDep)
-
     codREng referencia RamoEng(codREng)
     codDep referencia Departamento(codDep)
 
@@ -262,7 +261,7 @@ EMPREGADO
 | matricula \<pk> | nome_emp | endereco | salario | sexo | data_nasc | depart \<fk> | supervisor \<fk> | 
 | :-------------: | :------: | :------: | :-----: | :--: | :-------: | :----------: | :--------------: |
 
-> Auto-relacionamento, ligado pela própria chave primária.
+> **Auto-Relacionamento:** Liga-se à própria chave primária.
 
 DEPARTAMENTO
 | nome_dep |  cod_dep \<pk> | gerente \<fk> | dt_inicio_gerente |
@@ -278,7 +277,7 @@ DEPENDENTE
 | nome \<pk> | sexo | parentesco | data_nasc | matricula \<pk>, \<fk> |   
 | :--------: | :--: | :--------: | :-------: | :--------------------: | 
 
-> Chave Composta: (matricula, nomeDep)
+> **Chave Composta:** (matricula, nomeDep)
 
 EMP_PROJ
 | cod_proj \<pk>, \<fk> | cod_emp \<pk> ,\<fk> | horas |  
