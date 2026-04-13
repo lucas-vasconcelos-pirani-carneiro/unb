@@ -80,7 +80,7 @@ c. Ciclo de vida de projeto de software é porção do ciclo de vida de software
 
 ### Questão 12 - Associe elementos a nomes considerando o método Kanban e o seguinte diagrama:
 
-![imagem-questao12](questao12-questionario04.png)
+![imagem-questao12](img/quest-04/questao12.png)
 
 Elemento 2: **WIP**   
 Elemento 1: **Quadro**  

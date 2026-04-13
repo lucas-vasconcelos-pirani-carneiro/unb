@@ -98,7 +98,7 @@ c. Considerando agregação entre classes, A representa o todo enquanto B repres
 
 ### Questão 13 - Selecione todas as opções verdadeiras considerando o seguinte diagrama de sequência:
 
-![questao13](image.png)
+![questao13](img/quest-06/questao13.png)
 
 **a. Processamento da Mensagem 3 resulta no envio da Mensagem 4.**  
 b. Processamento de mensagem enviada por instância de B cria instancia de C.  

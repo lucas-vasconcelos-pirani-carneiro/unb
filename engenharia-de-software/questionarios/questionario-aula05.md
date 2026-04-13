@@ -94,10 +94,10 @@ TERMO C $\rightarrow$ Mainline.
 
 ### Questão 15 - Associe definição ao termo que melhor designa o conceito definido.
 
-Sequência de baselines representando diferentes versões de sistema. $\rightarrow$ **Mainline**;
-Entidade associada a projeto de software e controlada por processo de gerenciamento de configuração. $\rightarrow$ **Item de configuração**;
-Versão de sistema disponibilizada para uso. $\rightarrow$ **Release**;
-Coleção controlada de versões de elementos que compõem sistema. $\rightarrow$ **Baseline**;
+Sequência de baselines representando diferentes versões de sistema. $\rightarrow$ **Mainline**;  
+Entidade associada a projeto de software e controlada por processo de gerenciamento de configuração. $\rightarrow$ **Item de configuração**;  
+Versão de sistema disponibilizada para uso. $\rightarrow$ **Release**;  
+Coleção controlada de versões de elementos que compõem sistema. $\rightarrow$ **Baseline**;  
 Instância de item de configuração que difere de outras instâncias desse mesmo item. $\rightarrow$ **Versão**.
 
 ### Questão 16 - Selecione toda opção verdadeira acerca de gerenciamento de configuração de software.
