@@ -847,23 +847,30 @@ Main> ((^3) . (/2)) 10
 Main> (sum . take 10) [1..]
 55 :: Integer
 
+-- 1:uns -> Gera uma lista de uns, [1,1,1,...] e soma os 20 primeiros elementos.
 Main> let uns = 1:uns in (sum . take 20) uns
 20 :: Integer
 
 Main> take 20 uns where uns = 1:uns
 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] :: [Integer]
 
+-- | Se for n == 1 --> [1]
+-- simula o take, expande até o n - 1
 Main> let uns n | n==1 = [1] | n/=1 = 1:uns (n-1) in (sum.uns) 30
-50
+30
 ```
 
 ### Funções como Parâmetros
+- `p`: tem que ser uma **função predicativa**, retorna true ou false.
+- \` \`: Transforma uma função em um operador.
 
 ```hugs
+par x = x `mod` 2 == 0
+
 filtro p (x:xs)
     | p x = x:filtro p xs
     | otherwise = filtro p xs
-filtro _ [] = [] par x = x `mod` 2 == 0
+filtro _ [] = [] 
 
 Main> filtro par [1..21]
 [2,4,6,8,10,12,14,16,18,20] :: [Integer]
@@ -874,6 +881,7 @@ Main> filtro odd [1..20]
 Main> map par [1..10]
 [False,True,False,True,False,True,False,True,False,True] :: [Bool]
 
+-- 0 + (1 + (2 + (3 + ... )))
 Main> foldr (+) 0 [1..10]  
 55 :: Integer
 ```
@@ -928,9 +936,12 @@ Main> let operacao (f, x, y) = f x y
 ```
 
 ### Map
+- Uma lista aplicada a função x tal que x faz parte xs.
 
 ```hugs
 map f xs = [f x | x <- xs]
+
+-- O par ordenado (x,y) vem do zip de xs e ys
 map2 f xs ys = [f x y | (x,y) <- zip xs ys]
 ```
 
