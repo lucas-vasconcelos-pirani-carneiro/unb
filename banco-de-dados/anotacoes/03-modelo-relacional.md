@@ -139,7 +139,7 @@ DEPENDENTE
 
 ### Relacionamento
 
-- Pode gerar uma **tabela** ou ser uma **coluna/conjunto de colunas**, como na coluna FK, no banco de dados. 
+- Pode gerar uma **tabela** ou ser uma **coluna/conjunto de colunas**, como na coluna `FK`, no banco de dados. 
 - O relacionamento no modelo relacional é implementado por meio de **chaves estrangeiras**.
     - Ou seja, são responsáveis pelo relacionamento entre as tabelas.
 
@@ -153,12 +153,14 @@ DEPENDENTE
 
 - **Parcipação parcial** dos dois lados: Cria-se uma coluna de **chave estrangeira** em uma das tabelas para fazer a ligação.
     - Não faz diferença em qual tabela ($E_1$, $E_2$) colocar a chave estrangeira.
+    - Normalmente, coloca-se na tabela que tem **menos registros**.
 
 ![tipo2-card1-1](img/03-modelo-relacional/tipo2-card1-1.png)  
 ![tipo2-card1-1_tabela](img/03-modelo-relacional/tipo2-card1-1_tabela.png)
 ![tipo2-card1-1_tabela_1](img/03-modelo-relacional/tipo2-card1-1_tabela_1.png)
 
 - **Parcipação total** de um lado e **Participação parcial** de outro: Cria-se uma coluna de **chave estrangeira** na tabela com **partcipação total**.
+    - Garante que não vai ter espaços em brancos.
 
 ![tipo3-card1-1](img/03-modelo-relacional/tipo3-card1-1.png)  
 ![tipo3-card1-1_tabela](img/03-modelo-relacional/tipo3-card1-1_tabela.png)
@@ -172,6 +174,10 @@ DEPENDENTE
 
 #### Relacionamento N:N
 - Cria-se uma **nova tabela** que é composta por **chaves estrangeiras** das outras tabelas. 
+
+> [!NOTE]
+>
+> Nessa nova tabela criada com as **chaves estrangeiras (*FK*)**, elas também são **chaves primárias (*PK*)** dessa nova tabela.
 
 ![cardN-N](img/03-modelo-relacional/cardN-N.png)  
 ![cardN-N_tabela](img/03-modelo-relacional/cardN-N_tabela.png)
