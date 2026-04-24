@@ -1,1 +1,0 @@
-map2 f xs ys 	= [f x y | (x,y) <- zip xs ys]
