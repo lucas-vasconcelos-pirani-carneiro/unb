@@ -1,0 +1,1 @@
+coprimos x y = if mdc x y == 1 then True else False where mdc x 0 = x; mdc x y = mdc y (mod x y)
