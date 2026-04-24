@@ -131,7 +131,7 @@
 - **Linguagens Funcionais:** Realizam computações aplicando **funções a parâmetros**, sem necessariamente usar <u>variáveis</u> ou <u>iteração</u>. 
   - Apesar de seus benefícios teóricos, elas ainda não substituíram as imperativas porque **não** são tão **eficientes** em computadores de arquitetura **von Neumann**.
 
-  ![arquitetura-de-von-neumann](img/01-introducao/arquitetura-de-von-neumann.png)
+  ![arquitetura-de-von-neumann](../img/01-introducao/arquitetura-de-von-neumann.png)
 
 ### 2. Evolução das Metodologias de Programação
 - As mudanças na forma como os softwares são desenvolvidos também forçaram a evolução das linguagens, especialmente devido ao aumento do <u>custo do programador</u> em relação ao hardware.
@@ -176,7 +176,7 @@
 - **Computadores Virtuais:** Como projetar hardware para cada <u>linguagem de alto nível</u> seria caro e inflexível, usa-se o **software de sistema** (como o Sistema Operacional e compiladores) para criar "camadas" sobre a máquina real.
 - Cada camada funciona como um **computador virtual**, oferecendo interfaces de nível mais alto para o usuário ou programador.
 
-![interfaces-de-computadores-virtuais](img/01-introducao/interfaces-de-computadores-virtuais.png)
+![interfaces-de-computadores-virtuais](../img/01-introducao/interfaces-de-computadores-virtuais.png)
 
 ### Compilação
 - Neste método, o programa em <u>linguagem-fonte</u> é totalmente **traduzido** para <u>linguagem de máquina</u> antes da execução.
@@ -190,7 +190,7 @@
 
 - **Vinculação (Linking):** O <u>linkeditor</u> conecta o código do usuário a <u>programas do sistema</u> (como os de entrada e saída) e <u>bibliotecas</u>, gerando o módulo de carga (executável).
 
-![processo-de-compilacao](img/01-introducao/processo-de-compilacao.png)
+![processo-de-compilacao](../img/01-introducao/processo-de-compilacao.png)
 
 ### Arquitetura von Neumann e a Execução
 - **Ciclo Buscar-Executar (*Fetch-Execute*):** Os programas **residem na memória**, mas são **executados** na **CPU**. 
@@ -204,7 +204,7 @@
 - **Desvantagens:** <u>Execução muito lenta</u> (10 a 100 vezes mais devagar que a compilada) e exige **mais espaço em memória**, pois a <u>tabela de símbolos</u> deve estar presente.
 - **Exemplos:** Scripts de `shell` do UNIX, arquivos `.BAT` e linguagens como `APL` e `LISP`.
 
-![interpretacao-pura](img/01-introducao/interpretacao-pura.png)
+![interpretacao-pura](../img/01-introducao/interpretacao-pura.png)
 
 ### Sistemas de Interpretação Híbrida
 - É um meio-termo que **traduz a linguagem de alto nível** para uma linguagem **intermediária** para facilitar a **interpretação**.
@@ -213,7 +213,7 @@
   - `Perl`: Parcialmente compilada para **detectar erros** antes da interpretação.
   - `Java`: Traduzida para **código de bytes** (`bytecode`), que é interpretado pela <u>Java Virtual Machine</u> (`JVM`), garantindo portabilidade.
 
-  ![interpretacao-hibrida](img/01-introducao/interpretacao-hibrida.png)
+  ![interpretacao-hibrida](../img/01-introducao/interpretacao-hibrida.png)
 
 ## Ambientes de Programação
 
