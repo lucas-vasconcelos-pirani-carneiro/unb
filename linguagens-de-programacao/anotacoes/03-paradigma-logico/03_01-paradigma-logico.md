@@ -49,7 +49,7 @@ false
 - Consulta **conjuntiva** e Variáveis cotizadas:
 ```prolog
 ?- pai(joao, F), pai(F,N).  % Quem são os netos de joão? 
-?- tio(T,P), pai(P,maria).  % Quem é o tio avó de Maria?
+?- pai(P,maria), tio(T,P).  % Quem é o tio avó de Maria?
 ```
 
 ## Predicados Bidirecionais
@@ -140,10 +140,12 @@ false.
 
 - Fatorial
 ```prolog
-fat(0,1):-!.
+fat(0,1):-!. % !: Cut, corta a pesquisa, não permite backtrack
 fat(1,1):-!.
 fat(N,F) :- N1 is N - 1, fat(N1,F1), F is N * F1.
  
+% Tudo que não for avaliada tem retorno por default true.
+% F vai acumulando os valores.
 
 % Execução
 ?- fat(0,F).
@@ -160,7 +162,6 @@ false.
 
 ?- fat(N,120).
 ERROR: is/2: Arguments are not sufficiently instantiated
-7
 ```
 
 - Fibonacci
@@ -196,6 +197,9 @@ ERROR: Arguments are not sufficiently instantiated
 
 ![data-objects](../img/03-prolog/data-objects.png)
 
+
+
+### Variável 
 - Nomeia entidades do universo do discurso. 
 ```prolog
 <termo> ::= <simples>|<termo composto>
@@ -204,7 +208,6 @@ ERROR: Arguments are not sufficiently instantiated
 <variável><dígito>| <variável>_ 
 ```
 
-### Variável 
 ```prolog
 X  _   _x   Avo   Gente   G12  Pai_sangue    _b
 ```
@@ -239,7 +242,7 @@ X  _   _x   Avo   Gente   G12  Pai_sangue    _b
 ```prolog
 X is 1+2.
 X = 3.
-X is ceiling( 2.1 ).
+X is ceiling( 2.1 ). % Menor inteiro não menor que. 
 X = 3.
 X is ceiling( -2.1).
 X = -2.
@@ -301,7 +304,7 @@ X = -2.
 | =:= / 2 | igual (ISO) |
 
 ## Avaliador de Expressões
-- `X is E`: X é uma variável não ligada, E é uma expressão aritmética
+- `X is E`: X é uma **variável não ligada**, E é uma **expressão aritmética**
 - `E1 op E2`:
     - Onde $op \in \{ <, \le, \geq, >, =:=, =\backslash= \}$
     - E1 e E2 são expressões aritméticas avaliadas antes da comparação.
