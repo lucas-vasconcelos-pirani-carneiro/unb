@@ -581,5 +581,34 @@
         \end{itemize}
     \end{itemize}
 
+\vspace{1cm}
 \subsubsection{Acordo de Chave Compartilhada}
 
+    \textbf{Usando Criptografia de Chave Pública para Concordar em uma Chave Compartilhada}
+
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item \textbf{Problema:} para Bob e Alice utilizarem técnicas de chave simétrica, eles precisam concordar sobre uma chave compartilhada.
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item E se eles nunca se encontraram antes?
+            \item A criptografia de chave pública também pode resolver esse problema!
+        \end{itemize}
+    \end{itemize}
+
+    \textbf{Diffie-Hellman (DH)} chaves pública/privada: Usa um algoritmo diferente do RSA.
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Bob escolhe valores \textbf{públicos}: Um número primo grande $p$, outro número grande $g$ (com $g < p$).
+        \item Alice e Bob escolhem, independentemente, valores \textbf{privados}: $SA$ (de Alice) e $SB$ (de Bob).
+        \item \textbf{Chave pública de Alice:} $K_{A}^+ = g^{SA} \bmod p$.
+        \item \textbf{Chave pública de Bob:} $K_{B}^+ = g^{SB} \bmod p$.
+    \end{itemize}
+
+    Diffie-Hellman (DH): derivação da chave compartilhada:
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Alice e Bob calculam um segredo compartilhado em comum sem nunca trocá-lo explicitamente!
+        \item Alice e Bob possuem chaves públicas DH: $K_{A}^+$ e $K_{B}^+$, e valores secretos: $SA$ e $SB$.
+    \end{itemize}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\textwidth]{img/diffie-hellman.png}
+    \end{figure}
