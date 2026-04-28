@@ -612,3 +612,57 @@
         \centering
         \includegraphics[width=0.7\textwidth]{img/diffie-hellman.png}
     \end{figure}
+
+\subsection{E-mail seguro}
+
+    \textbf{Confidencialidade}
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Alice quer enviar um e-mail \textbf{confidencial}, $m$, para Bob. 
+    \end{itemize}
+    
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\textwidth]{img/confidencialidade-email}
+    \end{figure}
+
+    Alice
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Gera uma chave privada \textbf{simétrica} aleatória $K_S$.
+        \item Criptografa a mensagem com $K_S$ (por eficiência).
+        \item Também criptografa $K_S$ usando a chave pública de Bob.
+        \item Envia para Bob: $K_S(m)$, mensagem criptografada, $K_B(K_S)^+$, a chave simétrica criptografada com a chave pública de Bob.
+    \end{itemize}
+
+    Bob
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Usa a sua chave privada para \underline{descriptografar} e recuperar a chave $K_s$.
+        \item Usa $K_s$ para \underline{descriptografar} $K_s(m)$ para a mensagem $m$.
+    \end{itemize}
+
+
+    \textbf{Integridade, Autenticação}
+    
+    Alice quer enviar uma mensagem $m$ para Bob com \textbf{integridade da mensagem e autenticação}.
+    
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\textwidth]{img/email-integridade-autenticacao}
+    \end{figure}
+    
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Alice assina digitalmente o \underline{hash da mensagem} usando sua chave privada, garantindo integridade e autenticação.
+        \item Envia tanto a mensagem (em claro) quanto a assinatura digital.
+    \end{itemize}
+
+    Alice envia uma mensagem $m$ para Bob garantindo: \textbf{Confidencialidade, Integridade da mensagem e Autenticação}.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\textwidth]{img/email-final}
+    \end{figure}
+
+     \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item \textbf{Alice utiliza três chaves:} Sua chave privada, a chave pública de Bob e uma nova chave simétrica.
+    \end{itemize}
+
+\subsection{Proteção de conexões TCP: TLS}
