@@ -163,7 +163,7 @@ Cada **empregado** pode possuir vários **dependentes**, devendo-se saber, para 
   - Todo empregado tem dependente ? **Não**. Parcial
   - ...
 
-```plaintext
+```plantuml
 @startchen
 
 '/ Entidades e Atributos /'
