@@ -298,10 +298,288 @@
 
     \textbf{RSA na prática: chaves de sessão}
     \begin{itemize}[left=0.5cm, align=left, nosep]
-        \item A exponenciação no RSA é computacionalmente intensiva.
+        \item A \underline{exponenciação} no RSA é computacionalmente intensiva.
         \item O DES é pelo menos 100 vezes mais rápido que o RSA.
         \item Utiliza-se \underline{criptografia} de chave pública para estabelecer uma \textbf{conexão segura} e, em seguida, define-se uma segunda chave — a chave de 
-        sessão simétrica — para criptografar os dados; chave de sessão: $K_S$.
+        sessão simétrica — para criptografar os dados; 
+    \end{itemize}
+
+    \textbf{Chave de Sessão: } $K_S$.
+    \begin{itemize}[left=0.5cm, align=left, nosep]
         \item Bob e Alice usam RSA para trocar uma \textbf{chave de sessão} simétrica $K_S$.
         \item Aós ambos possuírem $K_S$, utilizam criptografia de \underline{chave simétrica}.
     \end{itemize}
+
+\subsection{Uso da Criptografia de Chave Pública}
+
+\subsubsection{Autenticação}
+
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item \textbf{Objetivo:} Bob quer que Alice ``prove'' a sua identidade para ele.
+        \item \textbf{Protocol ap1.0:} Alice fala ``I am Alice''.
+        \item \textbf{Problema:} Na internet Bob não consegue ``ver'', então Trudy pode simplesmente se declarar como Alice. 
+    \end{itemize}
+
+    \begin{figure}[H]
+        \centering
+        
+        \begin{minipage}{0.3\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{img/autenticacao-v1}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.3\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{img/autenticacao-v1-problema}
+        \end{minipage}
+    
+    \end{figure}
+
+    \textbf{Auntenticação: Outra Tentativa}
+
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item \textbf{Objetivo:} Bob quer que Alice ``prove'' a sua identidade para ele.
+        \item \textbf{Protocol ap2.0:} Alice fala ``I am Alice'' em um pacote IP contendo o seu endereço de IP de origem.
+        \item \textbf{Problema:} Trudy pode criar um pacote ``spoofing'', \underline{falsificado}, do endereço IP de Alice.
+    \end{itemize}
+
+    \begin{figure}[H]
+        \centering
+        
+        \begin{minipage}{0.4\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{img/autenticacao-v2}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.4\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{img/autenticacao-v2-problema}
+        \end{minipage}
+    
+    \end{figure}
+
+    \textbf{Auntenticação: Uma Terceira Tentativa}
+    
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item \textbf{Objetivo:} Bob quer que Alice ``prove'' a sua identidade para ele.
+        \item \textbf{Protocol ap3.0:} Alice fala ``I am Alice'' e envia a sua senha secreta para ``provar'' que é ela mesma.
+        \item \textbf{Problema (\textit{Playback Attack}):} Trudy grava o pacote de Alice e, posteriormente, o reproduz para Bob.
+    \end{itemize}
+
+    \begin{figure}[H]
+        \centering
+        
+        \begin{minipage}{0.4\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{img/autenticacao-v3}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.4\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{img/autenticacao-v3-problema}
+        \end{minipage}
+    
+    \end{figure}
+
+    \textbf{Auntenticação: Uma Terceira Tentativa Modificada}
+    
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item \textbf{Objetivo:} Bob quer que Alice ``prove'' a sua identidade para ele.
+        \item \textbf{Protocol ap3.0:} Alice fala ``I am Alice'' e envia a sua senha secreta \underline{criptografada} para ``provar'' que é ela mesma.
+        \item \textbf{Problema:} \textbf{\textit{Playback Attack}} continua funcionando.
+    \end{itemize}
+
+    \begin{figure}[H]
+        \centering
+        
+        \begin{minipage}{0.4\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{img/autenticacao-v3-modificado}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.4\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{img/autenticacao-v3-modificado-problema}
+        \end{minipage}
+    
+    \end{figure}
+    
+    \textbf{Auntenticação: Uma Quarta Tentativa}
+    
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item \textbf{Objetivo:} Evitar o \textbf{\textit{Playback Attack}}.
+        \item \textbf{nonce:} Um número $R$ usado somente \textbf{uma única vez na vida}.
+        \item \textbf{Protocol ap4.0:} Para provar que Alice está ``viva'', Bob envia Alice \underline{nonce}, $R$.
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Alice deve retornar $R$, criptografado com uma \underline{chave secreta compartilhada}.
+        \end{itemize}
+    \end{itemize}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{img/autenticacao-v4}
+    \end{figure}
+
+    \textbf{Auntenticação: ap5.0}
+
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item \textbf{ap4.0} requer/exige que chave simétrica seja compartilhada.
+        \item \textbf{ap5.0:} Usa o \underline{nonce}, criptografia de chave pública.
+    \end{itemize}
+
+    Problema: Como identificar que é realmente Alice conversando com Bob, saber que a chave pública é de fato de Alice. 
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{img/autenticacao-v5}
+    \end{figure}
+
+    \textbf{Auntenticação: ap5.0 - ainda há uma falha!}
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item \textbf{Homem (ou Mulher) no meio do ataque:} Trudy se faz passar por Alice (para Bob) e por Bob (para Alice).
+    \end{itemize}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.65\textwidth]{img/autenticacao-v5-falha}
+    \end{figure}
+
+\subsubsection{Assinaturas Digitais e Integridade de Mensagens}
+
+    \textbf{Técnica \underline{criptográfica} análoga a assinaturas manuscritas:}
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item O Emissor (Bob) assina digitalmente o documento: ele é o proprietário/criador do documento.
+        \item \textbf{Verificável e \underline{infalsificável}:} O receptor (Alice) pode provar a alguém que Bob, e ninguém mais (incluindo Alice), assinou o documento.
+        \item \textbf{Assinatura digital simples para a mensagem $m$:}
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Bob assima $m$ criptografando-a com sua chave privada $K_b$, criando uma mensagem ``assinada'', $K_{b}^-$.
+        \end{itemize}
+    \end{itemize}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.6\textwidth]{img/assinatura-digital.png}
+    \end{figure}
+
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Suponha que Alice recebe a mensagem $m$ com a assinatura: $m, K_{b}^-$.
+        \item Alice verifica $m$ assinado por Bob aplicando a chave pública $K_{b}^+$ de Bob a $K_{b}^-$, e em seguida, verifica se $K_{b}(K_{b}^-)^+ = m$.
+        \item Se $K_{b}(K_{b}^-)^+ = m$, quem assinou $m$ deve ter usado a chave privada de Bob.
+    \end{itemize}
+    
+    \textbf{Alice verifica, portanto, que:}
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Bob assinou $m$.
+        \item Ninguém mais assinou $m$.
+        \item Bob assinou $m$ não $m'$.
+    \end{itemize}
+
+    \textbf{Não-Repúdio:}
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Alice pode levar $m$ e a assinatura $K_{b}^-$ ao tribunal e provar que Bob assinou $m$.
+    \end{itemize}
+
+    \textbf{Resumos de mensagens (Message Digests)} 
+    Criptografar mensagens longas com chave pública é \underline{computacionalmente caro}.
+    \textbf{Objetivo:} Obter uma "impressão digital" (\textit{"fingerprint"}) digital de comprimento fixo e fácil de calcular.
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Aplica-se uma função \textit{hash} $H$ à mensagem $m$, obtendo um resumo (\textit{message digests}) de tamanho fixo: $H(m)$. 
+    \end{itemize}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{img/funcao-hash}
+    \end{figure}
+
+    \textbf{Propriedades da função \textit{hash}}
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Muitos-para-um (many-to-1): várias mensagens diferentes podem gerar o mesmo \textit{hash}.
+        \item Produz um resumo (\textit{message digests}) de tamanho fixo (fingerprint), independentemente do tamanho da mensagem original.
+        \item Dado um resumo (\textit{message digests}) $x$, é computacionalmente inviável encontrar uma mensagem $m$ tal que $x = H(m)$. 
+    \end{itemize}
+
+    \textbf{Checksum da Internet: uma função hash \underline{criptográfica fraca}}
+    O Internet checksum possui algumas propriedades de uma função \textit{hash}:
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Produz um resumo de tamanho fixo (soma de 16 bits) da mensagem.
+        \item É muitos-para-um (many-to-one).
+    \end{itemize}
+    No entanto, dado uma mensagem com um determinado valor de hash, é fácil encontrar outra mensagem com o mesmo valor de hash.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.55\textwidth]{img/internet-checksum}
+    \end{figure}
+
+    \textbf{Assinatura digital = resumo da mensagem assinada (\textit{message digests})}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.6\textwidth]{img/verificacao-messagem.png}
+    \end{figure}
+
+    \textbf{Algoritmos de função \textit{hash}}
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item A função hash \textbf{MD5} é amplamente utilizada (RFC 1321).
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Calcula um resumo de mensagem de 128 bits em um processo de 4 etapas.
+            \item Dada uma string arbitrária $x$ de 128 bits, parece difícil construir uma \underline{mensagem} $m$ cujo hash MD5 seja igual a $x$.
+        \end{itemize}
+        \item O \textbf{SHA-1} também é utilizado
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Padrão dos EUA [NIST, FIPS PUB 180-1].
+            \item Produz um resumo de mensagem de 160 bits.
+        \end{itemize}
+    \end{itemize}
+
+    \textbf{Auntenticação: ap5.0 - vamos resolvê-lo !!}
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item \textbf{Relembrando o problema:} Trudy se passa por Alice (para Bob) e por Bob (para Alice).
+    \end{itemize}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.65\textwidth]{img/autenticacao-v5-consertado.png}
+    \end{figure}
+
+    \textbf{Necessidade de chaves públicas certificadas}
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Motivação: Trudy faz uma pegadinha de pizza com Bob.
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Trudy cria um pedido por e-mail:
+            ``Prezada Pizzaria,
+            Por favor, entregue para mim quatro pizzas de pepperoni.
+            Obrigado,
+            Bob.''
+            \item Trudy assina o pedido com sua chave privada.
+            \item Trudy envia o pedido para a pizzaria.
+            \item Trudy envia também sua chave pública, mas diz que é a chave pública de Bob.
+            \item A pizzaria verifica a assinatura e então entrega quatro pizzas de pepperoni para Bob.
+            \item Bob nem gosta de pepperoni! 
+        \end{itemize}
+    \end{itemize}
+
+    \textbf{Autoridades Certificadoras de Chaves Públicas (CA)}
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item \textbf{Autoridade certificadora (CA):} Vincula uma chave pública a uma entidade específica, $E$.
+        \item Entidade (pessoa, site, roteador) registra sua chave pública com o CE e fornece uma ``prova de identidade'' à CA.
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item A CA cria um certificado que associa a identidade $E$ à sua chave pública.
+            \item O certificado, contendo a chave pública de E, é assinado digitalmente pela CA: a CA afirma que “esta é a chave pública de E” 
+        \end{itemize}
+    \end{itemize}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\textwidth]{img/autoridades-certificadoras.png}
+    \end{figure}
+
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Quando Alice quer a chave pública de Bob:
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Obtém o certificado de Bob (diretamente com Bob ou de outra fonte).
+            \item Aplica a chave pública da CA (Autoridade Certificadora) ao certificado de Bob obtendo, assim, a chave pública de Bob.
+        \end{itemize}
+    \end{itemize}
+
+\subsubsection{Acordo de Chave Compartilhada}
+
