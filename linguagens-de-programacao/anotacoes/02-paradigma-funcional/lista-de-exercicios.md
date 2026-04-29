@@ -198,43 +198,231 @@ import Data.List (sort)
 listasIguais xs ys = sort xs == sort ys
 ```
 
-7.	Escreva uma função que retorne o número de vezes que um dado elemento aparece numa lista. (1,0)
+### 7. Escreva uma função que retorne o número de vezes que um dado elemento aparece numa lista. (1,0)
+- Aqui podemos fazer uma busca recursiva na lista, em que temos como caso base da recursão a lista sendo vazia e um número qualquer retornando 0.
+- E para o caso recursiva precisamos verificar se a cabeça da lista é igual ao número que estamos procurando se sim retornamos 1 + a busca recursiva pela ocorrência dos outros elementos pela cauda da lista.
 
 ```haskell
+apareceLista :: [Int] -> Int -> Int
+apareceLista [] _ = 0
+apareceLista (h:t) n 
+    | h == n = 1 + apareceLista t n
+    | otherwise = apareceLista t n
+
+-- Execução
+ghci> apareceLista [] 1
+0
+ghci> apareceLista [1,1,1,1,1,1] 1
+6
+ghci> apareceLista [1..5] 1
+1
+ghci> apareceLista [1,2,1,2,1,2,1] 1
+4
+ghci> apareceLista [2,2,2,2,1,1,1] 1
+3
 ```
 
-8.	Escreva uma função que receba uma lista de números e retorne uma tupla com uma lista dos números pares e uma lista dos números ímpares.          (1,5) 
-Ex:  funcao [1,2,3]
-	([2],[1,3])
+### 8. Escreva uma função que receba uma lista de números e retorne uma tupla com uma lista dos números pares e uma lista dos números ímpares. (1,5) 
+```haskell
+-- Exemplo:
+ghci> funcao [1,2,3]
+ghci> ([2],[1,3])
+```
+
+- Aqui precisamos primeiramente criar o tipo da tupla que tem como primeiro e segundo elementos listas de inteiros.
+- Depois, criamos uma função que recebe uma lista de inteiros e retorna essa tupla.
+- A ideia seria fazer uma busca recursiva, onde teríamos como base uma lista vazia que retornaria uma tupla com listas vazias ( [], [] ).
+- Já para o caso recursivo, precisamos chamar a função para a cauda da lista (t), que irá retornar uma tupla contendo a lista de pares e a lista de ímpares.
+- Então, devemos desempacotar essa tupla para obter (pares, impares) e, a partir disso, verificar se a cabeça (h) é par ou ímpar:
+- Se for par, adicionamos h à lista de pares. Caso contrário, adicionamos h à lista de ímpares.
+- Por fim, reconstruímos a tupla com os novos valores.
 
 ```haskell
+type TuplaDeLista = ([Int], [Int])
+funcao :: [Int] -> TuplaDeLista
+funcao [] = ([],[])
+funcao (h:t) 
+    | even h = (h: pares, impares)
+    | otherwise = (pares, h: impares)
+    where 
+        (pares, impares) = funcao t
+
+-- Execução
+ghci> funcao [1..10]
+([2,4,6,8,10],[1,3,5,7,9])
+ghci> funcao [1,3..10]
+([],[1,3,5,7,9])
+ghci> funcao [2,4..10]
+([2,4,6,8,10],[])
+ghci> funcao []
+([],[])
 ```
 
-9.	Escreva uma função que verifique se um ano é bissexto. (0,5)
+### 9. Escreva uma função que verifique se um ano é bissexto. (0,5)
+- Para um ser Bissexto é preciso que ele seja divísivel por 4 e ao mesmo tempo não seja divisível por 100 ou que ele seja divisível por 400.
 
 ```haskell
+ehBissexto :: Int -> Bool
+ehBissexto n = if (n `mod` 4 == 0 && n `mod` 100 /= 0) || (n `mod` 400 == 0) then True else False 
+
+-- Outra forma
+ehBissexto :: Int -> Bool
+ehBissexto n = (n `mod` 4 == 0 && n `mod` 100 /= 0) || (n `mod` 400 == 0)  
+
+-- Execução
+ghci> ehBissexto 2016
+True
+ghci> ehBissexto 2020
+True
+ghci> ehBissexto 2022
+False
+ghci> ehBissexto 2021
+False
+ghci> ehBissexto 1999
+False
+ghci> ehBissexto 2000
+True
+ghci> ehBissexto 2002
+False
 ```
 
-10.	Escreva uma função que verifique se um ponto (x,y) está dentro de uma circunferência de raio R e com centro localizado num ponto (a,b).          (1,0)
-11.	Crie uma função que gere os números primos menores que um dado número    (2,5)
-12.	Escreva uma função que receba uma lista e a transforme em palíndrome.     (1,0) 
-Ex: transforma [1,2]
-	[1,2,2,1]
-13.	Escreva uma função que receba uma lista e retorne o número de elementos que estão acima da média dos valores da lista.            (2,0)
-14.	Escreva uma função que receba os coeficientes “a”, “b” e “c” da entrada padrão (teclado) e calcule as raízes da equação ax2+bx+c.           (2,0)
-15.	Escreva uma função que receba uma lista e retorne a posição de um dado elemento nessa lista, iniciando da posição 0.           (1,0)
-16.	Escreva uma função que receba uma string com o nome de um arquivo e retorne a extensão daquele arquivo (considere que a extensão vem depois do último ponto).
-Ex: extensao “prova_de_hugs.doc.pdf”        (1,5)
-	“.pdf”
+### 10.	Escreva uma função que verifique se um ponto (x,y) está dentro de uma circunferência de raio R e com centro localizado num ponto (a,b). (1,0)
+- Aqui primeiramente devemos usar uma tupla para criar um ponto (x,y).
+- Ainda precisamos saber da fôrmula da circunferência da geometri analítica que é: $(x - a)^2 + (y - b)^2 = r^2$, onde $a,b$ são coordenadas do Centro.
+- Além disso precisamps saber que a posição de um ponto $(x,y)$ está dentro da circunferência se $(x - a)^2 + (y - b)^2 < r^2$
+
+```haskell
+type Ponto = (Float, Float)
+estaNaCirc :: Ponto -> Ponto -> Float -> Bool
+estaNaCirc (x,y) (a,b) r
+    |  (x - a)^2 + (y - b)^2 < r^2 = True
+    | otherwise = False
+
+-- Outra forma 
+type Ponto = (Double, Double)
+dentroCirc :: Ponto -> Ponto -> Double -> Bool
+dentroCirc (x,y) (a,b) r =
+    (x - a)^2 + (y - b)^2 <= r^2
+
+-- Execução
+ghci> dentroCirc (1,2) (0,0) 2
+False
+ghci> dentroCirc (1,1) (0,0) 2
+True
+```
+
+### 11.	Crie uma função que gere os números primos menores que um dado número. (2,5)
+
+```haskell
+
+```
+
+### 12.	Escreva uma função que receba uma lista e a transforme em palíndrome. (1,0) 
+- Para poder transforma uma lista em um palíndromo, acredito que a maneira mais fácil seja concatenar a lista original com a sua lista reversa.
+- Para isso podemos usar a função nativa `reverse` e o operador `++` do `Haskell`.
+
+```haskell
+-- Exemplo: 
+ghci> transforma [1,2]
+ghci> [1,2,2,1]
+```
+
+```haskell
+transforma :: [Int] -> [Int]
+transforma lista = lista ++ reverse lista 
+
+-- Solução que evita duplicar o meio
+transforma :: [Int] -> [Int]
+transforma lista = lista ++ reverse (init lista) 
+-- Init: "Cauda ao contrário" retorna a lista sem o seu último elemento
+
+-- Execução
+ghci> transforma [1,2]
+[1,2,2,1]
+ghci> transforma [1,2,2,2]
+[1,2,2,2,2,2,2,1]
+ghci> transforma [1,2,1,2]
+[1,2,1,2,2,1,2,1]
+ghci> transforma []
+[]
+ghci> transforma [1]
+[1,1]
+```
+
+### 13.	Escreva uma função que receba uma lista e retorne o número de elementos que estão acima da média dos valores da lista. (2,0)
+- A ideia aqui seria somar todos os elemetos, usando o `sum`, de da lista dividir pelo seu comprimento, usando o `length`, para obtermos a média e 
+depois , usando a função `filter`, filtrar todos os elementos maiores que a média.
+- O problema é que o haskell não consegue fazer divisão por inteiro que pode retorna `Float`.
+- Ao invês de passar a media como parâmetro da função `filter`, vamos passar uma **função anônima** que para cada `elemento x` verifica-se se `x * n > s`,
+onde `s` é a **soma dos valores** dos elementos da lista e `n` o **comprimento** da lista.
+- Logo, se `x * n` for maior que `s` siginifica que o elemento x da lista é maior que a média.
+
+```haskell
+acimaMedia :: [Int] -> [Int]
+acimaMedia [] = []
+acimaMedia lista = filter (\x -> x * n > s) lista
+    where
+        s = sum lista
+        n = length lista
+
+-- Execução
+```
+
+### 14.	Escreva uma função que receba os coeficientes $a,b, \text{e } c$, “b” e “c” da entrada padrão (teclado) e calcule as raízes da equação $ax^2 + bx +c$. (2.0)
+- Fazer usando let e where, 
+- como vamos realizar calculo e mostrá-los depois é preciso fazer as conversões de tipos usando read String -> Float, e show Double -> String
+
+```haskell
+
+```
+
+
+### 15.	Escreva uma função que receba uma lista e retorne a posição de um dado elemento nessa lista, iniciando da posição 0. (1,0)
+
+```haskell
+
+```
+
+### 16.	Escreva uma função que receba uma string com o nome de um arquivo e retorne a extensão daquele arquivo (considere que a extensão vem depois do último ponto). (1,5)
+
+```haskell
+-- Exemplo
+extensao “prova_de_hugs.doc.pdf”        
+".pdf"
 extensao “unknown”
-	(Você decide)
-17.	Escreva uma função que encontre todos os nomes em uma dada frase, começando com letra maiúscula, e o restante do nome em letra minúscula.        (1,5)
-18.	Escreva uma função que quebre uma string em duas partes no ponto onde estiver uma “/” e retorne uma tupla com as duas partes.          (2,0)
-Ex: quebra “oi/tudo bem?”
-	(“oi”, “tudo bem?”)
-quebra “/tudo bem”
-	([],”tudo bem”)
-19.	Crie uma função que substitua uma dada palavra por outra em uma frase. Se a palavra não estiver contida na frase, deverá retornar a frase original.         (1,5)
-Ex: subs “Senna” “Vettel” “Senna é o tricampeão de Fórmula 1 mais jovem!”
-	“Vettel é o tricampeão de Fórmula 1 mais jovem!”
+-- (Você decide)
+```
 
+```haskell
+
+```
+
+
+### 17.	Escreva uma função que encontre todos os nomes em uma dada frase, começando com letra maiúscula, e o restante do nome em letra minúscula. (1,5)
+
+```haskell
+
+```
+
+### 18.	Escreva uma função que quebre uma string em duas partes no ponto onde estiver uma “/” e retorne uma tupla com as duas partes.          (2,0)
+
+```haskell
+-- Exemplo: 
+quebra "oi/tudo bem?"
+("oi", "tudo bem?")
+
+quebra "/tudo bem"
+([],"tudo bem")
+```
+
+```haskell
+
+```
+
+### 19.	Crie uma função que substitua uma dada palavra por outra em uma frase. Se a palavra não estiver contida na frase, deverá retornar a frase original. (1,5)
+
+```haskell
+-- Exemplo: 
+subs "Senna" "Vettel" "Senna é o tricampeão de Fórmula 1 mais jovem!"
+"Vettel é o tricampeão de Fórmula 1 mais jovem!"
+```
