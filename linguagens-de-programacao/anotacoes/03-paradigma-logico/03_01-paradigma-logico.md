@@ -351,57 +351,60 @@ obtemcoef(A,B,C),
 D is B^2-4*A*C,
 
 ( D >= 0,  
-X1 is (-B + sqrt(D))/(2*A), 
-X2 is (-B - sqrt(D))/(2*A), nl, 
-write('x1 = '), write(X1),  nl,
-write('x2 = '), write(X2);
-
+    X1 is (-B + sqrt(D))/(2*A), 
+    X2 is (-B - sqrt(D))/(2*A), nl, 
+    write('x1 = '), write(X1),  nl,
+    write('x2 = '), write(X2);
 D < 0, nl, write('Nao tem raizes reais.') 
 ),
 
 raizes. 
 
 simNao(Msg) :- nl, write(Msg), repeat, 
-write(‘ (s/n): '),
-get_char(N), nl, member(N,[’S’,’s’,’N’,’n’]), !, member(N,[’S’,’s’]).
+    write(' (s/n): '),
+    get_char(N), nl, member(N,['S','s','N','n']), !, member(N,['S','s']).
+% Fica insistindo que a pesooa entra com s ou n.
+% Se for N ou n falha em member(N,['S','s']).
+% !(Cut): Evita backtrack
 
 obtemcoef(A,B,C) :-
-obtem('Informe coef a > ', A),
-obtem('Informe coef b > ', B),
-obtem('Informe coef c > ', C).
+    obtem('Informe coef a > ', A),
+    obtem('Informe coef b > ', B),
+    obtem('Informe coef c > ', C).
 obtem(Msg,X) :- nl, write(Msg), read(X).
 ```
+
+- `is`: Avaliador de expressões artiméticas,
+    - A,B e C tem que ser um número se não dará Erro!
 
 ## Átomo
 - Átomos são **nomes textuais** usados para **identificar dados**, **predicados**, **operadores**, **módulos**, **arquivos**, **janelas**, etc. 
 - Pode ser reconhecido pelo predicado atom(X).
+- Gramática:
+    - `<átomo> ::= <átomo-alfa>|<átomo-simb>| <string><átomo-apostrofado> |<átomo-especial>`
+    - `<átomo-alfa> ::= <letra-minúscula> | <átomo-alfa><letra>| <átomo-alfa><dígito> | <átomo-alfa> ...`
 
-```prolog
-<átomo> ::= <átomo-alfa>|<átomo-simb>| <string><átomo-apostrofado> |<átomo-especial>
-<átomo-alfa> ::= <letra-minúscula> | <átomo-alfa><letra>| <átomo-alfa><dígito> | <átomo-alfa> _ 
-%Exemplos: 
-a, avo, amora, a2, a_, big_32, xMax, etc.
-<átomo-simb> ::= <caracter-simb>|<atomo simb><caracter-simb> 
-<caracter-simb> ::= #|$|%|&|*|+|-|.|/|:|<|=|>|@|\|^|`| ~ 
+    - Exemplos: `a, avo, amora, a2, a_, big_32, xMax, etc.`
 
-% Exemplos: 
-&  &:   ++    <<    >>    <-- ..    *-/*
-% Obs.: desde que não seja operador primitivo
+    - `<átomo-simb> ::= <caracter-simb>|<atomo simb><caracter-simb>` 
+    - `<caracter-simb> ::= #|$|%|&|*|+|-|.|/|:|<|=|>|@|\|^|`| ~ `
+    - Exemplos: `&  &:   ++    <<    >>    <-- ..    *-/*`
 
-<átomo-apostrofado> ::= 
-% 'qualquer seqüência de caracteres'
+> [!NOTE]
+>
+> Desde que não seja operador primitivo.
 
-% Exemplo: 
-'Avo' '123' 'alo mundo'    'a' 
+`<átomo-apostrofado>` ::=  'qualquer seqüência de caracteres'
 
-% Um caracter em si é um átomo, exemplo:  'x'
-<string> ::= "qualquer sequência de caracteres"
+- Exemplo: 'Avo' '123' 'alo mundo'    'a' 
+-  Um caracter em si é um átomo, exemplo:  'x'
 
-<átomo especial> ::= ! | [] 
-% Tais átomos têm funções especiais na linguagem Prolog.
-% ! = cut
-% [] = representa lista vazia
-```
+`<string> ::= "qualquer sequência de caracteres"`
+
+`<átomo especial> ::= ! | []` 
+- Tais átomos têm funções especiais na linguagem Prolog.
+- `!` = cut
+- [] = representa lista vazia
 
 ### Termo Composto
 ```prolog
@@ -425,7 +428,7 @@ a, avo, amora, a2, a_, big_32, xMax, etc.
 [X,Y|Xs] = [1,2,3,4] % X=1, Y=2, e Xs =[3,4]
 ```
 
-- Método `take`.
+- Método `take`: retorna os primeiros n elementos de uma lista.
 ```prolog
 take(0,_,[]).
 take(_,[],[]).
@@ -437,7 +440,7 @@ Rs = [a,b,c] ;
 false.
 ```
 
-- Método `drop`.
+- Método `drop`: despreza os primeiros n elementos de uma lista.
 ```prolog
 drop(0,Xs,Xs).
 drop(_,[],[]).
@@ -454,6 +457,7 @@ false.
 - Com sintaxe geral:
     - nome(t1,t2,...,tn),  
     - nome/n
+
 - **Exemplos:**
 ```prolog
 parent(pam,bob).

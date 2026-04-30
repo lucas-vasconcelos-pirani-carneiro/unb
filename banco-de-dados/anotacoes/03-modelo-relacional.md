@@ -188,6 +188,7 @@ DEPENDENTE
 
 - Cria-se uma **tabela** para o relacionamento que recebe como **chave estrangeira** e **primária**, as chaves primárias das outras entidades.
 
+FORNECE
 | NumLote \<pk>, \<fk> | FNome \<pk>, \<fk> | NumProj \<pk>, \<fk> | Quantidade |
 | :------------------: | :----------------: | :------------------: |:---------: |
 
