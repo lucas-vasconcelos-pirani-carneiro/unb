@@ -661,8 +661,209 @@
         \includegraphics[width=0.7\textwidth]{img/email-final}
     \end{figure}
 
-     \begin{itemize}[left=0.5cm, align=left, nosep]
+    \begin{itemize}[left=0.5cm, align=left, nosep]
         \item \textbf{Alice utiliza três chaves:} Sua chave privada, a chave pública de Bob e uma nova chave simétrica.
     \end{itemize}
 
 \subsection{Proteção de conexões TCP: TLS}
+
+    \vspace{0.5cm}
+    \textbf{Segurança na Camada de Transporte - TLS}
+
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Protocolo de segurança amplamente utilizado acima da camada de transporte.
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Suportado por praticamente todos os navegadores e servidores web: \underline{https} (porta 443).
+        \end{itemize}
+        \item Fornece:
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item \textbf{Confidencialidade:} por meio de \underline{criptografia simétrica}.
+            \item \textbf{Integridade:} por meio de \underline{hashing criptográfico}.
+            \item \textbf{Autenticação:} por meio de \underline{criptografia de chave pública}.
+        \end{itemize}
+        \item Histórico:
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Pesquisas iniciais e implementações: programação de rede segura, \textit{secure sockets}.
+            \item Secure Sockets Layer (SSL) descontinuado [2015].
+            \item TLS 1.3 [2018].
+        \end{itemize}
+    \end{itemize}    
+
+    \textbf{O que é Necessário ?}
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Vamos construir um protocolo TLS simplificado (\textit{toy TLS}), chamado \textbf{t-TLS}, para entender o que é necessário!
+        \item Algumas peças já foram vistas:
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item \textit{\textbf{Handshake:}} Alice e Bob usam seus certificados e chaves privadas para se autenticarem mutuamente e trocar ou criar um segredo compartilhado.
+            \item \textbf{Derivação de chaves:} Alice e Bob usam o segredo compartilhado para derivar um conjunto de chaves.
+            \item \textbf{Transferência de dados:} Transferência contínua (stream) de dados: os dados são enviados como uma série de registros.
+            \begin{itemize}[left=0.5cm, align=left, nosep, label=-]
+                \item Não se trata apenas de transações únicas.
+            \end{itemize}
+                \textbf{Encerramento da conexão:} Mensagens especiais são usadas para encerrar a conexão de forma segura.
+        \end{itemize}
+    \end{itemize}
+
+    \textbf{t-tls: Handshake inicial}
+    
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.3\textwidth]{img/tls-handshake.png}
+    \end{figure}
+    
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Bob estabelece uma conexão TCP com Alice.
+        \item Bob verifica que Alice é realmente Alice.
+        \item Bob envia para Alice uma chave secreta mestra (MS), usada para gerar todas as outras chaves da sessão TLS.
+        \item Problemas potenciais:
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item São necessários 3 RTT (\textit{round-trip times}) antes que o cliente possa começar a receber dados (incluindo o handshake do TCP).
+        \end{itemize}
+    \end{itemize}
+
+    \textbf{t-tls: Chaves criptografadas}
+    
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item É considerado uma má prática usar a mesma chave para mais de uma \underline{função criptográfica}.
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Devem ser usadas chaves diferentes para o \textbf{MAC} (\textbf{\textit{Message Authentication Code}}) e Criptografia.
+        \end{itemize}
+        \item Quatro chaves:
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item $K_c:$ Chave de criptografia para dados enviados do cliente para o servidor.
+            \item $M_c:$ Chave de \textbf{MAC} para dados enviados do cliente para o servidor.
+            \item $K_s:$ Chave de criptografia para dados enviados do servidor para o cliente.
+            \item $M_s:$ Chave de \textbf{MAC} para dados enviados do servidor para o cliente.
+        \end{itemize}
+        \item As chaves são derivadas a partir de uma \textbf{Função de derivação de chaves} (\textbf{\textit{KDF — Key Derivation Function}}). 
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Usa a chave mestra (MS) e possivelmente pode usar também dados aleatórios adicionais para gerar novas chaves para a sessão.
+        \end{itemize}
+    \end{itemize}
+
+    \textbf{t-tls: Dados criptografados}
+    
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Lembrete: o TCP fornece uma \textbf{abstração de fluxo contínuo de bytes}.
+        \item \underline{Pergunta:} Podemos criptografar os dados diretamente no fluxo (stream) ao escrevê-los no socket TCP?
+        \item \underline{Resposta:} Onde colocar o MAC? Se for no final, não há integridade da mensagem até que todos os dados sejam recebidos e a conexão seja encerrada!!
+        \item \textbf{Solução:} Dividir o fluxo em uma série de \textbf{``registros'' (\textit{records})}.
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Cada registro do cliente-servidor carrega um \textbf{MAC}, gerado com $M_c$.
+            \item O receptor pode processar cada registro conforme ele chega.
+        \end{itemize}
+        \item Cada registro do \underline{t-tls} é criptografado usando uma chave simétrica $K_c$ enviado pelo TCP.
+    \end{itemize}
+
+     \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{img/criptografia-dados}
+    \end{figure}
+
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Possíveis ataques ao fluxo de dados ?
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item \textbf{Reordenação:} Um atacante (\textit{man-in-the-middle}) intercepta segmentos TCP e altera a ordem (manipulando números de 
+            sequência no cabeçalho TCP, que não é criptografado).
+            \item \textbf{Repetição - \textit{replay}}. 
+        \end{itemize}
+        \item Soluções:
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Usar números de sequência do TLS (dados + número de sequência TLS incluídos no MAC).
+            \item Usar \underline{nonce}, valor único/aleatório.
+        \end{itemize}
+    \end{itemize}
+
+    \textbf{t-tls: Encerramento de conexão}
+
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Ataque de Truncamento:
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Um atacante forja um segmento TCP de encerramento.
+            \item Um ou ambos os lados acreditam que há menos dados do que realmente foram enviados.
+        \end{itemize}
+        
+        \item \textbf{Solução:} Usar tipos de registros, copm um tipo para o fechamento.
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item $0 \rightarrow$ Dados, $1 \rightarrow$ Fechamento.
+        \end{itemize}     
+        
+        \item MAC agora computa usando os dados, tipo e número de sequência.
+    \end{itemize}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.6\textwidth]{img/tls-fechamento-conexao.png}
+    \end{figure}
+
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item TLS fornece uma API que qualquer aplicação pode usar.
+        \item Uma visão HTTP do TLS:
+    \end{itemize}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.6\textwidth]{img/http-tls.png}
+    \end{figure}    
+
+    \textbf{TLS 1.3: Conjunto de cifras (\textit{cipher suite})}
+
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item ``Cipher suite'': Algoritmos que podem ser usados para geração de chaves, criptografia, MAC e assinatura digital.
+        \item TLS 1.3: Possui um conjunto de cifras mais limitado do que o TLS 1.2 (2008).
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Apenas 5 opções, em vez de 37.
+            \item Exige o uso de \underline{Diffie-Hellman} (DH) para troca de chaves, antes podia ser DH ou RSA.
+            \item Utiliza ``criptografia autenticada'' (\textit{authenticated encryption}), combina algoritmos de criptografia em autenticação em um único processo, antes 
+            fazia isso em etapas separadas.
+            \item O HMAC utiliza a função hash \underline{criptográfica}: SHA-256 ou SHA-384.
+        \end{itemize}     
+    \end{itemize}
+
+    \textbf{TLS 1.3 handshake: 1 RTT}
+
+    \begin{enumerate}[left=0.5cm, align=left, nosep]
+        \item client TLS hello msg:
+        \begin{itemize}[left=0.5cm, align=left, nosep]
+            \item Adivinha o protocolo de acordo de chaves e os parâmetros.
+            \item Indica os conjuntos de cifras suportados.
+        \end{itemize}
+        \item server TLS hello msg escolhe:
+        \begin{itemize}[left=0.5cm, align=left, nosep]
+            \item Protocolo de acordo de chaves, parâmetros.
+            \item Conjunto de cifras.
+            \item Certificado assinado pelo servidor.
+        \end{itemize}
+        \item client
+        \begin{itemize}[left=0.5cm, align=left, nosep]
+            \item Verifica o certificado do server.
+            \item Gera uma chave.
+            \item Pode agora fazer requisições na aplicação (HTTPS GET).
+        \end{itemize}
+    \end{enumerate}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.4\textwidth]{img/tls-handshake-1RTT.png}
+    \end{figure}  
+    
+    \textbf{TLS 1.3 handshake: 0 RTT}
+
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Mensagem inicial de hello contém dados criptografados pela aplicação.
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item ``Retomando'' a conexão anterior entre o cliente e o servidor.
+            \item Dados da aplicação criptografados usando o ``segredo mestre de retomada'' 
+            da conexão anterior.
+        \end{itemize}
+        \item Vunerável a ataques \textbf{replay}!!
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Talvez seja aceitável para requisições HTTP GET ou requisições do cliente que não 
+            modificam o estado do servidor.
+        \end{itemize}      
+    \end{itemize}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.4\textwidth]{img/tls-handshake-0RTT.png}
+    \end{figure}  
