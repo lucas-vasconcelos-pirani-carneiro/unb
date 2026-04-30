@@ -71,6 +71,14 @@ dentroCirc (x,y) (a,b) r
     | (x - a)^2 + (y - b)^2 < r^2 = True
     | otherwise = False
 
+-- Exercício 11. Crie uma função que gere os números primos menores que um dado número.
+isPrime :: Int -> Bool
+isPrime n
+    | length [x | x <- [1..n], n `mod` x == 0] == 2 = True
+    | otherwise = False
+
+listaPrimos :: Int -> [Int]
+listaPrimos n = filter isPrime [1..n]
 
 -- Exercício 12. Escreva uma função que receba uma lista e a transforme em palíndrome. (1,0)
 transforma :: [Int] -> [Int]
@@ -84,4 +92,19 @@ acimaMedia lista = filter (\x -> x * n > s) lista
         s = sum lista
         n = length lista
 
--- 14.	Escreva uma função que receba os coeficientes $a,b, \text{e } c$, “b” e “c” da entrada padrão (teclado) e calcule as raízes da equação $ax^2 + bx +c$.
+-- Exercício 14. Escreva uma função que receba os coeficientes $a,b, \text{e } c$, “b” e “c” da entrada padrão (teclado) e calcule as raízes da equação $ax^2 + bx +c$.
+
+
+-- Exercício 15. Escreva uma função que receba uma lista e retorne a posição de um dado elemento nessa lista, iniciando da posição 0. (1,0)
+posicaoRec :: Int -> [Int] -> Int
+posicaoRec _ [] = 0 
+posicaoRec n (h:t)
+    | h == n = posicaoRec n []
+    | h /= n = 1 + posicaoRec n t
+
+posicao :: Int -> [Int] -> Int
+posicao n lista = 
+    if n `elem` lista
+        then 
+            posicaoRec n lista
+        else -1

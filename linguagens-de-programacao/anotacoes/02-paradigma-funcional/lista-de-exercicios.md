@@ -312,9 +312,25 @@ True
 ```
 
 ### 11.	Crie uma função que gere os números primos menores que um dado número. (2,5)
+- A ideia aqui é usar a função filter onde passamos como parâmetro uma função que verifica se um número é primo ou não em cima de uma lista que vai de [1..n], onde n é o dado número que queremos saber os primos menor que eles.
+- A função para determinar se um número é primo ou não foi pensada da seguinte maneira: utilizamos a propriedade que os números só possuem dois divisores 1 e ele mesmo então geramos uma lista com todos os divisores de um determinado número n usando o operador mod e verificamos se essa lista tem tamanho 2, se sim retorna True, ou seja, n é um número primo. Caso contrário, retorna False. 
 
 ```haskell
+isPrime :: Int -> Bool
+isPrime n 
+    | length [x | x <- [1..n], n `mod` x == 0] == 2 = True
+    | otherwise = False
 
+listaPrimos :: Int -> [Int]
+listaPrimos n = filter isPrime [1..n]
+
+-- Execução
+ghci> listaPrimos 20
+[2,3,5,7,11,13,17,19]
+ghci> listaPrimos 50
+[2,3,5,7,11,13,17,19,23,29,31,37,41,43,47]
+ghci> listaPrimos 100
+[2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97]
 ```
 
 ### 12.	Escreva uma função que receba uma lista e a transforme em palíndrome. (1,0) 
@@ -366,6 +382,10 @@ acimaMedia lista = filter (\x -> x * n > s) lista
         n = length lista
 
 -- Execução
+ghci> acimaMedia [1..10]
+[6,7,8,9,10]
+ghci> acimaMedia [2,4,3,6,8,9,11,05,34,0,7,8]
+[9,11,34]
 ```
 
 ### 14.	Escreva uma função que receba os coeficientes $a,b, \text{e } c$, “b” e “c” da entrada padrão (teclado) e calcule as raízes da equação $ax^2 + bx +c$. (2.0)
@@ -376,11 +396,36 @@ acimaMedia lista = filter (\x -> x * n > s) lista
 
 ```
 
-
 ### 15.	Escreva uma função que receba uma lista e retorne a posição de um dado elemento nessa lista, iniciando da posição 0. (1,0)
+- Aqui acabei fazendo uma gambiarra no código. Primeiramente temos uma função que verfica se o elemento que procuramos está na lista ou não usando a função `elem` disponibilizada nativamente no `Haskell`.
+- Se o elemento está na lista então chamo uma função que busca pela posição do elemento na lista de forma recursiva, caso contrário retorno -1 para demostrar que o elemento não está na lista.
+- A função recursiva foi feita da seguinte maneira como caso base temos uma lista vazia que retorna 0, e caso recursivo e dado da seguinte forma: 
+    - se a cabeça for igual ao elemento procurado = retornamos caso base, ou seja, chamamos a função de forma recursiva passando como parâmetro o elemento procurado e a lista vazia
+    - Caso contrário, continuamos a busca pela posição do elemento de forma recursiva somando 1 e chamando a função recursivamente passando como parâmetro o elemento procurado e a cauda da lista.
 
 ```haskell
+posicaoRec :: Int -> [Int] -> Int
+posicaoRec _ [] = 0 
+posicaoRec n (h:t)
+    | h == n = posicaoRec n []
+    | h /= n = 1 + posicaoRec n t
 
+posicao :: Int -> [Int] -> Int
+posicao n lista = 
+    if n `elem` lista
+        then 
+            posicaoRec n lista
+        else -1
+
+-- Execução
+ghci> posicao 5 [1..10]
+4
+ghci> posicao 0 [1..10]
+-1
+ghci> posicao 1 [1..10]
+0
+ghci> posicao 10 [1..10]
+9
 ```
 
 ### 16.	Escreva uma função que receba uma string com o nome de um arquivo e retorne a extensão daquele arquivo (considere que a extensão vem depois do último ponto). (1,5)
@@ -404,7 +449,9 @@ extensao “unknown”
 
 ```
 
-### 18.	Escreva uma função que quebre uma string em duas partes no ponto onde estiver uma “/” e retorne uma tupla com as duas partes.          (2,0)
+### 18.	Escreva uma função que quebre uma string em duas partes no ponto onde estiver uma "/" e retorne uma tupla com as duas partes. (2,0)
+- Ir fazendo composição até encontrar o simbolo '/'
+- usar a função que encontrar a posição porém para lista de Char ou seja String
 
 ```haskell
 -- Exemplo: 
