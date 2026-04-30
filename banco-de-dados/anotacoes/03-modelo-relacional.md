@@ -62,7 +62,7 @@ DEPARTAMENTO
 
 #### Restrição de Integridade de Entidade
 - Está relacionada com a chave primária.
-- Uma chave primária **não** pode ser **repetida** e ser **nula**.
+- Uma chave primária **não** pode ser **repetida** e ser **nula**, ou seja, ser **único**.
 
 #### Restrição de Integridade Referencial
 - Está associada ao conceito de chave estrangeira.
@@ -274,6 +274,8 @@ DEPARTAMENTO
 | nome_dep |  cod_dep \<pk> | gerente \<fk> | dt_inicio_gerente |
 | :------: | :------------: | :-----------: | :---------------: |
 
+> O **atributo** do relacionamento vai para onde a \<fk> for, nesse caso para a tabela de Departamento.
+
 LOCAL_DEP
 | cod_dep \<pk>, \<fk> | local \<pk> | 
 | :------------------: | :---------: |
@@ -289,3 +291,67 @@ DEPENDENTE
 EMP_PROJ
 | cod_proj \<pk>, \<fk> | cod_emp \<pk> ,\<fk> | horas |  
 | :-------------------: | :------------------: | :---: | 
+
+## Exemplo - NBA
+- Nesse exemplo mapeamos somente o momento atual em que se encontra os jogadares e técnicos da NBA.
+- Todo time precisa ter um e somente um técnico, enquanto um time por ter vários jogadores.
+
+![exemplo-nba](img/03-modelo-relacional/exemplo-nba.png)
+
+```plantuml
+@startchen
+
+entity Pessoa {
+}
+
+entity Time {
+}
+
+relationship Técnico {
+}
+
+relationship Jogador {
+}
+
+Pessoa -1- Técnico
+Técnico =1= Time
+
+Pessoa -N- Jogador
+Jogador -1- Time
+    
+@endchen
+```
+
+PESSOA
+|  idPessoa \<pk> | nome | data_nasc | peso | altura | idTime \<fk> |
+| :-------------: | :--: | :-------: | :--: | :----: | :----------: |
+
+TIME
+|  idTime \<pk> | nome | sigla | cidade | estado | idPessoa \<fk> |
+| :-----------: | :--: | :---: | :----: | :----: | :------------: |
+
+### Mundança - Adicionando Histórico
+- Agora, queremos adicionar o **histórico** do time, jogadores e técnicos, ou seja, o nosso banco de dados tem que conseguir comportar a mudança dos times e técnicos.
+- Ex: Lebron James 
+    - 2003 $\rightarrow$ Cleveland Cavaliers
+    - 2008 $\rightarrow$ Miami Heat
+    - 2014 $\rightarrow$ Cleveland Cavaliers
+    - 2018 $\rightarrow$ Los Angeles Lakers
+- Como o nosso banco de dados precisará armazenar o histórico para isso temos que adicionar um atributo `data` como chave nos relacionamentos.
+- Além disso, agora as cardinalidades mudam também passam a ser `N:N`.
+
+![exemplo-nba2](img/03-modelo-relacional/exemplo-nba2.png)
+
+- Como ambas as tabelas ficariam **iguais** após o mapeamento, nesse caso recomenda-se criar apenas uma tabela e adicionar o atributo **papel** que informa se a pessoa é um **jogador** ou um **técnico**.
+
+PESSOA
+|  idPessoa \<pk> | nome | data_nasc | peso | altura | 
+| :-------------: | :--: | :-------: | :--: | :----: |
+
+TIME
+|  idTime \<pk> | nome | sigla | cidade | estado |
+| :-----------: | :--: | :---: | :----: | :----: |
+
+TIME_PESSOA
+| idPessoa \<pk> \<fk> | idTime \<pk> \<fk> | dataInicio \<pk> | DataFinal | papel |
+| :------------------: | :----------------: | :--------------: | :-------: | :---: |
