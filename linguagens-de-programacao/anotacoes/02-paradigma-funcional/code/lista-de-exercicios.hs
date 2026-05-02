@@ -92,8 +92,32 @@ acimaMedia lista = filter (\x -> x * n > s) lista
         s = sum lista
         n = length lista
 
--- Exercício 14. Escreva uma função que receba os coeficientes $a,b, \text{e } c$, “b” e “c” da entrada padrão (teclado) e calcule as raízes da equação $ax^2 + bx +c$.
+-- Exercício 14. Escreva uma função que receba os coeficientes a,b e c da entrada padrão (teclado) e calcule as raízes da equação $ax^2 + bx +c$.
+entrada :: IO ()
+entrada = do
+    putStr "Digite o valor do coeficiente a: "
+    astr <- getLine
+    putStr "Digite o valor do coeficiente b: "
+    bstr <- getLine
+    putStr "Digite o valor do coeficiente c: "
+    cstr <- getLine
+    
+    let 
+        a = read astr
+        b = read bstr 
+        c = read cstr
+        delta =  b^2 - 4*a*c
+        r1 = (-b + sqrt delta) / (2 * a) 
+        r2 = (-b - sqrt delta) / (2 * a) 
 
+    if delta > 0 
+        then
+            putStrLn ("Raiz 1 = " ++ show r1 ++ "\nRaiz 2 = " ++ show r2)
+    else if delta == 0
+        then 
+            putStrLn ("Raiz = " ++ show r1)
+    else 
+        putStrLn "Sem raízes"
 
 -- Exercício 15. Escreva uma função que receba uma lista e retorne a posição de um dado elemento nessa lista, iniciando da posição 0. (1,0)
 posicaoRec :: Int -> [Int] -> Int
@@ -108,3 +132,24 @@ posicao n lista =
         then 
             posicaoRec n lista
         else -1
+
+-- Exercício 16. Escreva uma função que receba uma string com o nome de um arquivo e retorne a extensão daquele arquivo (considere que a extensão vem depois do último ponto). (1,5)
+procuraPonto :: String -> String
+procuraPonto "" = ""
+procuraPonto (h:t)
+    | h == '.' = h : ""
+    | otherwise = h : procuraPonto t
+
+extensao :: String -> String
+extensao s = 
+    if '.' `elem` s 
+        then reverse (procuraPonto (reverse s))
+    else "unknown"
+
+-- Exercício 18. Escreva uma função que quebre uma string em duas partes no ponto onde estiver uma "/" e retorne uma tupla com as duas partes. (2,0)
+quebra :: [Char] -> ([Char], [Char])
+quebra (h:t)
+    | h /= '/' = (h: parte1, parte2)
+    | otherwise = (parte1, t)
+    where 
+        (parte1, parte2) = quebra t

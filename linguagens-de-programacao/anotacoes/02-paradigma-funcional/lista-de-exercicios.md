@@ -389,11 +389,55 @@ ghci> acimaMedia [2,4,3,6,8,9,11,05,34,0,7,8]
 ```
 
 ### 14.	Escreva uma função que receba os coeficientes $a,b, \text{e } c$, “b” e “c” da entrada padrão (teclado) e calcule as raízes da equação $ax^2 + bx +c$. (2.0)
-- Fazer usando let e where, 
-- como vamos realizar calculo e mostrá-los depois é preciso fazer as conversões de tipos usando read String -> Float, e show Double -> String
+- Aqui como vamos realizar calculo e mostrá-los depois é preciso fazer as conversões de tipos usando read String -> Float, e show Double -> String.
+- Poderiamos usar as funções `getChar` ou `getLine` para ler o que foi digitado na entrada padrão.
+- A conversão usando o `read` é utilizado dentro do let onde também calculamos e definos os valores de delta e das raízes.
+- Na hora de mostrar o resultado usamos a função `show` que converte o valor do tipo Numérico para uma String.
 
 ```haskell
+entrada :: IO ()
+entrada = do
+    putStr "Digite o valor do coeficiente a: "
+    astr <- getLine
+    putStr "Digite o valor do coeficiente b: "
+    bstr <- getLine
+    putStr "Digite o valor do coeficiente c: "
+    cstr <- getLine
+    
+    let 
+        a = read astr
+        b = read bstr 
+        c = read cstr
+        delta =  b^2 - 4*a*c
+        r1 = (-b + sqrt delta) / (2 * a) 
+        r2 = (-b - sqrt delta) / (2 * a) 
 
+    if delta > 0 
+        then
+            putStrLn ("Raiz 1 = " ++ show r1 ++ "\nRaiz 2 = " ++ show r2)
+    else if delta == 0
+        then 
+            putStrLn ("Raiz = " ++ show r1)
+    else 
+        putStrLn "Sem raízes"
+
+-- Execução
+ghci> entrada
+Digite o valor do coeficiente a: 1
+Digite o valor do coeficiente b: -5
+Digite o valor do coeficiente c: 6
+Raiz 1 = 3.0
+Raiz 2 = 2.0
+ghci> entrada
+Digite o valor do coeficiente a: 1
+Digite o valor do coeficiente b: 4
+Digite o valor do coeficiente c: 4
+Raiz = -2.0
+ghci> entrada
+Digite o valor do coeficiente a: 1
+Digite o valor do coeficiente b: 4
+Digite o valor do coeficiente c: 400
+Sem raízes
 ```
 
 ### 15.	Escreva uma função que receba uma lista e retorne a posição de um dado elemento nessa lista, iniciando da posição 0. (1,0)
@@ -439,9 +483,28 @@ extensao “unknown”
 ```
 
 ```haskell
+procuraPonto :: String -> String
+procuraPonto "" = ""
+procuraPonto (h:t)
+    | h == '.' = h : ""
+    | otherwise = h : procuraPonto t
 
+extensao :: String -> String
+extensao s = 
+    if '.' `elem` s 
+        then reverse (procuraPonto (reverse s))
+    else "unknown"
+
+-- Execução
+ghci> extensao "artigo"
+"unknown"
+ghci> extensao "artigo.pdf"
+".pdf"
+ghci> extensao "artigo.java.pdf"
+".pdf"
+ghci> extensao "artigo.java"
+".java"
 ```
-
 
 ### 17.	Escreva uma função que encontre todos os nomes em uma dada frase, começando com letra maiúscula, e o restante do nome em letra minúscula. (1,5)
 
