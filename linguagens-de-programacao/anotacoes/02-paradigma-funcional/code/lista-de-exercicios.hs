@@ -1,3 +1,5 @@
+import Data.Char (isUpper, isLower, isAlpha)
+
 -- Exercício 01. Escreva uma função que receba uma lista de 4 elementos e verifique se todos os elementos são iguais. (1,0)
 elemIguais :: [Int] -> Bool
 elemIguais [] = True
@@ -146,10 +148,36 @@ extensao s =
         then reverse (procuraPonto (reverse s))
     else "unknown"
 
+-- Exercício 17. Escreva uma função que encontre todos os nomes em uma dada frase, começando com letra maiúscula, e o restante do nome em letra minúscula. (1,5)
+ehNome :: String -> Bool
+ehNome [] = False
+ehNome (x:xs) = isUpper x && all isLower xs
+
+limpa :: String -> String
+limpa = filter isAlpha
+
+encontrarNomes :: String -> [String]
+encontrarNomes s = filter ehNome (map limpa (words s))
+ 
 -- Exercício 18. Escreva uma função que quebre uma string em duas partes no ponto onde estiver uma "/" e retorne uma tupla com as duas partes. (2,0)
-quebra :: [Char] -> ([Char], [Char])
+type TuplaDeString = (String, String)
+
+quebra :: String -> TuplaDeString
+quebra "" = ([], [])
 quebra (h:t)
-    | h /= '/' = (h: parte1, parte2)
-    | otherwise = (parte1, t)
+    | h /= '/' = (h : parte1, parte2)
+    | otherwise = ([], t)
     where 
         (parte1, parte2) = quebra t
+
+-- Exercício 19. Crie uma função que substitua uma dada palavra por outra em uma frase. Se a palavra não estiver contida na frase, deverá retornar a frase original. (1,5)
+subs :: String -> String -> String -> String
+subs _ _ [] = []
+subs s1 s2 s =
+    unwords (map (\str -> if str == s1 then s2 else str) (words s))
+
+-- Usando composição
+subsComp :: String -> String -> String -> String
+subsComp s1 s2 = unwords . map troca . words
+  where
+    troca str = if str == s1 then s2 else str

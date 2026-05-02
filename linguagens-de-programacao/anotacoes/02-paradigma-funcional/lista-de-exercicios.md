@@ -507,14 +507,46 @@ ghci> extensao "artigo.java"
 ```
 
 ### 17.	Escreva uma função que encontre todos os nomes em uma dada frase, começando com letra maiúscula, e o restante do nome em letra minúscula. (1,5)
+- Aqui a ideia de resolução ficou um pouco mais complexa.
+- Primeiramente utilizamos a função `words` que divide uma string em uma lista de palavras, usando espaços em branco como separadores.
 
 ```haskell
+ghci> words "Joao, Lucas e Pedro foram com Maria no parque."
+["Joao,","Lucas","e","Pedro","foram","com","Maria","no","parque."]
+```
 
+- Depois aplicamos um filtro para retirar caracteres que não são letras, como vírgulas e pontos.
+
+```haskell
+ghci> map (filter isAlpha) ["Joao,","Lucas","e","Pedro","foram","com","Maria","no","parque."]
+["Joao","Lucas","e","Pedro","foram","com","Maria","no","parque"]
+```
+
+- E por fim passamos um outro filtro, chamado `ehNome`, na lista de Strings para ficar apenas aqueles que são nomes, ou seja, que começam com letra Maiúsculas e todos os restantes são minúsculas.
+```haskell
+ghci> filter ehNome ["Joao","Lucas","e","Pedro","foram","com","Maria","no","parque"]
+["Joao","Lucas","Pedro","Maria"]
+```
+
+```haskell
+ehNome :: String -> Bool
+ehNome [] = False
+ehNome (x:xs) = isUpper x && all isLower xs
+
+limpa :: String -> String
+limpa = filter isAlpha
+
+encontrarNomes :: String -> [String]
+encontrarNomes s = filter ehNome (map limpa (words s))
+
+-- Execução
+ghci> encontrarNomes "Lucas, Joao e Rio"
+["Lucas","Joao","Rio"]
 ```
 
 ### 18.	Escreva uma função que quebre uma string em duas partes no ponto onde estiver uma "/" e retorne uma tupla com as duas partes. (2,0)
-- Ir fazendo composição até encontrar o simbolo '/'
-- usar a função que encontrar a posição porém para lista de Char ou seja String
+- Ir fazendo composição até encontrar o simbolo '/'.
+- Quando encontrar o símbolo retornamos uma tupla onde o primeira elemento é essa lista que estamos fazendo a composição recursivamente e o segundo elemento seja a cauda do restante da lista.
 
 ```haskell
 -- Exemplo: 
@@ -526,13 +558,60 @@ quebra "/tudo bem"
 ```
 
 ```haskell
+type TuplaDeString = (String, String)
 
+quebra :: String -> TuplaDeString
+quebra "" = ([], [])
+quebra (h:t)
+    | h /= '/' = (h : parte1, parte2)
+    | otherwise = ([], t)
+    where 
+        (parte1, parte2) = quebra t
+
+-- Execução
+ghci> quebra "oi/tudo bem ?"
+("oi","tudo bem ?")
+ghci> quebra "/tudo bem ?"
+("","tudo bem ?")
 ```
 
 ### 19.	Crie uma função que substitua uma dada palavra por outra em uma frase. Se a palavra não estiver contida na frase, deverá retornar a frase original. (1,5)
+- Aqui vamos utilizar duas ideias: A primeira é usar a função `words` apresentada no exercício 17 e seu "simétrico" `unwords` e segundo utilizar a mesma ideia de subtituir 
+somente apenas um caractere por outro usando a função `map` .
+```haskell
+map (\c -> if c == 'a' then 'b' else c).
+
+-- Execução
+ghci> map (\c -> if c == 'a' then 'b' else c) "Lucas"
+"Lucbs"
+```
+
+- Primeiramente, aplicamos a função `words` sobre a frase para transformá-la em uma lista de palavras (`[String]`), separadas por espaços.
+- Em seguida, utilizamos `map` com uma função que percorre cada palavra da lista. Para cada elemento:
+    - verificamos se a palavra é **igual** à string que desejamos **substituir** (por exemplo, `"Senna"`);
+    - se for igual, retornamos a **nova palavra** (por exemplo, `"Vettel"`);
+    - caso contrário, mantemos a **palavra original**.
+- Por fim, aplicamos a função `unwords`, que transforma a lista de palavras novamente em uma única string, inserindo **espaços** entre elas.
 
 ```haskell
 -- Exemplo: 
 subs "Senna" "Vettel" "Senna é o tricampeão de Fórmula 1 mais jovem!"
 "Vettel é o tricampeão de Fórmula 1 mais jovem!"
+```
+
+```haskell
+subs :: String -> String -> String -> String
+subs _ _ [] = []
+subs s1 s2 s =
+    unwords (map (\str -> if str == s1 then s2 else str) (words s))
+
+-- Execução
+ghci> subs "Senna" "Vettel" "Senna e o tricampeao de Formula 1 mais jovem!"
+"Vettel e o tricampeao de Formula 1 mais jovem!"
+
+-- Outra Maneira: Usando composição
+subs :: String -> String -> String -> String
+subs s1 s2 = unwords . map troca . words
+  where
+    troca str = if str == s1 then s2 else str
 ```
