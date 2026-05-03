@@ -68,7 +68,7 @@ Pensando já nos requisitos técnicos (View, Procedure, Trigger, chave automáti
 - **Resumo:** Sistema de gestão de oportunidades acadêmicas, com candidatura, acompanhamento e comunicação estruturada.
 
 ### Datas Importantes
-- [ ] 05/05: Nomes dos Grupos e o Tema do Projeto
+- [ X ] 05/05: Nomes dos Grupos e o Tema do Projeto
 - [ ] 30/05: Primeira Parte
 - [ ] 30/06 ou 02/07: Entrega Final e Apresentação
 
