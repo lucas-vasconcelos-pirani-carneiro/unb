@@ -1,0 +1,215 @@
+1. Faça o script SQL de banco de dados manualmente. É muito importante um aluno de Computação da UnB saber criar um banco de dados mesmo sem uso de ferramenta.
+create table proprietario (cpf varchar(11),
+nome varchar(50), idade int,
+data_nasc date, bairro varchar(50),
+cidade varchar(50), estado varchar(50),
+cod_proprietario int primary key);
+
+create table telefone (dono_tel int references
+proprietario(cod_proprietario),
+numero int,
+primary key(numero, dono_tel)
+);
+
+create table veiculo (placa int primary key, ano_fab date,
+cor varchar(30), chassi varchar(17),
+id_proprietario int references proprietario(cod_proprietario),
+id_modelo int references modelo(cod_modelo),
+id_categoria int references categoria(cod_categoria)
+);
+
+create table modelo (cod_modelo primary key, nome_modelo varchar(50));
+
+create table categoria (cod_categoria int primary key, nome_categoria varchar(30));
+
+create table infracao (id_veiculo int references veiculo(id_veiculo),
+id_local int references local(id_local),
+id_agente int references agente(matricula),
+velocidade_maferida int,
+data_hora datetime
+);
+
+create table local (id_veiculo int primary key,
+velocidade_perm float,
+longitude float,
+latitude float);
+
+create table agente (matricula int primary key, tempo_serv int, nome varchar(30),
+data_contratacao date);
+
+2. Depois, a partir do brModelo, solicite a criação do script SQL do banco de dados.
+CREATE TABLE Proprietario 
+( 
+ cpf CHAR NOT NULL,  
+ nome VARCHAR NOT NULL,  
+ data_nasc DATE,  
+ bairro VARCHAR,  
+ cidade VARCHAR,  
+ estado VARCHAR,  
+ cod_proprietario INT PRIMARY KEY AUTO_INCREMENT,  
+ UNIQUE (cpf)
+); 
+
+CREATE TABLE telefone 
+( 
+ telefone VARCHAR PRIMARY KEY,  
+ cod_proprietario INT PRIMARY KEY,  
+); 
+
+CREATE TABLE Veículo 
+( 
+ ano_fabricacao DATE,  
+ cor VARCHAR,  
+ placa VARCHAR NOT NULL,  
+ chassi VARCHAR NOT NULL,  
+ idProprietario INT,  
+ idModelo INT,  
+ idCategoria INT,  
+ idVeiculo INT PRIMARY KEY AUTO_INCREMENT,  
+ UNIQUE (placa,chassi)
+); 
+
+CREATE TABLE Modelo 
+( 
+ nome_modelo VARCHAR,  
+ cod_modelo INT PRIMARY KEY AUTO_INCREMENT,  
+); 
+
+CREATE TABLE Categoria 
+( 
+ nome_categoria VARCHAR,  
+ cod_categoria INT PRIMARY KEY AUTO_INCREMENT,  
+); 
+
+CREATE TABLE Infracao 
+( 
+ vel_aferida INT,  
+ idVeículo INT PRIMARY KEY,  
+ idLocal INT PRIMARY KEY,  
+ idAgente_de_Transito INT PRIMARY KEY,  
+ idTipo_Infrcao INT PRIMARY KEY,  
+ data_hora DATETIME,  
+); 
+
+CREATE TABLE Tipo_Infrcao 
+( 
+ cod_tipo_infracao INT PRIMARY KEY,  
+ valor FLOAT NOT NULL,  
+); 
+
+CREATE TABLE Local 
+( 
+ vel_permitida INT,  
+ cod_local INT PRIMARY KEY,  
+ longitude FLOAT,  
+ latitude FLOAT,  
+); 
+
+CREATE TABLE Agente_de_Transito 
+( 
+ tempo_servico INT,  
+ nome VARCHAR NOT NULL,  
+ data_contracao DATE,  
+ matricula INT PRIMARY KEY,  
+); 
+
+ALTER TABLE telefone ADD FOREIGN KEY(cod_proprietario) REFERENCES Proprietario (cod_proprietario)
+ALTER TABLE Veículo ADD FOREIGN KEY(idProprietario) REFERENCES Proprietario (idProprietario)
+ALTER TABLE Veículo ADD FOREIGN KEY(idModelo) REFERENCES Modelo (idModelo)
+ALTER TABLE Veículo ADD FOREIGN KEY(idCategoria) REFERENCES Categoria (idCategoria)
+ALTER TABLE Infracao ADD FOREIGN KEY(idVeículo) REFERENCES Veículo (idVeículo)
+ALTER TABLE Infracao ADD FOREIGN KEY(idLocal) REFERENCES Local (idLocal)
+ALTER TABLE Infracao ADD FOREIGN KEY(idAgente_de_Transito) REFERENCES Agente_de_Transito (idAgente_de_Transito)
+ALTER TABLE Infracao ADD FOREIGN KEY(idTipo_Infrcao) REFERENCES Tipo_Infrcao (idTipo_Infrcao)
+
+
+3. Depois, solicite uma ferramenta de IA para criar o script SQL de banco de dados (informe a ferramenta que foi utilizada).
+-- Tabela Proprietario
+CREATE TABLE Proprietario (
+    cod_proprietario INT PRIMARY KEY,
+    cpf CHAR(11) NOT NULL UNIQUE,
+    nome VARCHAR(100) NOT NULL,
+    data_nasc DATE,
+    bairro VARCHAR(100),
+    cidade VARCHAR(100),
+    estado VARCHAR(50)
+);
+
+-- Tabela Telefone
+CREATE TABLE telefone (
+    telefone VARCHAR(20),
+    cod_proprietario INT,
+    PRIMARY KEY (telefone, cod_proprietario),
+    FOREIGN KEY (cod_proprietario) REFERENCES Proprietario(cod_proprietario)
+);
+
+-- Tabela Modelo
+CREATE TABLE Modelo (
+    cod_modelo INT PRIMARY KEY,
+    nome_modelo VARCHAR(100) NOT NULL
+);
+
+-- Tabela Categoria
+CREATE TABLE Categoria (
+    cod_categoria INT PRIMARY KEY,
+    nome_categoria VARCHAR(100) NOT NULL
+);
+
+-- Tabela Veiculo
+CREATE TABLE Veiculo (
+    idVeiculo INT PRIMARY KEY,
+    ano_fabricacao DATE,
+    cor VARCHAR(50),
+    placa VARCHAR(10) UNIQUE,
+    chassi VARCHAR(50) UNIQUE,
+    idProprietario INT,
+    idModelo INT,
+    idCategoria INT,
+    FOREIGN KEY (idProprietario) REFERENCES Proprietario(cod_proprietario),
+    FOREIGN KEY (idModelo) REFERENCES Modelo(cod_modelo),
+    FOREIGN KEY (idCategoria) REFERENCES Categoria(cod_categoria)
+);
+
+-- Tabela Local
+CREATE TABLE Local (
+    cod_local INT PRIMARY KEY,
+    vel_permitida INT,
+    longitude FLOAT,
+    latitude FLOAT
+);
+
+-- Tabela Agente de Trânsito
+CREATE TABLE Agente_de_Transito (
+    matricula INT PRIMARY KEY,
+    nome VARCHAR(100),
+    data_contratacao DATE,
+    tempo_servico INT
+);
+
+-- Tabela Tipo_Infração
+CREATE TABLE Tipo_Infrao (
+    cod_tipo_infracao INT PRIMARY KEY,
+    valor FLOAT
+);
+
+-- Tabela Infração
+CREATE TABLE Infracao (
+    idVeiculo INT,
+    idLocal INT,
+    idAgente_de_Transito INT,
+    idTipo_Infracao INT,
+    vel_aferida INT,
+    data_hora DATETIME,
+    PRIMARY KEY (idVeiculo, idLocal, idAgente_de_Transito, idTipo_Infracao, data_hora),
+    FOREIGN KEY (idVeiculo) REFERENCES Veiculo(idVeiculo),
+    FOREIGN KEY (idLocal) REFERENCES Local(cod_local),
+    FOREIGN KEY (idAgente_de_Transito) REFERENCES Agente_de_Transito(matricula),
+    FOREIGN KEY (idTipo_Infracao) REFERENCES Tipo_Infrao(cod_tipo_infracao)
+);
+
+4. Faça uma análise comparativa entre os 3 modelos. Eles ficaram semelhantes? Teve diferença? Todos os relacionamentos foram gerados da mesma forma?
+O nosso script ficou parecido com o gerado pela IA,c ontudo ficou bastante diferente do gerado pelo brModelo que utilizou extensivamente o comando ALTER TABLE.
+
+
+
+

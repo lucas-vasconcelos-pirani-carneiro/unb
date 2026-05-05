@@ -1,0 +1,6 @@
+1) Na tabela telefone foi criada um FK cpf que corresponde a PK do Proprietário pois telefone é um atributo multivalorado.
+Na tabela Veiculo temos as FK idProprietario que corresponde ao corresponde a PK do Proprietário pois temos um relacionamento N-1, além disso temos as FK idModelo e idCategoria pela mesma justificativa.
+Na tabela infração temos a FK idVeiculo que corresponde a PK do Veiculo pois pois temos um relacionamento N-1 entre eles, além temos as FK idLocal, idAgente_de_transito e idTipo_infracao pela mesma justificativa.
+
+2) Utilizando o Claude Sonet 4.6 foram criadas a tabela telefone contendo uma FK cpf_proprietario que corresponde a PK do Proprietário pois telefone é um atributo multivalorado, e Na tabela infração temos a FK placa_veicula que corresponde a PK do Veiculo pois pois temos um relacionamento N-1 entre eles, além temos as FK local, matricula_agente e tipo_infracao. No restante das tabelas apresentou-se uma limitação pois ele não consegui criar tabelas em que os atributos eram PK e FK ao mesmo tempo ele criou essas colunas apenas como PK.
+
