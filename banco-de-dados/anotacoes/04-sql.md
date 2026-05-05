@@ -119,9 +119,98 @@ create table pessoa_projeto (
 ```
 
 ### Exemplo - Dentran
-```sql
+- Criando o Banco de Dados.
 
+```bash
+mysql> CREATE DATABASE detran;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| detran             |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
 ```
 
+- Criando as tabelas e relacionamentos.
+```sql
+-- Tabela Proprietário
+CREATE TABLE proprietario (
+	idProprietario INTEGER AUTO_INCREMENT PRIMARY KEY,
+	cpf CHAR(11) UNIQUE NOT NULL,
+	nome VARCHAR(60) NOT NULL,
+	data_nasc DATE,
+	cidade VARCHAR(30),
+	estado VARCHAR(20),
+	bairro VARCHAR(40)
+);
 
+-- Tabela Telefone
+CREATE TABLE telefone (
+	numero VARCHAR(15),
+	idProprietario INTEGER REFERENCES proprietario (idProprietario),
+	PRIMARY KEY (numero, idProprietario)
+);
+
+-- Tabela Categoria
+CREATE TABLE categoria (
+	idCategoria INTEGER AUTO_INCREMENT PRIMARY KEY,
+	nome_categoria VARCHAR(15)
+);
+
+-- Tabela Modelo
+CREATE TABLE modelo(
+	idModelo INTEGER AUTO_INCREMENT PRIMARY KEY,
+	nome_modelo VARCHAR(15)
+);
+
+-- Tabela Veículo
+CREATE TABLE veiculo (
+	idVeiculo INTEGER AUTO_INCREMENT PRIMARY KEY,
+	cor VARCHAR(15),
+	placa VARCHAR(10) UNIQUE NOT NULL,
+	chassi VARCHAR(50) UNIQUE NOT NULL,
+	ano_fabricacao DATE,
+	idProprietario INTEGER REFERENCES proprietario (idProprietario),
+	idModelo INTEGER REFERENCES modelo (idModelo),
+	idCategoria INTEGER REFERENCES categoria (idCategoria),
+);
+
+-- Tabela Tipo de Infração
+CREATE TABLE tipo_infracao (
+	idTipo_Infracao INTEGER AUTO_INCREMENT PRIMARY KEY,
+	valor DECIMAL (6,2) NOT NULL
+);
+
+-- Tabela Local
+CREATE TABLE local (
+	idLocal INTEGER AUTO_INCREMENT PRIMARY KEY,
+	vel_permitda INTEGER,
+	longitude DECIMAL (11,8) NOT NULL, -- pos_geografica POINT NOT NULL
+	latitude DECIMAL (10,8) NOT NULL,
+);
+
+-- Tabela Agente de Trânsito
+CREATE TABLE agente_transito (
+	matricula INTEGER PRIMARY KEY,
+	nome VARCHAR(60) NOT NULL,
+	data_contratacao DATE,
+);
+
+-- Tabela Infracao
+CREATE TABLE infracao (
+	data_hora DATETIME,
+	vel_aferida INTEGER,
+	idLocal INTEGER REFERENCES local (idLocal),
+	idAgente_Transito INTEGER REFERENCES agente_transito (matricula),
+	idTipo_Infracao INTEGER REFERENCES tipo_infracao (idTipo_Infracao),
+	idVeiculo INTEGER REFERENCES veiculo (idVeiculo),  
+	PRIMARY KEY (data_hora, idLocal, idAgente_Transito, idTipo_Infracao, idVeiculo)
+);
+```
 
