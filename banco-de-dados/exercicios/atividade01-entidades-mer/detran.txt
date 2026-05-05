@@ -1,0 +1,45 @@
+Veiculos
+- placa (chave)
+- chassi
+- cor_predominante
+- modelo (composto)
+	- codigo_modelo
+	- nome_modelo
+- ano_fabricacao
+- proprietario
+- categoria (composto)
+	- codigo_categoria
+	- nome_categoria
+
+Proprietario
+- cpf (chave)
+- nome
+- endereco (composto) 
+	- bairro
+	- cidade
+	- estado
+- telefone (multivalorado)
+- sexo
+- data de nascimento
+- idade (derivado)
+
+Infracao
+- tipo_infracao
+- valor
+- codigo_infracao (chave)
+- veiculo
+- data
+- hora
+- local (composto) 
+	- codigo_local
+	- posicao_geografica
+	- velocidade permitida
+- velocidade
+- agente_transito
+
+Agente de Transito
+- matricula (chave)
+- nome
+- data_contratacao
+- tempo_servico (dericado)
+
