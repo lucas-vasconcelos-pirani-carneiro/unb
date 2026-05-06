@@ -1,5 +1,6 @@
 import keygen
 import signature
+import rsa
 
 print('Geração de Chaves')
 p, q = keygen.gerarprimos()
@@ -16,6 +17,22 @@ d, _ = chavepriv
 
 print("Chave pública: ", chavepub)
 print("Chave privada: ", chavepriv)
+
+print('RSA usando OAEP')
+
+mensagem = b"Ouviram do Ipiranga as margens placidas \n De um povo heroico o brado retumbante \n E o sol da Liberdade em raios fulgidos \n Brilhou no ceu da Patria nesse instante.\n"
+
+print("Mensagem original: \n", mensagem)
+
+cifrada = rsa.cifra(chavepub, mensagem)
+print("Mensagem após criptografar com RSA: \n", cifrada)
+
+decifrada = rsa.decifra(chavepriv, cifrada)
+print("Mensagem após descriptografar com RSA: \n", decifrada)
+
+print("Mensagem recuperada: \n", decifrada)
+print("Funcionou?", mensagem == decifrada)
+
 
 """
 primos = keygen.gerarprimos()
