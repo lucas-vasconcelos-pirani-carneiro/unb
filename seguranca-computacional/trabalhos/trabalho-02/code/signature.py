@@ -1,41 +1,53 @@
 from hashlib import sha3_256
-import base64
 import rsa
+import base64
 
 def gerar_hash(mensagem):
     return sha3_256(mensagem).digest()
 
-
-def assinar(chave_privada, mensagem):
+def gerar_assinatura(chave_privada, mensagem):
     hash_msg = gerar_hash(mensagem)
-    assinatura = rsa.rsa(chave_privada, hash_msg)
+    assinatura = rsa.rsa(chave_privada,hash_msg)
+    return assinatura
+
+def verificar_assinatura(chave_publica, mensagem, assinatura):
+    hash_original = gerar_hash(mensagem)
+    hash_recebido = rsa.rsa(chave_publica, assinatura)
+
+    # Retirar zeros à esquerda
+    hash_recebido = hash_recebido[-len(hash_original):]
+
+    return hash_original == hash_recebido
+
+def formatar_documento(mensagem_cifrada,assinatura):
+    msg_b64 = base64.b64encode(mensagem_cifrada).decode()
     assinatura_b64 = base64.b64encode(assinatura).decode()
 
-    documento = (
-        "-----BEGIN SIGNED MESSAGE-----\n"
-        + mensagem.decode()
-        + "\n-----SIGNATURE-----\n"
-        + assinatura_b64
-    )
+    documento = f"""
+-----BEGIN SECURE MESSAGE-----
+
+-----CIPHERTEXT-----
+{msg_b64}
+
+-----SIGNATURE-----
+{assinatura_b64}
+
+-----END SECURE MESSAGE-----
+"""
 
     return documento
 
 def parse_documento(documento):
-    partes = documento.split("\n-----SIGNATURE-----\n")
+    partes = documento.split("-----SIGNATURE-----")
 
-    mensagem = partes[0].replace(
-        "-----BEGIN SIGNED MESSAGE-----\n",
-        ""
-    )
+    parte_msg = partes[0]
+    parte_ass = partes[1]
 
-    assinatura_b64 = partes[1]
+    msg_b64 = (parte_msg.split("-----CIPHERTEXT-----")[1].strip())
+
+    assinatura_b64 = (parte_ass.split("-----END SECURE MESSAGE-----")[0].strip())
+    
+    mensagem_cifrada = base64.b64decode(msg_b64)
     assinatura = base64.b64decode(assinatura_b64)
-    return mensagem.encode(), assinatura
 
-def verificar(chave_publica, documento):
-    mensagem, assinatura = parse_documento(documento)
-    hash_original = gerar_hash(mensagem)
-    hash_recebido = rsa.rsa(chave_publica, assinatura)
-    # Retirar zeros à esquerda
-    hash_recebido = hash_recebido[-len(hash_original):]
-    return hash_original == hash_recebido
+    return mensagem_cifrada, assinatura

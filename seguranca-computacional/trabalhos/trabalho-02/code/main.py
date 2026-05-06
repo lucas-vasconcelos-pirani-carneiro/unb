@@ -1,56 +1,70 @@
 import keygen
-import signature
 import rsa
+import signature
 
-print('Geração de Chaves')
+print("Geração de Chaves:")
 
 p, q = keygen.gerarprimos()
 
-print(f'p = {p}\nq = {q}')
+print(f"\np = {p}\n")
+print(f"q = {q}\n")
 
-print("p eh primo?", keygen.miller_rabin(p))
-print("q eh primo?", keygen.miller_rabin(q))
+print("p é primo ?", keygen.miller_rabin(p))
+print("q é primo ?", keygen.miller_rabin(q))
 
 chavepub, chavepriv = keygen.gerarchave(p, q)
 
-print("Chave pública:", chavepub)
-print("Chave privada:", chavepriv)
+print("\nChave pública:")
+print(chavepub)
+
+print("\nChave privada:")
+print(chavepriv)
 
 with open("mensagem.txt", "rb") as arquivo:
     mensagem = arquivo.read()
 
-print("\nMensagem original:\n")
+print("Mensagem Original:\n")
+
 print(mensagem.decode())
 
-# Rsa + OAEP
-
-print("RSA usando OAEP")
-
-cifrada = rsa.cifra(chavepub, mensagem)
-
-print("\nMensagem cifrada:\n")
-print(cifrada)
-
-decifrada = rsa.decifra(chavepriv, cifrada)
-
-print("\nMensagem decifrada:\n")
-print(decifrada.decode())
-
-print("\nFuncionou?", mensagem == decifrada)
-
 # Assinatura
+print("Gerando Assinatura...\n")
 
-print("\nGerando assinatura:")
+assinatura = signature.gerar_assinatura(chavepriv,mensagem)
 
-documento_assinado = signature.assinar(chavepriv,mensagem)
+print("Assinatura gerada com sucesso.")
 
-# salva documento assinado
-with open("assinado.txt", "w") as arquivo:
-    arquivo.write(documento_assinado)
+# RSA + OAEP
+print("Criptografando RSA + OAEP\n")
 
-with open("assinado.txt", "r") as arquivo:
-    documento = arquivo.read()
+try:
+    mensagem_cifrada = rsa.cifra(chavepub,mensagem)
+    print("Mensagem cifrada com sucesso.")
 
-valido = signature.verificar(chavepub,documento)
+except ValueError as erro:
+    print("\nErro:", erro)
+    exit()
 
+documento = signature.formatar_documento(mensagem_cifrada,assinatura)
+
+with open("mensagem-segura.txt", "w") as arq:
+    arq.write(documento)
+
+print("Documento salvo em mensagem-segura.txt")
+
+with open("mensagem-segura.txt", "r") as arq:
+    documento = arq.read()
+
+mensagem_cifrada, assinatura = (signature.parse_documento(documento))
+
+mensagem_recuperada = rsa.decifra(chavepriv,mensagem_cifrada)
+
+print("Mensagem Recuperada:\n")
+print(mensagem_recuperada.decode())
+
+print("Verificação da Assinatura:\n")
+valido = signature.verificar_assinatura(chavepub,mensagem_recuperada,assinatura)
 print("\nAssinatura válida?", valido)
+
+print("Verificação da Mensagem:\n")
+print("Mensagem recuperada corretamente?",mensagem == mensagem_recuperada)
