@@ -24,28 +24,28 @@ def formatar_documento(mensagem_cifrada,assinatura):
     assinatura_b64 = base64.b64encode(assinatura).decode()
 
     documento = f"""
------BEGIN SECURE MESSAGE-----
++----- Inicio da Mensagem -----+
 
------CIPHERTEXT-----
++----- Ciphertext -----+
 {msg_b64}
 
------SIGNATURE-----
++----- Assinatura -----+
 {assinatura_b64}
 
------END SECURE MESSAGE-----
++----- Fim da Mensagem -----+
 """
 
     return documento
 
 def parse_documento(documento):
-    partes = documento.split("-----SIGNATURE-----")
+    partes = documento.split("+----- Assinatura -----+")
 
     parte_msg = partes[0]
     parte_ass = partes[1]
 
-    msg_b64 = (parte_msg.split("-----CIPHERTEXT-----")[1].strip())
+    msg_b64 = (parte_msg.split("+----- Ciphertext -----+")[1].strip())
 
-    assinatura_b64 = (parte_ass.split("-----END SECURE MESSAGE-----")[0].strip())
+    assinatura_b64 = (parte_ass.split("+----- Fim da Mensagem -----+")[0].strip())
     
     mensagem_cifrada = base64.b64decode(msg_b64)
     assinatura = base64.b64decode(assinatura_b64)
