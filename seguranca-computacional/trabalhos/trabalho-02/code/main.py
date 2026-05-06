@@ -3,43 +3,54 @@ import signature
 import rsa
 
 print('Geração de Chaves')
+
 p, q = keygen.gerarprimos()
 
-print(f'p = {p}\n q = {q}')
+print(f'p = {p}\nq = {q}')
 
 print("p eh primo?", keygen.miller_rabin(p))
 print("q eh primo?", keygen.miller_rabin(q))
 
 chavepub, chavepriv = keygen.gerarchave(p, q)
 
-e, n = chavepub
-d, _ = chavepriv
+print("Chave pública:", chavepub)
+print("Chave privada:", chavepriv)
 
-print("Chave pública: ", chavepub)
-print("Chave privada: ", chavepriv)
+with open("mensagem.txt", "rb") as arquivo:
+    mensagem = arquivo.read()
 
-print('RSA usando OAEP')
+print("\nMensagem original:\n")
+print(mensagem.decode())
 
-mensagem = b"Ouviram do Ipiranga as margens placidas \n De um povo heroico o brado retumbante \n E o sol da Liberdade em raios fulgidos \n Brilhou no ceu da Patria nesse instante.\n"
+# Rsa + OAEP
 
-print("Mensagem original: \n", mensagem)
+print("RSA usando OAEP")
 
 cifrada = rsa.cifra(chavepub, mensagem)
-print("Mensagem após criptografar com RSA: \n", cifrada)
+
+print("\nMensagem cifrada:\n")
+print(cifrada)
 
 decifrada = rsa.decifra(chavepriv, cifrada)
-print("Mensagem após descriptografar com RSA: \n", decifrada)
 
-print("Mensagem recuperada: \n", decifrada)
-print("Funcionou?", mensagem == decifrada)
+print("\nMensagem decifrada:\n")
+print(decifrada.decode())
 
+print("\nFuncionou?", mensagem == decifrada)
 
-"""
-primos = keygen.gerarprimos()
-print (primos)
-chaves = keygen.gerarchave(primos[0], primos[1])
-print("\n")
-print(chaves)
+# Assinatura
 
-signature.hasher("exemplo.jpeg",chaves[1][0],chaves[1][1])
-"""
+print("\nGerando assinatura:")
+
+documento_assinado = signature.assinar(chavepriv,mensagem)
+
+# salva documento assinado
+with open("assinado.txt", "w") as arquivo:
+    arquivo.write(documento_assinado)
+
+with open("assinado.txt", "r") as arquivo:
+    documento = arquivo.read()
+
+valido = signature.verificar(chavepub,documento)
+
+print("\nAssinatura válida?", valido)
