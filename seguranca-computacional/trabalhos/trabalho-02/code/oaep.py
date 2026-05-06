@@ -44,7 +44,7 @@ def decifra_oaep(n, msg_cifrada, hash_func=sha3_256):
     idx = data_block_sem_hash.find(b'\x01')
 
     if idx == -1:
-        print("Formato OAEP inválido: separador 0x01 não encontrado")
+        raise ValueError("Formato OAEP inválido")
 
     msg = data_block_sem_hash[idx + 1:]
 
