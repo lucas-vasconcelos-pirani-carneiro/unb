@@ -373,3 +373,129 @@ WHERE telefone IS NOT NULL;
 ```
 
 ## SELECT
+- Executa uma consulta no Banco de Dados.
+
+```sql
+SELECT [DISTINCT] (*, coluna [alias])
+FROM tabela
+[WHERE condicao]
+[ORDER BY {coluna exp} [ASC|desc]];
+```
+
+- **Produto Cartesiano:** Misturar dados de tabelas diferentes.
+```sql
+SELECT *
+FROM tabela1, tabela2
+```
+
+### Exemplo
+
+FUNCIONARIO
+| matricula | nome | data_nasc | salario | codDep |
+| :-------: | :--: | :-------: | :-----: | :----: | 
+| 111 | Joana | 25/06/1991 | 12.000 | MK |
+| 222 | Pedro | 14/08/1995 | 8.000 | TI | 
+
+DEPARTAMENTO
+| codDep | Descrição |
+| :----: | :-------: | 
+|   MK   | Marketing |
+|   TI   | Tecnologia |
+
+```sql
+SELECT *
+FROM funcionario, departamento
+```
+
+FUNCIONARIO_DEPARTAMENTO
+| matricula | nome | data_nasc | salario | codDep | codDep | Descrição |
+| :-------: | :--: | :-------: | :-----: | :----: | :----: | :-------: | 
+|    111    | Joana | 25/06/1991 | 12.000 | MK |  MK   | Marketing  |
+|    111    | Joana | 25/06/1991 | 12.000 | MK |  **TI**   | **Tecnologia**  |
+|    222    | Pedro | 14/08/1995 | 8.000 | TI |   TI   | Tecnologia |
+|    222    | Pedro | 14/08/1995 | 8.000 | TI |   **MK**   | **Marketing** |
+
+- `JOIN`: Misturar os dados de tabelas diferentes de forma consisitente.
+
+```sql
+SELECT *
+FROM tabela1, tabela2
+-- O valor da coluna de uma tabela é igual ao valor da coluna de outra tabela.
+WHERE tabela1.coluna1 = tabela2.coluna2 
+
+-- Corringo o exemplo
+SELECT *
+FROM funcionario, departamento
+WHERE funcionario.codDep = departamento.codDep
+```
+
+FUNCIONARIO_DEPARTAMENTO
+| matricula | nome | data_nasc | salario | codDep | codDep | Descrição |
+| :-------: | :--: | :-------: | :-----: | :----: | :----: | :-------: | 
+|    111    | Joana | 25/06/1991 | 12.000 | MK |  MK   | Marketing  |
+|    222    | Pedro | 14/08/1995 | 8.000 | TI |   TI   | Tecnologia |
+
+
+- Existem outros tipos de `JOIN`: `INNER JOIN`, `LEFT JOIN` e `RIGHT JOIN`.
+
+```sql
+-- INNER JOIN
+SELECT *
+FROM tabela1 INNER JOIN, tabela2 ON
+tabela1.id = tabela2.id
+
+-- LEFT JOIN
+SELECT *
+FROM tabela1 LEFT JOIN, tabela2 ON
+tabela1.id = tabela2.id
+
+-- RIGHT JOIN
+SELECT *
+FROM tabela1 RIGHT JOIN, tabela2 ON
+tabela1.id = tabela2.id
+```
+
+- `GROUP BY`: Mostra dados referente a um grupo de registros.
+	- Mostra estatística para diferentes grupos;
+	- **Inclui** e **exclui** registros de grupos usando a clausura `HAVING`.
+
+```sql
+SELECT coluna
+FROM tabela1, tabela2, ...
+[WHERE condição]
+[GROUP BY expressão]
+[HAVING condição do grupo]
+[ORDER BY colunas]
+```
+
+- Funções de Grupo:
+	- `AVG`: Média.
+	- `COUNT` Contador.
+	- `MAX`: Máximo.
+	- `MIN`: Mínimo.
+
+- **Subqueries:** Escrever *queries* aninhadas para o banco de dados.
+	- Uma ***Subquery*** é um `SELECT` que contém outros SELECT's.
+	- Deve estar sempre entre **parênteses**.
+	- Deve aparecer do **lado direito** do operador.
+	- Pode ser usado na clausura `FROM`.
+
+```sql
+-- Query Principal
+SELECT lista_select
+FROM tabela
+WHERE expressão operador
+-- Subquery
+	(SELECT lista_select
+	FROM tabela)
+```
+
+> [!IMPORTANT]
+>
+> - A ***subquery*** é executada antes da query principal.
+
+## Exemplo - DML
+
+
+## Exemplo - SELECT
+
