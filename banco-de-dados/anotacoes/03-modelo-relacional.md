@@ -73,7 +73,7 @@ DEPARTAMENTO
 
 > [!WARNING]
 >
-> Uma **chave estrangeira** também pode ser **nula**, ela pode ser um campo que não estaja preenchido se a chave estrangeira for `NOT NULL`.
+> Uma **chave estrangeira** também pode ser **nula**, ela pode ser um campo que não esteja preenchido se a chave estrangeira for `NOT NULL`.
 > - Isso ocorre quando o relacionamento é **Parcial**.
 
 ## Mapeamento MER $\rightarrow$ MR
@@ -106,7 +106,7 @@ FUNCIOANRIO
     - A chave da tabela TELEFONE é composta pela **chave do funcionário** + o próprio **atributo telefone**.
     - É uma **Chave Composta**.
 - Funcionario (<u>matricula</u>, nome, rua, cidade)
-- Telefone ((<u>matFunc(</u> (PK), (<u>fone</u>), onde `MatFunc` referencia Funcionario (matricula)
+- Telefone ((<u>matFunc(</u> (PK), (<u>fone</u> (PK)), onde `MatFunc` referencia Funcionario (matricula)
 
 FUNCIOANRIO
 | matricula (PK) | nome | rua | cidade |
