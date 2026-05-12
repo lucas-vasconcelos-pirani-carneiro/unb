@@ -382,7 +382,8 @@ FROM tabela
 [ORDER BY {coluna exp} [ASC|desc]];
 ```
 
-- **Produto Cartesiano:** Misturar dados de tabelas diferentes.
+- **Produto Cartesiano:** Mistura os dados de tabelas diferentes.
+
 ```sql
 SELECT *
 FROM tabela1, tabela2
@@ -415,7 +416,7 @@ FUNCIONARIO_DEPARTAMENTO
 |    222    | Pedro | 14/08/1995 | 8.000 | TI |   TI   | Tecnologia |
 |    222    | Pedro | 14/08/1995 | 8.000 | TI |   **MK**   | **Marketing** |
 
-- `JOIN`: Misturar os dados de tabelas diferentes de forma consisitente.
+- `JOIN`: Junta os dados de tabelas diferentes de forma consisitente.
 
 ```sql
 SELECT *
@@ -423,7 +424,7 @@ FROM tabela1, tabela2
 -- O valor da coluna de uma tabela é igual ao valor da coluna de outra tabela.
 WHERE tabela1.coluna1 = tabela2.coluna2 
 
--- Corringo o exemplo
+-- Corrigindo o exemplo
 SELECT *
 FROM funcionario, departamento
 WHERE funcionario.codDep = departamento.codDep
@@ -435,24 +436,19 @@ FUNCIONARIO_DEPARTAMENTO
 |    111    | Joana | 25/06/1991 | 12.000 | MK |  MK   | Marketing  |
 |    222    | Pedro | 14/08/1995 | 8.000 | TI |   TI   | Tecnologia |
 
-
 - Existem outros tipos de `JOIN`: `INNER JOIN`, `LEFT JOIN` e `RIGHT JOIN`.
 
 ```sql
--- INNER JOIN
+-- INNER JOIN: Retorna somente os registro com valores iguais.
+-- Mesmo resultado do plano cartesiano com WHERE, porém o JOIN é implementado de forma otimizada pelo SGBD. 
 SELECT *
-FROM tabela1 INNER JOIN, tabela2 ON
-tabela1.id = tabela2.id
+FROM tabela1 INNER JOIN tabela2 
+	ON tabela1.id = tabela2.id
 
--- LEFT JOIN
+-- LEFT/RIGHT/FULL JOIN: Retorna todos os valores de um lado se tiver relação, valores iguais, traz junto.
 SELECT *
-FROM tabela1 LEFT JOIN, tabela2 ON
-tabela1.id = tabela2.id
-
--- RIGHT JOIN
-SELECT *
-FROM tabela1 RIGHT JOIN, tabela2 ON
-tabela1.id = tabela2.id
+FROM tabela1 [LEFT/RIGHT/FULL] OUTER JOIN tabela2 
+	ON tabela1.id = tabela2.id
 ```
 
 - `GROUP BY`: Mostra dados referente a um grupo de registros.
