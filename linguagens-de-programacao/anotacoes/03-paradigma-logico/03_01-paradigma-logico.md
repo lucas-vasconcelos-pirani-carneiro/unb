@@ -381,14 +381,54 @@ obtem(Msg,X) :- nl, write(Msg), read(X).
 - Átomos são **nomes textuais** usados para **identificar dados**, **predicados**, **operadores**, **módulos**, **arquivos**, **janelas**, etc. 
 - Pode ser reconhecido pelo predicado atom(X).
 - Gramática:
-    - `<átomo> ::= <átomo-alfa>|<átomo-simb>| <string><átomo-apostrofado> |<átomo-especial>`
-    - `<átomo-alfa> ::= <letra-minúscula> | <átomo-alfa><letra>| <átomo-alfa><dígito> | <átomo-alfa> ...`
+```
+<átomo> ::= <átomo-alfa>
+           | <átomo-simb>
+           | <átomo-apostrofado>
+           | <átomo-especial>
+```
 
-    - Exemplos: `a, avo, amora, a2, a_, big_32, xMax, etc.`
+- Átomo alfabético: Deve iniciar com letra **minúscula** e Pode conter letras, dígitos e `_`.
+```
+<átomo-alfa> ::= <letra-minúscula>
+                | <átomo-alfa><letra>
+                | <átomo-alfa><dígito>
+                | <átomo-alfa>_
+```
 
-    - `<átomo-simb> ::= <caracter-simb>|<atomo simb><caracter-simb>` 
-    - `<caracter-simb> ::= #|$|%|&|*|+|-|.|/|:|<|=|>|@|\|^|`| ~ `
-    - Exemplos: `&  &:   ++    <<    >>    <-- ..    *-/*`
+- Exemplos:
+```
+a
+avo
+amora
+a2
+a_
+big_32
+xMax
+```
+
+- Átomo simbólico:
+```
+<átomo-simb> ::= <caracter-simb>
+                | <átomo-simb><caracter-simb>
+```
+
+- Caracteres Permitidos:
+```
+#  $  %  &  *  +  -  .  /  :  <  =  >  @  \  ^  `  ~
+```
+
+- Exemplos: `a, avo, amora, a2, a_, big_32, xMax, etc.`
+```
+&
+&:
+++
+<<
+>>
+<--
+..
+*-/*
+```
 
 > [!NOTE]
 >
