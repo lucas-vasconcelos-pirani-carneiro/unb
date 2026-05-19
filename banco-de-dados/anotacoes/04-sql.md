@@ -389,8 +389,6 @@ SELECT *
 FROM tabela1, tabela2
 ```
 
-### Exemplo
-
 FUNCIONARIO
 | matricula | nome | data_nasc | salario | codDep |
 | :-------: | :--: | :-------: | :-----: | :----: | 
@@ -452,12 +450,13 @@ FROM tabela1 [LEFT/RIGHT/FULL] OUTER JOIN tabela2
 ```
 
 - `GROUP BY`: Mostra dados referente a um grupo de registros.
+	- Agrupa um conjunto de dados e aplica as condições nesses grupos.
 	- Mostra estatística para diferentes grupos;
 	- **Inclui** e **exclui** registros de grupos usando a clausura `HAVING`.
 
 ```sql
 SELECT coluna
-FROM tabela1, tabela2, ...
+FROM tabela
 [WHERE condição]
 [GROUP BY expressão]
 [HAVING condição do grupo]
@@ -475,6 +474,7 @@ FROM tabela1, tabela2, ...
 	- Deve estar sempre entre **parênteses**.
 	- Deve aparecer do **lado direito** do operador.
 	- Pode ser usado na clausura `FROM`.
+	- É comum a ***Subquery*** está dentro do `WHERE`.
 
 ```sql
 -- Query Principal
@@ -489,6 +489,123 @@ WHERE expressão operador
 > [!IMPORTANT]
 >
 > - A ***subquery*** é executada antes da query principal.
+
+### Exemplo: NBA
+
+```sql
+-- Nomes dos Jogadores e o Nome dos Times
+SELECT tb_pessoa.nome_pessoa, tb_time.nome_time -- SELECT nome_pessoa, nome_time pois nome_pessoa e nome_time não existem em outras ocorrências no banco de dados 
+FROM tb_pessoa, tb_time, tb_time_jogador
+WHERE tb_pessoa.id_pessoa = tb_time_jogador.id_jogador 
+AND tb_time.cod_time = tb_time_jogador.cod_time;
+
+-- Usando ALIAS
+SELECT nome_pessoa, nome_time
+FROM tb_pessoa p, tb_time t, tb_time_jogador tj
+WHERE p.id_pessoa = tj.id_jogador  
+AND t.cod_time = tj.cod_time;
+
+-- Contar quantos vezes aparecem o nome do time, ou seja, quantos jogadores cada time tem
+SELECT COUNT(nome_time), nome_time
+FROM tb_pessoa p, tb_time t, tb_time_jogador tj
+WHERE p.id_pessoa = tj.id_jogador
+AND t.cod_time = tj.cod_time
+GROUP BY nome_time;
+
+-- Quero os grupos onde o resultado é a 4
+-- Having é a condição do grupo
+SELECT COUNT(nome_time), nome_time
+FROM tb_pessoa p, tb_time t, tb_time_jogador tj
+WHERE p.id_pessoa = tj.id_jogador
+AND t.cod_time = tj.cod_time
+GROUP BY nome_time
+HAVING COUNT(nome_time) > 4;
+```
+
+## Outros Tópicos
+
+### Auto-Numeração
+- É utilizada para criar um **identificador automático** para uma determinada coluna.
+
+```sql
+CREATE TABLE especialidade (
+	id IN(11) AUTO_INCREMENT/SERIAL/SEQUENCE, -- Cada SGBD utiliza um nome
+	nome VARCHAR(20) NOT NULL,
+	PRIMARY KEY (id)
+);
+```
+
+### VIEWS (Visões)
+- São tabelas virtuais ou lógicas criadas a partir de uma tabela física, normalmente oriundas do `SELECT`.
+
+```sql
+CREATE VIEW nomeDaVisao 
+	AS SELECT ...;
+```
+
+### Stored PROCEDURES.
+- São programas que **podem ser armazenados** no SGBD, porém depende da linguagem que o SGBD vai usar.
+	- Os SGBD comercias tem suas linguagens próprias do `SQL`.
+
+```sql
+CREATE PROCEDURE proc_name
+([parameters,...])
+[BEGIN]
+	corpo_da_rotina;
+[END]
+```
+
+### TRIGGERS (Gatilhos)
+- São **objetos** do banco de dados associados a uma tabela, definidos para serem disparados automaticamente e **responderem a um evento particular**.
+	- São usados com comandos `DML`.
+	- Ex: Quando ocorrer um `UPDATE` em uma tabela o SGBD vai fazer uma função.
+- São utilizados para a **auditoria** do banco de dados.
+	- Quem mexeu na tabela ?
+	- Qual foi a mudança feita na tabela ?
+	- Quem fez uma consulta em uma tabela ?
+
+```sql
+CREATE TRIGGER 
+trigger_name trigger_time trigger_event 
+ON table_name FOR EACH ROW trigger_s 
+
+-- Exemplo
+CREATE TRIGGER exemplo_trigger AFTER
+UPDATE ON funcionario FOR EACH ROW
+BEGIN
+	IF (NEW.nome IS NOT NULL) THEN 
+		INSERT INTO Funcionario_auditoria
+			VALUES(NEW.nome, OLD.nome)
+	END IF;
+END;
+```
+
+- Depois que atualiza o funcionário para cada linha, se o novo nome não é nulo insere na tabela de auditoria o novo valor inserido para nome e o antigo valor do nome.
+
+### CURSORES
+- São objetos que armazenam um **conjunto de registros**.
+- Retornam um resultado do banco de dados, usando variáveis da linguagem de programação e depois e possível manipular aquele cursor.
+- Passos:
+	1. Declarar (`Declare`)
+	2. Abrir (`Open`)
+	3. Pegar os dados (`Fetch`).
+	4. Fechar (`Close`).
+
+```sql
+DECLARE cur1 CURSOR FOR 
+SELECT nome
+FROM funcionario;
+
+OPEN cur1;
+
+REPEAT 
+	FETCH cur1 INTO a;
+		SELECT a;
+	UNTIL film 
+END REPEAT;
+
+CLOSE cur1;
+```
 
 ## Exemplo - DML
 
