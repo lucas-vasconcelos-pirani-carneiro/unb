@@ -609,6 +609,145 @@ CLOSE cur1;
 
 ## Exemplo - DML
 
+Usando o comando `INSERT INTO`:
+
+```sql
+INSERT INTO categoria (cod_categoria, nome_categoria)
+VALUES (3, 'Bicicleta Elétrica');
+
+-- Outra forma de usar o INSERT quando não se sabe os valores da tabela
+INSERT INTO categoria
+VALUES (4, 'Bicicleta');
+```
+
+![exemplo-insert](img/04-sql/exemplo-insert.png)
+
+Usando o comando `DELETE`:
+
+```sql
+-- Se não colocar o where é deletado todos os registros da tabela
+DELETE FROM categoria
+WHERE cod_categoria = 4;
+
+-- Erro de Integridade Referencial
+DELETE FROM local
+WHERE cod_local = 1;
+/*
+ERROR:  update or delete on table "local" violates foreign key constraint "infracao_idlocal_fkey" on table "infracao"
+Key (cod_local)=(1) is still referenced from table "infracao". 
+
+SQL state: 23503
+Detail: Key (cod_local)=(1) is still referenced from table "infracao".
+*/
+```
+
+![exemplo-delete](img/04-sql/exemplo-delete.png)
+
+> [!NOTE]
+>
+> No caso de erro de **Integridade Referencial** seria preciso **primeiro apagar** o registro que faz uso do `cod_local = 1` e posteriormente apagar em sua própria tabela.
+
+Usando o comando `UPDATE`:
+
+```sql
+UPDATE categoria 
+SET nome_categoria = 'Bicicleta'
+WHERE cod_categoria = 3;
+```
+
+![exemplo-update](img/04-sql/exemplo-update.png)
 
 ## Exemplo - SELECT
 
+Vendo todas as ocorrências da tabela **veiculo** e da tabela **proprietário:**
+
+```sql
+SELECT * FROM veiculo;
+SELECT * FROM proprietario;
+```
+
+Retornando apenas os nomes dos **proprietários:**
+
+```sql
+SELECT nome 
+FROM proprietario;
+```
+
+![exemplo-select](img/04-sql/exemplo-select.png)
+
+```sql
+SELECT nome 
+FROM proprietario
+ORDER BY nome;
+```
+
+![exemplo7-select](img/04-sql/exemplo7-select.png)
+
+Retornando apenas os nomes e os cpf dos **proprietários:**
+
+```sql
+SELECT cpf, nome 
+FROM proprietario;
+```
+
+![exemplo2-select](img/04-sql/exemplo2-select.png)
+
+O nome do proprietátio e quais carros eles tem ?
+
+```sql
+-- Produto Cartesiano
+SELECT * 
+FROM proprietario, veiculo; 
+
+-- Produto Cartesiando com WHERE
+SELECT * 
+FROM proprietario AS p, veiculo AS v
+WHERE p.cod_proprietario = v.idproprietario;
+
+-- INNER JOIN
+SELECT * 
+FROM proprietario AS p 
+INNER JOIN veiculo AS v
+	ON p.cod_proprietario = v.idproprietario;
+```
+
+![exemplo3-select](img/04-sql/exemplo3-select.png)
+
+![exemplo4-select](img/04-sql/exemplo4-select.png)
+
+O nome do proprietátio e a placa do carro dele ?
+```sql
+SELECT nome, placa 
+FROM proprietario AS p, veiculo AS v
+WHERE p.cod_proprietario = v.idproprietario;
+```
+
+![exemplo5-select](img/04-sql/exemplo5-select.png)
+
+Quantos veiculos tem no banco de dados ?
+
+```sql
+SELECT COUNT(*)
+FROM veiculo; 
+```
+
+![exemplo6-select](img/04-sql/exemplo6-select.png)
+
+Quantos veiculos por cada cor ?
+
+```sql
+SELECT cor, COUNT(*)
+FROM veiculo
+GROUP BY cor;
+```
+
+![exemplo-group_by](img/04-sql/exemplo-group_by.png)
+
+```sql
+SELECT cor, COUNT(*)
+FROM veiculo
+GROUP BY cor
+HAVING COUNT(*) > 1;
+```
+
+![exemplo-having](img/04-sql/exemplo-having.png)
