@@ -73,6 +73,34 @@ WHERE t1.nreal = 'Gloria Pires'
     AND t2.nreal <> 'Gloria Pires'
 
 ORDER BY t2.nreal;
+
+-- Outra forma de fazer
+SELECT t2.nreal
+FROM (
+    SELECT f.titulo, a.nreal
+    FROM filme AS f
+    INNER JOIN filme_ator AS fa
+        ON fa.codfilme = f.codfilme
+    INNER JOIN ator AS a
+        ON a.codator = fa.codator
+) AS t1
+
+INNER JOIN (
+
+    SELECT f.titulo, a.nreal
+    FROM filme AS f
+    INNER JOIN filme_ator AS fa
+        ON fa.codfilme = f.codfilme
+    INNER JOIN ator AS a
+        ON a.codator = fa.codator
+) AS t2
+
+ON t2.titulo = t1.titulo
+
+WHERE t1.nreal = 'Gloria Pires'
+    AND t2.nreal <> 'Gloria Pires'
+
+ORDER BY t2.nreal;
 ```
 
 ![exercicio05](image.png)
