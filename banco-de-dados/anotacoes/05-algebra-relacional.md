@@ -261,6 +261,10 @@ Junção (**JOIN**) entre tabelas.
 
 $$R \bowtie_{ <\text{condição}> } S$$
 
+O resultado desta operação é construído da seguinte forma:
+- Tome o produto de R e S
+- Selecione do produto apenas as tuplas que **satisfazem a condição C**.
+
 Essa operação é semelhante a fazer $\sigma_{\text{codição}}(R \times S)$.
 
 #### Exemplo
@@ -304,11 +308,118 @@ b) $\text{DEPT\_LOCS} \leftarrow \text{DEPARTAMENTO} * \text{DEPT\_LOCALIZACOES}
 | Pesquisa           | 5        | 333445555 | 1988-05-22     | Sugarland   |
 | Pesquisa           | 5        | 333445555 | 1988-05-22     | Houston     |
 
+### Inner and Outer Join
 
+$U$
+| A | B | C |
+| - | - | - |
+| 1 | 2 | 3 |
+| 4 | 5 | 6 |
+| 7 | 8 | 9 |
 
+$V$
+| B | C | D  |
+| - | - | -- |
+| 2 | 3 | 10 |
+| 2 | 3 | 11 |
+| 6 | 7 | 12 |
 
+$U \bowtie V$
+| A | B | C | D  |
+| - | - | - | -- |
+| 1 | 2 | 3 | 10 |
+| 1 | 2 | 3 | 11 |
 
+Left Outer Join - $U \; \overset{\scriptstyle\circ}{\bowtie}_L \; V$
+| A | B | C | D  |
+| - | - | - | -- |
+| 1 | 2 | 3 | 10 |
+| 1 | 2 | 3 | 11 |
+| 4 | 5 | 6 |    |
+| 7 | 8 | 9 |    |
 
+Full Outer Join - $U \; \overset{\scriptstyle\circ}{\bowtie} \; V$
+| A | B | C | D  |
+| - | - | - | -- |
+| 1 | 2 | 3 | 10 |
+| 1 | 2 | 3 | 11 |
+| 4 | 5 | 6 |    |
+| 7 | 8 | 9 |    |
+|   | 6 | 7 | 12 |
 
-## Exercício -
-Colocar aqui o exemplo da sala de aula que usa o tom hanks.
+Right Outer Join - $U \; \overset{\scriptstyle\circ}{\bowtie}_R \; V$
+| A | B | C | D  |
+| - | - | - | -- |
+| 1 | 2 | 3 | 10 |
+| 1 | 2 | 3 | 11 |
+|   | 6 | 7 | 12 |
+
+### Agregação
+A agregação é usada para **resumir ou agregar** os valores em uma coluna de uma relação.
+
+Alguns tipos de operações de agregação são:
+- SUM
+- AVR
+- MIN
+- MAX
+- COUNT
+
+#### Exemplo
+| A | B |
+| - | - |
+| 1 | 2 |
+| 3 | 4 |
+| 1 | 2 |
+| 1 | 2 |
+
+1. SUM (B) = 2 + 4 + 2 + 2 = 10
+2. AVR (A) = (1 + 3 + 1 + 1)/4 = 1.5
+3. MIN (A) = 1
+4. MAX (B) = 4
+5. COUNT (A) = 4
+
+### Agrupamento
+Considere as linhas de uma tabela em grupos, correspondentes ao **valor de uma ou mais outras colunas**, e agregamos apenas dentro de cada grupo.
+
+$$ \gamma_L(\text{Relação}) $$
+
+#### Exemplo
+$ \gamma_{\text{startName, MIN(year)}}(\text{StarsIn}) $
+
+StarsIn
+| title               | year | starName              |
+| :-----------------: | :--: | :-------------------: |
+| Catch Me If You Can | 2002 | Leonardo DiCaprio     |
+| The Aviator         | 2004 | Leonardo DiCaprio     |
+| Dallas Buyers Club  | 2013 | Mathew McConaughey    |
+| Cast Away           | 2000 | Tom Hanks             |
+| Catch Me If You Can | 2002 | Tom Hanks             |
+| The Terminal        | 2004 | Tom Hanks             |
+
+### Árvore
+Quais são os títulos e os anos do filmes feitos pela Fox que tem menos de 100 minutos de duração ?
+
+```text
+                 π title,year
+                       |
+                       ∩
+                    /     \
+      σ length ≥ 100     σ studioName = 'Fox'
+              |                     |
+            Movies                Movies
+```
+
+## Exercício
+Qual o nome do outro ator que fez o mesmo filme que o Tom Hanks?
+
+StarsIn
+| title               | year | starName              |
+| :-----------------: | :--: | :-------------------: |
+| Catch Me If You Can | 2002 | Leonardo DiCaprio     |
+| The Aviator         | 2004 | Leonardo DiCaprio     |
+| Dallas Buyers Club  | 2013 | Mathew McConaughey    |
+| Cast Away           | 2000 | Tom Hanks             |
+| Catch Me If You Can | 2002 | Tom Hanks             |
+| The Terminal        | 2004 | Tom Hanks             |
+
+$ \pi_{outros.starName}( \sigma_{\text{th.starName = 'Tom Hanks' AND th.title = outros.title AND outros.starName <> 'Tom Hanks'}}(\rho_{\text{th}}(\text{StarsIn}) \times \rho_{\text{outros}} ( \text{StarsIn} ) ) ) $
