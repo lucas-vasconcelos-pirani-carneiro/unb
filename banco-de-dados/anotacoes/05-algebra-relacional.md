@@ -330,7 +330,7 @@ $U \bowtie V$
 | 1 | 2 | 3 | 10 |
 | 1 | 2 | 3 | 11 |
 
-Left Outer Join - $U \; \overset{\scriptstyle\circ}{\bowtie}_L \; V$
+Left Outer Join - $U \ \overset{\scriptstyle\circ}{\bowtie}_L \ V$
 | A | B | C | D  |
 | - | - | - | -- |
 | 1 | 2 | 3 | 10 |
@@ -338,7 +338,7 @@ Left Outer Join - $U \; \overset{\scriptstyle\circ}{\bowtie}_L \; V$
 | 4 | 5 | 6 |    |
 | 7 | 8 | 9 |    |
 
-Full Outer Join - $U \; \overset{\scriptstyle\circ}{\bowtie} \; V$
+Full Outer Join - $U \ \overset{\scriptstyle\circ}{\bowtie} \ V$
 | A | B | C | D  |
 | - | - | - | -- |
 | 1 | 2 | 3 | 10 |
@@ -347,7 +347,7 @@ Full Outer Join - $U \; \overset{\scriptstyle\circ}{\bowtie} \; V$
 | 7 | 8 | 9 |    |
 |   | 6 | 7 | 12 |
 
-Right Outer Join - $U \; \overset{\scriptstyle\circ}{\bowtie}_R \; V$
+Right Outer Join - $U \ \overset{\scriptstyle\circ}{\bowtie}_R \ V$
 | A | B | C | D  |
 | - | - | - | -- |
 | 1 | 2 | 3 | 10 |
@@ -381,10 +381,10 @@ Alguns tipos de operações de agregação são:
 ### Agrupamento
 Considere as linhas de uma tabela em grupos, correspondentes ao **valor de uma ou mais outras colunas**, e agregamos apenas dentro de cada grupo.
 
-$$ \gamma_L(\text{Relação}) $$
+$$\gamma_L(\text{Relação})$$
 
 #### Exemplo
-$ \gamma_{\text{startName, MIN(year)}}(\text{StarsIn}) $
+$\gamma_{\text{startName, MIN(year)}}(\text{StarsIn})$
 
 StarsIn
 | title               | year | starName              |
@@ -422,4 +422,4 @@ StarsIn
 | Catch Me If You Can | 2002 | Tom Hanks             |
 | The Terminal        | 2004 | Tom Hanks             |
 
-$ \pi_{outros.starName}( \sigma_{\text{th.starName = 'Tom Hanks' AND th.title = outros.title AND outros.starName <> 'Tom Hanks'}}(\rho_{\text{th}}(\text{StarsIn}) \times \rho_{\text{outros}} ( \text{StarsIn} ) ) ) $
+$\pi_{outros.starName}( \sigma_{\text{th.starName = 'Tom Hanks' AND th.title = outros.title AND outros.starName <> 'Tom Hanks'}}(\rho_{\text{th}}(\text{StarsIn}) \times \rho_{\text{outros}} ( \text{StarsIn} ) ) )$
