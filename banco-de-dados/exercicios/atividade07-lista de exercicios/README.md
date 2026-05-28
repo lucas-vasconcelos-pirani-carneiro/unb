@@ -78,6 +78,9 @@ INNER JOIN curso AS c
 	ON c.cod_curso = cl.cod_curso;
 ```
 
+$T1 \leftarrow (\rho_{l}(\text{Livro}) \times \rho_{cl}(\text{Curso-Livro}) \times \rho_{c}(\text{Curso}))$  
+$\pi_{\text{l.titulo, c.descricao}}(\sigma_{\text{cl.isbn = l.isbn AND cl.cod-curso = c.cod-curso}}(T1)) $
+
 b) Para toda ocorrência de pré-requisito de cursos apresente, código e descrição de curso, como também código e descrição de curso pré-requisito.
 
 ```sql
@@ -90,3 +93,6 @@ INNER JOIN curso AS c1
 INNER JOIN curso AS c2
 	ON p.cod_curso_pre = c2.cod_curso;
 ```
+
+$T1 \leftarrow (\rho_{p}(\text{Prereq}) \times \rho_{c_1}(\text{Curso}) \times \rho_{c_2}(\text{Curso}))$   
+$\pi_{\text{c1.descricao,c2.descricao}}(\sigma_{\text{p.cod-curso = c1.cod-curso AND p.cod-curso-pre = c2.cod-curso}}(T1)) $
