@@ -268,7 +268,7 @@ O resultado desta operação é construído da seguinte forma:
 Essa operação é semelhante a fazer $\sigma_{\text{codição}}(R \times S)$.
 
 #### Exemplo
-$\text{DEPT\_GET} \leftarrow \text{DEPARTAMENTO} \bowtie_{\text{ GERSSN } = \text{ SSN}} \text{EMPREGADO}$
+$\text{DEPT-GET} \leftarrow \text{DEPARTAMENTO} \bowtie_{\text{ GERSSN } = \text{ SSN}} \text{EMPREGADO}$
 
 | DEPT_GER | DNOME | DNUMERO | GERSSN | ... | PNOME | MINICIAL | UNOME | SSN | ... |
 | :------: | :---: | :-----: | :----: | :-: | :---: | :------: | :---: | :-: | :-: |
