@@ -259,7 +259,7 @@ $$\rho_{<\text{Novo nome da relação}>}(\text{Relação})$$
 ### Operação de Junção
 Junção (**JOIN**) entre tabelas.
 
-$$R \bowtie_{ <\text{condição}> } S$$
+$$R \bowtie_{<\text{condição}>} S$$
 
 O resultado desta operação é construído da seguinte forma:
 - Tome o produto de R e S
@@ -287,26 +287,26 @@ Operação de Junção natural utilizada para fazer relacionamento entre relaç�
 $$R * S$$
 
 #### Exemplos
-a) $\text{DEPT\_PROJ} \leftarrow \text{PROJETO} * \text{DEPT}$
+a) $\text{DEPT-PROJ} \leftarrow \text{PROJETO} * \text{DEPT}$
 
-| PNAME            | PNUMBER | PLOCALIZACAO | DNUM | DNOME          | GERSSN   | GERDATAINICIO |
-|------------------|----------|---------------|------|----------------|-----------|----------------|
-| ProdutoX         | 1        | Bellaire      | 5    | Research       | 333445555 | 1988-05-22     |
-| ProdutoY         | 2        | Sugarland     | 5    | Research       | 333445555 | 1988-05-22     |
-| ProdutoZ         | 3        | Houston       | 5    | Research       | 333445555 | 1988-05-22     |
-| Automacao        | 10       | Stafford      | 4    | Administration | 987654321 | 1995-01-01     |
-| Reorganizacao    | 20       | Houston       | 1    | Headquarters   | 888665555 | 1981-06-19     |
-| Novosbeneficios  | 30       | Stafford      | 4    | Administration | 987654321 | 1995-01-01     |
+| PNAME            |  PNUMBER | PLOCALIZACAO | DNUM | DNOME          | GERSSN    | GERDATAINICIO  |
+| :--------------: | :------: | :----------: | :--: | :------------: | :------:  | :------------: |
+| ProdutoX         | 1        | Bellaire     | 5    | Research       | 333445555 | 1988-05-22     |
+| ProdutoY         | 2        | Sugarland    | 5    | Research       | 333445555 | 1988-05-22     |
+| ProdutoZ         | 3        | Houston      | 5    | Research       | 333445555 | 1988-05-22     |
+| Automacao        | 10       | Stafford     | 4    | Administration | 987654321 | 1995-01-01     |
+| Reorganizacao    | 20       | Houston      | 1    | Headquarters   | 888665555 | 1981-06-19     |
+| Novosbeneficios  | 30       | Stafford     | 4    | Administration | 987654321 | 1995-01-01     |
 
-b) $\text{DEPT\_LOCS} \leftarrow \text{DEPARTAMENTO} * \text{DEPT\_LOCALIZACOES}$
+b) $\text{DEPT-LOCS} \leftarrow \text{DEPARTAMENTO} * \text{DEPT-LOCALIZACOES}$
 
-| DNOME              | DNUMERO | GERSSN   | GERDATAINICIO | LOCALIZACAO |
-|--------------------|----------|-----------|----------------|-------------|
-| Sede Administrativa| 1        | 888665555 | 1981-06-19     | Houston     |
-| Administracao      | 4        | 987654321 | 1995-01-01     | Stafford    |
-| Pesquisa           | 5        | 333445555 | 1988-05-22     | Bellaire    |
-| Pesquisa           | 5        | 333445555 | 1988-05-22     | Sugarland   |
-| Pesquisa           | 5        | 333445555 | 1988-05-22     | Houston     |
+| DNOME              | DNUMERO |  GERSSN   | GERDATAINICIO  | LOCALIZACAO |
+| :----------------: | :------:| :-------: | :------------: | :---------: |
+| Sede Administrativa| 1       | 888665555 | 1981-06-19     | Houston     |
+| Administracao      | 4       | 987654321 | 1995-01-01     | Stafford    |
+| Pesquisa           | 5       | 333445555 | 1988-05-22     | Bellaire    |
+| Pesquisa           | 5       | 333445555 | 1988-05-22     | Sugarland   |
+| Pesquisa           | 5       | 333445555 | 1988-05-22     | Houston     |
 
 ### Inner and Outer Join
 
