@@ -330,7 +330,9 @@ $U \bowtie V$
 | 1 | 2 | 3 | 10 |
 | 1 | 2 | 3 | 11 |
 
-Left Outer Join - $U \ \overset{\scriptstyle\circ}{\bowtie}_L \ V$
+Left Outer Join - $U \ \overset{\scriptstyle\circ}{\bowtie}_L \ V$ ou $U \ ]\bowtie  V$
+- Traz tudo do lado esquerdo se tiver igualdade do lado direito preenche.
+
 | A | B | C | D  |
 | - | - | - | -- |
 | 1 | 2 | 3 | 10 |
@@ -347,12 +349,18 @@ Full Outer Join - $U \ \overset{\scriptstyle\circ}{\bowtie} \ V$
 | 7 | 8 | 9 |    |
 |   | 6 | 7 | 12 |
 
-Right Outer Join - $U \ \overset{\scriptstyle\circ}{\bowtie}_R \ V$
+Right Outer Join - $U \ \overset{\scriptstyle\circ}{\bowtie}_R \ V$ ou $U \bowtie[ \ V$
+- Traz tudo do lado direito se tiver igualdade do lado esquerdo preenche.
+
 | A | B | C | D  |
 | - | - | - | -- |
 | 1 | 2 | 3 | 10 |
 | 1 | 2 | 3 | 11 |
 |   | 6 | 7 | 12 |
+
+> [!NOTE]
+>
+> A diferença no natural join e do inner join é que o `natural join` já **elimina as duplicatas**. 
 
 ### Agregação
 A agregação é usada para **resumir ou agregar** os valores em uma coluna de uma relação.
@@ -383,7 +391,7 @@ Considere as linhas de uma tabela em grupos, correspondentes ao **valor de uma o
 
 $$\gamma_L(\text{Relação})$$
 
-#### Exemplo
+#### Exemplo - Menor ano que os atores trabalharam
 $\gamma_{\text{startName, MIN(year)}}(\text{StarsIn})$
 
 StarsIn
@@ -395,6 +403,13 @@ StarsIn
 | Cast Away           | 2000 | Tom Hanks             |
 | Catch Me If You Can | 2002 | Tom Hanks             |
 | The Terminal        | 2004 | Tom Hanks             |
+
+RESULTADO
+|  starName             | year |
+| :-------------------: | :--: |
+| Leonardo DiCaprio     | 2002 |
+| Mathew McConaughey    | 2013 |
+| Tom Hanks             | 2000 |
 
 ### Árvore
 Quais são os títulos e os anos do filmes feitos pela Fox que tem menos de 100 minutos de duração ?
