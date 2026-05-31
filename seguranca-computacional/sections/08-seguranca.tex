@@ -867,3 +867,197 @@
         \centering
         \includegraphics[width=0.4\textwidth]{img/tls-handshake-0RTT.png}
     \end{figure}  
+
+\subsection{Segurança na camada de rede: IPsec}
+
+    \textbf{IP Sec}
+
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Fornece criptografia em \underline{nível de datagrama}, autenticação e integridade 
+        tanto para tráfego de usuário quanto para tráfego de controle.
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Exemplo: BGP, DNS messages. 
+        \end{itemize}
+        
+        \item \textbf{transport mode:} \textbf{Apenas a carga útil (\textit{payload})} do \underline{datagrama} é criptografado e autenticado.
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.5\textwidth]{img/transport-mode}
+            \end{figure} 
+        
+            \item \textbf{tunnel mode:} O \underline{datagrama} inteiro é criptografado e autenticado. 
+            \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+                \item O \underline{datagrama} criptografado é encapsulado em um novo \underline{datagrama} com um novo cabeçalho IP e 
+                encaminhado para o destino por meio de um túnel.
+            \end{itemize}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.4\textwidth]{img/tunnel-mode}
+            \end{figure}  
+    \end{itemize}
+
+    \textbf{Dois protocolos do IPsec}
+
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Authentication Header (AH) protocol [RFC 4302]
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Fornece autenticação de origem e integridade de dados, mas não confidencialidade.
+        \end{itemize}
+        \item Encapsulation Security Protocol (ESP) [RFC 4303]
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Fornece autenticação de origem, integridade de dados e confidencialidade.
+            \item É amplamente mais utilizado que o AH.
+        \end{itemize}
+    \end{itemize}
+     
+    \textbf{Security Associations (SAs)}
+
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Antes do envio de dados, uma \textbf{associação de segurança} (SA) é estabelecida da entidade remetente para a entidade receptora (direcional).
+        \item Por fim, a entidade receptora mantém informações de estado sobre a SA.
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Lembre-se: os endpoints TCP também mantêm informações de estado.
+            \item O IP não \underline{possui conexão}; o \underline{IPsec} é orientado a conexão!
+        \end{itemize}
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.5\textwidth]{img/sa}
+        \end{figure} 
+
+        \item R1 armazena para SA:
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Identificador de 32 bits: \textit{Security Parameter Index} (SPI)
+            \item Interface SA de origem (200.168.1.100)
+            \item Interface SA de destino (193.68.2.23)
+            \item Tipo de criptografia usado
+            \item Chave de criptografia
+            \item Tipo de verificação de integridade usada
+            \item Chave de autenticação
+        \end{itemize}
+    \end{itemize}
+     
+    \textbf{Datagrama IPsec}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.6\textwidth]{img/datagrama-ipsec}
+    \end{figure} 
+
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item ESP trailer: Preenchimento para cifras de bloco.
+        \item ESP header:
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item SPI, para que a entidade receptora saiba o que fazer.
+            \item Número de sequência, para impedir ataques de repetição.
+        \end{itemize}
+        \item MAC no campo de \underline{autenticação} ESP criado com chave secreta compartilhada.
+    \end{itemize}
+
+    \textbf{ESP tunnel mode: Ações}
+
+    at R1:
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Anexa o trailer ESP ao \underline{datagrama} original (que inclui os campos de cabeçalho originais!).
+        \item Criptografa o resultado usando o algoritmo e a chave especificados pela SA.
+        \item Anexa o cabeçalho ESP ao início desta quantidade criptografada.
+        \item Cria um MAC de autenticação usando o algoritmo e a chave especificados na SA.
+        \item Anexa o MAC que forma a carga útil.
+        \item Cria um novo cabeçalho IP, novos campos de cabeçalho IP e endereços para o ponto de extremidade do túnel.
+    \end{itemize}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.65\textwidth]{img/acoes-tunnel-mode}
+    \end{figure} 
+
+    \textbf{IPsec - Número de Sequência}
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Para uma nova SA, o remetente inicializa o número de sequência com 0.
+        \item A cada envio de datagrama na SA:
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item O remetente incrementa o contador de número de sequência.
+            \item Insere um valor no campo de número de sequência.
+        \end{itemize}
+        \item Objetivo:
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Impedir que um atacante intercepte e reproduza um pacote.
+            \item O recebimento de pacotes IP autenticados duplicados pode interromper o serviço.
+        \end{itemize}
+        \item Método:
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item O destino verifica se há duplicatas.
+            \item Não rastreia todos os pacotes recebidos; em vez disso, usa uma janela.
+        \end{itemize}
+    \end{itemize}
+
+    \textbf{IPSec - Banco de Dados Seguros}
+
+    Security Policy Database (SPD)
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Política: Para um determinado datagrama, o remetente precisa saber se deve usar IPsec.
+        \item Política armazenada no \textbf{banco de dados de políticas de segurança (SPD)}.
+        \item Precisa saber qual SA usar:
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Pode usar: endereço IP de origem e destino; número do protocolo.
+        \end{itemize}
+        \item SPD: ``o que'' fazer
+    \end{itemize}    
+
+    Security Assoc. Database (SAD)
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item O endpoint armazena o estado da SA no \textbf{banco de dados de associação de segurança} (SAD).
+        \item Ao enviar um \underline{datagrama IPsec}, o R1 acessa o SAD para determinar como processá-lo.
+        \item Quando o \underline{datagrama IPsec} chega ao R2, o R2 examina o SPI no datagrama IPsec, indexa o 
+        SAD com o SPI e processa o datagrama de acordo.
+        \item SAD: ``como'' fazer
+    \end{itemize}  
+
+    \textbf{IKE: Troca de Chaves da Internet}
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item \textbf{Exemplos anteriores:} Estabelecimento manual de SAs IPsec em endpoints IPsec:
+        
+        \begin{verbatim}
+        SPI: 12345
+        Source IP: 200.168.1.100
+        Dest IP: 193.68.2.23
+        Protocol: ESP
+        Encryption algorithm: 3DES-cbc
+        HMAC algorithm: MD5
+        Encryption key: 0x7aeaca…
+        HMAC key: 0xc0291f…
+        \end{verbatim}
+
+        \item A criação manual de chaves é impraticável para VPNs com centenas de endpoints.
+        \item Em vez disso, use \textbf{\underline{IPsec IKE} (Internet Key Exchange)}.
+    \end{itemize}     
+
+    \textbf{IKE: PSK e PKI}
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item Autenticação (provar sua identidade) com segredo pré-compartilhado (PSK) ou com PKI (chaves pública/privada e certificados).
+        \item \textbf{PSK:} Ambas as partes começam com uma chave secreta.
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Executam o protocolo IKE para autenticar uma à outra e gerar as SAs IPsec (uma em cada direção), 
+            incluindo criptografia e chaves de autenticação.
+        \end{itemize}
+        \item \textbf{PKI:} Ambas as partes começam com um par de chaves pública/privada e um certificado.
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Executam o protocolo IKE para autenticar uma à outra e obter as SAs IPsec (uma em cada direção).
+            \item Similar ao handshake no SSL.
+        \end{itemize}
+    \end{itemize} 
+
+    \textbf{Fases do IKE}
+    \begin{itemize}[left=0.5cm, align=left, nosep]
+        \item \textbf{Fase 1:} Estabelecer SA IKE bidirecional
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item Nota: SA IKE diferente de SA \underline{IPsec}.
+            \item Também conhecida como associação de segurança ISAKMP.
+        \end{itemize}
+        \item \textbf{Fase 2:} O ISAKMP é usado para negociar com segurança um par de SAs IPsec.
+        \item A Fase 1 possui dois modos: \underline{modo agressivo} e \underline{modo principal}.
+        \begin{itemize}[left=0.5cm, nosep, label=$\hookrightarrow$]
+            \item \textbf{Modo agressivo:} utiliza menos mensagens.
+            \item \textbf{Modo principal:} oferece proteção de identidade e é mais flexível.
+        \end{itemize}
+    \end{itemize} 
