@@ -103,7 +103,7 @@ WHERE t1.nreal = 'Gloria Pires'
 ORDER BY t2.nreal;
 ```
 
-![exercicio05](image.png)
+![exercicio05](exercicio05.png)
 
 ### 6) Liste o nome de todos os atores que começam com a letra A. Utilize o comando LIKE.
 
