@@ -1,152 +1,139 @@
-# Projeto
+# Sistema de Aluguel de Equipamentos — Go
 
-Utilizar a Linguagem GoLang para fazer um projeto não muito complexo, porém esse projeto deve estar alinhado com as premissas da linguagem.
+Projeto acadêmico: demonstrar as premissas da linguagem Go por meio de um sistema backend real, comparando implementações com e sem controle de concorrência.
 
-## 1º Seminário
-A linguagem de programação **Go (Golang)** surgiu no Google em 2007 como uma resposta direta a desafios de **infraestrutura** e **desenvolvimento** enfrentados pela empresa.
+## Critérios de Avaliação
 
-### Por que a linguagem surgiu?
-O surgimento do Go foi motivado pela necessidade de resolver obstáculos complexos que as linguagens existentes não conseguiam suprir **de forma eficiente** dentro da **escala do Google**. Os principais motivos foram:
+Lista baseada na planilha disponibilizada pelo professor.
 
-- **Desempenho e Hardware:** A empresa precisava de uma solução que aproveitasse melhor o desempenho de **processadores multinúcleos** e sistemas **divididos em redes**.
+- [ ] Linguagem: histórico e versão
+- [ ] Projeto: premissas, usuário característico, domínio de aplicação
+- [ ] Construtores (com exemplos)
+- [ ] Legibilidade (fatores, exemplos e conclusão)
+- [ ] Capacidade de escrita (fatores, exemplos e conclusão)
+- [ ] Confiabilidade (fatores, exemplos e conclusão)
+- [ ] Custo e outros critérios de avaliação da linguagem
+- [ ] Projeto: apresentação e explicação do código
+- [ ] Site / Demonstração
+- [ ] Vídeo (duração: ~10 min)
 
-- **Complexidade de Linguagens Existentes:** Tentativas de resolver esses problemas com linguagens como C++, Java e Python falharam em agrupar todos os atributos desejados em uma única linguagem, como **tipagem estática**, **segurança**, **eficiência** e **facilidade de sintaxe**.
+## Linguagem - Histórico e Versão
 
-- **Lentidão no Desenvolvimento:** O processo de fusão e compilação de sistemas massivos com milhares de engenheiros era muito demorado; o Go foi projetado para ter **tempos de compilação extremamente rápidos**.
+A linguagem Go foi criada em 2007 por Robert Griesemer, Rob Pike e Ken
+Thompson como projeto interno do Google, tornou-se open source em novembro
+de 2009 e atingiu estabilidade com o lançamento da versão 1.0 em março de
+2012. A versão atual é a **1.24**, lançada em 2025. <sources>[1]</sources>
 
-- **Escalabilidade e Concorrência:** O avanço da computação em nuvem exigia uma linguagem explicitamente voltada para o desenvolvimento de **aplicações concorrentes altamente confiáveis**.
+A motivação central foi resolver limitações práticas em escala: ciclos de
+compilação lentos com C++, dificuldade de escrever software concorrente seguro
+e a ausência de uma linguagem que reunisse tipagem estática, simplicidade de
+sintaxe e uso eficiente de hardware multinúcleo. Em 2008 o projeto deixou de
+ser atividade paralela e passou a ser desenvolvido em tempo integral dentro da
+empresa.
 
-### Como a linguagem surgiu?
-O desenvolvimento seguiu uma trajetória de projeto interno para se tornar uma das linguagens mais populares do mundo:
+Go se inspira na sintaxe do C, mas incorpora coleta de lixo automática,
+inferência de tipos e um modelo de concorrência baseado em goroutines e
+channels, derivado do formalismo CSP (Communicating Sequential Processes).
 
-- **Criadores:** Foi concebida como um projeto interno por **Robert Griessemer**, **Rob Pike** e **Ken Thompson**.
+## Linguagem - Domínios de Aplicação
 
-- **Evolução Interna:** Em 2008, o Go deixou de ser um projeto de meio período para se tornar um projeto de período integral dentro do Google.
+Go se consolidou em domínios onde concorrência, desempenho e simplicidade de
+implantação são requisitos centrais.
 
-- **Lançamento como Código Aberto:** Em novembro de 2009, a linguagem tornou-se ***Open Source***, permitindo que desenvolvedores de fora do Google começassem a adotá-la a partir de 2010.
+Em **serviços de nuvem e rede** a linguagem tem sua maior presença: Docker e
+Kubernetes são escritos em Go, e empresas como Dropbox migraram infraestrutura
+crítica de Python para Go buscando ganhos de desempenho. É a escolha dominante
+para microserviços e arquiteturas serverless.
 
-- **Inspiração e Recursos:** Trata-se de uma linguagem inspirada no `C`, mas que incorpora recursos avançados como **coleta de lixo (*garbage collection*)**, abstração para estruturas de dados e um modelo de **concorrência intuitivo** baseado em *goroutines* e *channels*.
+No desenvolvimento de **CLIs**, o diferencial é o binário único e
+autossuficiente gerado pelo compilador, sem runtime externo a instalar.
+Ferramentas como Hugo e as CLIs do GitHub e da Stripe foram construídas nesse
+modelo.
 
-- **Estabilidade:** A primeira versão oficial (v1) foi lançada em 2012, estabelecendo uma base estável para adoção comercial em larga escala.
+Em **DevOps e SRE**, ferramentas como Prometheus (monitoramento) e Terraform
+(infraestrutura como código) são referências construídas em Go, evidenciando a
+adoção pela comunidade de operações.
 
-### Domínios de Aplicação
-Os principais domínios de aplicação da linguagem Go, conforme as fontes, são:
+Go também aparece em bancos de dados (CockroachDB), bioinformática e
+**backends web**, com suporte nativo a HTTP/2 e integrações com MySQL, MongoDB
+e Elasticsearch. Empresas como Medium, Netflix, Uber e Riot Games figuram
+entre os adotantes.
 
-#### 1. Serviços de Nuvem e Rede (Cloud & Network Services)
-Este é um dos domínios mais fortes do Go devido ao seu suporte **nativo à concorrência** e ao uso eficiente de processadores multinúcleo.
+## Linguagem - Usuários Característicos
+O perfil típico de usuário Go, chamado de *gopher*, é o de engenheiro que lida com sistemas distribuídos, alta carga ou infraestrutura de
+nuvem. Os grupos mais representativos são engenheiros de sistemas em larga
+escala, equipes de DevOps e SRE, desenvolvedores de microserviços e APIs, e
+desenvolvedores de CLIs que precisam de binários portáteis sem dependências.
 
-- **Aplicações:** É amplamente utilizada para construir **microserviços**, arquiteturas ***serverless*** e sistemas de computação em nuvem escaláveis.
+Entre as empresas usuárias estão Google, Microsoft, Docker, Cloudflare,
+PayPal, American Express, Netflix, Uber, Riot Games e Wildlife Studios.
 
-- **Exemplos Reais:** Ferramentas fundamentais da infraestrutura moderna de nuvem, como `Docker` e `Kubernetes`, são escritas em Go. Empresas como `Dropbox` migraram grande parte de sua infraestrutura crítica de Python para Go visando **melhor desempenho**.
+## Linguagem - Premissas e Diretivas
 
-#### 2. Interfaces de Linha de Comando (CLIs)
-Desenvolvedores preferem Go para criar ferramentas de terminal pela sua portabilidade e velocidade de execução.
+**Concorrência como cidadã de primeira classe.** O mantra central é: *"não
+comunique compartilhando memória; compartilhe memória comunicando"*.
+Goroutines são extremamente leves (cerca de 2 KB de stack inicial, contra
+megabytes de uma thread de SO), permitindo que milhares rodem simultaneamente.
+Channels são o mecanismo preferido de coordenação — intrinsecamente
+thread-safe e mais fáceis de compor do que locks explícitos.
 
-- **Vantagens:** O Go compila para um **binário único autossuficiente**, o que facilita a distribuição e instalação em qualquer sistema sem a necessidade de bibliotecas externas.
+**Simplicidade acima de expressividade.** Go deliberadamente omite herança,
+sobrecarga de operadores e generics complexos (generics foram adicionados
+apenas na v1.18) para manter o código legível por qualquer membro da equipe.
 
-- **Ferramentas:** Bibliotecas como `Cobra` e `Viper` são comumente usadas para criar CLIs elegantes e poderosas. Exemplos incluem ferramentas do GitHub, `Stripe` e o gerador de sites estáticos `Hugo`.
+**Binário único e implantação trivial.** O compilador empacota todas as
+dependências em um executável estático, eliminando problemas de versionamento
+de runtime em produção.
 
-#### 3. Desenvolvimento Web
-O Go foi desenhado para permitir o desenvolvimento rápido de aplicações web seguras e escaláveis.
+**Garbage collection de baixa latência.** O GC opera com pausas entre 10 e
+100 microssegundos, tornando Go viável para sistemas de tempo quase-real.
 
-- **Recursos:** Possui um servidor web nativo performante e sua própria biblioteca de *templates*. 
-    - Suporta as tecnologias mais recentes como HTTP/2 e bancos de dados modernos (MySQL, MongoDB, Elasticsearch).
+**Tipagem estática com inferência.** O operador `:=` permite inferência de
+tipos sem abrir mão das garantias da tipagem estática.
 
-- **Uso:** Empresas como `Medium` e `The Economist` utilizam Go para alimentar seus serviços de backend e fornecer conteúdo de forma flexível e eficiente.
+## Construtores
 
-#### 4. DevOps e Engenharia de Confiabilidade de Sites (SRE)
-O Go é ideal para equipes de DevOps que buscam automatizar tarefas e melhorar processos de integração e entrega contínua (CI/CD).
+> Em desenvolvimento.
 
-- **Aplicações:** Utilizado desde pequenos scripts de automação até serviços complexos de gerenciamento de *rollout*.
+## Legibilidade
 
-- **Exemplos:** Ferramentas de monitoramento como `Prometheus` e sistemas de provisionamento de infraestrutura como `Terraform` são construídos em Go.
+> Em desenvolvimento.
 
-#### 5. Outros Domínios Específicos
+## Capacidade de Escrita
 
-- **Bioinformática e Processamento de Dados:** Utilizado para tarefas de processamento massivo de dados e machine learning em empresas como a `GRAIL`.
+> Em desenvolvimento.
 
-- **Bancos de Dados:** O Go foi a escolha para construir bancos de dados modernos como o `CockroachDB`, devido aos seus benefícios de desempenho e baixa barreira de entrada.
+## Confiabilidade
 
-- **Aplicações Desktop:** Através de frameworks como o `Fyne`, é possível construir interfaces gráficas de usuário (GUI) para desktop de forma simples.
+> Em desenvolvimento.
 
-### Usuários Característicos
-Os usuários característicos da linguagem Go (também conhecidos como ***"gophers"***
-) abrangem desde desenvolvedores individuais até grandes equipes de engenharia em corporações globais. A linguagem é amplamente adotada em cenários que exigem alta performance, escalabilidade e facilidade de manutenção. Os perfis de usuários mais comuns incluem:
+## Custo e Outros Critérios de Avaliação da Linguagem
 
-#### 1. Engenheiros de Sistemas em Larga Escala
-`Go` é uma boa escolha de equipes que desenvolvem produtos e serviços que operam em **escala global** pois esses usuários buscam **eficiência** para lidar com milhares de linhas de código e processos de compilação rápidos.
+> Em desenvolvimento.
 
-#### 2. Equipes de DevOps e Engenharia de Confiabilidade de Sites (SRE)
-Engenheiros de SRE utilizam a linguagem para transformar scripts simples de **"uso único"** em ferramentas complexas de gerenciamento de ***rollout*** e automação de implantação em nuvem.
+## Projeto
 
-#### 3. Desenvolvedores de Serviços de Nuvem e Redes
-Este grupo utiliza `Go` para construir arquiteturas de **microserviços** e sistemas distribuídos. A linguagem é preferida por esses usuários devido ao seu **suporte nativo à concorrência**, permitindo a coordenação eficiente de recursos compartilhados e alto desempenho em processadores multinúcleo.
+O projeto é um sistema backend de gerenciamento de aluguel e agendamento de
+equipamentos, acessado por múltiplos usuários simultaneamente via requisições
+HTTP.
 
-#### 4. Desenvolvedores de Ferramentas de Linha de Comando (CLI)
-Muitos desenvolvedores preferem Go para criar CLIs devido à sua **portabilidade** e velocidade de inicialização imediata. O fato de o Go compilar para um único binário autossuficiente (sem dependências externas) torna a instalação e atualização dessas ferramentas trivial para os usuários finais.
+**Domínio:** Backend web, onde a linguagem já demonstrou maturidade em produção em empresas como Medium e Uber.
 
-#### 5. Desenvolvedores Web (Backend)
-Usuários que precisam desenvolver rapidamente aplicações web seguras e **escaláveis** utilizam Go pelo seu servidor web nativo performante e suporte a tecnologias modernas como HTTP/2 e diversos bancos de dados (MySQL, MongoDB, ...).
+**Usuário característico:** Equipes ou plataformas que precisam de um serviço
+de reservas confiável sob carga simultânea, onde dois usuários não podem
+alugar a mesma unidade no mesmo horário.
 
-#### Empresas que são Usuários Característicos:
+**Alinhamento com as premissas:** o problema central, múltiplos usuários
+acessando o mesmo recurso ao mesmo tempo, é exatamente o cenário para o qual
+Go foi projetado. O sistema será implementado em duas versões: uma sem
+controle de concorrência, que evidenciará race conditions (o estoque pode
+ficar negativo), e outra utilizando goroutines, mutex e channels, demonstrando
+o modelo CSP na prática. A comparação de performance entre as duas versões sob
+carga será feita com ferramentas de load testing.
 
-- **Tecnologia e Infraestrutura:** Google, Microsoft, IBM, Facebook, GitHub, Cloudflare, Docker, Dropbox e MongoDB.
-- **Serviços Financeiros e E-commerce:** PayPal, American Express, Capital One, MercadoLibre, Monzo e Curve.
-- **Mídia e Entretenimento:** Netflix, YouTube, Twitch, Medium, The Economist e New York Times.
-- **Serviços e Mobilidade:** Uber, SIXT, Stripe e Trivago.
-- **Jogos:** Riot Games e Wildlife Studios.
+## Referências
 
-### Premissas e Diretivas
-As premissas e diretivas da linguagem Go baseiam-se na busca por um equilíbrio entre **eficiência de execução**, **velocidade de compilação** e **simplicidade de programação**. Abaixo estão as principais premissas e diretivas que guiam a linguagem:
-
-#### 1. Filosofia de Concorrência (Modelo CSP)
-Uma das premissas fundamentais do Go é o suporte nativo à concorrência através do modelo **Communicating Sequential Processes (CSP)**.
-
-- **Mantra Principal:** A diretiva central da linguagem é: **"Não comunique compartilhando memória; em vez disso, compartilhe memória comunicando"**.
-
-- **Goroutines como Recurso Livre:** `Go` incentiva o uso de ***goroutines***, tratando-as como recursos extremamente leves e "gratuitos" (chegando a ser 10 vezes mais baratas em recursos do que threads de Python), permitindo que desenvolvedores foquem no problema e não no gerenciamento complexo de threads.
-
-- **Channels para Composição:** O uso de canais (*channels*) é a diretiva preferida para coordenar a entrada e saída entre subsistemas, pois eles são intrinsecamente seguros para uso concorrente e mais fáceis de compor do que travas de memória (locks). 
-
-#### 2. Simplicidade e Engenharia de Software
-Go foi construída com foco em **bons princípios de engenharia de software** e na redução do "atrito" no desenvolvimento.
-
-- **Sintaxe Enxuta e Limpa:** A linguagem favorece a legibilidade, evitando recursos complexos que tornam o código difícil de manter.
-
-- **Binário Único e Autossuficiente:** Uma premissa de distribuição é que o Go compila o código em um **binário único**, que inclui todas as bibliotecas e módulos necessários, permitindo que o programa rode em qualquer sistema sem exigir ranhuras de **tempo de execução** (*runtimes*) ou dependências externas.
-
-- **Pacote Padrão Completo:** Os desenvolvedores do Go acreditam que a biblioteca padrão deve ser robusta o suficiente para eliminar a necessidade frequente de dependências de terceiros.
-
-#### 3. Gerenciamento Automático e Desempenho
-A linguagem assume a responsabilidade por tarefas complexas que costumam causar bugs em outras linguagens.
-
-- **Garbage Collection de Baixa Latência:** A premissa é que o desenvolvedor não deve se preocupar com a gestão manual de memória. 
-    - O coletor de lixo do Go é otimizado para pausas curtíssimas (entre 10 e 100 microssegundos), minimizando o impacto no desempenho de sistemas de tempo real.
-
-- **Tipagem Estática Sem Verbocidade:** Embora seja **estaticamente tipada** para garantir segurança em larga escala, Go utiliza **inferência de tipos** (como o operador `:=`) para manter a escrita ágil.
-
-- **Velocidade de Compilação:** Uma diretiva de design crítica foi garantir que sistemas massivos, com milhares de engenheiros e linhas de código, pudessem ser compilados de forma extremamente rápida, evitando gargalos no processo de desenvolvimento.
-
-#### 4. Abordagem Orientada a Objetos
-Go adota uma premissa distinta para a organização de código:
-
-- **Estruturas em vez de Classes:** Go não possui classes, objetos ou hierarquia de tipos (herança) tradicional.
-
-- **Composição e Métodos:** A diretiva de design utiliza `Structs` (tipos definidos pelo usuário) e métodos para permitir um estilo de programação orientado a objetos que favorece a composição sobre a herança.
-
-### Referências
-- https://go.dev/
-- https://cbt.ifsp.edu.br/images/Documentos/2021/CTII/CTII418_Go.pdf
-- COX-BUDAY, Katherine. Concurrency in Go: Tools and Techniques for Developers. Sebastopol: O'Reilly Media, 2017.
-- DOXSEY, Caleb. Introducing Go: Build Reliable, Scalable Programs. Sebastopol: O'Reilly Media, 2016.
-
-### Ideia do Projeto
-Nosso projeto será um sistema backend, desenvolvido em Go, para gerenciar o aluguel e agendamento de equipamentos, acessado por múltiplos usuários via web. 
-
-#### Justificativa
-A escolha da linguagem Go se justifica porque ela foi projetada para serviços de backend e nuvem, com suporte nativo à concorrência por meio de goroutines e channels, o que facilita o tratamento de muitas requisições simultâneas com boa performance e uso eficiente de recursos. 
-Além disso, Go gera um binário único e autossuficiente, simplificando a implantação do sistema em diferentes servidores ou ambientes, sem dependências complexas. 
-A sintaxe enxuta, a tipagem estática e a biblioteca padrão robusta contribuem para um código mais simples de manter e menos propenso a erros, o que é adequado para um projeto que pode evoluir e ser mantido por diferentes equipes ao longo do tempo.
-
-## 2º Seminário
-
+- Go official website: https://go.dev/
+- CTII418- Linguagem Go (IFSP): https://cbt.ifsp.edu.br/images/Documentos/2021/CTII/CTII418_Go.pdf
+- COX-BUDAY, Katherine. *Concurrency in Go*. O'Reilly Media, 2017.
+- DOXSEY, Caleb. *Introducing Go*. O'Reilly Media, 2016.
