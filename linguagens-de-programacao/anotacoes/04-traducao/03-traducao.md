@@ -289,3 +289,127 @@ begin
         Error  /* falta '(' */   
 end;
 ```
+
+## Modelagem Semântica
+O manual de uma LP precisa definir o **significado de cada construção**, isolada e em conjunto com outras.
+
+- **Sintaxe:** Gramática formal 
+- **Semântica:** Linguagem natural e exemplos, o que dá margem a mal entendidos devido a ambiguidades de significado.
+- **Método:** Definição precisa, concisa e legível da semântica.
+
+O problema da semântica tem sido objeto de estudos, mas um método satisfatório para **definir a semântica** de uma LP ainda não foi encontrado.
+
+Exemplos de Métodos Propostos:
+- **Modelos Gramaticais:** Agregam extensões (semânticas) a uma gramática formal.
+- **Modelos Imperativos ou Operacionais:** Descrevem a semântica através de autômato complexo representando o computador virtual onde a LP é executada.
+- **Modelos aplicativos:** Abordagem do paradigma funcional para descrição semântica.
+- **Modelos axiomáticos:** Estende o cálculo de predicados para incluir programas.
+- **Modelos de especificação:** Relacionamento entre as funções que constituem o programa.
+
+### Modelos Gramaticais
+- Uma das primeiras tentativas de criação de modelos formais para a semântica. 
+- **Consiste em adicionar extensões às BNF que definem a LP, baseado na extração de informações semânticas da árvore de parse.**
+- Gramática de atributos (Knuth, 68) é uma forma de extrair informações adicionais a partir da árvore de parse.
+- A ideia é associar uma **função (atributo)** a **cada nó da árvore de parse** do programa, representando o conteúdo semântico do nó.
+
+### Gramática de Atributos
+- **Semântica Estática:**
+    - Regras se relacionam apenas indiretamente com o significado dos programas durante a execução.
+    - Durante a compilação se pode verificar se tais regras foram atendidas ou não.
+    - Elas relacionam com as formas legais dos programas mas não podem ser descritas por uma **BNF**.
+        - Regras de tipificação (checagem de tipos)
+        - Variáveis devem ser declaradas antes de serem referenciadas
+        - Identificador seguindo o end de procedimento Ada deve coincidir com o nome do procedimento.
+
+- A gramática de atributos é criada pela adição de funções (*atributos*) a cada regra na gramática BNF.
+
+$$X_0 \rightarrow X_1 \ldots X_n$$
+
+- **Herança de Atributo:** Atributo herdado é uma função que relaciona valores de não-terminais na árvore com valores de não-terminais representados em nós (ancestrais) mais próximos da raiz:
+
+$$ H(X_i) = f ( A(X_0), \ldots, A(X_{i-1}) ) , i = 1, \ldots, n$$
+
+- **Atributo Sintetizado:** Relaciona não-terminais na esquerda com valores de não-terminais na direita em uma regra. 
+    - Os atributos são sintetizados a partir das informações mais distantes da raiz (filhos) e passados na direção da raiz.
+
+$$ s(X_0) = f( A(X_1), \ldots, A(X_n)) $$
+
+#### Exemplos de Gramáticas Atributos
+- Gramática simples para expressão aritmética:
+
+$$E \rightarrow T \mid E + T \qquad T \rightarrow P \mid TP \qquad P \rightarrow I \mid (E)$$
+
+- A semântica dessa LP é definida pelas seguintes funções que produzem o valor de qualquer expressão gerada por essa gramática:
+
+| Produção | Atributo sintetizado |
+| :--------: | :-----------------: |
+| $$E \rightarrow T$$ | $$valor(E) = valor(T)$$ |
+| $$E \rightarrow E + T$$ | $$valor(E_1) = valor(E_2) + valor(T)$$ |
+| $$T \rightarrow P$$ | $$valor(T) = valor(P)$$ |
+| $$T \rightarrow T \times P$$ | $$valor(T_1) = valor(T_2) \times valor(P)$$ |
+| $$P \rightarrow I$$ | $$valor(P) = \text{valor do número } I$$ |
+| $$P \rightarrow (E)$$ | $$valor(P) = valor(E)$$ |
+
+![exemplo-arvore-de-atributos](../img/04-traducao/exemplo-arvore-de-atributos.png)
+
+Gramática de atributos pode ser utilizada para passar informação semântica para estruturas sintáticas, facilitando o processo de analise e geração de código.
+- Informação de declaração pode ser coletada em produções de declarações e 
+passadas para a geração de código em e.a. 
+
+| Produção | Atributo sintetizado |
+|-----------|---------------------|
+| `<dcl> ::= <decl><dcl>` | `decl_set(dcl1) = decl_id(decl) ∪ decl_set(dcl2)` |
+| `<dcl> ::= <decl>` | `decl_set(dcl) = decl_id(decl)` |
+| `<decl> ::= declare x` | `decl_id(decl) = x` |
+| `<decl> ::= declare y` | `decl_id(decl) = y` |
+| `<decl> ::= declare z` | `decl_id(decl) = z` |
+
+Se tem apenas atributos sintetizados, eles podem ser avaliados durante a 
+geração da árvore de parse. Este é o caso do `YetAnotherCompilerCompiler`.
+
+### Modelo Imperativo ou Operacional
+Computador virtual descrito como um autômato complexo: 
+- Estados correspondem aos estados do programa em tempo de execução (valores das variáveis, código executável e estruturas de housekeeping definidas pelo sistema). 
+- Operações que alteram os estados do autômato: Descritas de forma 
+formal (correspondem a execução de instruções). 
+- Parte da definição descreve como o programa é traduzido para um 
+estado inicial do autômato. 
+- A partir desse estado  inicial, o autômato se move de estado para 
+estado, segundo suas operações, até chegar ao estado final.  
+
+VDL tem enfoque operacional. Estende a árvore de parse para incorporar um interpretador. 
+- Estado = árvore de pgm + árvore de dados na máquina. 
+- Cada instrução move de um estado para outro.
+
+### Modelo Aplicativo
+- Tenta construir (hierarquicamente) a definição da função que o programa, codificado em uma certa LP, executa.
+- Cada operação, primitiva ou definida pelo usuário, representa uma função matemática. 
+- As estruturas de controle de sequência são usadas para compor essas funções em sequências maiores, representadas no texto do programa por comandos e expressões. 
+- Loops são tratados como funções recursivas, construídas a partir dos componentes do corpo do loop.
+- Por último, é derivado um modelo funcional do programa inteiro.
+- O método da Semântica Denotacional de Scott e Strachey e o da Semântica Funcional de Mills são exemplos desse enfoque.
+
+### Modelo Axiomático
+- Define a semântica de cada construção sintática na LP como um **axioma** ou **regra de inferência** do cálculo de predicados:
+    - Usada para deduzir o efeito de execução da construção sintática.
+- Para entender o programa inteiro, usa-se os axiomas e regras de inferências como em provas matemáticas.
+    - Supondo que as variáveis de entrada obedecem a certas restrições, os axiomas e regras de inferências são usados para achar restrições atendidas pelos valores de outras variáveis após a execução de cada comando no programa.
+    - Com esse procedimento pode-se eventualmente provar que os valores de saída representam funções apropriadas calculadas a partir dos valores de entrada.
+- Um exemplo desse método é a Semântica Axiomática de Hoare.
+
+### Modelos de Especificação
+- Descreve o relacionamento entre as várias funções que implementam o programa.
+- A implementação é correta (do ponto de vista da especificação) se quaisquer duas funções do programa, obedecem o relacionamento estabelecido para elas.
+- Tipos algébricos de dados são uma implementação formal.
+    - Na construção de um programa que implementa a pilha P, **push** e **pop** são operações inversas.  
+    - Um axioma que pode ser estabelecido é: `pop(push(P,x)) = P`, e x por efeito colateral. 
+    - Qualquer implementação de pilha que preserve esta propriedade (entre outras) é uma implementação correta. 
+
+### Conclusão
+- Definição semântica formal: parte da especificação de uma LP ?
+    - PL/I: Inclui especificação VDL da semântica dos comandos
+    - Ada: Inclui semântica denotacional
+- Nenhum modelo semântico provou ser útil para implementadores e usuários simultaneamente.
+    - **Modelo Imperativo (*operacional*):** Descrição da VM é útil para o implementador mas muito detalhada e sem valor para o usuário.  
+    - **Modelo Aplicativo (*funcional*, *denotacional*):** São complexos e sem muita utilidade para implementador e usuário.
+    - **Modelo Axiomático:** Pode ser entendido pelo usuário, mas a complexidade aumenta se aplicada a definição de toda LP inteira. Sem utilidade para o implementador.
