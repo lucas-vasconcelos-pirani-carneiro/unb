@@ -6,11 +6,10 @@ Entrega Final
     - Lucas Vasconcelos Pirani Carneiro (251031785)
 
 - Vídeo: https://youtu.be/321UOqc3ybA
-(máximo de 10 minutos) contendo a análise da linguagem de programação utilizada no desenvolvimento do projeto, segundo os critérios de avaliação de uma LP, e a 
-descrição do projeto do grupo.
 
 - Wiki: https://gabrielbismarck.github.io/GoMaker/
 
-URL da Wiki do projeto
-
-- Descrição das atividades que cada membro do grupo executou.
+As atividades do grupo foram distribuídas da seguinte forma: 
+- Gabriel Bismarck: Implementação e testes do módulo de busca, incluindo a integração com o cliente de consulta; 
+- Lucas Vasconcelos: Desenvolvimento do pipeline de indexação, preparação e normalização dos dados; 
+- Maria Luiza: Implementação da busca e da busca distribuída, abrangendo coordenação entre nós e balanceamento de consultas.
