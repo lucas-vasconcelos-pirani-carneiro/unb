@@ -9,8 +9,8 @@ Entrega Final
 (máximo de 10 minutos) contendo a análise da linguagem de programação utilizada no desenvolvimento do projeto, segundo os critérios de avaliação de uma LP, e a 
 descrição do projeto do grupo.
 
-- Wiki: 
-- URL da Wiki do projeto
-    
+- Wiki: https://gabrielbismarck.github.io/GoMaker/
+
+URL da Wiki do projeto
 
 - Descrição das atividades que cada membro do grupo executou.
