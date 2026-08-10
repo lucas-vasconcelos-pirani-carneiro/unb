@@ -7,6 +7,8 @@
 linguagens-de-programacao//
 ├── 📂 anotacoes/
 ├── 📂 materiais-aula/
+├── 📂 projeto/
+├── 📂 provas-antigas/
 ├── 📄 README.md
 └── 📄 plano-de-ensino.pdf
 ```
