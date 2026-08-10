@@ -8,9 +8,9 @@ engenharia-de-software/
 ├── 📂 anotacoes/
 ├── 📂 questionarios/
 ├── 📂 trabalho/
-├── 📄 README.md
 ├── 📄 link-ferramentas.txt
 ├── 📄 lista-de-exercios.pdf
 ├── 📄 plano-de-ensino.pdf
+├── 📄 README.md
 └── 📄 slides.pdf
 ```
