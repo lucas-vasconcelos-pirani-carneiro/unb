@@ -8,9 +8,10 @@ seguranca-computacional/
 ├── 📂 anotacoes/
 ├── 📂 img/
 ├── 📂 output/
+├── 📂 sections/
+├── 📂 seminario/
 ├── 📂 slides/
 ├── 📂 trabalhos/
-├── 📂 seminario/
 ├── 📄 Makefile
 ├── 📄 README.md
 ├── 📄 main.tex
