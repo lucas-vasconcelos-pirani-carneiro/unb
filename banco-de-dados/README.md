@@ -7,7 +7,10 @@
 banco-de-dados/
 ├── 📂 anotacoes/
 ├── 📂 exercicios/
+├── 📂 projeto/
+├── 📂 seminario/
 ├── 📂 slides/
+├── 📂 testes/
 ├── 📄 README.md
 └── 📄 plano-de-ensino.pdf
 ```
