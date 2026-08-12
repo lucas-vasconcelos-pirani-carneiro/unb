@@ -6,6 +6,10 @@
 ```plaintext
 organizacao-e-arquitetura-de-computadores/
 ├── 📂 anotacoes/
+├── 📂 projeto/
+├── 📂 slides/
+├── 📂 testes/
+├── 📂 trabalhos/
 ├── 📄 README.md
 └── 📄 plano-de-ensino.pdf
 ```
