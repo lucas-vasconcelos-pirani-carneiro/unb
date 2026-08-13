@@ -143,7 +143,7 @@ Processadores em celulares:
 ![processadores-celular](img/01-introducao/processadores-celular.png)
 
 ### Decimal x Binário
-Diferenciando potências decimais de potências binárias
+Diferenciando potências **decimais/base 10** de potências **binárias/base 2**
 
 | Decimal term | Abbreviation | Value | Binary term | Abbreviation | Value | % Larger |
 | ------------ | ------------ | ----: | ----------- | ------------ | ----: | -------: |
@@ -188,14 +188,15 @@ Nosso foco principal: **O processador**, **caminho de dados** e **controle**.
 - Lógica combinatória, circuitos aritméticos, portas lógicas 
 - Lógica booleana, 1s e 0s 
 - Transistores usados para construir portas lógicas (CMOS/TTL) 
--  Física dos semicondutores 
--  Propriedades dos átomos e moléculas 
--  Mecânica quântica
+- Física dos semicondutores 
+- Propriedades dos átomos e moléculas 
+- Mecânica quântica
 
 ### Arquitetura do Conjunto de Instruções (ISA)
 Uma abstração muito importante 
-- **Interface** entre o hardware e o software de baixo nível  
-- Padroniza instruções, padrões de bits de linguagem de máquina, etc. 
+- **Interface** entre o <u>hardware</u> e o <u>software</u> de baixo nível  
+- Padroniza instruções, padrões de bits de linguagem de máquina, etc.
+    - Define o que o processador pode fazer  
 - **Vantagem:** Permite diferentes implementações de uma arquitetura  
 - **Desvantagem:** Algumas vezes impede o uso de inovações
 
@@ -209,6 +210,8 @@ ISAs modernas:
 - ARM 
 - HP PA-RISC e outras
 
+![tipos-processadores](img/01-introducao/tipos-processadores.png)
+
 ### Arquitetura x Organização x Implementação
 ![arq-org-imp](img/01-introducao/arq-org-imp.png)
 
@@ -216,16 +219,16 @@ ISAs modernas:
 No início do século 17 iniciou-se a automação de tarefas com máquinas, com resultados utilizados até hoje!
 
 ### Máquina de Pascal
-- Fazia soma e subtração em decimal mecanicamente. 
+- Fazia **soma** e **subtração** em <u>decimal</u> mecanicamente. 
 - Mais tarde no mesmo século foram adicionadas multiplicação e divisão à máquina. 
-- Cartões perfurados codificados com instruções para a máquina vieram da indústria de tecelagem.
+- **Cartões perfurados** codificados com instruções para a máquina vieram da indústria de tecelagem.
 
 ![maq-pascal](img/01-introducao/maq-pascal.png)
 
 ### A Calculadora de Babbage
 Um dos grandes sucessos e fracassos no caminho do desenvolvimento de computadores.  
 
-Uma calculadora mecânica automática que nunca funcionou. A Analytical Engine foi a 3a máquina de calcular projetada por Babbage e a que mais contribuiu para o desenvolvimento da computação.
+Uma calculadora mecânica automática que nunca funcionou. A Analytical Engine foi a 3ª máquina de calcular projetada por Babbage e a que mais contribuiu para o desenvolvimento da computação.
 
 Charles Babbage não conseguiu solucionar problemas mecânicos tentando construir sua máquina.  
 - A máquina de Babbage ficou num sonho. Era muito complexa para os profissionais da época.
@@ -250,6 +253,25 @@ O projeto de Babbage teria um conjunto de instruções bem simples, limitado a o
 > A ideia de Babbage sobre a estruturação de informação dentro de um dispositivo foi utilizada, finalmente com algum sucesso, no início do século 20.
 
 ### Konrad Zuse: O primeiro computador
+- **1935–1938 - Z1:** Konrad Zuse constrói a Z1, considerado o primeiro computador do mundo controlado por programa.
+  - Apesar de alguns problemas de engenharia mecânica, possuía os elementos básicos das máquinas modernas.
+  - Utilizava o **sistema binário**.
+  - Apresentava a separação entre **armazenamento e controle**, característica padrão dos computadores modernos.
+  - O pedido de patente de Zuse de 1936 (Z23139/GMD Nr. 005/021) também sugere uma **arquitetura de von Neumann**, posteriormente reformulada em 1945.
+  - A arquitetura previa que **programas e dados pudessem ser modificados e armazenados na memória**.
+
+- **1941 - Z3:** Zuse conclui a Z3, considerada o primeiro computador **programável e plenamente funcional** do mundo.
+
+- **1945 - Plankalkül:** Zuse descreve a **Plankalkül**, considerada a primeira linguagem de programação de alto nível.
+  - A linguagem continha diversos recursos que posteriormente se tornariam comuns nas linguagens de programação modernas.
+  - A **FORTRAN** surgiria quase uma década depois.
+  - Zuse também utilizou a Plankalkül para projetar o **primeiro programa de xadrez** do mundo.
+
+- **1946 - Zuse-Ingenieurbüro Hopferau:** Zuse funda a primeira **startup de computadores** do mundo.
+  - A empresa foi denominada **Zuse-Ingenieurbüro Hopferau**.
+  - O capital de risco foi obtido por meio da **ETH Zürich** e de uma opção da **IBM** sobre as patentes de Zuse.
+
+![zuse](img/01-introducao/zuse.png)
 
 ### MARK I
 
@@ -272,15 +294,17 @@ As instruções também eram armazenadas num formato diferente dos dados.
 
 A técnica de armazenamento de dados e instruções separadamente tornou-se conhecida como Arquitetura Harvard.
 
+![mark1](img/01-introducao/mark1.png)
+
 ### O Mark I de Manchester - The Baby Machine
 - Construído entre 1946 e 1948 na Universidade de Manchester - UK 
 - **Memória digital**  
 - Arquitetura: 
-    - palavras com 32 bit de comprimento; 
-    - endereçagem simples; 
-    - cálculo aritmético binário em série; 
-    - uma memória RAM com 32 words, extensível até 8.192 words; 
-    - uma velocidade de cálculo de 1,2 ms por instrução;
+    - Palavras com 32 bit de comprimento; 
+    - Endereçamento simples; 
+    - Cálculo aritmético binário em série; 
+    - Uma memória RAM com 32 words, extensível até 8.192 words; 
+    - Uma velocidade de cálculo de 1,2 ms por instrução;
 
 ### Evolução Tecnológica: a Válvula
 - 1906: Invenção da Válvula Termiônica.
@@ -295,14 +319,18 @@ No início dos anos 40 este computador foi desenvolvido na Universidade da Penns
 Calculator.
 
 Podia fazer 5000 adições por segundo ou 357 multiplicações por segundo. 
+- Capacicade de processamento.
 
-Era programado por cartões perfurados e podia ler dois números por segundo.
+Era programado por **cartões perfurados** e podia ler dois números por segundo.
+- Velocidade de IO, entrada e saída.
 
 O ENIAC, construído na Segunda Guerra Mundial, foi o primeiro computador de finalidade geral 
 - Usado para calcular tabelas de disparo de artilharia 
 - 24 metros de comprimento por 2,5 metros de altura e dezenas de centímetros de profundidade 
 - Cada um dos 20 registradores de 10 dígitos tinha 60 centímetros de comprimento 
 - Usava 18.000 válvulas
+
+![eniac](img/01-introducao/eniac.png)
 
 ### A arquitetura von Neumann
 Em  meados dos anos 40, ***John Von Neumann*** mostrou que as instruções poderiam ser representadas na mesma linguagem utilizada para os dados.
@@ -315,6 +343,9 @@ Num típico sistema von Neumann, **instruções e dados** estão inseridos junto
 - Instruções são apenas números, não podendo ser distinguidas dos dados.
 
 A arquitetura von Neumann e o conceito de **programa armazenado** tornou-se padrão  para os sistemas computacionais.
+- As instruções são direcionadas/vem de uma a partir de uma parte especifica em memória.
+    - PC: Program Couter
+- É possível sobrescrever instruções.
 
 Combinar instruções e dados na mesma memória traz algumas **vantagens**: 
 - **Uso eficiente da memória:** Um único bloco (grande) de memória ao invés de dois menores. 
@@ -335,6 +366,8 @@ válvula.
 
 Geravam muito menos calor que as válvulas e eram muito, muito mais rápidos (as distâncias eram muito menores): podiam suportar até 100.000 chaveamentos por segundo.
 
+![comp-val-transitor](img/01-introducao/comp-val-transitor.png)
+
 ### Revolução da Eletrônica
 - Válvulas 
 - Transistores 
@@ -342,7 +375,7 @@ Geravam muito menos calor que as válvulas e eram muito, muito mais rápidos (as
 - LSI 
 - VLSI
 
-![comp-val-transitor](img/01-introducao/comp-val-transitor.png)
+![revolucao-eletronica](img/01-introducao/revolucao-eletronica.png)
 
 Conceitos de organização, paralelismo e hierarquia de memória são os mesmos de mainframes das décadas de 60 e 70 a diferença está na tecnologia.
 - 1970: poucos milhares de transistores num chip 
@@ -365,7 +398,7 @@ A Arquitetura Harvard Modificada é **atualmente** utilizada em praticamente tod
 O retorno da arquitetura Harvard foi impulsionada inicialmente pelos Processadores  Digitais de Sinais, e utilizada ainda hoje,na sua forma pura,em diversos processadores e microcontroladores de baixo custo. 
 - **Ex:** DSPs, microcontroladores PIC, 8051, etc.
 
-![arquitetura-harvard-original](image.png)
+![arquitetura-harvard-original](img/01-introducao/arquitetura-harvard-original.png)
 
 A Arquitetura Harvard Modificada é atualmente utilizada em praticamente todos os sistemas computacionais.  
 
@@ -377,12 +410,14 @@ Une  os  benefícios da maior largura de banda (acesso a instruções e dados si
 
 ![fabricacao-chip](img/01-introducao/fabricacao-chip.png)
 
+![bolacha-chip](img/01-introducao/bolacha-chip.png)
+
 Por que chips fabricados em grandes volumes tem custo menor ?  (verificar quais alternativas se aplicam) 
-- [ X ] Com grandes volumes, o processo de manufatura pode ser adaptado a um projeto específico, aumentando o rendimento 
-- [ X ] Dá menos trabalho desenvolver um chip para produção em massa do que um chip para baixa produção 
-- [ ] As máscaras utilizadas no processo de fabricação são caras, assim o custo por chip diminui com o aumento do volume 
-- [ ] O custo de desenvolvimento do chip é independente do volume; assim, o custo por chip diminui com o volume de fabricação 
-- [ X ] Chips produzidos em massa usualmente são de tamanho menor que os de baixo volume, resultando em um maior rendimento por bolacha de silício
+- [ ] Com grandes volumes, o processo de manufatura pode ser adaptado a um projeto específico, aumentando o rendimento 
+- [ ] Dá menos trabalho desenvolver um chip para produção em massa do que um chip para baixa produção 
+- [ X ] As máscaras utilizadas no processo de fabricação são caras, assim o custo por chip diminui com o aumento do volume 
+- [ X ] O custo de desenvolvimento do chip é independente do volume; assim, o custo por chip diminui com o volume de fabricação 
+- [ ] Chips produzidos em massa usualmente são de tamanho menor que os de baixo volume, resultando em um maior rendimento por bolacha de silício
 
 ### Lei de Moore
 A capacidade de integração de transistores dobra a cada 18 a 24 meses.
