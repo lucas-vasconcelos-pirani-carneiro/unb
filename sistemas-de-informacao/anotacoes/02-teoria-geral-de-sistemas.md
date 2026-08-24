@@ -26,6 +26,7 @@ Um sistema pode **fazer parte de outro sistema** e ser influenciado por elemento
 
 ### Ambiente e Fronteira
 A fronteira define o **recorte da análise**, enquanto o ambiente reúne **elementos externos** que podem **influenciar** o sistema.
+- Os dados influenciam a fronteira do sistema.
 
 ![ambiente-fronteira](img/ambiente-fronteira.png)
 
@@ -101,7 +102,7 @@ A finalidade do Microsoft Teams é permitir a comunicação entre usuários, por
 - Compartilhamento de arquivos e trabalhos
 
 ### Onde você colocaria a fronteira ? 
-A fronteira estaria nos recursos e serviços controlados pelo Microsoft Teams, incluindo seus servidores, aplicativos e funcionalidades.
+A fronteira se relaciona com os recursos e serviços controlados pelo Microsoft Teams, incluindo seus servidores, aplicativos e funcionalidades.
 
 ### Quais elementos fazem parte do ambiente ?
 - Usuários
@@ -109,13 +110,13 @@ A fronteira estaria nos recursos e serviços controlados pelo Microsoft Teams, i
 - Computadores e celulares
 - Câmeras
 - Microfones
+- Regras de Negócio
 - Outros sistemas e serviços externos
 
 ### Quais são entradas, processamento e saídas ? 
 Entradas:
 - Cadastro e dados dos usuários
 - Mensagens e arquivos enviados
-- Solicitações para entrar em equipes
 - Agendamento de reuniões
 
 Processamento:
