@@ -104,9 +104,9 @@ a = b + c + d + e
 
 - Código RiscV: 
 ```asm
-add a,b,c // a = b + c
-add a,a,d // a = b + c + d
-add a,a,e // # a = b + c + d + e
+add a,b,c # a = b + c
+add a,a,d # a = b + c + d
+add a,a,e # a = b + c + d + e
 ```
 
 ### Exemplo 03
@@ -118,9 +118,9 @@ f = (g + h) - (i + j)
 
 - Código RiscV: 
 ```asm
-add t0, g, h // t0 - temporário
-add t1, i, j // t1 - temporário
-sub f, t0, t1 // f = t0 - t1
+add t0, g, h # t0 - temporário
+add t1, i, j # t1 - temporário
+sub f, t0, t1 # f = t0 - t1
 ```
 
 ## Registradores RV
@@ -302,8 +302,8 @@ A **nona posição** do vetor A, `A[8]`, está no offset **8 x 4 = 32** pois des
 - **word:** Tem 4 bytes por isso multiplica por 4.
 
 ```asm
-lw x9, 32(x22) // temporário x9 = A[8]
-add x9, x21, x9 // temporário x9 = h + A[8]
+lw x9, 32(x22) # temporário x9 = A[8]
+add x9, x21, x9 # temporário x9 = h + A[8]
 ```
 
 De maneira análoga, a **décima-terceira posição** do vetor A, `A[12]`, está no offset **12 x 4 = 48**.
@@ -344,7 +344,7 @@ add t1, t0, t0
 # Endereço Novo
 add t2, x22, t1 # Endereço de A[i] = Endereço Base + Deslocamento
 
-lw s2, 0(t2) # s2 = A[i] 
+lw s2, 0(t2) # s2 = A[i], não poderia colocar lw s2, t2(x22) o RiscV não permite !!
 
 add t4, x21, s2 # g + A[i]
 sub t5, t4, s1 # (g + A[i]) - A[0]
