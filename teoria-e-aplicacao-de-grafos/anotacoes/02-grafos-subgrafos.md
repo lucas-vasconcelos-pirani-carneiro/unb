@@ -73,6 +73,10 @@ Resposta: $3 + 6 + 8 = 17$
 - Isto é, se há uma correspondência **um-para-um** entre os vértices de $G$ e aqueles de H, tal que o **número de elos(arestas)** unindo qualquer **par de vértices** em $G$ é **igual ao número de elos(arestas)** unindo os pares correspondentes de vértices em $H$.
 - Preserva as arestas, **mesmas conexões** com nomes diferentes.
 
+Dois grafos $G = (V, E)$ e $H = (W, F)$ são **isomórficos** se houver uma função bijetiva $f: V \to W$ tal que para todos $v, w \in V$: $\{ v, w \} \in E \leftrightarrow \{ f(v), f(w) \} \in F$
+
+![exemplo1-isomorfismo](img/02-grafo-subgrafo/exemplo1-isomorfismo.png)
+
 ### Exemplo
 ![exemplo-isomorfismo](img/02-grafo-subgrafo/exemplo-isomorfismo.png)
 
