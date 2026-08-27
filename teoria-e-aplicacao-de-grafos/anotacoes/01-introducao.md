@@ -134,4 +134,8 @@ Em qualquer grafo, a **soma de todos os graus** dos vértices é igual a **duas 
 - Em qualquer grafo, o **número de vértices de grau ímpar** é **par**. 
 - Se $G$ é um grafo que possui $n$ vértices e é **regular de grau** $r$, então $G$ tem exatamente $\frac{1}{2}nr$ elos (arestas).
 
-## Grafos e Subgrafos
+## Grafo Completo
+- Um grafo **simples** que contém **todos elos (arestas) possíveis** entre **todos os vértices** é considerado um grafo **completo**.
+- Um **grafo completo** com $n$ vértices é indicado por $K_n$.
+
+![grafo-completo](img/01-introducao/grafo-completo.png)
