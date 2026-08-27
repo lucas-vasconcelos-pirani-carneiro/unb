@@ -205,6 +205,9 @@ Comando **condicionais** (if-then-else), **laços** e **chamadas de subroutinas*
 
 ### Controle de Fluxo - Desvio Incondicional
 
+Instruções são sempre colocadas em **endereço par**, ou seja, o último bit é o 0.
+- Esse bit é colocado por fora.
+
 **Sintaxe**
 ```asm
 jal ra, label # Jump and link: ra = PC + 4, PC = label
@@ -235,6 +238,8 @@ jalr ra, t0, imm    # Jump and link: ra = PC + 4, PC = Imm_32 + t0
 jalr ra, imm(t0)    # formato utilizado pelo Patterson
 ```
 
+- `jalr`: Volta para o mesmo endereço, não utiliza o **PC = PC + 4**.
+
 #### Formato Tipo-I de instrução:
 - Ex: `jalr ra, t0, 4` 
 
@@ -255,6 +260,8 @@ beq t0, t1, Label    # Branch if Equal:         t0 == t1 ? PC = Label : PC += 4
 bge t0, t1, Label    # B if greater than/equal: t0 >= t1 ? PC = Label : PC += 4 
 blt t0, t1, Label    # B if less than:          t0 <  t1 ? PC = Label : PC += 4
 ```
+
+- Ou ele salta para o label, ou ele **executa a próxima** instrução se falar na comparação.
 
 **Exemplo:**
 - i: s4 
@@ -286,6 +293,8 @@ LABEL:  xxxxxxxx
         xxxxxxxx 
         beq t0, t1, LABEL
 ```
+
+Para não fazer a subtração também é preciso realizar um `jal`, jump para não executar a instrução indesejada.
 
 #### Formato Tipo-SB
 | Campo | Imm[12, 10:0] | rs2 | rs1 | funct3 | Imm[4:1, 11] | opcode |
@@ -365,7 +374,7 @@ mv t1, t2       # t1 <= t2
 ![modo-de-enderacemento](img/03-assembly-RV/modo-de-enderacemento.png)
 
 ### Endereços em desvios
-- **Linguagem C:**  `while(save[i] == k)  i++;` 
+- **Linguagem C:**  `while(save[i] == k)  i++;`, "Pula Branco".
 
 ![enderecos-desvios](img/03-assembly-RV/enderecos-desvios.png)
 
