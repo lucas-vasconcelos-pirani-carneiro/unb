@@ -1,50 +1,41 @@
 #include <stdio.h>
-#include  <stdint.h>
-#define MEM_SIZE 16384
+#include <stdint.h>
 
-int8_t mem[MEM_SIZE]; // Memória é um array de 16KBytes
+#define MEM_SIZE 1024
+#define DATA_SEG 512
 
-// sb(reg, kte, byte): Escreve o byte passado como parâetro na memória.
-void sb(int32_t reg, int32_t kte, int8_t byte){
-    int32_t endereco_memoria = reg + kte; 
-    mem[endereco_memoria] = byte;
+int8_t mem[MEM_SIZE];
+
+int32_t lb(uint32_t reg, int32_t kte){
+    uint32_t endereco_memoria = reg + kte;
+    
+    return (int32_t) mem[endereco_memoria];
 }
 
-// lb(reg, kte): lê um byte da memória e o converte para um inteiro de 32 bits estendendo o sinal do byte. Retorna o inteiro de 32 bits. 
-int32_t lb(int32_t reg, int32_t kte){
-    int32_t endereco_memoria = reg + kte;
-    int8_t byte_lido; 
-
-    byte_lido = mem[endereco_memoria];
-
-    return (int32_t) byte_lido;
+int32_t lbu(uint32_t reg, int32_t kte) {
+    uint32_t endereco_memoria = reg + kte;
+    
+    return (uint8_t) mem[endereco_memoria];
 }
 
-// lbu(reg, kte): lê um byte da memória e o converte para um inteiro de 32 bits sem sinal (valor  positivo). Retorna o inteiro de 32 bits.
-uint32_t lbu(int32_t reg, int32_t kte){
-    int32_t endereco_memoria = reg + kte;
-    uint8_t byte_lido; 
-
-    byte_lido = mem[endereco_memoria];
-    return (uint32_t) byte_lido;
-}
-
-// lw(reg, kte): lê uma palavra de 32 bits da memória e retorna o seu valor. 
-uint32_t lw(int32_t reg, int32_t kte){
-    int32_t endereco_memoria = reg + kte;
+int32_t lw(uint32_t reg, int32_t kte){
+    uint32_t endereco_memoria = reg + kte;
     
     uint8_t byte0 = mem[endereco_memoria]; 
     uint8_t byte1 = mem[endereco_memoria + 1]; 
     uint8_t byte2 = mem[endereco_memoria + 2]; 
     uint8_t byte3 = mem[endereco_memoria + 3]; 
     
-    return (byte3 << 24) | (byte2 << 16) | (byte1 << 8) | byte0;
-    
+    return ((uint32_t) byte3 << 24) | ((uint32_t) byte2 << 16) | ((uint32_t) byte1 << 8)  | (uint32_t) byte0;    
 }
 
-// sw(reg, kte, word): escreve os 4 bytes de word na memória, colocando o menos significativo no endereço especicicado e os outros nos endereços de byte seguintes.
-void sw(int32_t reg, int32_t kte, uint32_t word){
-    int32_t endereco_memoria = reg + kte;
+void sb(uint32_t reg, int32_t kte, uint8_t byte){
+    uint32_t endereco_memoria = reg + kte; 
+    mem[endereco_memoria] = byte;
+}
+
+void sw(uint32_t reg, int32_t kte, uint32_t word){
+    uint32_t endereco_memoria = reg + kte;
     
     int8_t byte0 = word & 0xFF; 
     int8_t byte1 = (word >> 8) & 0xFF; 
@@ -55,36 +46,105 @@ void sw(int32_t reg, int32_t kte, uint32_t word){
     mem[endereco_memoria + 1] = byte1;
     mem[endereco_memoria + 2] = byte2;
     mem[endereco_memoria + 3] = byte3;
-
 }
 
-void teste_lb(void) 
-{ 
-    mem[100] = (int8_t)0xEF; 
-    mem[101] = (int8_t)0xAD; 
-    mem[102] = (int8_t)0x7C; 
-    mem[103] = (int8_t)0x7B; 
-    printf("lb(100, 0) = 0x%08x\n", (uint32_t)lb(100, 0)); 
-    printf("lb(100, 1) = 0x%08x\n", (uint32_t)lb(100, 1)); 
-    printf("lb(100, 2) = 0x%08x\n", (uint32_t)lb(100, 2)); 
-    printf("lb(100, 3) = 0x%08x\n", (uint32_t)lb(100, 3)); 
+void teste_lb(void)
+{
+    mem[100] = (int8_t)0xEF;
+    mem[101] = (int8_t)0xAD;
+    mem[102] = (int8_t)0x7C;
+    mem[103] = (int8_t)0x7B;
+
+    printf("lb(100, 0) = 0x%08x\n", (uint32_t)lb(100, 0));
+    printf("lb(100, 1) = 0x%08x\n", (uint32_t)lb(100, 1));
+    printf("lb(100, 2) = 0x%08x\n", (uint32_t)lb(100, 2));
+    printf("lb(100, 3) = 0x%08x\n", (uint32_t)lb(100, 3));
 }
 
-int main(){
-    sb(7, 0, 0xaa); 
-    int32_t word = lb(7, 0); 
-    printf("word_10 = %d\n",  word); 
-    printf("word_x = 0x%08x\n", (uint32_t)word);
 
-    printf("------------------------------\n");
+void teste_lbu(void)
+{
+    mem[100] = (int8_t)0xEF;
+    mem[101] = (int8_t)0xAD;
+    mem[102] = (int8_t)0xAC;
+    mem[103] = (int8_t)0xAB;
 
-    int32_t word1 = lbu(7, 0); 
-    printf("word_10 = %d\n",  word1); 
-    printf("word_x = 0x%08x\n", (uint32_t)word1);
-    
-    printf("------------------------------\n");
+    printf("lbu(100, 0) = 0x%08x\n", (uint32_t)lbu(100, 0));
+    printf("lbu(100, 1) = 0x%08x\n", (uint32_t)lbu(100, 1));
+    printf("lbu(100, 2) = 0x%08x\n", (uint32_t)lbu(100, 2));
+    printf("lbu(100, 3) = 0x%08x\n", (uint32_t)lbu(100, 3));
+}
 
-    teste_lb();
-    
+
+void teste_lw(void)
+{
+    /* Inicialização direta da memória */
+    mem[100] = (int8_t)0xEF;
+    mem[101] = (int8_t)0xAD;
+    mem[102] = (int8_t)0xAC;
+    mem[103] = (int8_t)0xAB;
+
+    printf("lw(100, 0) = 0x%08x\n", (uint32_t)lw(100, 0));
+}
+
+
+void teste_sb(void)
+{
+    sb(100, 0, 0x11);
+    sb(100, 1, 0x22);
+    sb(100, 2, 0x33);
+    sb(100, 3, 0x44);
+
+    printf("mem[100] = 0x%02x\n", (uint8_t)mem[100]);
+    printf("mem[101] = 0x%02x\n", (uint8_t)mem[101]);
+    printf("mem[102] = 0x%02x\n", (uint8_t)mem[102]);
+    printf("mem[103] = 0x%02x\n", (uint8_t)mem[103]);
+}
+
+
+void teste_sw(void)
+{
+    sw(100, 0, 0x11223344);
+
+    printf("mem[100] = 0x%02x\n", (uint8_t)mem[100]);
+    printf("mem[101] = 0x%02x\n", (uint8_t)mem[101]);
+    printf("mem[102] = 0x%02x\n", (uint8_t)mem[102]);
+    printf("mem[103] = 0x%02x\n", (uint8_t)mem[103]);
+}
+
+
+int main(void)
+{
+    int teste;
+
+    scanf("%d", &teste);
+
+    switch (teste)
+    {
+        case 1:
+            teste_lb();
+            break;
+
+        case 2:
+            teste_lbu();
+            break;
+
+        case 3:
+            teste_lw();
+            break;
+
+        case 4:
+            teste_sb();
+            break;
+
+        case 5:
+            teste_sw();
+            break;
+
+        default:
+            printf("Teste invalido\n");
+            break;
+    }
+
     return 0;
 }
