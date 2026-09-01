@@ -131,4 +131,63 @@ Qualidade pergunta se a informação é adequada ao uso; segurança pergunta com
 - Caso 02: Uma nota é alterada sem autorização - Integridade.
 - Caso 03: O SIGAA fica indisponível durante o período de matrícula. - Disponibilidade.
 
+## Conhecimento
+Conhecimento **não é apenas** possuir informação: envolve compreendê-la, relacioná-la a experiências e utilizá-la para explicar situações e orientar ações.
 
+- **Informação**: 50 estudantes estão matriculados na turma.
+- **Experiência/Interpretação**: Em turmas grandes, certas atividades exigem mais organização, tempo e acompanhamento.
+- **Conhecimento**: Turmas desse porte exigem estratégias adequadas de ensino 
+e acompanhamento.
+- **Decisão/Ação**: Adaptar a dinâmica das atividades, a organização da turma e as formas de acompanhamento.
+
+> [!NOTE]
+>
+> Conhecimento pode orientar decisões e ações, mas a decisão não é o conhecimento em si.
+
+### Dados $\rightarrow$ Informação $\rightarrow'$ Conhecimento
+- **Dados:** Registros de fatos, eventos ou observações.
+    - Ex: 50
+- **Informação:** Conteúdo contextualizado, interpretado e com significado.
+    - Ex: 50 estudantes estão matriculados.
+- **Conhecimento:** Compreensão construída a partir de informação, experiência e aprendizagem.
+
+## Atividade 03
+- Dado: 7,5.
+- Informação: A média da turma foi 7,5.
+- Informação: A média aumentou depois que a estratégia de ensino foi alterada.
+- Conhecimento: O professor conclui, com base em experiências anteriores e no s resultados, que a nova estratégia deve ser mantida
+
+### Explícito X Tácito
+- **Conhecimneto Explícito:** Conhecimento que pode ser articulado, documentado e compartilhado de forma relativamente estruturada.
+    - Ex: normas, manuais, procedimentos, relatórios
+
+- **Conhecimneto Tácito:** Conhecimento ligado à experiência, habilidades, julgamento e práticas, muitas vezes difícil de formalizar integralmente.
+    - Ex: experiência de um técnico para reconhecer sinais de falha
+
+## Dados
+Como Extrair Valor ?
+- Explorar e analisar dados para identificar padrões, gerar evidências, apoiar previsões e decisões.
+    - Ciência de Dados
+
+Como Cuidar desses Recursos ?
+- Definir responsabilidades, regras, qualidade, acesso, proteção e uso adequado dos dados.
+    - Gestão e Governança de Dados
+
+
+### Ciência de Dados X Gestão e Governança de Dados
+**Ciência de Dados** é uma área interdisciplinar que combina métodos computacionais, estatísticos e analíticos para explorar dados e produzir evidências úteis.
+
+**Gestão de Dados:** Execução das atividades necessárias para coletar, armazenar, integrar, manter, disponibilizar e proteger dados ao longo de seu ciclo de vida.
+
+**Governança de Dados:** Definição de autoridade, responsabilidades, políticas e mecanismos para orientar e controlar a gestão e o uso dos dados.
+ 
+
+### Valor e Qualidade
+Se dados podem gerar informação e conhecimento, pode parecer vantajoso coletar tudo o que estiver disponível. Mas quantidade não é sinônimo de valor.
+- **Valor:** Dados são valiosos quando são pertinentes à finalidade e ajudam a produzir informação  útil.
+- **Qualidade:** Mais dados podem significar mais redundância, desatualização, inconsistência e custo de manutenção
+- **Privacidade:** Dados pessoais devem ser tratados de forma adequada à finalidade e limitados ao necessário.
+
+> [!NOTE]
+>
+> Na LGPD, essa ideia aparece no **princípio** da necessidade: limitar o tratamento ao mínimo necessário para realizar suas finalidades, com dados pertinentes, proporcionais e não excessivos.
