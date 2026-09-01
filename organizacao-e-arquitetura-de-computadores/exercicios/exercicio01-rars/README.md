@@ -95,6 +95,25 @@ Exit:
     
     li a7, 10 # Terminar o programa
     ecall
+
+# Solução Proposta
+.text
+	li a7, 5
+	ecall
+	mv t0, a0
+	add s0, zero, zero
+lass:
+	ble t0, zero, fim
+	ecall
+	add s0, s0, a0
+	addi t0, t0, -1
+	j lass
+fim:
+	mv a0, s0
+	li a7, 1
+	ecall
+	li a7, 10
+	ecall
 ```
 
 
@@ -144,6 +163,26 @@ ehimpar: .string "Eh impar"
 		
 		li a7, 10 # Terminar o programa	
 		ecall
+
+# Solução Proposta
+.data
+ehpar: 	 .string "Eh par"
+ehimpar: .string "Eh impar"
+
+.text
+	li a7, 5
+	ecall
+	andi a0, a0, 1
+	beqz a0, par
+	la a0, ehimpar
+	j fim
+par:	
+	la a0, ehpar
+fim:
+	li a7, 4
+	ecall
+	li a7, 10
+	ecall
 ```
 
 ### Questão 05
@@ -229,6 +268,45 @@ Exit:
         
     li a7, 10 # Termina a execução do programa
     ecall
+
+# Solução Proposta
+.data
+rsp:  .space 30
+size: .word 30
+
+.text
+	
+	li a7, 8
+	la a0, rsp
+	la a1, size
+	lw a1, 0(a1)
+	ecall
+	
+	la s0, rsp	
+Loop:	
+	lbu s1, 0(s0)
+	beq s1, zero, fim
+	mv a0, s1
+	jal eh_min
+	addi s0, s0, 1
+	beq a0, zero, Loop
+	addi s1, s1, -32
+	sb s1, -1(s0)
+	j Loop
+	
+fim:	
+	li a7, 4
+	la a0, rsp
+	ecall
+	li a7, 10
+	ecall
+	
+eh_min:
+	slti t0, a0, 123
+	li   t1, 96
+	slt  t1, t1, a0
+	and  a0, t0, t1
+	ret
 ```
 
 ### Questão 06
@@ -282,6 +360,30 @@ Portanto:
         
         li a7, 10 # Terminar o programa
         ecall
+
+# Solução Proposta
+.text
+
+	li a7, 5
+	ecall
+	
+	li  t0, 1
+	add t1, zero, zero
+	li  t2, 32 
+loop:
+	blez t2, fim
+	addi t2, t2, -1
+	and  a1, a0, t0
+	srli a0, a0, 1
+	add  t1, t1, a1
+	j loop
+fim:
+	li a7, 1
+	mv a0, t1
+	ecall
+	
+	li a7, 10
+	ecall
 ```
 
 ### Questão 07
@@ -327,6 +429,23 @@ a + b * c
 	li a7, 1
 	ecall 
 	
+	li a7, 10
+	ecall
+
+# Solução Proposta 
+.text
+	li a7, 5
+	ecall
+	mv t0, a0  # a
+	ecall
+	mv t1, a0  # b
+	ecall
+	mv t2, a0  # c
+	mul t2, t1, t2
+	add t0, t0, t2
+	mv a0, t0
+	li a7, 1
+	ecall
 	li a7, 10
 	ecall
 ```
@@ -418,5 +537,39 @@ L1:
 	lw ra, 0(sp)
 	addi sp, sp, 4
 	
+	ret
+
+# Solução Proposta
+.data 
+str:	.space 32
+nl:	    .word 10
+
+.text
+	li a7, 8
+	la a0, str
+	li a1, 32
+	ecall
+	
+	lw  a1, nl
+	jal limpa
+	
+	li a7, 4
+	la a0, str
+	ecall
+	
+	li a7, 10
+	ecall
+	
+limpa:
+	lbu t1, 0(a0)
+	beqz t1, fim
+	bne t1, a1 segue
+	sb zero, 0(a0)
+
+segue:
+	addi a0, a0, 1
+	j limpa
+
+fim:
 	ret
 ```
