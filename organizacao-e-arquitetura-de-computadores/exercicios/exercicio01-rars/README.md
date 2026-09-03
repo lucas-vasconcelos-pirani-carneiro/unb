@@ -314,52 +314,58 @@ Ler um inteiro do teclado e imprimir o número de bits em 1 em sua representaç�
 
 Encerrar o programa com a chamada do sistema.
 
-Para contar quantos bits `1` existem na representação binária de um número, foi utilizado o algoritmo de Brian Kernighan.
+Para contar quantos bits `1` existem na representação binária de um número, podemos verificar os bits um por um.
 
-A ideia principal é:
+A ideia é:
 
-```text
-n = n & (n - 1)
+- Ler o inteiro e armazená-lo em `a0`.
+- Inicializar um contador em `0`.
+- Fazer um `andi` com `1` para verificar o último bit de `a0`:
+  
+```asm
+  andi t0, a0, 1
 ```
 
-Essa operação remove exatamente um bit `1` do número.
+- O resultado do andi será 0 ou 1, dependendo do último bit do número.
+- Somar esse resultado ao contador. Como o resultado é 0 ou 1, estamos contando diretamente quantos bits possuem valor 1.
+- Deslocar a0 um bit para a direita:
 
-Portanto:
+```asm
+srai a0, a0, 1
+```
 
-- Inicializamos um contador em `0`.
-- Enquanto `n` for diferente de `0`:
-  - Calculamos `n - 1`.
-  - Fazemos `n & (n - 1)`.
-  - Incrementamos o contador.
-- Quando `n` chega a `0`, o contador contém a quantidade de bits `1`.
+- Dessa forma, o próximo bit passa a ser o último e poderá ser analisado pelo próximo `andi`.
+- Repetir esse processo **32 vezes**, pois estamos trabalhando com um inteiro de 32 bits.
+- Ao final das 32 iterações, o contador terá a quantidade de bits `1` da representação binária do número.
+- Colocar o contador em `a0` e utilizar a `syscall PrintInt` para imprimir o resultado.
 
 ```asm
 .text
-    li a7, 5 # Ler um inteiro
-    ecall
-    
-    li s1, 0 # i = 0
-    mv t0, a0 # t0 <-- a0
-    
-    beq t0, zero, Exit
-    
-    Loop:
-        addi t1, t0, -1
-        and t0, t0, t1
-        
-        addi s1, s1, 1
-        
-        beq, t0, zero, Exit
-        
-        j Loop
-    
-    Exit:
-        mv a0, s1 # a0 <-- t0
-        li a7, 1 # Imprimir um inteiro
-        ecall 
-        
-        li a7, 10 # Terminar o programa
-        ecall
+	li a7, 5
+	ecall
+	
+	li s1, 0
+	li s2, 32
+	
+loop:
+	blez s2, exit
+	
+	andi t0, a0, 1  # Marcaramento para testar um bit
+	add s1, t0, s1
+	
+	srai a0, a0, 1
+	
+	addi s2, s2, -1
+	j loop
+	
+exit:
+	mv a0, s1
+	
+	li a7, 1
+	ecall
+		
+	li a7, 10
+	ecall
 
 # Solução Proposta
 .text
