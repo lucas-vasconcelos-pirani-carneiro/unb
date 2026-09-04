@@ -578,4 +578,16 @@ segue:
 
 fim:
 	ret
+
+# Outra Solução Minha
+limpa:
+	lb t0, 0(a0) # t0 = string[i] e a0 = &string[i]
+	beq t0, a1, troca # t0 = '\n'
+	
+	addi a0, a0 ,1
+	j limpa
+	
+troca:
+	sb zero, 0(a0)	
+	ret
 ```

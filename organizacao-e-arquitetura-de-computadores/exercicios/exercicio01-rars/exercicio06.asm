@@ -1,31 +1,26 @@
 .text
-	li a7, 5 # Ler um inteiro
+	li a7, 5
 	ecall
 	
-	# Truque de de Brian Kernighan
-	# Pegue o número e subtraia 1 dele próprio.
-	# Faça uma operação E lógico (AND) entre o número atual e o resultado da subtração (n & (n - 1)).
-	# Repita o processo até o número zerar, contando quantas vezes o ciclo rodou.
+	li s1, 0
+	li s2, 32
 	
-	li s1, 0 # i = 0
-	mv t0, a0
+loop:
+	blez s2, exit
 	
-	beq t0, zero, Exit
+	andi t0, a0, 1  # Marcaramento para testar um bit
+	add s1, t0, s1
 	
-	Loop:
-		addi t1, t0, -1
-		and t0, t0, t1
+	srai a0, a0, 1
+	
+	addi s2, s2, -1
+	j loop
+	
+exit:
+	mv a0, s1
+	
+	li a7, 1
+	ecall
 		
-		addi s1, s1, 1
-		
-		beq t0, zero, Exit	
-		j Loop
-		
-	Exit:
-		mv a0, s1
-		li a7, 1 # Imprimir um inteiro
-		ecall
-		
-		li a7, 10 # Encerrar o programa
-		ecall
-		
+	li a7, 10
+	ecall
