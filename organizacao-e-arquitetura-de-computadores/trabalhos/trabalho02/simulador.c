@@ -248,11 +248,236 @@ enum INSTRUCTIONS get_instr_code(uint32_t opcode, uint32_t funct3, uint32_t func
     }
     return I_nop;
 }
+
 void execute() {
-//******************** inserir o codigo para execucao das instrucoes aqui
+    switch (ins_code)
+    {
+        // Instruções do Tipo R
+        case I_add:
+            if (rd != 0)
+                breg[rd] = (int32_t)breg[rs1] + (int32_t)breg[rs2];
+            break;
 
+        case I_sub:
+            if (rd != 0)
+                breg[rd] = (int32_t)breg[rs1] - (int32_t)breg[rs2];
+            break;
+
+        case I_and:
+            if (rd != 0)
+                breg[rd] = breg[rs1] & breg[rs2];
+            break;
+
+        case I_or:
+            if (rd != 0)
+                breg[rd] = breg[rs1] | breg[rs2];
+            break;
+
+        case I_xor:
+            if (rd != 0)
+                breg[rd] = breg[rs1] ^ breg[rs2];
+            break;
+
+        case I_sll:
+            if (rd != 0)
+                breg[rd] = (uint32_t)breg[rs1] << (breg[rs2] & 0x1F);
+            break;
+
+        case I_srl:
+            if (rd != 0)
+                breg[rd] = (uint32_t)breg[rs1] >> (breg[rs2] & 0x1F);
+            break;
+
+        case I_sra:
+            if (rd != 0)
+                breg[rd] = (int32_t)breg[rs1] >> (breg[rs2] & 0x1F);
+            break;
+
+        case I_slt:
+            if (rd != 0)
+                breg[rd] = ((int32_t)breg[rs1] < (int32_t)breg[rs2]) ? 1 : 0;
+            break;
+
+        case I_sltu:
+            if (rd != 0)
+                breg[rd] = ((uint32_t)breg[rs1] < (uint32_t)breg[rs2]) ? 1 : 0;
+            break;
+        
+        // Instruções do Tipo I
+        case I_addi:
+            if (rd != 0)
+                breg[rd] = (int32_t)breg[rs1] + imm12_i;
+            break;
+
+        case I_andi:
+            if (rd != 0)
+                breg[rd] = breg[rs1] & (uint32_t)imm12_i;
+            break;
+
+        case I_ori:
+            if (rd != 0)
+                breg[rd] = breg[rs1] | (uint32_t)imm12_i;
+            break;
+
+        case I_xori:
+            if (rd != 0)
+                breg[rd] = breg[rs1] ^ (uint32_t)imm12_i;
+            break;
+
+        case I_slti:
+            if (rd != 0)
+                breg[rd] = ((int32_t)breg[rs1] < imm12_i) ? 1 : 0;
+            break;
+
+        case I_sltiu:
+            if (rd != 0)
+                breg[rd] = ((uint32_t)breg[rs1] < (uint32_t)imm12_i) ? 1 : 0;
+            break;
+
+        case I_slli:
+            if (rd != 0)
+                breg[rd] = (uint32_t)breg[rs1] << shamt;
+            break;
+
+        case I_srli:
+            if (rd != 0)
+                breg[rd] = (uint32_t)breg[rs1] >> shamt;
+            break;
+
+        case I_srai:
+            if (rd != 0)
+                breg[rd] = (int32_t)breg[rs1] >> shamt;
+            break;
+
+        case I_jalr:
+            if (rd != 0)
+                breg[rd] = pc;
+            pc = (breg[rs1] + imm12_i) & ~1u;
+            break;
+
+        case I_lb:
+            if (rd != 0)
+                breg[rd] = lb(breg[rs1], imm12_i);
+            break;
+
+        case I_lbu:
+            if (rd != 0)
+                breg[rd] = lbu(breg[rs1], imm12_i);
+            break;
+
+        case I_lh:
+            if (rd != 0) {
+                uint32_t address = (uint32_t)breg[rs1] + (uint32_t)imm12_i;
+                uint16_t v = (uint16_t)(((uint16_t)mem[address]) |
+                                       ((uint16_t)mem[address + 1] << 8));
+                breg[rd] = (int16_t)v;
+            }
+            break;
+
+        case I_lhu:
+            if (rd != 0) {
+                uint32_t address = (uint32_t)breg[rs1] + (uint32_t)imm12_i;
+                uint16_t v = (uint16_t)(((uint16_t)mem[address]) |
+                                       ((uint16_t)mem[address + 1] << 8));
+                breg[rd] = (uint32_t)v;
+            }
+            break;
+
+        case I_lw:
+            if (rd != 0)
+                breg[rd] = lw(breg[rs1], imm12_i);
+            break;
+
+        // Instruções do Tipo U
+        case I_auipc:
+            if (rd != 0)
+                breg[rd] = (pc - 4) + ((uint32_t)imm20_u); // Não sei pq mas é sem o << 12
+            break;
+
+        case I_lui:
+            if (rd != 0)
+                breg[rd] = imm20_u;
+            break;
+        
+        // Instruções do Tipo SB
+        case I_beq:
+            if (breg[rs1] == breg[rs2])
+                pc = pc - 4 + imm13;
+            break;
+
+        case I_bne:
+            if (breg[rs1] != breg[rs2])
+                pc = pc - 4 + imm13;
+            break;
+
+        case I_bge:
+            if ((int32_t)breg[rs1] >= (int32_t)breg[rs2])
+                pc = pc - 4 + imm13;
+            break;
+
+        case I_bgeu:
+            if ((uint32_t)breg[rs1] >= (uint32_t)breg[rs2])
+                pc = pc - 4 + imm13;
+            break;
+
+        case I_blt:
+            if ((int32_t)breg[rs1] < (int32_t)breg[rs2])
+                pc = pc - 4 + imm13;
+            break;
+
+        case I_bltu:
+            if ((uint32_t)breg[rs1] < (uint32_t)breg[rs2])
+                pc = pc - 4 + imm13;
+            break;
+
+        case I_sb:
+            sb(breg[rs1], imm12_s, (int8_t)breg[rs2]);
+            break;
+
+        case I_sh:
+            {
+                uint32_t address = (uint32_t)breg[rs1] + (uint32_t)imm12_s;
+                uint16_t v = (uint16_t)breg[rs2];
+                mem[address] = (uint8_t)(v & 0xFF);
+                mem[address + 1] = (uint8_t)((v >> 8) & 0xFF);
+            }
+            break;
+
+        case I_sw:
+            sw(breg[rs1], imm12_s, breg[rs2]);
+            break;
+
+        // Instruções do Tipo UJ
+        case I_jal:
+            if (rd != 0)
+                breg[rd] = pc;
+            pc = pc - 4 + imm21;
+            break;
+
+        // Instruções do sistema
+        case I_ecall:
+            switch ((int)breg[17]) {  // a7
+                case 5: {
+                    int x;
+                    scanf("%d", &x);
+                    breg[10] = x;   // a0
+                    break;
+                }
+                case 1:
+                    printf("%d", breg[10]);  // a0
+                    break;
+                case 10:
+                    stop_prg = 1;
+                    break;
+                default:
+                    break;
+            }
+            break;
+
+        default:
+            break;
+    }
 }
-
 
 void step() {
     fetch();
@@ -271,6 +496,21 @@ int32_t get_imm32(enum FORMATS iformat) {
         default:        return 0;
     }
 }
+
+void reset_state(void) {
+    for (int i = 0; i < 32; i++) breg[i] = 0;
+    for (int i = 0; i < MEM_SIZE; i++) mem[i] = 0;
+    pc = 0;
+    ri = 0;
+    stop_prg = 0;
+    opcode = 0;
+    rs1 = rs2 = rd = 0;
+    shamt = 0;
+    funct3 = 0;
+    funct7 = 0;
+    imm12_i = imm12_s = imm13 = imm20_u = imm21 = 0;
+}
+
 void run() {
     init();
     while ((pc < code_limit) && !stop_prg)
@@ -278,9 +518,30 @@ void run() {
 }
 
 int main(void) {
-    init();
-    //* códigos de teste
-    //* pode ser arquivo ou escrever direto na memoria.
 
+   init();
+
+    /* Valores iniciais */
+    breg[1] = 100;
+    breg[2] = 30;
+
+    /* Instruções em memória */
+    sw(0,  0, 0x002082B3);  /* add   x5, x1, x2   */
+    sw(0,  4, 0x40208333);  /* sub   x6, x1, x2   */
+    sw(0,  8, 0x123453B7);  /* lui   x7, 0x12345  */
+    sw(0, 12, 0x00001417);  /* auipc x8, 0x00001  */
+
+    /* Executa as instruções */
+    step();   /* add   */
+    step();   /* sub   */
+    step();   /* lui   */
+    step();   /* auipc */
+
+    /* Resultados esperados */
+    printf("%d\n", breg[5]);          /* 130 */
+    printf("%d\n", breg[6]);          /* 70  */
+    printf("0x%08X\n", breg[7]);      /* 0x12345000 */
+    printf("0x%08X\n", breg[8]);      /* 0x0000100C */
+    
     return 0;
 }
