@@ -331,6 +331,13 @@ A unidade de controle de prover:
 - **Seleção da operação** da ULA. 
 - Controle do **novo endereço a ser carregado no PC**, para instruções de salto.
 
+| Instrução | Opcode  | ALUSrc | Mem2Reg | RegWrite | MemRead | MemWrite | Branch | ALUOp |
+|-----------|:-------:|:------:|:-------:|:--------:|:-------:|:--------:|:------:|:-----:|
+| Tipo-R    | 0110011 | 0      | 0       | 1        | 0       | 0        | 0      | 10    |
+| lw        | 0000011 | 1      | 1       | 1        | 1       | 0        | 0      | 00    |
+| sw        | 0100011 | 1      | X       | 0        | 0       | 1        | 0      | 00    |
+| beq       | 1100011 | 0      | X       | 0        | 0       | 0        | 1      | 01    |
+
 Implementações 
 - Lógica Combinacional (síntese lógica) 
 - ROM 
