@@ -12,42 +12,70 @@ end genImm32;
 
 architecture rtl of genImm32 is
 
+    type FORMAT_RV is (R_type, I_type, S_type, SB_type, UJ_type, U_type);
+    
     signal opcode : std_logic_vector(6 downto 0);
     signal funct3 : std_logic_vector(2 downto 0);
-
+    signal formato : FORMAT_RV;
+    
 begin
+
     opcode <= instr(6 downto 0);
     funct3 <= instr(14 downto 12);
 
-    identifier : process( opcode, funct3, instr )
-
+    p_formato : process( opcode )
     begin
-        
-        imm32 <= (others => '0');
-        
-        if (opcode = "0010011") and (funct3 = "101") and ( instr(30) = '1' ) then -- Tipo-I*
-            imm32 <= signed( resize( unsigned( instr(24 downto 20) ), 32));
-        
-        elsif (opcode = "0000011") or (opcode = "0010011") or (opcode = "1100111") then -- Tipo-I
-            imm32 <= resize( signed( instr(31 downto 20) ), 32); 
-                    
-        elsif (opcode = "0100011") then -- Tipo-S
-            imm32 <= resize( signed( instr(31 downto 25) & instr(11 downto 7) ), 32);
+        if (opcode = "0000011") or (opcode = "0010011") or (opcode = "1100111") then
+            formato <= I_type;
 
-        elsif (opcode = "1100011") then -- Tipo-SB
-            imm32 <= resize( signed( instr(31) & instr(7) & instr(30 downto 25) & instr(11 downto 8) & '0'), 32);
+        elsif opcode = "0100011" then
+            formato <= S_type;
 
-        elsif (opcode = "1101111") then -- Tipo-UJ
-            imm32 <= resize( signed( instr(31) & instr(19 downto 12) & instr(20) & instr(30 downto 21) & '0'), 32);
+        elsif opcode = "1100011" then
+            formato <= SB_type;
 
-        elsif (opcode = "0110111") then -- Tipo-U
-            imm32 <= signed( resize( unsigned( instr(31 downto 12) & "000000000000" ), 32));
+        elsif opcode = "1101111" then
+            formato <= UJ_type;
+
+        elsif opcode = "0110111" then
+            formato <= U_type;
 
         else
-            imm32 <= (others => '0'); -- Tipo-R
+            formato <= R_type;
         
         end if;
-
     end process;
     
+    p_gerador : process( opcode, formato, funct3, instr )
+    begin
+        case( formato ) is
+        
+            when I_type =>
+                if (opcode = "0010011") and (funct3 = "101") and (instr(30) = '1') then
+                    imm32 <= signed( resize(unsigned( instr(24 downto 20)), 32));
+                else
+                    imm32 <= resize( signed(instr(31 downto 20)), 32);
+                end if;
+
+            when S_type =>
+                imm32 <= resize( signed(instr(31 downto 25) & instr(11 downto 7)), 32);
+
+            when SB_type =>
+                imm32 <= resize( signed(instr(31) & instr(7) & instr(30 downto 25) & instr(11 downto 8) & '0'), 32 );
+
+            when UJ_type =>
+                imm32 <= resize( signed(instr(31) & instr(19 downto 12) & instr(20) & instr(30 downto 21) & '0'), 32);
+
+            when U_type =>
+                imm32 <= signed( resize(unsigned(instr(31 downto 12) & "000000000000"), 32));
+
+            when R_type =>
+                imm32 <= (others => '0');
+
+            when others => 
+                imm32 <= (others => '0');
+        
+        end case ;
+    end process;
+
 end architecture rtl;
