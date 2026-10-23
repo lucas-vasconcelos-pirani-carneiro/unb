@@ -229,6 +229,137 @@ Maneira Rápida: Fazer a diferença percentual das CPI de loads (5) e jump e bra
     - Máquinas de Estados Finita 
     - Microprogramação    
 
-
+| Representação | Diagrama de estados finitos | Microprograma |
+|---|---|---|
+| Controle de Sequenciação | Função de próximo estado explícita | Contador de programa + ROM |
+| Representação Lógica | Equações Lógicas | Tabelas Verdade |
+| Técnica de Implementação | PLA | ROM |
 
 ### Máquina de Estados Finita - MEF
+- **Diagrama de Estados**. 
+- Cada nó do diagrama representa um estado. 
+- A transição entre estados é indicada por arcos. 
+- As condições de disparo de uma transição são associadas aos arcos. 
+- Cada **estado** corresponde a **um ciclo de relógio**.
+
+![diagrama-de-estados](img/11-multiciclo/diagrama-de-estados.png)
+
+### MEF do Controle do MIPS Multiciclo
+Análise do controle para toda a ISA implementada: 
+
+1. Busca da Instrução 
+2. Decodificação 
+3. Execução 
+4. Acesso à Memória e Conclusão Tipo-R 
+5. Conclusão LW
+
+![diagrama-multiciclo](img/11-multiciclo/diagrama-multiciclo.png)
+
+Máquinas de Estados Finita - Implementação
+- Conjunto de estados. 
+- **Função de próximo estado:** Determinada pelo estado atual e entrada. 
+- **Saída:** Determinada pelo estado atual (**Moore**) e possivelmente pela entrada (**Mealy**).
+
+![mef-implementacao](img/11-multiciclo/mef-implementacao.png)
+
+## Controle com MEF
+
+Estrutura da máquina de estados: 
+- Lógica de saída 
+- Lógica de transição 
+- Registrador de estado 
+- Entradas externas (código da instrução)
+
+### Implementação com ROM
+Tamanho da memória 
+- 11 bits endereço: 2048 posições de memória. 
+- 20 bits de dados
+    - ROM de 40kbits
+- Porém é ineficiente, pois utilizameros apenas 9 posições de memória já que temos 9 estados distintos. 
+
+![implementacao-rom](img/11-multiciclo/implementacao-rom.png)
+
+Exemplo: Projeto lógico para cada saída na forma soma de produtos
+
+- EscrevePC: Acionado nos estados 0 ou 9
+
+| S3 | S2 | S1 | S0 |
+| :-:| :-: | :-: | :-:|
+| 0 | 0 | 0 | 0 |
+| 0 | 0 | 1 | 0 |
+| 0 | 1 | 1 | 0 |
+
+$\text{EscrevePC} = \bar{s_3} \cdot \bar{s_2} \cdot \bar{s_1} \cdot \bar{s_0} + s_3 \cdot \bar{s_2} \cdot \bar{s_1} \cdot s_0$
+
+- $NS_0$: Acionado nos estados 0, 2, 6 ou 1 (caso `opcode = jal`)
+
+| Op6 | Op5 | Op4 | Op3 | Op2 | Op1 | Op0 | S3 | S2 | S1 | S0 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| x | x | x | x | x | x | x | 0 | 0 | 0 | 0 |
+| x | x | x | x | x | x | x | 0 | 0 | 1 | 0 |
+| x | x | x | x | x | x | x | 0 | 1 | 1 | 0 |
+| 1 | 1 | 0 | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 1 |
+
+$NS_0 = \bar{s_3} \cdot \bar{s_2} \cdot \bar{s_1} \cdot \bar{s_0} + \bar{s_3} \cdot \bar{s_2} \cdot s_1 \cdot \bar{s_0} + \bar{s_3} \cdot s_2 \cdot s_1 \cdot \bar{s_0} + Op_6 \cdot Op_5 \cdot \bar{Op_4} \cdot Op_3 \cdot Op_2 \cdot Op_1 \cdot Op_0 \cdot \bar{s_3} \cdot \bar{s_2} \cdot \bar{s_1} \cdot s_0$
+
+### Implementação com PLA 
+- Programmable Logic Array
+
+- Mais eficiente: 
+    - Pode compartilhar termos de produtos. 
+    - Apenas entradas que possuem saídas ativas. 
+    - Pode considerar don't cares.
+
+Tamanho = (Entradas $\times$ N.Prod.) + (Saidas $\times$ N.Prod) 
+
+Tamanho: $(11 \times 17) + (20 \times 17) = 527$ células 
+
+![pla](img/11-multiciclo/pla.png)
+
+## Microprogramação
+Problemas da MEF: 
+- O projeto da parte de controle através de diagramas de transição de estados pode rapidamente se tornar inviável se o **número de estados for muito grande**. 
+- MEF's de **processadores complexos** (x86, x64) podem ter milhares de estados. 
+
+Uma alternativa para projeto é seguir um processo semelhante a programação.
+
+- Uma **microinstrução** é definida pelos **valores dos sinais de controle** que atuam na unidade operativa durante um estado da MEF (`ESTADO`). 
+- A execução de uma instrução do processador pode então ser realizada através de uma **sequência de microinstruções** (`TRANSIÇÕES`). 
+- O **conjunto de microinstruções** que implementa o controle de um processador é chamado de **microprograma** (`DIAGRAMA DE ESTADOS`).
+
+![unidade-de-controle](img/11-multiciclo/unidade-de-controle.png)
+
+### Microprograma
+O sequenciamento das microinstruções é realizado de forma similar a de um programa norma.
+- Microinstruções são usualmente **executadas em sequência**. 
+    - Correspondem aos caminhos no diagrama de estados. 
+- Em alguns casos, a sequência a ser seguida depende de informações externas (código da instrução, por exemplo). 
+- Nestes casos, são necessários mecanismos de desvio.
+
+Sequenciamento para o subset do RISC-V
+![sequenciamento](img/11-multiciclo/sequenciamento.png)
+
+### Formato da Microinstrução
+- A **microinstrução** é dividida em **campos** que atuam sobre conjuntos de elementos da **unidade operativa**. 
+- Os campos são escolhidos de acordo com sua finalidade. O controle da ULA, por exemplo, é associado a um campo. 
+- O microprograma é usualmente implementado em **ROM ou PLA**, onde cada microinstrução tem seu próprio endereço.
+
+Função dos campos das Microinstruções
+![funcao-campos](img/11-multiciclo/funcao-campos.png)
+
+MicroISA
+![microISA](img/11-multiciclo/microISA.png)
+
+Microprograma para a Unidade de Controle RISC-V
+![microprograma](img/11-multiciclo/microprograma.png)
+
+## Exercício
+Considerando o workload do compilador `gcc`, qual a CPI média do RISC-V multiciclo implementado ?
+
+- Load: 22% (5 ciclos) 
+- Store: 11% (4 ciclos) 
+- Operações aritméticas: 49% (4 ciclos) 
+- Branches: 16% (3 ciclos) 
+- Jumps: 2% (3 ciclos)
+
+$22\% - 18\% = 4\%$, logo CPI = $4,04$
