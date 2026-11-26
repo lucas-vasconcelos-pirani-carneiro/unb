@@ -19,8 +19,7 @@ begin
             when "01"   => Y <= I1;
             when "10"   => Y <= I2;
             when "11"   => Y <= I3;
-            when others => Y <= '0';
+            when others => Y <= (others => '0');
         end case;
     end process;
 end behavioral;
-
